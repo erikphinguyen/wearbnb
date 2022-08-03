@@ -23,7 +23,7 @@
     "url": "https://github.com/erikphinguyen/wearbnb/issues"
   },
   "engines": {
-    "node": "16.15.1"
+    "node": "12.15.1"
   },
   "homepage": "https://github.com/erikphinguyen/wearbnb#readme"
 }
