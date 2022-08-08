@@ -32,3 +32,31 @@ router.post('/', asyncHandler(async function (req,res) {
 }))
 
 // PUT BRAND
+router.put('/:id', asyncHandler(async (req, res) => {
+    const {brandImg, name, address, city, country} = req.body;
+    const id  = parseInt(req.params.id);
+    const brand = await Brand.findByPk(id);
+    brand.brandImg = brandImg;
+    brand.name = name;
+    brand.address = address;
+    brand.city = city;
+    brand.country = country;
+    await brand.save();
+
+    res.json(brand);
+}))
+
+// DELETE BRAND
+router.delete('/:id(\\d+)', async (req, res) => {
+
+    const { id } = req.params;
+
+    const brands = await Brand.findByPk(id);
+    // console.log(brands)
+    await brands.destroy();
+    return res.json({
+        message: "brand deleted"
+    })
+})
+
+module.exports = router;

@@ -12,8 +12,8 @@ module.exports = (sequelize, DataTypes) => {
     review: DataTypes.STRING
   }, {});
   Review.associate = function (models) {
-    Comment.belongsTo(models.User, { foreignKey: "userId" })
-    Comment.belongsTo(models.Brand, { foreignKey: "brandId" })
+    Review.belongsTo(models.User, { foreignKey: "userId" })
+    Review.belongsTo(models.Brand, { foreignKey: "brandId" })
   };
   return Review;
 };
