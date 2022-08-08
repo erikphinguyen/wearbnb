@@ -6,11 +6,13 @@ const { Brand, Review } = require('../../db/models');
 // GET ALL BRANDS
 router.get('/', asyncHandler(async function (req, res) {
     const brands = await Brand.findAll();
+    console.log("GET ALL BRANDS", brands)
     return res.json(brands);
 }))
 
 // GET INDIVIDUAL BRAND
 router.get('/:id(\\d+)', asyncHandler(async function (req, res) {
+
     const {id} = req.params;
     const brand = await Brand.findByPk(id,
         {
