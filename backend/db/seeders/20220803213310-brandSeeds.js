@@ -25,7 +25,7 @@ module.exports = {
       },
       {
         userId: "3",
-        brandImg: "https://cdn.freebiesupply.com/logos/large/2x/cartier-2-logo-png-transparent.png",
+        brandImg: "https://logos-world.net/wp-content/uploads/2020/06/Cartier-Symbol.png",
         name: "Cartier",
         address: "17 Rue du Faubourg Saint-Honoré",
         city: "Paris",

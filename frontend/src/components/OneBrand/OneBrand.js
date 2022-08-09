@@ -15,6 +15,7 @@ const OneBrand = () => {
     console.log(singleBrand)
 
     const [editMode, setEditMode] = useState(false);
+
     const [newBrandData, setNewBrandData] = useState({
         brandImg: '',
         name: '',
