@@ -72,10 +72,7 @@ function Navigation({ isLoaded }) {
     return (
         <ul>
             <div>
-                <NavLink exact to="/">Home</NavLink>
-            </div>
-            <div>
-                <NavLink to="/brands">Brands</NavLink>
+                <NavLink exact to="/"></NavLink>
             </div>
             <div>
                 {isLoaded && sessionLinks}

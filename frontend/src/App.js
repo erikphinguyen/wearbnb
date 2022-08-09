@@ -55,16 +55,10 @@ function App() {
       {isLoaded && (
         <Switch>
           <Route exact path="/">
-
-          </Route>
-          <Route exact path="/brands">
             <Brands />
           </Route>
           <Route exact path='/brands/:id'>
             <OneBrand />
-          </Route>
-          <Route path="/signup">
-            <SignupFormPage />
           </Route>
         </Switch>
       )}
