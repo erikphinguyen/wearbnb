@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   Brand.associate = function (models) {
     Brand.belongsTo(models.User, { foreignKey: "userId" })
-    // Brand.hasMany(models.Images, )
+    Brand.hasMany(models.Review, { foreignKey: "brandId", onDelete: 'CASCADE', hooks: true })
   };
   return Brand;
 };
