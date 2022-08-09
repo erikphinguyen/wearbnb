@@ -12,11 +12,16 @@ const Brands = () => {
     const brandsObj = useSelector(state => state.brands)
 
     useEffect(() => {
-        let brandsArr = Object.values(brandsObj);
-        setBrands(brandsArr)
+        dispatch(thunkGetBrands()).then(res => {
+            // console.log("LINE 16 IN USE EFFECT", res)
+            // let brandsArr = Object.values(brandsObj);
+            // setBrands(brandsArr)
+            setBrands(res)
+        })
     }, [dispatch])
 
-    if (!brands.length) return <h1>no brands D:</h1>
+    console.log("OUTSIDE OF USE EFFECT", brands)
+    // if (!brands.length) return <h1>no brands D:</h1>
 
     const handleDelete = (id) => {
         dispatch(thunkDeleteBrands(id))
@@ -29,7 +34,7 @@ const Brands = () => {
         <div className='brands-page'>
             <div className='brands-holder'>
                 {
-                    brands.map((brand) => {
+                    brands.map((brand) => (
                         <div
                             key={brand.id}
                             value={brand.id}
@@ -42,7 +47,7 @@ const Brands = () => {
                             </div>
                             <button className='button' onClick={() => handleDelete(brand.id)}>Delete</button>
                         </div>
-                    })
+                    ))
                 }
             </div>
         </div>

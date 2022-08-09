@@ -39,6 +39,7 @@ import { Route, Switch } from "react-router-dom";
 import SignupFormPage from "./components/SignupFormPage";
 import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
+import Brands from "./components/Brands/Brands.js"
 
 function App() {
   const dispatch = useDispatch();
@@ -53,7 +54,10 @@ function App() {
       {isLoaded && (
         <Switch>
           <Route exact path="/">
-            
+
+          </Route>
+          <Route exact path="/brands">
+            <Brands />
           </Route>
           <Route path="/signup">
             <SignupFormPage />

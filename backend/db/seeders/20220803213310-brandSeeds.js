@@ -12,6 +12,26 @@ module.exports = {
         country: "USA",
         createdAt: new Date(),
         updatedAt: new Date()
+      },
+      {
+        userId: "2",
+        brandImg: "https://indiacityblog.com/wp-content/uploads/2020/04/Turbologo-1200x900.png",
+        name: "Louis Vuitton",
+        address: "LVMH Moët Hennessy - Louis Vuitton, 22, avenue Montaigne ",
+        city: "Paris",
+        country: "France",
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        userId: "3",
+        brandImg: "https://cdn.freebiesupply.com/logos/large/2x/cartier-2-logo-png-transparent.png",
+        name: "Cartier",
+        address: "17 Rue du Faubourg Saint-Honoré",
+        city: "Paris",
+        country: "France",
+        createdAt: new Date(),
+        updatedAt: new Date()
       }
     ], {})
   },
