@@ -45,7 +45,7 @@ router.put('/:id', asyncHandler(async (req, res) => {
     brand.country = country;
     await brand.save();
 
-    res.json(brand);
+    return res.json(brand);
 }))
 
 // DELETE BRAND

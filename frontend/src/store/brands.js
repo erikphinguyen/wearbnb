@@ -52,53 +52,54 @@ export const thunkGetBrands = () => async (dispatch) => {
     if (response.ok) {
         const brands = await response.json();
         dispatch(getBrands(brands));
+        return brands
     }
 }
 
 // GET ONE BRAND
-// export const thunkGetOneBrand = (id) => async (dispatch) => {
-//     const response = await csrfFetch(`/api/brands/${id}`)
+export const thunkGetOneBrand = (id) => async (dispatch) => {
+    const response = await csrfFetch(`/api/brands/${id}`)
 
-//     // console.log("RESPONSE TEST", response)
-//     if (response.ok) {
-//         const brands = await response.json();
-//         // console.log(brands)
-//         dispatch(getOneBrand(brands));
-//         return brands
-//     }
-// }
+    // console.log("RESPONSE TEST", response)
+    if (response.ok) {
+        const brands = await response.json();
+        // console.log(brands)
+        dispatch(getOneBrand(brands));
+        return brands
+    }
+}
 
-// export const thunkPutBrands = data => async dispatch => {
-//     const response = await csrfFetch(`/api/brands/${data.id}`, {
-//         method: 'PUT',
-//         headers: {
-//             'Content-Type': 'application/json'
-//         },
-//         body: JSON.stringify(data)
-//     });
+export const thunkPutBrands = data => async dispatch => {
+    const response = await csrfFetch(`/api/brands/${data.id}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    });
 
-//     if (response.ok) {
-//         const brand = await response.json();
-//         dispatch(putBrands(brand));
-//         return brand;
-//     }
-// };
+    if (response.ok) {
+        const brand = await response.json();
+        dispatch(putBrands(brand));
+        return brand;
+    }
+};
 
-// export const thunkPostBrands = (data) => async dispatch => {
-//     const response = await csrfFetch(`/api/brands`, {
-//         method: 'POST',
-//         headers: {
-//             'Content-Type': 'application/json'
-//         },
-//         body: JSON.stringify(data)
-//     });
+export const thunkPostBrands = (data) => async dispatch => {
+    const response = await csrfFetch(`/api/brands`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    });
 
-//     if (response.ok) {
-//         const brand = await response.json();
-//         dispatch(postBrands(brand));
-//         return brand;
-//     }
-// };
+    if (response.ok) {
+        const brand = await response.json();
+        dispatch(postBrands(brand));
+        return brand;
+    }
+};
 
 export const thunkDeleteBrands = (id) => async dispatch => {
     const response = await csrfFetch(`/api/brands/${id}`, {
