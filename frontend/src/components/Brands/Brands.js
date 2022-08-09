@@ -12,12 +12,13 @@ const Brands = () => {
     const brandsObj = useSelector(state => state.brands)
 
     useEffect(() => {
-        dispatch(thunkGetBrands()).then(res => {
-            // console.log("LINE 16 IN USE EFFECT", res)
-            // let brandsArr = Object.values(brandsObj);
-            // setBrands(brandsArr)
-            setBrands(res)
-        })
+        dispatch(thunkGetBrands())
+            .then(res => {
+                // console.log("LINE 16 IN USE EFFECT", res)
+                // let brandsArr = Object.values(brandsObj);
+                // setBrands(brandsArr)
+                setBrands(res)
+            })
     }, [dispatch])
 
     console.log("OUTSIDE OF USE EFFECT", brands)

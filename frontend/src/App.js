@@ -40,6 +40,7 @@ import SignupFormPage from "./components/SignupFormPage";
 import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 import Brands from "./components/Brands/Brands.js"
+import OneBrand from "./components/OneBrand/OneBrand";
 
 function App() {
   const dispatch = useDispatch();
@@ -58,6 +59,9 @@ function App() {
           </Route>
           <Route exact path="/brands">
             <Brands />
+          </Route>
+          <Route exact path='/brands/:id'>
+            <OneBrand />
           </Route>
           <Route path="/signup">
             <SignupFormPage />
