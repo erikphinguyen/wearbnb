@@ -21,10 +21,10 @@ const postReviews = (reviews) => {
     }
 }
 
-const putReviews = (reviews) => {
+const putReviews = (review) => {
     return {
         type: PUT_REVIEWS,
-        reviews
+        review
     }
 }
 
@@ -48,6 +48,7 @@ export const thunkGetReviews = () => async (dispatch) => {
 }
 
 export const thunkPutReviews = data => async dispatch => {
+    console.log("HITTING THUNK PUT REVIEWS")
     const response = await csrfFetch(`/api/reviews/${data.id}`, {
         method: 'PUT',
         headers: {
@@ -117,7 +118,7 @@ const reviewsReducer = (state = {}, action) => {
         case PUT_REVIEWS:
             return {
                 ...state,
-                [action.reviews.id]: action.reviews
+                [action.review.id]: action.review
             }
         default:
             return state;

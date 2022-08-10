@@ -21,8 +21,7 @@ const Brands = () => {
             })
     }, [dispatch])
 
-    console.log("OUTSIDE OF USE EFFECT", brands)
-    // if (!brands.length) return <h1>no brands D:</h1>
+    if (!brands.length) return <h1>no brands D:</h1>
 
     const handleDelete = (id) => {
         dispatch(thunkDeleteBrands(id))

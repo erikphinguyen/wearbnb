@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, NavLink, Route, useParams } from 'react-router-dom';
 import brandsReducer, { thunkGetOneBrand, thunkPutBrands } from '../../store/brands.js'
-import { thunkPostReviews } from '../../store/reviews.js';
+import { thunkGetReviews, thunkPostReviews, thunkDeleteReviews } from '../../store/reviews.js';
 
 import "./OneBrand.css"
 
@@ -13,18 +13,24 @@ const OneBrand = () => {
     //     console.log(state.brands)
     //     return state.brands[Number(id)]
     // });
-    const [singleBrand, setSingleBrand] = useState({})
-
-    // console.log(singleBrand)
 
     const [editMode, setEditMode] = useState(false);
+    const [editModeReviews, setEditModeReviews] = useState(false);
 
+    // get brand
+    const [singleBrand, setSingleBrand] = useState({})
+    // console.log(singleBrand)
+
+
+    // put reviews
     const [newReview, setNewReview] = useState({
         review: ''
     })
 
+    // get reviews
     const [oneBrandReviews, setOneBrandReviews] = useState([])
 
+    // put brand
     const [newBrandData, setNewBrandData] = useState({
         brandImg: '',
         name: '',
@@ -34,7 +40,6 @@ const OneBrand = () => {
     })
 
     useEffect(() => {
-        console.log('TEST')
         dispatch(thunkGetOneBrand(id))
             .then(res => {
                 console.log("USE EFFECT ONE BRAND", res)
@@ -44,7 +49,7 @@ const OneBrand = () => {
             .catch(err => console.log(err))
     }, [dispatch, id])
 
-    console.log(singleBrand)
+    // console.log(singleBrand)
 
     const handleSubmitEdit = e => {
         e.preventDefault();
@@ -63,6 +68,21 @@ const OneBrand = () => {
         }
         dispatch(thunkPostReviews(data))
             .then(res => setOneBrandReviews([...oneBrandReviews, res]))
+    }
+
+    // const handleDeleteReview = (id) => {
+    //     dispatch(thunkDeleteReviews(id))
+    //         .then(() => {
+    //             let newReviews = reviews.filter(review => review.id !== id)
+    //             setOneImageReviews(newReviews)
+    //         })
+    // }
+
+    const handleDeleteReview = (id) => {
+        dispatch(thunkDeleteReviews(id))
+            .then(() => {
+                setOneBrandReviews(oneBrandReviews.filter(review => review.id !== id))
+            })
     }
 
     if (!singleBrand) return "no brand available";
@@ -89,7 +109,7 @@ const OneBrand = () => {
                             {singleBrand.country}
                         </p>
                         <button className='button' onClick={() => setEditMode(true)}>
-                            Edit
+                            Edit Brand
                         </button>
                         <div>
                             {
@@ -101,6 +121,10 @@ const OneBrand = () => {
                                             <p>
                                                 {review.review}
                                             </p>
+                                            <button onClick={() => setEditModeReviews(true)}>
+                                                Edit Review
+                                            </button>
+                                            <button onClick={() => handleDeleteReview(review.id)}>Delete</button>
                                         </div>
                                     </div>
                                 ))
@@ -138,6 +162,18 @@ const OneBrand = () => {
                             onChange={(e) => setNewBrandData({ ...newBrandData, country: e.target.value })}
                         />
                         <button className='button' onClick={handleSubmitEdit}>Save</button>
+                    </div>
+                ) : null
+            }
+            {
+                editModeReviews ? (
+                    <div>
+                        <input
+                            type='text'
+                            placeholder='New Review'
+                            onChange={(e) => setNewReview({ ...newReview, review: e.target.value })}
+                        />
+                        <button onClick={handleSubmitReview}>Save</button>
                     </div>
                 ) : null
             }
