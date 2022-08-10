@@ -60,13 +60,14 @@ export const thunkGetBrands = () => async (dispatch) => {
 export const thunkGetOneBrand = (id) => async (dispatch) => {
     const response = await csrfFetch(`/api/brands/${id}`)
 
-    // console.log("RESPONSE TEST", response)
+    console.log("RESPONSE TEST IN THUNK GET ONE BRAND", response)
     if (response.ok) {
         const brand = await response.json();
         console.log("THUNK GET ONE BRAND", brand)
         dispatch(getOneBrand(brand));
         return brand
     }
+    else {console.log('ELSE RESPONSE IN GET ONE BRAND', response)}
 }
 
 export const thunkPutBrands = data => async dispatch => {
@@ -118,6 +119,7 @@ export const thunkDeleteBrands = (id) => async dispatch => {
 
 
 const brandsReducer = (state = {}, action) => {
+    console.log('HITTING BRANDS REDUCER')
     switch (action.type) {
         case GET_BRANDS:
             const newBrands = {};
@@ -130,10 +132,11 @@ const brandsReducer = (state = {}, action) => {
             }
         case GET_ONE_BRAND:
             const newState = { ...state };
-            console.log("GET ONE BRAND", action.brand)
+            console.log("GET ONE BRAND IN REDUCER", action.brand)
             newState[action.brand.id] = action.brand
             return newState
         case DELETE_BRANDS:
+            console.log('HITTING DELETE BRANDS IN REDUCER')
             const deleteState = { ...state };
             delete deleteState[action.id]
             return deleteState;
