@@ -1,20 +1,29 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, NavLink, Route, useParams } from 'react-router-dom';
-import { thunkGetOneBrand, thunkPutBrands } from '../../store/brands.js'
+import brandsReducer, { thunkGetOneBrand, thunkPutBrands } from '../../store/brands.js'
+import { thunkPostReviews } from '../../store/reviews.js';
+
 import "./OneBrand.css"
 
 const OneBrand = () => {
     const dispatch = useDispatch();
     const { id } = useParams();
-    const singleBrand = useSelector(state => {
-        console.log('STATE BRANDS', state.brands[id])
-        return state.brands[id]
-    });
+    // const singleBrand = useSelector(state => {
+    //     console.log(state.brands)
+    //     return state.brands[Number(id)]
+    // });
+    const [singleBrand, setSingleBrand] = useState({})
 
-    console.log(singleBrand)
+    // console.log(singleBrand)
 
     const [editMode, setEditMode] = useState(false);
+
+    const [newReview, setNewReview] = useState({
+        review: ''
+    })
+
+    const [oneBrandReviews, setOneBrandReviews] = useState([])
 
     const [newBrandData, setNewBrandData] = useState({
         brandImg: '',
@@ -24,6 +33,19 @@ const OneBrand = () => {
         country: ''
     })
 
+    useEffect(() => {
+        console.log('TEST')
+        dispatch(thunkGetOneBrand(id))
+            .then(res => {
+                console.log("USE EFFECT ONE BRAND", res)
+                setSingleBrand(res)
+                setOneBrandReviews(res.Reviews)
+            })
+            .catch(err => console.log(err))
+    }, [dispatch, id])
+
+    console.log(singleBrand)
+
     const handleSubmitEdit = e => {
         e.preventDefault();
         let data = {
@@ -31,6 +53,16 @@ const OneBrand = () => {
             ...newBrandData
         }
         dispatch(thunkPutBrands(data))
+    }
+
+    const handleSubmitReview = e => {
+        e.preventDefault();
+        let data = {
+            brandId: id,
+            review: newReview.review
+        }
+        dispatch(thunkPostReviews(data))
+            .then(res => setOneBrandReviews([...oneBrandReviews, res]))
     }
 
     if (!singleBrand) return "no brand available";
@@ -59,6 +91,21 @@ const OneBrand = () => {
                         <button className='button' onClick={() => setEditMode(true)}>
                             Edit
                         </button>
+                        <div>
+                            {
+                                oneBrandReviews.map(review => (
+                                    <div
+                                        key={review.id}
+                                    >
+                                        <div>
+                                            <p>
+                                                {review.review}
+                                            </p>
+                                        </div>
+                                    </div>
+                                ))
+                            }
+                        </div>
                     </div>
                 </div>
             </div>
