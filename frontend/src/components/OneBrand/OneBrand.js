@@ -117,6 +117,26 @@ const OneBrand = () => {
                             placeholder='New Name'
                             onChange={(e) => setNewBrandData({ ...newBrandData, name: e.target.value })}
                         />
+                        <input
+                            type='text'
+                            placeholder='New Image'
+                            onChange={(e) => setNewBrandData({ ...newBrandData, brandImg: e.target.value })}
+                        />
+                        <input
+                            type='text'
+                            placeholder='New Address'
+                            onChange={(e) => setNewBrandData({ ...newBrandData, address: e.target.value })}
+                        />
+                        <input
+                            type='text'
+                            placeholder='New City'
+                            onChange={(e) => setNewBrandData({ ...newBrandData, city: e.target.value })}
+                        />
+                        <input
+                            type='text'
+                            placeholder='New Country'
+                            onChange={(e) => setNewBrandData({ ...newBrandData, country: e.target.value })}
+                        />
                         <button className='button' onClick={handleSubmitEdit}>Save</button>
                     </div>
                 ) : null
