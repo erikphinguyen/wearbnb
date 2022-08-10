@@ -12,7 +12,6 @@ router.get('/', asyncHandler(async function (req, res) {
 
 // GET INDIVIDUAL BRAND
 router.get('/:id(\\d+)', asyncHandler(async function (req, res) {
-
     const {id} = req.params;
     const brand = await Brand.findByPk(id,
         {
