@@ -18,6 +18,14 @@ router.get('/:id(\\d+)', requireAuth, restoreUser, asyncHandler(async (req, res)
     return res.json(reviews);
 }));
 
+router.put('/:id(\\d+)', requireAuth, restoreUser, asyncHandler(async (req, res) => {
+    const { id } = req.body;
+    let review = await Review.findByPk(id);
+    review.review = req.body.review;
+    await review.save();
+    return res.json(review);
+}))
+
 // POST REVIEW
 router.post('/:id(\\d+)', requireAuth, restoreUser, asyncHandler(async (req, res) => {
     const { id } = req.params;
