@@ -42,7 +42,8 @@ const OneBrand = () => {
         country: ''
     })
 
-    useEffect(() => {
+    useEffect( async => {
+        console.log('USE EFFECT ONE BRAND BEFORE RES')
         dispatch(thunkGetOneBrand(id))
             .then(res => {
                 console.log("USE EFFECT ONE BRAND", res)
