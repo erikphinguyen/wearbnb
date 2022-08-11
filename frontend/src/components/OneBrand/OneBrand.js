@@ -11,7 +11,7 @@ const OneBrand = () => {
     // console.log('PROPS HISTORY LOCATION', props)
     const dispatch = useDispatch();
     const { id } = useParams();
-    console.log('CHECKING ID IN ONBRAND',id)
+    console.log('CHECKING ID IN ONBRAND', id)
     // const singleBrand = useSelector(state => {
     //     console.log(state.brands)
     //     return state.brands[Number(id)]
@@ -19,6 +19,7 @@ const OneBrand = () => {
 
     const [editMode, setEditMode] = useState(false);
     const [editModeReviews, setEditModeReviews] = useState(false);
+    const [selectedEdit, setSelectedEdit] = useState(null);
 
     // get brand
     const [singleBrand, setSingleBrand] = useState({})
@@ -31,7 +32,7 @@ const OneBrand = () => {
     })
 
     // get reviews
-    const [oneBrandReviews, setOneBrandReviews] = useState([])
+    let [oneBrandReviews, setOneBrandReviews] = useState([])
 
     // put brand
     const [newBrandData, setNewBrandData] = useState({
@@ -67,13 +68,50 @@ const OneBrand = () => {
             .then(res => setSingleBrand(res))
     }
 
+    // EDITING REVIEW
+    console.log('FINDING ONNE BRAND REVIEWS', oneBrandReviews)
+    console.log('FINDING NEW REVIEW', newReview)
     const handleSubmitReviewEdit = e => {
         e.preventDefault();
         let data = {
-            id: oneBrandReviews.id,
+            id: selectedEdit,
             ...newReview
         }
+        console.log('DATA IN EDITING REVIEW', data)
         dispatch(thunkPutReviews(data))
+            .then(res => {
+                // this posts
+                // setOneBrandReviews([...oneBrandReviews, res])
+                // setOneBrandReviews(oneBrandReviews.filter(review => review.id !))
+
+                // edit
+                // let idx;
+                // for (let i = 0; i < oneBrandReviews.length; i++) {
+                //     if (i === res.id) {
+                //         idx = i;
+                //     }
+                // }
+                // let newReview = [];
+                // let oldReview = oneBrandReviews.filter(review => review.id !== res.id);
+                // for (let i = 0; i < oldReview.length; i++)  {
+                //     if (i === idx) {
+                //         newReview.push(res)
+                //     }
+                //     newReview.push(oldReview[i])
+                // }
+                // setOneBrandReviews(newReview)
+
+                //edit with less code
+                let oldReview = oneBrandReviews.filter(review => review.id !== res.id);
+                setOneBrandReviews([...oldReview, res])
+
+                // for (let i = 0; i < oneBrandReviews.length; i++) {
+                //     if (i === res.id) {
+                //         oneBrandReviews[i] = res;
+                //     }
+                // }
+                // setOneBrandReviews(oneBrandReviews);
+            })
     }
 
     // POSTING NEW REVIEW
@@ -131,7 +169,11 @@ const OneBrand = () => {
                                             <p>
                                                 {review.review}
                                             </p>
-                                            <button onClick={() => setEditModeReviews(true)}>
+                                            <button onClick={() => {
+                                                setSelectedEdit(review.id)
+                                                setEditModeReviews(true)
+                                            }
+                                            }>
                                                 Edit Review
                                             </button>
                                             <button onClick={() => handleDeleteReview(review.id)}>Delete</button>
@@ -178,6 +220,7 @@ const OneBrand = () => {
             {
                 editModeReviews ? (
                     <div>
+                        {console.log('NEW REVIEW IN EDITMODE REVIEWS', newReview)}
                         <input
                             type='text'
                             placeholder='Edit The Review'

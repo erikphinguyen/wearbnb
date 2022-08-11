@@ -2,9 +2,10 @@ import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useHistory } from 'react-router-dom';
 import { thunkPostBrands } from '../../store/brands';
+import { Modal } from '../../context/Modal';
 
-function PostBrand({brands, setBrands}) {
-    console.log('HITING POST BRAND MODAL',brands)
+function PostBrand({ brands, setBrands, onClose, setShowModal }) {
+    console.log('HITING POST BRAND MODAL', brands)
     const dispatch = useDispatch();
     const history = useHistory();
 
@@ -26,7 +27,10 @@ function PostBrand({brands, setBrands}) {
         return state.session.user
     })
 
+    // console.log('DOES BRANDS POP UP', brands)
+    // console.log('DOES SET BRANDS POP UP', setBrands)
     console.log('CONSOLE LOG SELECT  USER', selectUser)
+    console.log('SET SHOW MODAL', setShowModal)
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -44,6 +48,8 @@ function PostBrand({brands, setBrands}) {
         dispatch(thunkPostBrands(newBrand))
             .then(res => {
                 console.log("INSIDE THUNKPOSTBRANDS DISPATCH", res)
+                // onClose();
+                setShowModal(false);
                 setBrands([...brands, res])
                 // history.push({pathname:`/brands/${String(res.id)}`, state:{data: res}})
             })
