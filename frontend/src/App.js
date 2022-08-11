@@ -49,13 +49,15 @@ function App() {
     dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
   }, [dispatch]);
 
+  const [brands, setBrands] = useState([]);
+
   return (
     <>
-      <Navigation isLoaded={isLoaded} />
+      <Navigation isLoaded={isLoaded} brands={brands} setBrands={setBrands}/>
       {isLoaded && (
         <Switch>
           <Route exact path="/">
-            <Brands />
+            <Brands brands={brands} setBrands={setBrands}/>
           </Route>
           <Route exact path='/brands/:id'>
             <OneBrand />

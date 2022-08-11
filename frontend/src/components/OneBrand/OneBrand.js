@@ -7,8 +7,11 @@ import { thunkGetReviews, thunkPutReviews, thunkPostReviews, thunkDeleteReviews 
 import "./OneBrand.css"
 
 const OneBrand = () => {
+    // console.log('THIS IS PROPS IN ONEBRAND', props)
+    // console.log('PROPS HISTORY LOCATION', props)
     const dispatch = useDispatch();
     const { id } = useParams();
+    console.log('CHECKING ID IN ONBRAND',id)
     // const singleBrand = useSelector(state => {
     //     console.log(state.brands)
     //     return state.brands[Number(id)]
@@ -49,15 +52,18 @@ const OneBrand = () => {
             .catch(err => console.log(err))
     }, [dispatch, id])
 
+    console.log('WHAT IS SINGLE BRAND', singleBrand)
+
     // console.log(singleBrand)
 
     const handleSubmitEdit = e => {
         e.preventDefault();
         let data = {
-            id: singleBrand.id,
+            id: id,
             ...newBrandData
         }
         dispatch(thunkPutBrands(data))
+            .then(res => setSingleBrand(res))
     }
 
     const handleSubmitReviewEdit = e => {
@@ -116,7 +122,7 @@ const OneBrand = () => {
                         </button>
                         <div>
                             {
-                                oneBrandReviews.map(review => (
+                                oneBrandReviews?.map(review => (
                                     <div
                                         key={review.id}
                                     >

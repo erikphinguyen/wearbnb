@@ -3,7 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useHistory } from 'react-router-dom';
 import { thunkPostBrands } from '../../store/brands';
 
-function PostBrand() {
+function PostBrand({brands, setBrands}) {
+    console.log('HITING POST BRAND MODAL',brands)
     const dispatch = useDispatch();
     const history = useHistory();
 
@@ -21,9 +22,17 @@ function PostBrand() {
         setCountry('');
     }
 
+    const selectUser = useSelector(state => {
+        return state.session.user
+    })
+
+    console.log('CONSOLE LOG SELECT  USER', selectUser)
+
     const handleSubmit = async (event) => {
         event.preventDefault();
         const newBrand = {
+            fromModal: true,
+            userId: selectUser.id,
             brandImg,
             name,
             address,
@@ -31,11 +40,18 @@ function PostBrand() {
             country
         }
 
-        const brand = await dispatch(thunkPostBrands(newBrand));
-        if (brand) {
-            reset();
-            history.push(`/brands/${brand.id}`)
-        }
+        // const brand = await dispatch(thunkPostBrands(newBrand));
+        dispatch(thunkPostBrands(newBrand))
+            .then(res => {
+                console.log("INSIDE THUNKPOSTBRANDS DISPATCH", res)
+                setBrands([...brands, res])
+                // history.push({pathname:`/brands/${String(res.id)}`, state:{data: res}})
+            })
+        // if (brand) {
+        //     // reset();
+        //     // history.push(`/brands/${brand.id}`)
+        //     history.push({pathname:`/brands/${brand.id}`, state:{data: brand}})
+        // }
     };
 
     return (

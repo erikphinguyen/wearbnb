@@ -65,6 +65,7 @@ export const logout = () => async (dispatch) => {
 const initialState = { user: null };
 
 const sessionReducer = (state = initialState, action) => {
+    console.log('HITTING SESSION REDUCER')
     let newState;
     switch (action.type) {
         case SET_USER:

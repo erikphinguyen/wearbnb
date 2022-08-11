@@ -47,15 +47,17 @@ import SignUpFormModal from '../SignupFormModal';
 import Logo from './wearbnb-logo.PNG'
 import PostBrandHomeModal from '../PostBrandHomeModal';
 
-function Navigation({ isLoaded }) {
+function Navigation({ isLoaded, brands, setBrands }) {
     const sessionUser = useSelector(state => state.session.user);
 
     let sessionLinks;
     if (sessionUser) {
         sessionLinks = (
-            <ProfileButton user={sessionUser} />
+            <>
+                <ProfileButton user={sessionUser} />
+                <PostBrandHomeModal brands={brands} setBrands={setBrands} />
+            </>
         );
-            <PostBrandHomeModal />
     } else {
         sessionLinks = (
             <>

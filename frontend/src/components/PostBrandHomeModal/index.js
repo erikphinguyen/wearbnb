@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Modal } from '../../context/Modal';
 import PostBrandHome from '../PostBrandHome';
 
-function PostBrandModal() {
+function PostBrandModal({brands, setBrands}) {
     const [showModal, setShowModal] = useState(false);
 
     return (
@@ -10,7 +10,7 @@ function PostBrandModal() {
             <button className='button' onClick={() => setShowModal(true)}>Add A Brand</button>
             {showModal && (
                 <Modal onClose={() => setShowModal(false)}>
-                    <PostBrandHome />
+                    <PostBrandHome brands={brands} setBrands={setBrands}/>
                 </Modal>
             )}
         </>
