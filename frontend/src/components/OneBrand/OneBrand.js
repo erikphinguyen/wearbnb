@@ -2,13 +2,16 @@ import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, NavLink, Route, useParams } from 'react-router-dom';
 import brandsReducer, { thunkGetOneBrand, thunkPutBrands } from '../../store/brands.js'
-import { thunkGetReviews, thunkPostReviews, thunkDeleteReviews } from '../../store/reviews.js';
+import { thunkGetReviews, thunkPutReviews, thunkPostReviews, thunkDeleteReviews } from '../../store/reviews.js';
 
 import "./OneBrand.css"
 
 const OneBrand = () => {
+    // console.log('THIS IS PROPS IN ONEBRAND', props)
+    // console.log('PROPS HISTORY LOCATION', props)
     const dispatch = useDispatch();
     const { id } = useParams();
+    console.log('CHECKING ID IN ONBRAND',id)
     // const singleBrand = useSelector(state => {
     //     console.log(state.brands)
     //     return state.brands[Number(id)]
@@ -50,17 +53,30 @@ const OneBrand = () => {
             .catch(err => console.log(err))
     }, [dispatch, id])
 
+    console.log('WHAT IS SINGLE BRAND', singleBrand)
+
     // console.log(singleBrand)
 
     const handleSubmitEdit = e => {
         e.preventDefault();
         let data = {
-            id: singleBrand.id,
+            id: id,
             ...newBrandData
         }
         dispatch(thunkPutBrands(data))
+            .then(res => setSingleBrand(res))
     }
 
+    const handleSubmitReviewEdit = e => {
+        e.preventDefault();
+        let data = {
+            id: oneBrandReviews.id,
+            ...newReview
+        }
+        dispatch(thunkPutReviews(data))
+    }
+
+    // POSTING NEW REVIEW
     const handleSubmitReview = e => {
         e.preventDefault();
         let data = {
@@ -71,14 +87,7 @@ const OneBrand = () => {
             .then(res => setOneBrandReviews([...oneBrandReviews, res]))
     }
 
-    // const handleDeleteReview = (id) => {
-    //     dispatch(thunkDeleteReviews(id))
-    //         .then(() => {
-    //             let newReviews = reviews.filter(review => review.id !== id)
-    //             setOneImageReviews(newReviews)
-    //         })
-    // }
-
+    // DELETING REVIEW
     const handleDeleteReview = (id) => {
         dispatch(thunkDeleteReviews(id))
             .then(() => {
@@ -114,7 +123,7 @@ const OneBrand = () => {
                         </button>
                         <div>
                             {
-                                oneBrandReviews.map(review => (
+                                oneBrandReviews?.map(review => (
                                     <div
                                         key={review.id}
                                     >
@@ -171,10 +180,11 @@ const OneBrand = () => {
                     <div>
                         <input
                             type='text'
-                            placeholder='New Review'
+                            placeholder='Edit The Review'
                             onChange={(e) => setNewReview({ ...newReview, review: e.target.value })}
                         />
-                        <button onClick={handleSubmitReview}>Save</button>
+                        {/* <button onClick={handleSubmitReview}>Save</button> */}
+                        <button onClick={handleSubmitReviewEdit}>Save</button>
                     </div>
                 ) : null
             }

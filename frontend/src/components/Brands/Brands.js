@@ -4,11 +4,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, NavLink, Route, useParams, useHistory } from 'react-router-dom';
 import { thunkGetBrands, thunkDeleteBrands } from '../../store/brands.js'
 
-const Brands = () => {
+const Brands = ({brands, setBrands}) => {
     const dispatch = useDispatch();
     const { imageId } = useParams();
     const history = useHistory();
-    const [brands, setBrands] = useState([]);
+    // const [brands, setBrands] = useState([]);
     const brandsObj = useSelector(state => state.brands)
 
     useEffect(() => {

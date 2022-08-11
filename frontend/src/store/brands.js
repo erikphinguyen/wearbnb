@@ -60,6 +60,7 @@ export const thunkGetBrands = () => async (dispatch) => {
 export const thunkGetOneBrand = (id) => async (dispatch) => {
     const response = await csrfFetch(`/api/brands/${id}`)
 
+
     console.log("RESPONSE TEST IN THUNK GET ONE BRAND", response)
     if (response.ok) {
         const brand = await response.json();
@@ -71,6 +72,7 @@ export const thunkGetOneBrand = (id) => async (dispatch) => {
 }
 
 export const thunkPutBrands = data => async dispatch => {
+    console.log("HITTING THUNK PUT BRANDS")
     const response = await csrfFetch(`/api/brands/${data.id}`, {
         method: 'PUT',
         headers: {
@@ -80,6 +82,7 @@ export const thunkPutBrands = data => async dispatch => {
     });
 
     if (response.ok) {
+        console.log("IF RESPONSE OK IN THUNK PUT BRANDS", response)
         const brand = await response.json();
         dispatch(putBrands(brand));
         return brand;
