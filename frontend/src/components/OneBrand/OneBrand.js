@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, NavLink, Route, useParams } from 'react-router-dom';
 import brandsReducer, { thunkGetOneBrand, thunkPutBrands } from '../../store/brands.js'
-import { thunkGetReviews, thunkPostReviews, thunkDeleteReviews } from '../../store/reviews.js';
+import { thunkGetReviews, thunkPutReviews, thunkPostReviews, thunkDeleteReviews } from '../../store/reviews.js';
 
 import "./OneBrand.css"
 
@@ -60,6 +60,16 @@ const OneBrand = () => {
         dispatch(thunkPutBrands(data))
     }
 
+    const handleSubmitReviewEdit = e => {
+        e.preventDefault();
+        let data = {
+            id: oneBrandReviews.id,
+            ...newReview
+        }
+        dispatch(thunkPutReviews(data))
+    }
+
+    // POSTING NEW REVIEW
     const handleSubmitReview = e => {
         e.preventDefault();
         let data = {
@@ -70,14 +80,7 @@ const OneBrand = () => {
             .then(res => setOneBrandReviews([...oneBrandReviews, res]))
     }
 
-    // const handleDeleteReview = (id) => {
-    //     dispatch(thunkDeleteReviews(id))
-    //         .then(() => {
-    //             let newReviews = reviews.filter(review => review.id !== id)
-    //             setOneImageReviews(newReviews)
-    //         })
-    // }
-
+    // DELETING REVIEW
     const handleDeleteReview = (id) => {
         dispatch(thunkDeleteReviews(id))
             .then(() => {
@@ -170,10 +173,11 @@ const OneBrand = () => {
                     <div>
                         <input
                             type='text'
-                            placeholder='New Review'
+                            placeholder='Edit The Review'
                             onChange={(e) => setNewReview({ ...newReview, review: e.target.value })}
                         />
-                        <button onClick={handleSubmitReview}>Save</button>
+                        {/* <button onClick={handleSubmitReview}>Save</button> */}
+                        <button onClick={handleSubmitReviewEdit}>Save</button>
                     </div>
                 ) : null
             }

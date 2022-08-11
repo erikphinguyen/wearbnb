@@ -45,6 +45,7 @@ import './Navigation.css';
 import Demo from '../Demo/Demo.js'
 import SignUpFormModal from '../SignupFormModal';
 import Logo from './wearbnb-logo.PNG'
+import PostBrandHomeModal from '../PostBrandHomeModal';
 
 function Navigation({ isLoaded }) {
     const sessionUser = useSelector(state => state.session.user);
@@ -54,6 +55,7 @@ function Navigation({ isLoaded }) {
         sessionLinks = (
             <ProfileButton user={sessionUser} />
         );
+            <PostBrandHomeModal />
     } else {
         sessionLinks = (
             <>
@@ -74,7 +76,7 @@ function Navigation({ isLoaded }) {
         <ul>
             <div>
                 <NavLink exact to="/">
-                    <img src={Logo} width="200" alt="logo"/>
+                    <img src={Logo} width="200" alt="logo" />
                 </NavLink>
             </div>
             <div>

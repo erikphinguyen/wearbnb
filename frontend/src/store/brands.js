@@ -60,7 +60,6 @@ export const thunkGetBrands = () => async (dispatch) => {
 export const thunkGetOneBrand = (id) => async (dispatch) => {
     const response = await csrfFetch(`/api/brands/${id}`)
 
-    // console.log("RESPONSE TEST", response)
     if (response.ok) {
         const brand = await response.json();
         console.log("THUNK GET ONE BRAND", brand)
@@ -70,6 +69,7 @@ export const thunkGetOneBrand = (id) => async (dispatch) => {
 }
 
 export const thunkPutBrands = data => async dispatch => {
+    console.log("HITTING THUNK PUT BRANDS")
     const response = await csrfFetch(`/api/brands/${data.id}`, {
         method: 'PUT',
         headers: {
@@ -79,6 +79,7 @@ export const thunkPutBrands = data => async dispatch => {
     });
 
     if (response.ok) {
+        console.log("IF RESPONSE OK IN THUNK PUT BRANDS", response)
         const brand = await response.json();
         dispatch(putBrands(brand));
         return brand;
@@ -118,6 +119,7 @@ export const thunkDeleteBrands = (id) => async dispatch => {
 
 
 const brandsReducer = (state = {}, action) => {
+    console.log('HITTING BRANDS REDUCER')
     switch (action.type) {
         case GET_BRANDS:
             const newBrands = {};
@@ -130,7 +132,7 @@ const brandsReducer = (state = {}, action) => {
             }
         case GET_ONE_BRAND:
             const newState = { ...state };
-            console.log("GET ONE BRAND", action.brand)
+            console.log("GET ONE BRAND IN REDUCER", action.brand)
             newState[action.brand.id] = action.brand
             return newState
         case DELETE_BRANDS:
