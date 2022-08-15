@@ -2,6 +2,50 @@
     display: flex;
     justify-content: space-between;
     margin: 0;
+    border: 1px solid red;
+}
+
+.link {
+    margin-top: 12%;
+    background: none;
+    border: none;
+    text-decoration: none;
+    color: #777;
+    font-family: inherit;
+    font-size: inherit;
+    cursor: pointer;
+    padding: 0;
+}
+
+.dropdown {
+    position: relative
+}
+
+.dropdown.active > .link, .link:hover {
+    color:black;
+}
+
+.dropdown-menu {
+    position: absolute;
+    left: 0;
+    top: calc(100% + .3rem);
+    background-color: white;
+    padding: 0.65rem;
+    border-radius: 0.3rem;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .2);
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: opacity 200ms ease-in-out, transform 150ms ease-in-out;
+    pointer-events: none;
+}
+
+/*
+THIS TO TEST DROPDOWN
+*/
+.dropdown.active > .link + .dropdown-menu {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
 }
 
 .button-container>div {
@@ -14,6 +58,7 @@
     left: 0;
     margin-left: 19%;
     margin-right: 19%;
+    border: 1px solid green;
 }
 
 .navigation>div {
