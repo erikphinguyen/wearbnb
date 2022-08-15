@@ -44,7 +44,9 @@ const OneBrand = () => {
         country: ''
     })
 
-    useEffect( async => {
+    const user = useSelector(state => state.session.user)
+
+    useEffect(async => {
         console.log('USE EFFECT ONE BRAND BEFORE RES')
         dispatch(thunkGetOneBrand(id))
             .then(res => {
@@ -157,11 +159,15 @@ const OneBrand = () => {
                         <p>
                             {singleBrand.country}
                         </p>
-                        <button className='button' onClick={() => setEditMode(true)}>
-                            Edit Brand
-                        </button>
+                        {
+                            user?.id === singleBrand?.id && (
+                                <button className='button' onClick={() => setEditMode(true)}>
+                                    Edit Brand
+                                </button>
+                            )
+                        }
                         <div>
-                            <PostComment oneBrandReviews={oneBrandReviews} setOneBrandReviews={setOneBrandReviews}/>
+                            <PostComment oneBrandReviews={oneBrandReviews} setOneBrandReviews={setOneBrandReviews} />
                             {
                                 oneBrandReviews?.map(review => (
                                     <div

@@ -1,8 +1,17 @@
+nav {
+    top: 0;
+    margin-top: 0;
+}
+
 .button-container {
     display: flex;
     justify-content: space-between;
     margin: 0;
     border: 1px solid red;
+}
+
+.break-line {
+    margin-bottom: 1px solid #777;
 }
 
 .link {
@@ -21,8 +30,9 @@
     position: relative
 }
 
-.dropdown.active > .link, .link:hover {
-    color:black;
+.dropdown.active>.link,
+.link:hover {
+    color: black;
 }
 
 .dropdown-menu {
@@ -37,12 +47,18 @@
     transform: translateY(-10px);
     transition: opacity 200ms ease-in-out, transform 150ms ease-in-out;
     pointer-events: none;
+    display: flex;
+    flex-direction: column;
 }
 
-/*
-THIS TO TEST DROPDOWN
-*/
-.dropdown.active > .link + .dropdown-menu {
+.dropdown-menu>div {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+
+}
+
+.dropdown.active>.link+.dropdown-menu {
     opacity: 1;
     transform: translateY(0);
     pointer-events: auto;

@@ -24,16 +24,23 @@ router.post(
     validateLogin,
     asyncHandler(async (req, res, next) => {
         const { credential, password } = req.body;
+        if (credential === "" || password === "") {
+            return res.status(400).json({error: "Please fill out required fields"})
+        }
 
         const user = await User.login({ credential, password });
 
         if (!user) {
-            const err = new Error('Login failed');
-            err.status = 401;
-            err.title = 'Login failed';
-            err.errors = ['The provided credentials were invalid.'];
-            return next(err);
+            return res.status(400).json({error: "Invalid Username or Email"})
         }
+
+        // if (!user) {
+        //     const err = new Error('Login failed');
+        //     err.status = 401;
+        //     err.title = 'Login failed';
+        //     err.errors = ['The provided credentials were invalid.'];
+        //     return next(err);
+        // }
 
         await setTokenCookie(res, user);
 

@@ -1,0 +1,30 @@
+.footer {
+    position: fixed;
+    bottom: 0;
+    text-align: center;
+    width: 100%;
+    left: 0;
+}
+
+.footer>ul {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.fa-github-alt,
+.fa-linkedin {
+    letter-spacing: 0.05em;
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+.fa-github-alt:hover,
+.fa-linkedin:hover {
+    letter-spacing: 0.05em;
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
