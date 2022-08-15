@@ -14,6 +14,8 @@ function PostReview({ oneBrandReviews, setOneBrandReviews }) {
         return state.session.user
     })
 
+    const user = useSelector(state => state.session.user)
+
     const { id } = useParams()
     console.log('WHAT IS ID', id)
     console.log("WHAT IS SELECT USER", selectUser)
@@ -40,7 +42,7 @@ function PostReview({ oneBrandReviews, setOneBrandReviews }) {
 
     return (
         <>
-            <h2>
+            {/* <h2>
                 Upload New Review
             </h2>
             <form onSubmit={handleSubmit}>
@@ -56,8 +58,31 @@ function PostReview({ oneBrandReviews, setOneBrandReviews }) {
                     placeholder='New Review'
                     name='review'
                 />
-            </form>
-            <button className='button' onClick={handleSubmit} type='submit'>Submit</button>
+            </form> */}
+            {
+                user?.id && (
+                    <>
+                        <h2>
+                            Upload New Review
+                        </h2>
+                        <form onSubmit={handleSubmit}>
+                            {errors.map((error, idx) => (
+                                <li style={errors.length ? { color: "red" } : null} key={idx}>{error}</li>
+                            ))}
+                            <input
+                                className='input'
+                                style={errors.length && review.length == 0 ? { border: "1px solid red" } : null}
+                                type='text'
+                                onChange={(event) => setReview(event.target.value)}
+                                value={review}
+                                placeholder='New Review'
+                                name='review'
+                            />
+                        </form>
+                        <button className='button' onClick={handleSubmit} type='submit'>Submit</button>
+                    </>
+                )
+            }
         </>
     )
 

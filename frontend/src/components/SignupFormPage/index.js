@@ -17,56 +17,71 @@ function SignupFormPage() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (password === confirmPassword) {
-            setErrors([]);
-            return dispatch(sessionActions.signup({ email, username, password }))
-                .catch(async (res) => {
-                    const data = await res.json();
-                    if (data && data.errors) setErrors(data.errors);
-                });
-        }
-        return setErrors(['Confirm Password field must be the same as the Password field']);
+        // if (password === confirmPassword) {
+        //     setErrors([]);
+        //     return dispatch(sessionActions.signup({ email, username, password }))
+        //         .catch(async (res) => {
+        //             const data = await res.json();
+        //             if (data && data.errors) setErrors(data.errors);
+        //         });
+        // }
+        dispatch(sessionActions.signup({ email, username, password })).then(
+            async (res) => {
+                setErrors([res])
+            }
+        )
+        // return setErrors(['Confirm Password field must be the same as the Password field']);
     };
 
     return (
         <form className="form" onSubmit={handleSubmit}>
             <ul>
-                {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+                {errors.map((error, idx) => (
+                    <li style={errors.length ? { color: "red" } : null} key={idx}>{error}</li>
+                ))}
             </ul>
             <label>
                 Email
                 <input
+                    className="input"
+                    style={errors.length && email == "" ? { border: "1px solid red" } : null}
                     type="text"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    required
+                // required
                 />
             </label>
             <label>
                 Username
                 <input
+                    className="input"
+                    style={errors.length && username == "" ? { border: "1px solid red" } : null}
                     type="text"
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
-                    required
+                // required
                 />
             </label>
             <label>
                 Password
                 <input
+                    className="input"
+                    style={errors.length && password == "" ? { border: "1px solid red" } : null}
                     type="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    required
+                // required
                 />
             </label>
             <label>
                 Confirm Password
                 <input
+                    className="input"
+                    style={errors.length && confirmPassword == "" ? { border: "1px solid red" } : null}
                     type="password"
                     value={confirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)}
-                    required
+                // required
                 />
             </label>
             <button className='button' type="submit">Sign Up</button>

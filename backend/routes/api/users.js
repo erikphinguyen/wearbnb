@@ -30,10 +30,30 @@ const validateSignup = [
 // Sign up
 router.post(
     '/',
-    validateSignup,
+    // validateSignup,
     asyncHandler(async (req, res) => {
-        const { email, password, username } = req.body;
+        const { email, password, username, confirmPassword } = req.body;
+
+        if (email == "") {
+            return res.status(400).json({ error: "Please fill out Email" })
+
+        }
+        if (username == "") {
+            return res.status(400).json({ error: "Please fill out Username" })
+        }
+
+        if (password == "") {
+            return res.status(400).json({ error: "Please fill out Password" })
+        }
+        if (confirmPassword == "") {
+            return res.status(400).json({ error: "Please fill out Password" })
+        }
+
+
         const user = await User.signup({ email, username, password });
+        if (!user) {
+            return res.status(400).json({ error: "Invalid Username or Email" })
+        }
 
         await setTokenCookie(res, user);
 
