@@ -64,7 +64,7 @@ function Navigation({ isLoaded, brands, setBrands }) {
         sessionLinks = (
             <div className='button-container'>
                 <div className='dropdown' data-dropdown>
-                    <button className='link' data-dropdown-button>Information</button>
+                    <button className='link' data-dropdown-button>Log in/Sign up</button>
                     <div className='dropdown-menu' data-dropdown-button>
                         <div>
                             <Demo />
