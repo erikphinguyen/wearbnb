@@ -23,7 +23,7 @@ function LoginForm() {
 
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form className="form" onSubmit={handleSubmit}>
             <ul>
                 {errors.map((error, idx) => (
                     <li style={errors.length ? { color: "red" } : null} key={idx}>{error}</li>

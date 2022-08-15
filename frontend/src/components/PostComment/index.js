@@ -40,16 +40,15 @@ function PostReview({ oneBrandReviews, setOneBrandReviews }) {
 
     return (
         <>
-            <div>
-                {errors.map((error, idx) => (
-                    <li style={errors.length ? { color: "red" } : null} key={idx}>{error}</li>
-                ))}
-            </div>
             <h2>
                 Upload New Review
             </h2>
             <form onSubmit={handleSubmit}>
+                {errors.map((error, idx) => (
+                    <li style={errors.length ? { color: "red" } : null} key={idx}>{error}</li>
+                ))}
                 <input
+                    className='input'
                     style={errors.length && review.length == 0 ? { border: "1px solid red" } : null}
                     type='text'
                     onChange={(event) => setReview(event.target.value)}

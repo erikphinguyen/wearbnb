@@ -30,3 +30,22 @@
     box-shadow: none;
     transform: translateY(5px);
 }
+
+.profile-dropdown {
+    left: 0;
+    margin-left: 0;
+}
+
+.form {
+    padding: 20px;
+    margin: 20px;
+    border-radius: 2rem;
+}
+
+.input {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+}

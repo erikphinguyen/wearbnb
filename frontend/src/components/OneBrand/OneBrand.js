@@ -153,16 +153,16 @@ const OneBrand = () => {
     if (!singleBrand) return "no brand available";
 
     return (
-        <div>
+        <div className='onebrand-container'>
             <div>
                 <h1>{singleBrand.name}</h1>
-                <img
+                <img className='onebrand-image'
                     src={singleBrand.brandImg}
                 />
                 <div>
-                    <p>
+                    <h2>
                         Address:
-                    </p>
+                    </h2>
                     <div>
                         <p>
                             {singleBrand.address}
@@ -180,6 +180,43 @@ const OneBrand = () => {
                                 </button>
                             )
                         }
+                        {
+                            editMode ? (
+                                <div>
+                                    <input
+                                        style={errors.length && newReview.review.length == 0 ? { border: "1px solid red" } : null}
+                                        type='text'
+                                        placeholder='New Name'
+                                        onChange={(e) => setNewBrandData({ ...newBrandData, name: e.target.value })}
+                                    />
+                                    <input
+                                        style={errors.length && newReview.review.length == 0 ? { border: "1px solid red" } : null}
+                                        type='text'
+                                        placeholder='New Image'
+                                        onChange={(e) => setNewBrandData({ ...newBrandData, brandImg: e.target.value })}
+                                    />
+                                    <input
+                                        style={errors.length && newReview.review.length == 0 ? { border: "1px solid red" } : null}
+                                        type='text'
+                                        placeholder='New Address'
+                                        onChange={(e) => setNewBrandData({ ...newBrandData, address: e.target.value })}
+                                    />
+                                    <input
+                                        style={errors.length && newReview.review.length == 0 ? { border: "1px solid red" } : null}
+                                        type='text'
+                                        placeholder='New City'
+                                        onChange={(e) => setNewBrandData({ ...newBrandData, city: e.target.value })}
+                                    />
+                                    <input
+                                        style={errors.length && newReview.review.length == 0 ? { border: "1px solid red" } : null}
+                                        type='text'
+                                        placeholder='New Country'
+                                        onChange={(e) => setNewBrandData({ ...newBrandData, country: e.target.value })}
+                                    />
+                                    <button className='button' onClick={handleSubmitEdit}>Save</button>
+                                </div>
+                            ) : null
+                        }
                         <div>
                             <PostComment oneBrandReviews={oneBrandReviews} setOneBrandReviews={setOneBrandReviews} />
                             {
@@ -188,8 +225,11 @@ const OneBrand = () => {
                                         key={review.id}
                                     >
                                         <div>
+                                            <h4>
+                                                user {review.userId}'s review:
+                                            </h4>
                                             <p>
-                                                {review.review}
+                                            {review.review}
                                             </p>
                                             {
                                                 user?.id === review.userId && (
@@ -201,8 +241,28 @@ const OneBrand = () => {
                                                         }>
                                                             Edit Review
                                                         </button>
-
                                                         <button className='button' onClick={() => handleDeleteReview(review.id)}>Delete</button>
+                                                        {
+                                                            editModeReviews ? (
+                                                                <div>
+                                                                    <div>
+                                                                        {errors.map((error, idx) => (
+                                                                            <li style={errors.length ? { color: "red" } : null} key={idx}>{error}</li>
+                                                                        ))}
+                                                                    </div>
+                                                                    {console.log('NEW REVIEW IN EDITMODE REVIEWS', newReview)}
+                                                                    <input
+
+                                                                        style={errors.length && newReview.review.length == 0 ? { border: "1px solid red" } : null}
+                                                                        type='text'
+                                                                        placeholder='Edit The Review'
+                                                                        onChange={(e) => setNewReview({ ...newReview, review: e.target.value })}
+                                                                    />
+                                                                    {/* <button onClick={handleSubmitReview}>Save</button> */}
+                                                                    <button className='button' onClick={handleSubmitReviewEdit}>Save</button>
+                                                                </div>
+                                                            ) : null
+                                                        }
                                                     </>
                                                 )
                                             }
@@ -214,64 +274,6 @@ const OneBrand = () => {
                     </div>
                 </div>
             </div>
-            {
-                editMode ? (
-                    <div>
-                        <input
-                            style={errors.length && newReview.review.length == 0 ? { border: "1px solid red" } : null}
-                            type='text'
-                            placeholder='New Name'
-                            onChange={(e) => setNewBrandData({ ...newBrandData, name: e.target.value })}
-                        />
-                        <input
-                            style={errors.length && newReview.review.length == 0 ? { border: "1px solid red" } : null}
-                            type='text'
-                            placeholder='New Image'
-                            onChange={(e) => setNewBrandData({ ...newBrandData, brandImg: e.target.value })}
-                        />
-                        <input
-                            style={errors.length && newReview.review.length == 0 ? { border: "1px solid red" } : null}
-                            type='text'
-                            placeholder='New Address'
-                            onChange={(e) => setNewBrandData({ ...newBrandData, address: e.target.value })}
-                        />
-                        <input
-                            style={errors.length && newReview.review.length == 0 ? { border: "1px solid red" } : null}
-                            type='text'
-                            placeholder='New City'
-                            onChange={(e) => setNewBrandData({ ...newBrandData, city: e.target.value })}
-                        />
-                        <input
-                            style={errors.length && newReview.review.length == 0 ? { border: "1px solid red" } : null}
-                            type='text'
-                            placeholder='New Country'
-                            onChange={(e) => setNewBrandData({ ...newBrandData, country: e.target.value })}
-                        />
-                        <button className='button' onClick={handleSubmitEdit}>Save</button>
-                    </div>
-                ) : null
-            }
-            {
-                editModeReviews ? (
-                    <div>
-                        <div>
-                            {errors.map((error, idx) => (
-                                <li style={errors.length ? { color: "red" } : null} key={idx}>{error}</li>
-                            ))}
-                        </div>
-                        {console.log('NEW REVIEW IN EDITMODE REVIEWS', newReview)}
-                        <input
-                            style={errors.length && newReview.review.length == 0 ? { border: "1px solid red" } : null}
-                            type='text'
-                            placeholder='Edit The Review'
-                            onChange={(e) => setNewReview({ ...newReview, review: e.target.value })}
-                        />
-                        {/* <button onClick={handleSubmitReview}>Save</button> */}
-                        <button className='button' onClick={handleSubmitReviewEdit}>Save</button>
-                    </div>
-                ) : null
-            }
-
         </div>
     )
 }

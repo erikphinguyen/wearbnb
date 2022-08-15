@@ -74,9 +74,10 @@ function PostBrand({ brands, setBrands, onClose, setShowModal }) {
                     <li style={errors.length ? { color: "red" } : null} key={idx}>{error}</li>
                 ))}
             </div>
-            <h2>Upload New Brand</h2>
-            <form onSubmit={handleSubmit}>
+            <h2 className='input'>Upload New Brand</h2>
+            <form className="form" onSubmit={handleSubmit}>
                 <input
+                    className='input'
                     style={errors.length && brandImg.length == 0 ? { border: "1px solid red" } : null}
                     type='text'
                     onChange={(event) => setBrandImg(event.target.value)}
