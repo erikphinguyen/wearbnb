@@ -46,6 +46,8 @@ import Demo from '../Demo/Demo.js'
 import SignUpFormModal from '../SignupFormModal';
 import Logo from './wearbnb-logo.PNG'
 import PostBrandHomeModal from '../PostBrandHomeModal';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { fadro } from '@fortawesome/free-solid-svg-icons';
 
 function Navigation({ isLoaded, brands, setBrands }) {
     const sessionUser = useSelector(state => state.session.user);
@@ -61,14 +63,19 @@ function Navigation({ isLoaded, brands, setBrands }) {
     } else {
         sessionLinks = (
             <div className='button-container'>
-                <div>
-                    <Demo />
-                </div>
-                <div>
-                    <LoginFormModal />
-                </div>
-                <div>
-                    <SignUpFormModal />
+                <div className='dropdown' data-dropdown>
+                    <button className='link' data-dropdown-button>Information</button>
+                    <div className='dropdown-menu' data-dropdown-button>
+                        <div>
+                            <Demo />
+                        </div>
+                        <div>
+                            <LoginFormModal />
+                        </div>
+                        <div>
+                            <SignUpFormModal />
+                        </div>
+                    </div>
                 </div>
             </div>
         );
@@ -76,14 +83,16 @@ function Navigation({ isLoaded, brands, setBrands }) {
 
     return (
         <nav>
-            <div className='navigation'>
-                <div>
-                    <NavLink exact to="/">
-                        <img src={Logo} width="200" alt="logo" />
-                    </NavLink>
-                </div>
-                <div>
-                    {isLoaded && sessionLinks}
+            <div className='break-line'>
+                <div className='navigation'>
+                    <div>
+                        <NavLink exact to="/">
+                            <img src={Logo} width="200" alt="logo" />
+                        </NavLink>
+                    </div>
+                    <div>
+                        {isLoaded && sessionLinks}
+                    </div>
                 </div>
             </div>
         </nav>

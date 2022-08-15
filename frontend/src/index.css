@@ -5,3 +5,58 @@
     /* font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */
     font-family: 'Raleway', sans-serif;
 }
+
+/* .button {
+    background-color: #ff5a5f;
+    border: none;
+    border-radius: 0.3rem;
+    color: white;
+    font-size: 1rem;
+    padding: .5em .75em;
+    cursor: pointer;
+    width: 100%
+} */
+.button {
+    background-color: #ff5a5f;
+    box-shadow: 0 5px 0 #e49799;
+    text-align: center;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    cursor: pointer;
+}
+
+.button:active {
+    box-shadow: none;
+    transform: translateY(5px);
+}
+
+.profile-dropdown {
+    left: 0;
+    margin-left: 0;
+}
+
+.form {
+    padding: 20px;
+    margin: 20px;
+    border-radius: 2rem;
+}
+
+.input {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+}
+
+html,
+body {
+    top: 0;
+    margin-top: 0;
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 0;
+    padding-right: 0;
+
+}

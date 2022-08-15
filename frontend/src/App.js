@@ -41,6 +41,8 @@ import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 import Brands from "./components/Brands/Brands.js"
 import OneBrand from "./components/OneBrand/OneBrand";
+import Footer from "./components/Footer/ index";
+import PageNotFound from "./components/PageNotFound";
 
 function App() {
   const dispatch = useDispatch();
@@ -53,15 +55,17 @@ function App() {
 
   return (
     <>
-      <Navigation isLoaded={isLoaded} brands={brands} setBrands={setBrands}/>
+      <Navigation isLoaded={isLoaded} brands={brands} setBrands={setBrands} />
       {isLoaded && (
         <Switch>
           <Route exact path="/">
-            <Brands brands={brands} setBrands={setBrands}/>
+            <Brands brands={brands} setBrands={setBrands} />
+            <Footer />
           </Route>
           <Route exact path='/brands/:id'>
             <OneBrand />
           </Route>
+          <Route component={PageNotFound} />
         </Switch>
       )}
     </>

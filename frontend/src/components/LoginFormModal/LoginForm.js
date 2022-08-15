@@ -10,41 +10,45 @@ function LoginForm() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        setErrors([]);
-        return dispatch(sessionActions.login({ credential, password })).catch(
+        // setErrors([]);
+        dispatch(sessionActions.login({ credential, password })).then(
             async (res) => {
-                const data = await res.json();
-                if (data && data.errors) setErrors(data.errors);
+                // const data = await res.json();
+                // if (data && data.errors) setErrors(data.errors);
+                console.log('RES INSIDE LOGIN', res)
+                setErrors([res])
             }
         );
     };
 
+
     return (
-        <form onSubmit={handleSubmit}>
+        <form className="form" onSubmit={handleSubmit}>
             <ul>
                 {errors.map((error, idx) => (
-                    <li key={idx}>{error}</li>
+                    <li style={errors.length ? { color: "red" } : null} key={idx}>{error}</li>
                 ))}
             </ul>
             <label>
                 Username or Email
                 <input
+                    style={errors.length && credential == "" ? { border: "1px solid red" } : null}
                     type="text"
                     value={credential}
                     onChange={(e) => setCredential(e.target.value)}
-                    required
+                // required
                 />
             </label>
             <label>
                 Password
-                <input
+                <input style={errors.length && password == "" ? { border: "1px solid red" } : null}
                     type="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    required
+                // required
                 />
             </label>
-            <button type="submit">Log In</button>
+            <button className='button' type="submit">Log In</button>
         </form>
     );
 }

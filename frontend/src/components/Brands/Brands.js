@@ -21,6 +21,8 @@ const Brands = ({ brands, setBrands }) => {
             })
     }, [dispatch])
 
+    const user = useSelector(state => state.session.user)
+
     if (!brands.length) return <h1>no brands D:</h1>
 
     const handleDelete = (id) => {
@@ -45,7 +47,11 @@ const Brands = ({ brands, setBrands }) => {
                                     </img>
                                 </NavLink>
                                 <div className='brands-card-footer'>
-                                    <button onClick={() => handleDelete(brand.id)}>Delete</button>
+                                    {
+                                        user?.id === brand.userId && (
+                                            <button className='button' onClick={() => handleDelete(brand.id)}>Delete</button>
+                                        )
+                                    }
                                 </div>
                             </div>
                         </div>

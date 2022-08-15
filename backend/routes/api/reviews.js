@@ -20,8 +20,14 @@ router.get('/:id(\\d+)', requireAuth, restoreUser, asyncHandler(async (req, res)
 
 router.put('/:id(\\d+)', requireAuth, restoreUser, asyncHandler(async (req, res) => {
     const { id } = req.body;
+    console.log('FINDING ID', id)
     let review = await Review.findByPk(id);
+    console.log('WHAT IS REVIEW', review)
     review.review = req.body.review;
+
+    if (req.body.review.length === 0) {
+        return res.status(400).json({ error: "This is an empty editted review" })
+    }
     await review.save();
     return res.json(review);
 }))
@@ -31,6 +37,11 @@ router.post('/:id(\\d+)', requireAuth, restoreUser, asyncHandler(async (req, res
     console.log('HITTING POST REVIEW ROUTE')
     const { id } = req.params;
     const { userId, brandId, review } = req.body;
+
+    if (review.length === 0) {
+        return res.status(400).json({error: "This is an empty review"})
+    }
+
     const newReview = await Review.create({
         userId, brandId, review
     });

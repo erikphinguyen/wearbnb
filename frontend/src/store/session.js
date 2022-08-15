@@ -18,6 +18,7 @@ const removeUser = () => {
 
 
 export const login = (user) => async (dispatch) => {
+    console.log('AM I INSIDE LOGIN THUNK')
     const { credential, password } = user;
     const response = await csrfFetch('/api/session', {
         method: 'POST',
@@ -26,9 +27,25 @@ export const login = (user) => async (dispatch) => {
             password,
         }),
     });
-    const data = await response.json();
-    dispatch(setUser(data.user));
-    return response;
+
+    if (response.ok) {
+        const data = await response.json();
+        dispatch(setUser(data.user))
+        return null;
+    } else if (response.status < 500) {
+        const data = await response.json();
+        console.log('CAN WE FIND DATA', data.error)
+        // if (data.errors) {
+        //     return data.errors;
+        // }
+        return data.error;
+    } else {
+        return ['An error occurred. Please try again.']
+    }
+
+    // const data = await response.json();
+    // dispatch(setUser(data.user));
+    // return response;
 };
 
 export const restoreUser = () => async dispatch => {

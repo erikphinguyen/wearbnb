@@ -57,10 +57,17 @@ export const thunkPutReviews = data => async dispatch => {
         body: JSON.stringify(data)
     });
 
+    console.log('FINDING DATA IN THUNK PUT REVIEWS', data)
+    console.log('FINDING RESPONSE', response)
     if (response.ok) {
         const review = await response.json();
         dispatch(putReviews(review));
         return review;
+    }
+    else {
+        const data = await response.json()
+        console.log('WHAT IS DATA', data)
+        return data
     }
 };
 
@@ -78,6 +85,11 @@ export const thunkPostReviews = (data) => async dispatch => {
         const reviews = await response.json();
         dispatch(postReviews(reviews));
         return reviews;
+    }
+    else {
+        const data = await response.json()
+        console.log('WHAT IS DATA', data)
+        return data
     }
 };
 

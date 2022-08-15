@@ -1,0 +1,41 @@
+.footer {
+    position: fixed;
+    bottom: 0;
+    text-align: center;
+    width: 100%;
+    left: 0;
+    background-color: rgba(0,0,0,.8);
+    color: white;
+}
+
+.footer>ul {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.footer>ul>a {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.footer-list {
+    color: white;
+}
+
+.fa-github-alt,
+.fa-linkedin {
+    letter-spacing: 0.05em;
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+.fa-github-alt:hover,
+.fa-linkedin:hover {
+    letter-spacing: 0.05em;
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}

@@ -68,7 +68,7 @@ export const thunkGetOneBrand = (id) => async (dispatch) => {
         dispatch(getOneBrand(brand));
         return brand
     }
-    else {console.log('ELSE RESPONSE IN GET ONE BRAND', response)}
+    else { console.log('ELSE RESPONSE IN GET ONE BRAND', response) }
 }
 
 export const thunkPutBrands = data => async dispatch => {
@@ -87,6 +87,11 @@ export const thunkPutBrands = data => async dispatch => {
         dispatch(putBrands(brand));
         return brand;
     }
+    else {
+        const data = await response.json()
+        console.log('WHAT IS DATA', data)
+        return data
+    }
 };
 
 export const thunkPostBrands = (data) => async dispatch => {
@@ -102,6 +107,11 @@ export const thunkPostBrands = (data) => async dispatch => {
         const brand = await response.json();
         dispatch(postBrands(brand));
         return brand;
+    }
+    else {
+        const data = await response.json()
+        console.log('WHAT IS DATA', data)
+        return data
     }
 };
 
