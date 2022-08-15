@@ -174,7 +174,7 @@ const OneBrand = () => {
                             {singleBrand.country}
                         </p>
                         {
-                            user?.id === singleBrand?.id && (
+                            user?.id === singleBrand?.userId && (
                                 <button className='button' onClick={() => setEditMode(true)}>
                                     Edit Brand
                                 </button>
@@ -183,6 +183,11 @@ const OneBrand = () => {
                         {
                             editMode ? (
                                 <div>
+                                    <div>
+                                        {errors.map((error, idx) => (
+                                            <li style={errors.length ? { color: "red" } : null} key={idx}>{error}</li>
+                                        ))}
+                                    </div>
                                     <input
                                         style={errors.length && newReview.review.length == 0 ? { border: "1px solid red" } : null}
                                         type='text'
@@ -229,7 +234,7 @@ const OneBrand = () => {
                                                 user {review.userId}'s review:
                                             </h4>
                                             <p>
-                                            {review.review}
+                                                {review.review}
                                             </p>
                                             {
                                                 user?.id === review.userId && (
