@@ -18,7 +18,7 @@ const OneBrand = () => {
     //     return state.brands[Number(id)]
     // });
 
-    const [errors, setErrors] = useState([])
+    const [errors, setErrors] = useState([]);
 
     const [editMode, setEditMode] = useState(false);
     const [editModeReviews, setEditModeReviews] = useState(false);
