@@ -191,10 +191,25 @@ module.exports = {
         review: "Can't believe all the fun I had!",
         createdAt: new Date(),
         updatedAt: new Date()
-      }, {
+      },
+      {
         userId: "1",
         brandId: "10",
         review: "Fantastic experience, would want to do it again!",
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        userId: "1",
+        brandId: "11",
+        review: "Superb!  Very professional and fun!",
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        userId: "1",
+        brandId: "12",
+        review: "Can't believe all the fun I had!",
         createdAt: new Date(),
         updatedAt: new Date()
       }
