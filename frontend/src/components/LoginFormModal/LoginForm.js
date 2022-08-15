@@ -32,6 +32,7 @@ function LoginForm() {
             <label>
                 Username or Email
                 <input
+                    className="input"
                     style={errors.length && credential == "" ? { border: "1px solid red" } : null}
                     type="text"
                     value={credential}

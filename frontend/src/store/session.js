@@ -65,9 +65,28 @@ export const signup = (user) => async (dispatch) => {
             password,
         }),
     });
-    const data = await response.json();
-    dispatch(setUser(data.user));
-    return response;
+    // BEFORE SIGN UP ERRORS
+    // const data = await response.json();
+    // dispatch(setUser(data.user));
+    // return response;
+    if (response.ok) {
+        const data = await response.json();
+        dispatch(setUser(data.user))
+        return null;
+    } else if (response.status < 500) {
+        const data = await response.json();
+        console.log('CAN WE FIND DATA SIGN UP', data.error)
+        // if (data.errors) {
+        //     return data.errors;
+        // }
+        return data.error;
+    } else {
+        return ['An error occurred. Please try again.']
+    }
+
+    // const data = await response.json();
+    // dispatch(setUser(data.user));
+    // return response;
 };
 
 export const logout = () => async (dispatch) => {
