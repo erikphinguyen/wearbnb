@@ -9,7 +9,7 @@ function PostBrandModal({brands, setBrands}) {
 
     return (
         <>
-            <button className='button' onClick={() => setShowModal(true)}>Add A Brand</button>
+            <button  className='button' onClick={() => setShowModal(true)}>Add A Brand</button>
             {showModal && (
                 <Modal onClose={() => setShowModal(false)}>
                     <PostBrandHome setShowModal={setShowModal} brands={brands} setBrands={setBrands}/>

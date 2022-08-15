@@ -46,6 +46,8 @@ import Demo from '../Demo/Demo.js'
 import SignUpFormModal from '../SignupFormModal';
 import Logo from './wearbnb-logo.PNG'
 import PostBrandHomeModal from '../PostBrandHomeModal';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { fadro } from '@fortawesome/free-solid-svg-icons';
 
 function Navigation({ isLoaded, brands, setBrands }) {
     const sessionUser = useSelector(state => state.session.user);

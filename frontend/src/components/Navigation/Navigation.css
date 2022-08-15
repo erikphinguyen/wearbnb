@@ -7,7 +7,7 @@ nav {
     display: flex;
     justify-content: space-between;
     margin: 0;
-    border: 1px solid red;
+    /* border: 1px solid red; */
 }
 
 .break-line {
@@ -74,7 +74,7 @@ nav {
     left: 0;
     margin-left: 19%;
     margin-right: 19%;
-    border: 1px solid green;
+    /* border: 1px solid green; */
 }
 
 .navigation>div {

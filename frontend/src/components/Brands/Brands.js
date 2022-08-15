@@ -49,7 +49,7 @@ const Brands = ({ brands, setBrands }) => {
                                 <div className='brands-card-footer'>
                                     {
                                         user?.id === brand.userId && (
-                                            <button onClick={() => handleDelete(brand.id)}>Delete</button>
+                                            <button className='button' onClick={() => handleDelete(brand.id)}>Delete</button>
                                         )
                                     }
                                 </div>

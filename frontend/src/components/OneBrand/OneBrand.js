@@ -194,7 +194,7 @@ const OneBrand = () => {
                                             {
                                                 user?.id === review.userId && (
                                                     <>
-                                                        <button onClick={() => {
+                                                        <button className='button' onClick={() => {
                                                             setSelectedEdit(review.id)
                                                             setEditModeReviews(true)
                                                         }
@@ -202,7 +202,7 @@ const OneBrand = () => {
                                                             Edit Review
                                                         </button>
 
-                                                        <button onClick={() => handleDeleteReview(review.id)}>Delete</button>
+                                                        <button className='button' onClick={() => handleDeleteReview(review.id)}>Delete</button>
                                                     </>
                                                 )
                                             }
@@ -267,7 +267,7 @@ const OneBrand = () => {
                             onChange={(e) => setNewReview({ ...newReview, review: e.target.value })}
                         />
                         {/* <button onClick={handleSubmitReview}>Save</button> */}
-                        <button onClick={handleSubmitReviewEdit}>Save</button>
+                        <button className='button' onClick={handleSubmitReviewEdit}>Save</button>
                     </div>
                 ) : null
             }

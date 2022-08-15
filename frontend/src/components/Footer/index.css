@@ -4,11 +4,22 @@
     text-align: center;
     width: 100%;
     left: 0;
+    background-color: rgba(0,0,0,.8);
+    color: white;
 }
 
 .footer>ul {
     display: flex;
     justify-content: space-evenly;
+}
+
+.footer>ul>a {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.footer-list {
+    color: white;
 }
 
 .fa-github-alt,
