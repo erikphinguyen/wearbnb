@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, NavLink, Route, useParams, useHistory } from 'react-router-dom';
 import { thunkGetBrands, thunkDeleteBrands } from '../../store/brands.js'
 
-const Brands = ({brands, setBrands}) => {
+const Brands = ({ brands, setBrands }) => {
     const dispatch = useDispatch();
     const { imageId } = useParams();
     const history = useHistory();
@@ -32,20 +32,22 @@ const Brands = ({brands, setBrands}) => {
 
     return (
         <div className='brands-page'>
-            <div className='brands-holder'>
+            <div className='brands-container'>
                 {
                     brands.map((brand) => (
                         <div
                             key={brand.id}
                             value={brand.id}
                         >
-                            <div className='brands-container'>
+                            <div className='brands-card'>
                                 <NavLink to={`brands/${brand.id}`}>
-                                    <img src={brand.brandImg}>
+                                    <img className='brands-card-image' src={brand.brandImg}>
                                     </img>
                                 </NavLink>
+                                <div className='brands-card-footer'>
+                                    <button onClick={() => handleDelete(brand.id)}>Delete</button>
+                                </div>
                             </div>
-                            <button className='button' onClick={() => handleDelete(brand.id)}>Delete</button>
                         </div>
                     ))
                 }

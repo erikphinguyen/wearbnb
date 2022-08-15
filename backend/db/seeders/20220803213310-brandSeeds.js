@@ -15,7 +15,7 @@ module.exports = {
       },
       {
         userId: "2",
-        brandImg: "https://indiacityblog.com/wp-content/uploads/2020/04/Turbologo-1200x900.png",
+        brandImg: "https://logos-world.net/wp-content/uploads/2020/04/Louis-Vuitton-Logo.png",
         name: "Louis Vuitton",
         address: "LVMH Moët Hennessy - Louis Vuitton, 22, avenue Montaigne ",
         city: "Paris",

@@ -1,7 +1,6 @@
 .button-container {
     display: flex;
     justify-content: space-between;
-    border: 1px solid green;
     margin: 0;
 }
 
@@ -12,9 +11,9 @@
 .navigation {
     display: flex;
     justify-content: space-between;
-    border: 1px solid red;
     left: 0;
-    margin-left: 0;
+    margin-left: 19%;
+    margin-right: 19%;
 }
 
 .navigation>div {
