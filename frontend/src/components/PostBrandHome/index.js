@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useHistory } from 'react-router-dom';
 import { thunkPostBrands } from '../../store/brands';
-import { Modal } from '../../context/Modal';
 
 function PostBrand({ brands, setBrands, onClose, setShowModal }) {
     console.log('HITING POST BRAND MODAL', brands)

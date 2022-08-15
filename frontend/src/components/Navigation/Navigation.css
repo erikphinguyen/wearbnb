@@ -1,0 +1,23 @@
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid green;
+    margin: 0;
+}
+
+.button-container>div {
+    margin-top: 12%;
+}
+
+.navigation {
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid red;
+    left: 0;
+    margin-left: 0;
+}
+
+.navigation>div {
+    display: flex;
+    justify-content: space-between;
+}

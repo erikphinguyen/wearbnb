@@ -28,13 +28,12 @@ router.put('/:id(\\d+)', requireAuth, restoreUser, asyncHandler(async (req, res)
 
 // POST REVIEW
 router.post('/:id(\\d+)', requireAuth, restoreUser, asyncHandler(async (req, res) => {
+    console.log('HITTING POST REVIEW ROUTE')
     const { id } = req.params;
-    const { brandImg, name, address, city, country } = req.body;
+    const { userId, brandId, review } = req.body;
     const newReview = await Review.create({
-        brandImg, name, address, city, country
+        userId, brandId, review
     });
-    // const newReview = new Review({ id, brandImg, name, address, city, country})
-    // await newReview.save()
     const payload = await Review.findByPk(newReview.id)
     return res.json(payload);
 }))

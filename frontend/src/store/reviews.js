@@ -65,8 +65,9 @@ export const thunkPutReviews = data => async dispatch => {
 };
 
 export const thunkPostReviews = (data) => async dispatch => {
-    console.log(data)
+    console.log('HITTING THUNK POST REVIEW DATA', data)
     const response = await csrfFetch(`/api/reviews/${data.brandId}`, {
+        // console.log(response)
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

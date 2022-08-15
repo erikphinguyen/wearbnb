@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, NavLink, Route, useParams } from 'react-router-dom';
 import brandsReducer, { thunkGetOneBrand, thunkPutBrands } from '../../store/brands.js'
 import { thunkGetReviews, thunkPutReviews, thunkPostReviews, thunkDeleteReviews } from '../../store/reviews.js';
+import PostComment from '../PostComment'
 
 import "./OneBrand.css"
 
@@ -32,7 +33,7 @@ const OneBrand = () => {
     })
 
     // get reviews
-    let [oneBrandReviews, setOneBrandReviews] = useState([])
+    const [oneBrandReviews, setOneBrandReviews] = useState([])
 
     // put brand
     const [newBrandData, setNewBrandData] = useState({
@@ -160,6 +161,7 @@ const OneBrand = () => {
                             Edit Brand
                         </button>
                         <div>
+                            <PostComment oneBrandReviews={oneBrandReviews} setOneBrandReviews={setOneBrandReviews}/>
                             {
                                 oneBrandReviews?.map(review => (
                                     <div
@@ -231,6 +233,7 @@ const OneBrand = () => {
                     </div>
                 ) : null
             }
+
         </div>
     )
 }
