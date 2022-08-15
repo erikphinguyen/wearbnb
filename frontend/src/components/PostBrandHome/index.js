@@ -85,7 +85,9 @@ function PostBrand({ brands, setBrands, onClose, setShowModal }) {
                     placeholder='Brand Image'
                     name='brandImg'
                 />
-                {/* <input
+                <input
+                    className='input'
+                    style={errors.length && brandImg.length == 0 ? { border: "1px solid red" } : null}
                     type='text'
                     onChange={(event) => setName(event.target.value)}
                     value={name}
@@ -93,6 +95,8 @@ function PostBrand({ brands, setBrands, onClose, setShowModal }) {
                     name='name'
                 />
                 <input
+                    className='input'
+                    style={errors.length && brandImg.length == 0 ? { border: "1px solid red" } : null}
                     type='text'
                     onChange={(event) => setAddress(event.target.value)}
                     value={address}
@@ -100,6 +104,8 @@ function PostBrand({ brands, setBrands, onClose, setShowModal }) {
                     name='address'
                 />
                 <input
+                    className='input'
+                    style={errors.length && brandImg.length == 0 ? { border: "1px solid red" } : null}
                     type='text'
                     onChange={(event) => setCity(event.target.value)}
                     value={city}
@@ -107,12 +113,14 @@ function PostBrand({ brands, setBrands, onClose, setShowModal }) {
                     name='city'
                 />
                 <input
+                    className='input'
+                    style={errors.length && brandImg.length == 0 ? { border: "1px solid red" } : null}
                     type='text'
                     onChange={(event) => setCountry(event.target.value)}
                     value={country}
                     placeholder='Country'
                     name='country'
-                /> */}
+                />
                 <button className='button' type='submit'>Submit</button>
             </form>
         </div>
