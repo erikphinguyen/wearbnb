@@ -60,7 +60,7 @@ function Navigation({ isLoaded, brands, setBrands }) {
         );
     } else {
         sessionLinks = (
-            <>
+            <div className='button-container'>
                 <div>
                     <Demo />
                 </div>
@@ -70,21 +70,23 @@ function Navigation({ isLoaded, brands, setBrands }) {
                 <div>
                     <SignUpFormModal />
                 </div>
-            </>
+            </div>
         );
     }
 
     return (
-        <ul>
-            <div>
-                <NavLink exact to="/">
-                    <img src={Logo} width="200" alt="logo" />
-                </NavLink>
+        <nav>
+            <div className='navigation'>
+                <div>
+                    <NavLink exact to="/">
+                        <img src={Logo} width="200" alt="logo" />
+                    </NavLink>
+                </div>
+                <div>
+                    {isLoaded && sessionLinks}
+                </div>
             </div>
-            <div>
-                {isLoaded && sessionLinks}
-            </div>
-        </ul>
+        </nav>
     );
 }
 

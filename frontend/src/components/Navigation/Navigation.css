@@ -1,0 +1,22 @@
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    margin: 0;
+}
+
+.button-container>div {
+    margin-top: 12%;
+}
+
+.navigation {
+    display: flex;
+    justify-content: space-between;
+    left: 0;
+    margin-left: 19%;
+    margin-right: 19%;
+}
+
+.navigation>div {
+    display: flex;
+    justify-content: space-between;
+}
