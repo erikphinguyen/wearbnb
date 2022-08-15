@@ -21,11 +21,15 @@ const validateLogin = [
 // Log in
 router.post(
     '/',
-    validateLogin,
+    // validateLogin,
     asyncHandler(async (req, res, next) => {
         const { credential, password } = req.body;
-        if (credential === "" || password === "") {
-            return res.status(400).json({error: "Please fill out required fields"})
+        if (credential == "" && password.length > 1) {
+            return res.status(400).json({error: "Please fill out Username or Email"})
+
+        }
+        if (password == "" && credential.length > 1) {
+            return res.status(400).json({error: "Please fill out Password"})
         }
 
         const user = await User.login({ credential, password });

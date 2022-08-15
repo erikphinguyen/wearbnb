@@ -3,11 +3,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useHistory } from 'react-router-dom';
 import { thunkPostReviews } from '../../store/reviews';
 
-function PostReview({oneBrandReviews, setOneBrandReviews}) {
+function PostReview({ oneBrandReviews, setOneBrandReviews }) {
     console.log('HITTING POST REVIEW FX');
     const dispatch = useDispatch();
 
     const [review, setReview] = useState('');
+    const [errors, setErrors] = useState([]);
 
     const selectUser = useSelector(state => {
         return state.session.user
@@ -27,6 +28,10 @@ function PostReview({oneBrandReviews, setOneBrandReviews}) {
         console.log('---------------------------FINDING NEW REVIEW--------------------------------', newReview)
         dispatch(thunkPostReviews(newReview))
             .then(res => {
+                if (res.error) {
+                    setErrors([res.error])
+                    return
+                }
                 setOneBrandReviews([...oneBrandReviews, res])
                 // setReview(newReview)
             })
@@ -35,11 +40,17 @@ function PostReview({oneBrandReviews, setOneBrandReviews}) {
 
     return (
         <>
+            <div>
+                {errors.map((error, idx) => (
+                    <li style={errors.length ? { color: "red" } : null} key={idx}>{error}</li>
+                ))}
+            </div>
             <h2>
                 Upload New Review
             </h2>
             <form onSubmit={handleSubmit}>
                 <input
+                    style={errors.length && review.length == 0 ? { border: "1px solid red" } : null}
                     type='text'
                     onChange={(event) => setReview(event.target.value)}
                     value={review}

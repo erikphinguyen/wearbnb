@@ -13,6 +13,7 @@ function PostBrand({ brands, setBrands, onClose, setShowModal }) {
     const [address, setAddress] = useState('');
     const [city, setCity] = useState('');
     const [country, setCountry] = useState('');
+    const [errors, setErrors] = useState([])
 
     const reset = () => {
         setBrandImg('');
@@ -46,6 +47,11 @@ function PostBrand({ brands, setBrands, onClose, setShowModal }) {
         // const brand = await dispatch(thunkPostBrands(newBrand));
         dispatch(thunkPostBrands(newBrand))
             .then(res => {
+                console.log('FINDING RES IN POST BRAND', res)
+                if (res.error) {
+                    setErrors([res.error])
+                    return
+                }
                 console.log("INSIDE THUNKPOSTBRANDS DISPATCH", res)
                 // onClose();
                 setShowModal(false);
@@ -59,18 +65,26 @@ function PostBrand({ brands, setBrands, onClose, setShowModal }) {
         // }
     };
 
+    console.log('FINDING ERRORS', errors)
+
     return (
         <div>
+            <div>
+                {errors.map((error, idx) => (
+                    <li style={errors.length ? { color: "red" } : null} key={idx}>{error}</li>
+                ))}
+            </div>
             <h2>Upload New Brand</h2>
             <form onSubmit={handleSubmit}>
                 <input
+                    style={errors.length && brandImg.length == 0 ? { border: "1px solid red" } : null}
                     type='text'
                     onChange={(event) => setBrandImg(event.target.value)}
                     value={brandImg}
                     placeholder='Brand Image'
                     name='brandImg'
                 />
-                <input
+                {/* <input
                     type='text'
                     onChange={(event) => setName(event.target.value)}
                     value={name}
@@ -97,7 +111,7 @@ function PostBrand({ brands, setBrands, onClose, setShowModal }) {
                     value={country}
                     placeholder='Country'
                     name='country'
-                />
+                /> */}
                 <button className='button' type='submit'>Submit</button>
             </form>
         </div>
