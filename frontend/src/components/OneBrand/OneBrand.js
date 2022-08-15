@@ -19,6 +19,7 @@ const OneBrand = () => {
     // });
 
     const [errors, setErrors] = useState([]);
+    const [errorsReview, setErrorsReview] = useState([]);
 
     const [editMode, setEditMode] = useState(false);
     const [editModeReviews, setEditModeReviews] = useState(false);
@@ -93,7 +94,7 @@ const OneBrand = () => {
             .then(res => {
                 console.log('WHAT IS RES EDITING REVIEW', res)
                 if (res.error) {
-                    setErrors([res.error])
+                    setErrorsReview([res.error])
                     return
                 }
                 // this posts
@@ -251,14 +252,14 @@ const OneBrand = () => {
                                                             editModeReviews ? (
                                                                 <div>
                                                                     <div>
-                                                                        {errors.map((error, idx) => (
+                                                                        {errorsReview.map((error, idx) => (
                                                                             <li style={errors.length ? { color: "red" } : null} key={idx}>{error}</li>
                                                                         ))}
                                                                     </div>
                                                                     {console.log('NEW REVIEW IN EDITMODE REVIEWS', newReview)}
                                                                     <input
 
-                                                                        style={errors.length && newReview.review.length == 0 ? { border: "1px solid red" } : null}
+                                                                        style={errorsReview.length && newReview.review.length == 0 ? { border: "1px solid red" } : null}
                                                                         type='text'
                                                                         placeholder='Edit The Review'
                                                                         onChange={(e) => setNewReview({ ...newReview, review: e.target.value })}
