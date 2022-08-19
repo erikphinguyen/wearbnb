@@ -154,11 +154,9 @@ const OneBrand = () => {
                     <div>
                         <p>
                             {singleBrand.address}
-                        </p>
-                        <p>
+                            <br></br>
                             {singleBrand.city}
-                        </p>
-                        <p>
+                            <br></br>
                             {singleBrand.country}
                         </p>
                         {
@@ -218,12 +216,21 @@ const OneBrand = () => {
                                         key={review.id}
                                     >
                                         <div>
-                                            <h4>
-                                                user {review.userId}'s review:
-                                            </h4>
                                             <p>
-                                                {review.review}
+                                                <b>
+                                                    user {review.userId}'s review:
+                                                </b>
+                                                <div>
+                                                    {review.review}
+                                                </div>
+                                                <div>
+                                                    <b>created at: </b>{review.createdAt}
+                                                </div>
+                                                <div>
+                                                    <b>updated at:</b> {review.updatedAt}
+                                                </div>
                                             </p>
+
                                             {
                                                 user?.id === review.userId && (
                                                     <>
