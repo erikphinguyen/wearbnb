@@ -4,7 +4,6 @@ import { useParams, useHistory } from 'react-router-dom';
 import { thunkPostBrands } from '../../store/brands';
 
 function PostBrand({ brands, setBrands, onClose, setShowModal }) {
-    console.log('HITING POST BRAND MODAL', brands)
     const dispatch = useDispatch();
     const history = useHistory();
 
@@ -27,11 +26,6 @@ function PostBrand({ brands, setBrands, onClose, setShowModal }) {
         return state.session.user
     })
 
-    // console.log('DOES BRANDS POP UP', brands)
-    // console.log('DOES SET BRANDS POP UP', setBrands)
-    console.log('CONSOLE LOG SELECT  USER', selectUser)
-    console.log('SET SHOW MODAL', setShowModal)
-
     const handleSubmit = async (event) => {
         event.preventDefault();
         const newBrand = {
@@ -47,12 +41,10 @@ function PostBrand({ brands, setBrands, onClose, setShowModal }) {
         // const brand = await dispatch(thunkPostBrands(newBrand));
         dispatch(thunkPostBrands(newBrand))
             .then(res => {
-                console.log('FINDING RES IN POST BRAND', res)
                 if (res.error) {
                     setErrors([res.error])
                     return
                 }
-                console.log("INSIDE THUNKPOSTBRANDS DISPATCH", res)
                 // onClose();
                 setShowModal(false);
                 setBrands([...brands, res])
@@ -65,7 +57,6 @@ function PostBrand({ brands, setBrands, onClose, setShowModal }) {
         // }
     };
 
-    console.log('FINDING ERRORS', errors)
 
     return (
         <div>

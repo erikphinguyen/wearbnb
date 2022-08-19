@@ -48,7 +48,6 @@ export const thunkGetReviews = () => async (dispatch) => {
 }
 
 export const thunkPutReviews = data => async dispatch => {
-    console.log("HITTING THUNK PUT REVIEWS")
     const response = await csrfFetch(`/api/reviews/${data.id}`, {
         method: 'PUT',
         headers: {
@@ -57,8 +56,6 @@ export const thunkPutReviews = data => async dispatch => {
         body: JSON.stringify(data)
     });
 
-    console.log('FINDING DATA IN THUNK PUT REVIEWS', data)
-    console.log('FINDING RESPONSE', response)
     if (response.ok) {
         const review = await response.json();
         dispatch(putReviews(review));
@@ -66,15 +63,12 @@ export const thunkPutReviews = data => async dispatch => {
     }
     else {
         const data = await response.json()
-        console.log('WHAT IS DATA', data)
         return data
     }
 };
 
 export const thunkPostReviews = (data) => async dispatch => {
-    console.log('HITTING THUNK POST REVIEW DATA', data)
     const response = await csrfFetch(`/api/reviews/${data.brandId}`, {
-        // console.log(response)
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -88,7 +82,6 @@ export const thunkPostReviews = (data) => async dispatch => {
     }
     else {
         const data = await response.json()
-        console.log('WHAT IS DATA', data)
         return data
     }
 };

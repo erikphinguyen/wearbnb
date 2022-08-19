@@ -4,7 +4,6 @@ import { useParams, useHistory } from 'react-router-dom';
 import { thunkPostReviews } from '../../store/reviews';
 
 function PostReview({ oneBrandReviews, setOneBrandReviews }) {
-    console.log('HITTING POST REVIEW FX');
     const dispatch = useDispatch();
 
     const [review, setReview] = useState('');
@@ -17,8 +16,6 @@ function PostReview({ oneBrandReviews, setOneBrandReviews }) {
     const user = useSelector(state => state.session.user)
 
     const { id } = useParams()
-    console.log('WHAT IS ID', id)
-    console.log("WHAT IS SELECT USER", selectUser)
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -27,8 +24,6 @@ function PostReview({ oneBrandReviews, setOneBrandReviews }) {
             brandId: id,
             review
         }
-        console.log('---------------------------FINDING NEW REVIEW--------------------------------', newReview)
-        dispatch(thunkPostReviews(newReview))
             .then(res => {
                 if (res.error) {
                     setErrors([res.error])

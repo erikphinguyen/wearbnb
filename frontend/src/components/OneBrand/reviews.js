@@ -7,7 +7,6 @@ import './index.css';
 const Reviews = ({ reviews, setOneBrandReviews }) => {
     const dispatch = useDispatch();
     const { id } = useParams();
-    console.log("TESTING REVIEWS IN REVIEWS.JS", reviews)
 
     const handleDeleteReview = (id) => {
         dispatch(thunkDeleteReviews(id))

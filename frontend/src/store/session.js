@@ -18,7 +18,6 @@ const removeUser = () => {
 
 
 export const login = (user) => async (dispatch) => {
-    console.log('AM I INSIDE LOGIN THUNK')
     const { credential, password } = user;
     const response = await csrfFetch('/api/session', {
         method: 'POST',
@@ -34,7 +33,7 @@ export const login = (user) => async (dispatch) => {
         return null;
     } else if (response.status < 500) {
         const data = await response.json();
-        console.log('CAN WE FIND DATA', data.error)
+
         // if (data.errors) {
         //     return data.errors;
         // }
@@ -75,7 +74,6 @@ export const signup = (user) => async (dispatch) => {
         return null;
     } else if (response.status < 500) {
         const data = await response.json();
-        console.log('CAN WE FIND DATA SIGN UP', data.error)
         // if (data.errors) {
         //     return data.errors;
         // }
@@ -101,7 +99,6 @@ export const logout = () => async (dispatch) => {
 const initialState = { user: null };
 
 const sessionReducer = (state = initialState, action) => {
-    console.log('HITTING SESSION REDUCER')
     let newState;
     switch (action.type) {
         case SET_USER:
