@@ -13,15 +13,16 @@ router.get('/', asyncHandler(async function (req, res) {
 // GET INDIVIDUAL BRAND
 router.get('/:id(\\d+)', asyncHandler(async function (req, res) {
     const { id } = req.params;
-    const brand = await Brand.findByPk(Number(id),
-        {
-            include: [{
-                model: Review,
-                where: {
-                    brandId: id
-                }
-            }]
-        })
+    const brand = await Brand.findByPk(Number(id))
+    // const brand = await Brand.findByPk(Number(id),
+    //     {
+    //         include: [{
+    //             model: Review,
+    //             where: {
+    //                 brandId: id
+    //             }
+    //         }]
+    //     })
 
     return res.json(brand)
 }))

@@ -1,18 +1,25 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, NavLink, Route, useParams, useHistory } from 'react-router-dom';
-import {thunkDeleteReviews } from '../../store/reviews';
-import './index.css';
+import { thunkGetReviews, thunkDeleteReviews } from '../../store/reviews';
 
 const Reviews = ({ reviews, setOneBrandReviews }) => {
     const dispatch = useDispatch();
     const { id } = useParams();
 
+    useEffect(() => {
+        dispatch(thunkGetReviews())
+            .then(res => {
+                console.log('WHAT IS RES IN REVIEW.JS', res)
+                setOneBrandReviews(res)
+            })
+    }, [dispatch])
+
     const handleDeleteReview = (id) => {
         dispatch(thunkDeleteReviews(id))
             .then(() => {
                 let newReviews = reviews.filter(review => review.id !== id)
-                setOneImageReviews(newReviews)
+                setOneBrandReviews(newReviews)
             })
     }
 

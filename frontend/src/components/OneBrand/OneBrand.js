@@ -4,6 +4,7 @@ import { Link, NavLink, Route, useParams } from 'react-router-dom';
 import brandsReducer, { thunkGetOneBrand, thunkPutBrands } from '../../store/brands.js'
 import { thunkGetReviews, thunkPutReviews, thunkPostReviews, thunkDeleteReviews } from '../../store/reviews.js';
 import PostComment from '../PostComment'
+// import Reviews from './reviews'
 
 import "./OneBrand.css"
 
@@ -209,6 +210,9 @@ const OneBrand = () => {
                             ) : null
                         }
                         <div className='review'>
+                            {/* <div>
+                                <Reviews reviews={oneBrandReviews} setOneBrandReviews={setOneBrandReviews} />
+                            </div> */}
                             <PostComment oneBrandReviews={oneBrandReviews} setOneBrandReviews={setOneBrandReviews} />
                             {
                                 oneBrandReviews?.map(review => (
