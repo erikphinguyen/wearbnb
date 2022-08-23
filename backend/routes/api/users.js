@@ -48,7 +48,8 @@ router.post(
         if (confirmPassword == "") {
             return res.status(400).json({ error: "Please fill out Password" })
         }
-
+        if (password.length > 40) return res.status(400).json({ error: "Password exceeds max length of 40" })
+        if (confirmPassword.length > 40) return res.status(400).json({ error: "Confirm password exceeds max length of 40" })
 
         const user = await User.signup({ email, username, password });
         if (!user) {
