@@ -7,40 +7,59 @@ const { requireAuth } = require('../../utils/auth.js')
 // GET ALL BRANDS
 router.get('/', asyncHandler(async function (req, res) {
     const brands = await Brand.findAll();
-    console.log("GET ALL BRANDS", brands)
     return res.json(brands);
 }))
 
 // GET INDIVIDUAL BRAND
 router.get('/:id(\\d+)', asyncHandler(async function (req, res) {
-    console.log('GET INDIVIDUAL BRAND BACKEND', req.params)
     const { id } = req.params;
-    const brand = await Brand.findByPk(Number(id),
-        {
-            include: [{
-                model: Review,
-                where: {
-                    brandId: id
-                }
-            }]
-        })
-    console.log(brand)
-    console.log('GET INDIVIDUAL BRAND', brand)
-
+    const brand = await Brand.findByPk(Number(id))
+    // const brand = await Brand.findByPk(Number(id),
+    //     {
+    //         include: [{
+    //             model: Review,
+    //             where: {
+    //                 brandId: id
+    //             }
+    //         }]
+    //     })
 
     return res.json(brand)
 }))
 
 // POST BRAND
 router.post('/', requireAuth, asyncHandler(async function (req, res) {
-    console.log('POST BRAND IN BACKEND ROUTE', req.body)
     // const id = await Brand.create(req.body);
 
-    let { brandImg } = req.body;
+    let { brandImg, name, address, city, country } = req.body;
 
-    if (brandImg.length == 0) {
-        return res.status(400).json({ error: "No input" })
+    // let expression = { brandImg, name, address, city, country };
+
+    // switch (expression) {
+    //     case brandImg:
+    //         return res.status(400).json({error: "Brand image needed"});
+    //         break
+    //     case name:
+    //         return res.status(400).json({error: "Name input needed"});
+    //         break
+    //     case address:
+    //         return res.status(400).json({error: "Address input needed"});
+    //         break
+    //     case city:
+    //         return res.status(400).json({error: "City input needed"});
+    //         break
+    //     case country:
+    //         return res.status(400).json({error: "Country input needed"});
+    //         break
+    //     default:
+    //         return res.status(400).json({error: "There is an error"});
+    // }
+
+    if (brandImg.length === 0) {
+        return res.status(400).json({ error: "Add a brand image" })
     }
+
+
 
     // let splitBrandImg = brandImg.split(".")
     // let splitBrandImgStr = String(splitBrandImg[splitBrandImg.length - 1])
@@ -54,8 +73,7 @@ router.post('/', requireAuth, asyncHandler(async function (req, res) {
     let newBrand = new Brand(req.body)
 
     await newBrand.save();
-    // console.log('FINDING NEW BRAND', newBrand)
-    // console.log('FINDING ID IN POST BRAND', id)
+
     let review = new Review({
         userId: req.body.userId,
         brandid: newBrand.id,
@@ -104,7 +122,6 @@ router.delete('/:id(\\d+)', async (req, res) => {
     const { id } = req.params;
 
     const brands = await Brand.findByPk(id);
-    // console.log(brands)
     await brands.destroy();
     return res.json({
         message: "brand deleted"

@@ -20,9 +20,7 @@ router.get('/:id(\\d+)', requireAuth, restoreUser, asyncHandler(async (req, res)
 
 router.put('/:id(\\d+)', requireAuth, restoreUser, asyncHandler(async (req, res) => {
     const { id } = req.body;
-    console.log('FINDING ID', id)
     let review = await Review.findByPk(id);
-    console.log('WHAT IS REVIEW', review)
     review.review = req.body.review;
 
     if (req.body.review.length === 0) {
@@ -34,7 +32,6 @@ router.put('/:id(\\d+)', requireAuth, restoreUser, asyncHandler(async (req, res)
 
 // POST REVIEW
 router.post('/:id(\\d+)', requireAuth, restoreUser, asyncHandler(async (req, res) => {
-    console.log('HITTING POST REVIEW ROUTE')
     const { id } = req.params;
     const { userId, brandId, review } = req.body;
 

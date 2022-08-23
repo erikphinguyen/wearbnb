@@ -4,15 +4,13 @@ import { Link, NavLink, Route, useParams } from 'react-router-dom';
 import brandsReducer, { thunkGetOneBrand, thunkPutBrands } from '../../store/brands.js'
 import { thunkGetReviews, thunkPutReviews, thunkPostReviews, thunkDeleteReviews } from '../../store/reviews.js';
 import PostComment from '../PostComment'
+// import Reviews from './reviews'
 
 import "./OneBrand.css"
 
 const OneBrand = () => {
-    // console.log('THIS IS PROPS IN ONEBRAND', props)
-    // console.log('PROPS HISTORY LOCATION', props)
     const dispatch = useDispatch();
     const { id } = useParams();
-    console.log('CHECKING ID IN ONBRAND', id)
     // const singleBrand = useSelector(state => {
     //     console.log(state.brands)
     //     return state.brands[Number(id)]
@@ -27,7 +25,6 @@ const OneBrand = () => {
 
     // get brand
     const [singleBrand, setSingleBrand] = useState({})
-    // console.log(singleBrand)
 
 
     // put reviews
@@ -50,19 +47,13 @@ const OneBrand = () => {
     const user = useSelector(state => state.session.user)
 
     useEffect(async => {
-        console.log('USE EFFECT ONE BRAND BEFORE RES')
         dispatch(thunkGetOneBrand(id))
             .then(res => {
-                console.log("USE EFFECT ONE BRAND", res)
                 setSingleBrand(res)
                 setOneBrandReviews(res.Reviews)
             })
             .catch(err => console.log(err))
     }, [dispatch, id])
-
-    console.log('WHAT IS SINGLE BRAND', singleBrand)
-
-    // console.log(singleBrand)
 
     const handleSubmitEdit = e => {
         e.preventDefault();
@@ -81,18 +72,15 @@ const OneBrand = () => {
     }
 
     // EDITING REVIEW
-    console.log('FINDING ONE BRAND REVIEWS', oneBrandReviews)
-    console.log('FINDING NEW REVIEW', newReview)
     const handleSubmitReviewEdit = e => {
         e.preventDefault();
         let data = {
             id: selectedEdit,
             ...newReview
         }
-        console.log('DATA IN EDITING REVIEW', data)
+
         dispatch(thunkPutReviews(data))
             .then(res => {
-                console.log('WHAT IS RES EDITING REVIEW', res)
                 if (res.error) {
                     setErrorsReview([res.error])
                     return
@@ -160,18 +148,16 @@ const OneBrand = () => {
                 <img className='onebrand-image'
                     src={singleBrand.brandImg}
                 />
-                <div>
+                <div className='address-review'>
                     <h2>
                         Address:
                     </h2>
                     <div>
                         <p>
                             {singleBrand.address}
-                        </p>
-                        <p>
+                            <br></br>
                             {singleBrand.city}
-                        </p>
-                        <p>
+                            <br></br>
                             {singleBrand.country}
                         </p>
                         {
@@ -223,7 +209,10 @@ const OneBrand = () => {
                                 </div>
                             ) : null
                         }
-                        <div>
+                        <div className='review'>
+                            {/* <div>
+                                <Reviews reviews={oneBrandReviews} setOneBrandReviews={setOneBrandReviews} />
+                            </div> */}
                             <PostComment oneBrandReviews={oneBrandReviews} setOneBrandReviews={setOneBrandReviews} />
                             {
                                 oneBrandReviews?.map(review => (
@@ -231,12 +220,21 @@ const OneBrand = () => {
                                         key={review.id}
                                     >
                                         <div>
-                                            <h4>
-                                                user {review.userId}'s review:
-                                            </h4>
                                             <p>
-                                                {review.review}
+                                                <b>
+                                                    user {review.userId}'s review:
+                                                </b>
+                                                <div>
+                                                    {review.review}
+                                                </div>
+                                                <div>
+                                                    <b>created at: </b>{review.createdAt}
+                                                </div>
+                                                <div>
+                                                    <b>updated at:</b> {review.updatedAt}
+                                                </div>
                                             </p>
+
                                             {
                                                 user?.id === review.userId && (
                                                     <>
