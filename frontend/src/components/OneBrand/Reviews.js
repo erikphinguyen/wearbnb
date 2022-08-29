@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, NavLink, Route, useParams, useHistory } from 'react-router-dom';
 import {thunkDeleteReviews } from '../../store/reviews';
-import './index.css';
 
 const Reviews = ({ reviews, setOneBrandReviews }) => {
     const dispatch = useDispatch();
