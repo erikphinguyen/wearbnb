@@ -2,8 +2,13 @@ import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, NavLink, Route, useParams, useHistory } from 'react-router-dom';
 import { thunkGetReviews, thunkPutReviews, thunkPostReviews, thunkDeleteReviews } from '../../store/reviews';
+import PostComment from '../PostComment'
 
-const Reviews = ({ reviews, setOneBrandReviews }) => {
+const Reviews = () => {
+    // THIS WAS PASSED IN AS PROPS PRIOR
+    // { reviews, setReviews }
+
+
     const dispatch = useDispatch();
     const { id } = useParams();
 
@@ -11,7 +16,7 @@ const Reviews = ({ reviews, setOneBrandReviews }) => {
     const [editModeReviews, setEditModeReviews] = useState(false);
 
     // get reviews
-    const [oneBrandReviews, setOneBrandReviews] = useState([])
+    const [reviews, setReviews] = useState([])
 
     // put reviews
     const [newReview, setNewReview] = useState({
@@ -22,8 +27,11 @@ const Reviews = ({ reviews, setOneBrandReviews }) => {
 
     // FIX THIS
     useEffect(async => {
-        dispatch(thunkGetReviews)
-    })
+        dispatch(thunkGetReviews())
+            .then(res => {
+                setReviews(res)
+            })
+    }, [dispatch])
 
 
     // POSTING NEW REVIEW
@@ -34,7 +42,7 @@ const Reviews = ({ reviews, setOneBrandReviews }) => {
             review: newReview.review
         }
         dispatch(thunkPostReviews(data))
-            .then(res => setOneBrandReviews([...oneBrandReviews, res]))
+            .then(res => setReviews([...reviews, res]))
     }
 
     // EDITING REVIEW
@@ -52,36 +60,36 @@ const Reviews = ({ reviews, setOneBrandReviews }) => {
                     return
                 }
                 // this posts
-                // setOneBrandReviews([...oneBrandReviews, res])
-                // setOneBrandReviews(oneBrandReviews.filter(review => review.id !))
+                // setReviews([...reviews, res])
+                // setReviews(reviews.filter(review => review.id !))
 
                 // edit
                 // let idx;
-                // for (let i = 0; i < oneBrandReviews.length; i++) {
+                // for (let i = 0; i < reviews.length; i++) {
                 //     if (i === res.id) {
                 //         idx = i;
                 //     }
                 // }
                 // let newReview = [];
-                // let oldReview = oneBrandReviews.filter(review => review.id !== res.id);
+                // let oldReview = reviews.filter(review => review.id !== res.id);
                 // for (let i = 0; i < oldReview.length; i++)  {
                 //     if (i === idx) {
                 //         newReview.push(res)
                 //     }
                 //     newReview.push(oldReview[i])
                 // }
-                // setOneBrandReviews(newReview)
+                // setReviews(newReview)
 
                 //edit with less code
-                let oldReview = oneBrandReviews.filter(review => review.id !== res.id);
-                setOneBrandReviews([...oldReview, res])
+                let oldReview = reviews.filter(review => review.id !== res.id);
+                setReviews([...oldReview, res])
 
-                // for (let i = 0; i < oneBrandReviews.length; i++) {
+                // for (let i = 0; i < reviews.length; i++) {
                 //     if (i === res.id) {
-                //         oneBrandReviews[i] = res;
+                //         reviews[i] = res;
                 //     }
                 // }
-                // setOneBrandReviews(oneBrandReviews);
+                // setReviews(reviews);
             })
             .catch(err => console.log(err))
     }
@@ -90,7 +98,7 @@ const Reviews = ({ reviews, setOneBrandReviews }) => {
     const handleDeleteReview = (id) => {
         dispatch(thunkDeleteReviews(id))
             .then(() => {
-                setOneBrandReviews(oneBrandReviews.filter(review => review.id !== id))
+                setReviews(reviews.filter(review => review.id !== id))
             })
     }
 
@@ -99,7 +107,7 @@ const Reviews = ({ reviews, setOneBrandReviews }) => {
     //     dispatch(thunkDeleteReviews(id))
     //         .then(() => {
     //             let newReviews = reviews.filter(review => review.id !== id)
-    //             setOneBrandReviews(newReviews)
+    //             setReviews(newReviews)
     //         })
     // }
 

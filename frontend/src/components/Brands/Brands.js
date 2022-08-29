@@ -36,7 +36,7 @@ const Brands = ({ brands, setBrands }) => {
         <div className='brands-page'>
             <div className='brands-container'>
                 {
-                    brands.map((brand) => (
+                    brands?.map((brand) => (
                         <div
                             key={brand.id}
                             value={brand.id}

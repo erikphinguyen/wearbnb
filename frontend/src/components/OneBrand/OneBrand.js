@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, NavLink, Route, useParams } from 'react-router-dom';
 import brandsReducer, { thunkGetOneBrand, thunkPutBrands } from '../../store/brands.js'
 import { thunkGetReviews, thunkPutReviews, thunkPostReviews, thunkDeleteReviews } from '../../store/reviews.js';
-import PostComment from '../PostComment'
 
 import "./OneBrand.css"
 
@@ -19,6 +18,9 @@ const OneBrand = () => {
 
     const [editMode, setEditMode] = useState(false);
     const [selectedEdit, setSelectedEdit] = useState(null);
+
+    // get reviews
+    const [reviews, setReviews] = useState([])
 
     // get brand
     const [singleBrand, setSingleBrand] = useState({})
@@ -39,7 +41,7 @@ const OneBrand = () => {
         dispatch(thunkGetOneBrand(id))
             .then(res => {
                 setSingleBrand(res)
-                setOneBrandReviews(res.Reviews)
+                setReviews(res.Reviews)
             })
             .catch(err => console.log(err))
     }, [dispatch, id])
@@ -131,7 +133,7 @@ const OneBrand = () => {
                             ) : null
                         }
                         <div className='review'>
-                            <PostComment oneBrandReviews={oneBrandReviews} setOneBrandReviews={setOneBrandReviews} />
+                            <PostComment oneBrandReviews={oneBrandReviews} setReviews={setReviews} />
                             {
                                 oneBrandReviews?.map(review => (
                                     <div
