@@ -16,23 +16,13 @@ const OneBrand = () => {
     // });
 
     const [errors, setErrors] = useState([]);
-    const [errorsReview, setErrorsReview] = useState([]);
 
     const [editMode, setEditMode] = useState(false);
-    const [editModeReviews, setEditModeReviews] = useState(false);
     const [selectedEdit, setSelectedEdit] = useState(null);
 
     // get brand
     const [singleBrand, setSingleBrand] = useState({})
 
-
-    // put reviews
-    const [newReview, setNewReview] = useState({
-        review: ''
-    })
-
-    // get reviews
-    const [oneBrandReviews, setOneBrandReviews] = useState([])
 
     // put brand
     const [newBrandData, setNewBrandData] = useState({
@@ -67,74 +57,6 @@ const OneBrand = () => {
                     return
                 }
                 setSingleBrand(res)
-            })
-    }
-
-    // EDITING REVIEW
-    const handleSubmitReviewEdit = e => {
-        e.preventDefault();
-        let data = {
-            id: selectedEdit,
-            ...newReview
-        }
-
-        dispatch(thunkPutReviews(data))
-            .then(res => {
-                if (res.error) {
-                    setErrorsReview([res.error])
-                    return
-                }
-                // this posts
-                // setOneBrandReviews([...oneBrandReviews, res])
-                // setOneBrandReviews(oneBrandReviews.filter(review => review.id !))
-
-                // edit
-                // let idx;
-                // for (let i = 0; i < oneBrandReviews.length; i++) {
-                //     if (i === res.id) {
-                //         idx = i;
-                //     }
-                // }
-                // let newReview = [];
-                // let oldReview = oneBrandReviews.filter(review => review.id !== res.id);
-                // for (let i = 0; i < oldReview.length; i++)  {
-                //     if (i === idx) {
-                //         newReview.push(res)
-                //     }
-                //     newReview.push(oldReview[i])
-                // }
-                // setOneBrandReviews(newReview)
-
-                //edit with less code
-                let oldReview = oneBrandReviews.filter(review => review.id !== res.id);
-                setOneBrandReviews([...oldReview, res])
-
-                // for (let i = 0; i < oneBrandReviews.length; i++) {
-                //     if (i === res.id) {
-                //         oneBrandReviews[i] = res;
-                //     }
-                // }
-                // setOneBrandReviews(oneBrandReviews);
-            })
-            .catch(err => console.log(err))
-    }
-
-    // POSTING NEW REVIEW
-    const handleSubmitReview = e => {
-        e.preventDefault();
-        let data = {
-            brandId: id,
-            review: newReview.review
-        }
-        dispatch(thunkPostReviews(data))
-            .then(res => setOneBrandReviews([...oneBrandReviews, res]))
-    }
-
-    // DELETING REVIEW
-    const handleDeleteReview = (id) => {
-        dispatch(thunkDeleteReviews(id))
-            .then(() => {
-                setOneBrandReviews(oneBrandReviews.filter(review => review.id !== id))
             })
     }
 
