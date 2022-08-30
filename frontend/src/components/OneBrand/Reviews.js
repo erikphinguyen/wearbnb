@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, NavLink, Route, useParams, useHistory } from 'react-router-dom';
 import { thunkGetReviews, thunkPutReviews, thunkPostReviews, thunkDeleteReviews } from '../../store/reviews';
 import PostComment from '../PostComment'
+import './Reviews.css'
 
 const Reviews = () => {
     // THIS WAS PASSED IN AS PROPS PRIOR
@@ -14,6 +15,7 @@ const Reviews = () => {
 
     const [errorsReview, setErrorsReview] = useState([]);
     const [editModeReviews, setEditModeReviews] = useState(false);
+    const [selectedEdit, setSelectedEdit] = useState(null);
 
     // get reviews
     const [reviews, setReviews] = useState([])
@@ -111,21 +113,86 @@ const Reviews = () => {
     //         })
     // }
 
+    // THIS WAS UNDER <H3>REVIEWS</H3>
+    // {
+    //     reviews?.map((review) => (
+    //         <div
+    //             key={review.id}
+    //         >
+    //             {/* <div>{`${review.User.id} says`}</div> */}
+    //             {/* {`@${review.User.username}`} */}
+    //             <p>{review.review}</p>
+    //             <button className='button' onClick={() => handleDeleteReview(review.id)}>Delete Review</button>
+    //         </div>
+    //     ))
+    // }
+
     return (
-        <div>
+        <div className='reviews-page'>
             <h3>Reviews</h3>
-            {
-                reviews?.map((review) => (
-                    <div
-                        key={review.id}
-                    >
-                        {/* <div>{`${review.User.id} says`}</div> */}
-                        {/* {`@${review.User.username}`} */}
-                        <p>{review.review}</p>
-                        <button className='button' onClick={() => handleDeleteReview(review.id)}>Delete Review</button>
-                    </div>
-                ))
-            }
+            <div className='reviews-container'>
+                <PostComment reviews={reviews} setReviews={setReviews} />
+                {
+                    reviews?.map(review => (
+                        <div
+                            key={review.id}
+                        >
+                            <div>
+                                <p>
+                                    <b>
+                                        user {review.userId}'s review:
+                                    </b>
+                                    <div>
+                                        {review.review}
+                                    </div>
+                                    <div>
+                                        <b>created at: </b>{review.createdAt}
+                                    </div>
+                                    <div>
+                                        <b>updated at:</b> {review.updatedAt}
+                                    </div>
+                                </p>
+
+                                {
+                                    user?.id === review.userId && (
+                                        <>
+                                            <button className='button' onClick={() => {
+                                                setSelectedEdit(review.id)
+                                                setEditModeReviews(true)
+                                            }
+                                            }>
+                                                Edit Review
+                                            </button>
+                                            <button className='button' onClick={() => handleDeleteReview(review.id)}>Delete</button>
+                                            {
+                                                editModeReviews ? (
+                                                    <div>
+                                                        <div>
+                                                            {errorsReview.map((error, idx) => (
+                                                                <li style={errorsReview.length ? { color: "red" } : null} key={idx}>{error}</li>
+                                                            ))}
+                                                        </div>
+                                                        {console.log('NEW REVIEW IN EDITMODE REVIEWS', newReview)}
+                                                        <input
+
+                                                            style={errorsReview.length && newReview.review.length == 0 ? { border: "1px solid red" } : null}
+                                                            type='text'
+                                                            placeholder='Edit The Review'
+                                                            onChange={(e) => setNewReview({ ...newReview, review: e.target.value })}
+                                                        />
+                                                        {/* <button onClick={handleSubmitReview}>Save</button> */}
+                                                        <button className='button' onClick={handleSubmitReviewEdit}>Save</button>
+                                                    </div>
+                                                ) : null
+                                            }
+                                        </>
+                                    )
+                                }
+                            </div>
+                        </div>
+                    ))
+                }
+            </div>
         </div>
     )
 

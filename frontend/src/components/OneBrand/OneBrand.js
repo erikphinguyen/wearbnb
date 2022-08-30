@@ -99,31 +99,31 @@ const OneBrand = () => {
                                         ))}
                                     </div>
                                     <input
-                                        style={errors.length && newReview.review.length == 0 ? { border: "1px solid red" } : null}
+                                        style={errors.length ? { border: "1px solid red" } : null}
                                         type='text'
                                         placeholder='New Name'
                                         onChange={(e) => setNewBrandData({ ...newBrandData, name: e.target.value })}
                                     />
                                     <input
-                                        style={errors.length && newReview.review.length == 0 ? { border: "1px solid red" } : null}
+                                        style={errors.length ? { border: "1px solid red" } : null}
                                         type='text'
                                         placeholder='New Image'
                                         onChange={(e) => setNewBrandData({ ...newBrandData, brandImg: e.target.value })}
                                     />
                                     <input
-                                        style={errors.length && newReview.review.length == 0 ? { border: "1px solid red" } : null}
+                                        style={errors.length ? { border: "1px solid red" } : null}
                                         type='text'
                                         placeholder='New Address'
                                         onChange={(e) => setNewBrandData({ ...newBrandData, address: e.target.value })}
                                     />
                                     <input
-                                        style={errors.length && newReview.review.length == 0 ? { border: "1px solid red" } : null}
+                                        style={errors.length ? { border: "1px solid red" } : null}
                                         type='text'
                                         placeholder='New City'
                                         onChange={(e) => setNewBrandData({ ...newBrandData, city: e.target.value })}
                                     />
                                     <input
-                                        style={errors.length && newReview.review.length == 0 ? { border: "1px solid red" } : null}
+                                        style={errors.length ? { border: "1px solid red" } : null}
                                         type='text'
                                         placeholder='New Country'
                                         onChange={(e) => setNewBrandData({ ...newBrandData, country: e.target.value })}
@@ -132,69 +132,6 @@ const OneBrand = () => {
                                 </div>
                             ) : null
                         }
-                        <div className='review'>
-                            <PostComment oneBrandReviews={oneBrandReviews} setReviews={setReviews} />
-                            {
-                                oneBrandReviews?.map(review => (
-                                    <div
-                                        key={review.id}
-                                    >
-                                        <div>
-                                            <p>
-                                                <b>
-                                                    user {review.userId}'s review:
-                                                </b>
-                                                <div>
-                                                    {review.review}
-                                                </div>
-                                                <div>
-                                                    <b>created at: </b>{review.createdAt}
-                                                </div>
-                                                <div>
-                                                    <b>updated at:</b> {review.updatedAt}
-                                                </div>
-                                            </p>
-
-                                            {
-                                                user?.id === review.userId && (
-                                                    <>
-                                                        <button className='button' onClick={() => {
-                                                            setSelectedEdit(review.id)
-                                                            setEditModeReviews(true)
-                                                        }
-                                                        }>
-                                                            Edit Review
-                                                        </button>
-                                                        <button className='button' onClick={() => handleDeleteReview(review.id)}>Delete</button>
-                                                        {
-                                                            editModeReviews ? (
-                                                                <div>
-                                                                    <div>
-                                                                        {errorsReview.map((error, idx) => (
-                                                                            <li style={errors.length ? { color: "red" } : null} key={idx}>{error}</li>
-                                                                        ))}
-                                                                    </div>
-                                                                    {console.log('NEW REVIEW IN EDITMODE REVIEWS', newReview)}
-                                                                    <input
-
-                                                                        style={errorsReview.length && newReview.review.length == 0 ? { border: "1px solid red" } : null}
-                                                                        type='text'
-                                                                        placeholder='Edit The Review'
-                                                                        onChange={(e) => setNewReview({ ...newReview, review: e.target.value })}
-                                                                    />
-                                                                    {/* <button onClick={handleSubmitReview}>Save</button> */}
-                                                                    <button className='button' onClick={handleSubmitReviewEdit}>Save</button>
-                                                                </div>
-                                                            ) : null
-                                                        }
-                                                    </>
-                                                )
-                                            }
-                                        </div>
-                                    </div>
-                                ))
-                            }
-                        </div>
                     </div>
                 </div>
             </div>
