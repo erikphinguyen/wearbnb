@@ -137,12 +137,15 @@ const Reviews = () => {
                         <div
                             key={review.id}
                         >
+                            <> {console.log('HITTING REVIEWS FRONT END')}</>
+                            {console.log('WHAT IS REVIEW', review)}
                             <div>
                                 <p>
                                     <b>
                                         user {review.userId}'s review:
                                     </b>
                                     <div>
+                                        {/* so review.review doesn't exist */}
                                         {review.review}
                                     </div>
                                     <div>
