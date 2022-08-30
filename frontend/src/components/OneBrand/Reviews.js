@@ -97,21 +97,21 @@ const Reviews = () => {
     }
 
     // DELETING REVIEW
-    const handleDeleteReview = (id) => {
-        dispatch(thunkDeleteReviews(id))
-            .then(() => {
-                setReviews(reviews.filter(review => review.id !== id))
-            })
-    }
-
-    // DELETING REVIEW PT 2
     // const handleDeleteReview = (id) => {
     //     dispatch(thunkDeleteReviews(id))
     //         .then(() => {
-    //             let newReviews = reviews.filter(review => review.id !== id)
-    //             setReviews(newReviews)
+    //             setReviews(reviews.filter(review => review.id !== id))
     //         })
     // }
+
+    // DELETING REVIEW PT 2
+    const handleDeleteReview = (id) => {
+        dispatch(thunkDeleteReviews(id))
+            .then(() => {
+                let newReviews = reviews.filter(review => review.id !== id)
+                setReviews(newReviews)
+            })
+    }
 
     // THIS WAS UNDER <H3>REVIEWS</H3>
     // {

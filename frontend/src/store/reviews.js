@@ -37,8 +37,9 @@ const deleteReviews = (id) => {
 
 // THUNKS
 // ALL REVIEWS ON ONE IMAGE
-export const thunkGetReviews = () => async (dispatch) => {
-    const response = await csrfFetch(`/api/reviews`)
+export const thunkGetReviews = (id) => async (dispatch) => {
+    console.log('AM I HITTING THUNK GET REVIEWS')
+    const response = await csrfFetch(`/api/brands`)
 
     if (response.ok) {
         const reviews = await response.json();
@@ -48,7 +49,7 @@ export const thunkGetReviews = () => async (dispatch) => {
 }
 
 export const thunkPutReviews = data => async dispatch => {
-    const response = await csrfFetch(`/api/reviews/${data.id}`, {
+    const response = await csrfFetch(`/api/brands/${data.id}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
@@ -68,7 +69,7 @@ export const thunkPutReviews = data => async dispatch => {
 };
 
 export const thunkPostReviews = (data) => async dispatch => {
-    const response = await csrfFetch(`/api/reviews/${data.brandId}`, {
+    const response = await csrfFetch(`/api/brands/${data.brandId}`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -87,7 +88,7 @@ export const thunkPostReviews = (data) => async dispatch => {
 };
 
 export const thunkDeleteReviews = (id) => async dispatch => {
-    const response = await csrfFetch(`/api/reviews/${id}`, {
+    const response = await csrfFetch(`/api/brands/${id}`, {
         method: 'DELETE',
     });
 

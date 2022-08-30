@@ -17,7 +17,7 @@ const OneBrand = () => {
     const [errors, setErrors] = useState([]);
 
     const [editMode, setEditMode] = useState(false);
-    const [selectedEdit, setSelectedEdit] = useState(null);
+
 
     // get reviews
     const [reviews, setReviews] = useState([])
