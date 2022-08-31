@@ -14,10 +14,11 @@ const Brands = ({ brands, setBrands }) => {
     useEffect(() => {
         dispatch(thunkGetBrands())
             .then(res => {
+                let sortedBrands = res.sort((a,b) => a.id - b.id)
                 // console.log("LINE 16 IN USE EFFECT", res)
                 // let brandsArr = Object.values(brandsObj);
                 // setBrands(brandsArr)
-                setBrands(res)
+                setBrands(sortedBrands)
             })
     }, [dispatch])
 
