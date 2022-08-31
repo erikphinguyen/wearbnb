@@ -18,13 +18,11 @@ const OneBrand = () => {
 
     const [editMode, setEditMode] = useState(false);
 
-
     // get reviews
     const [reviews, setReviews] = useState([])
 
     // get brand
     const [singleBrand, setSingleBrand] = useState({})
-
 
     // put brand
     const [newBrandData, setNewBrandData] = useState({

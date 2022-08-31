@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, NavLink, Route, useParams, useHistory } from 'react-router-dom';
 import { thunkGetReviews, thunkPutReviews, thunkPostReviews, thunkDeleteReviews } from '../../store/reviews';
-import PostComment from '../PostComment'
+import PostReview from '../PostReview'
 import './Reviews.css'
 
 const Reviews = () => {
@@ -27,11 +27,29 @@ const Reviews = () => {
 
     const user = useSelector(state => state.session.user)
 
-    // FIX THIS
-    useEffect(async => {
-        dispatch(thunkGetReviews())
+    // GET REVIEWS
+    useEffect(() => {
+        dispatch(thunkGetReviews(id))
             .then(res => {
-                setReviews(res)
+                let sortedReviews = res.sort((a, b) => {
+                    if (new Date(a.createdAt) > new Date(b.createdAt)) {
+                        return 1
+                    }
+                    else if (new Date(a.createdAt) < new Date(b.createdAt)) {
+                        return -1
+                    }
+                    if (a.userId > b.userId) {
+                        return 1
+                    }
+                    else if (a.userId < b.userId) {
+                        return -1
+                    }
+                    else {
+                        return 0
+                    }
+                })
+                console.log('WHAT IS RES', res)
+                setReviews(sortedReviews)
             })
     }, [dispatch])
 
@@ -61,6 +79,28 @@ const Reviews = () => {
                     setErrorsReview([res.error])
                     return
                 }
+                dispatch(thunkGetReviews(id))
+                    .then(res => {
+                        let sortedReviews = res.sort((a, b) => {
+                            if (new Date(a.createdAt) > new Date(b.createdAt)) {
+                                return 1
+                            }
+                            else if (new Date(a.createdAt) < new Date(b.createdAt)) {
+                                return -1
+                            }
+                            if (a.userId > b.userId) {
+                                return 1
+                            }
+                            else if (a.userId < b.userId) {
+                                return -1
+                            }
+                            else {
+                                return 0
+                            }
+                        })
+                        console.log('WHAT IS RES', res)
+                        setReviews(sortedReviews)
+                    })
                 // this posts
                 // setReviews([...reviews, res])
                 // setReviews(reviews.filter(review => review.id !))
@@ -83,8 +123,10 @@ const Reviews = () => {
                 // setReviews(newReview)
 
                 //edit with less code
-                let oldReview = reviews.filter(review => review.id !== res.id);
-                setReviews([...oldReview, res])
+                // let oldReview = reviews.filter(review => review.id !== res.id);
+                // oldReview.push(res)
+                // let sortedReviews = reviews.sort((a,b) => b.createdAt - a.createdAt)
+                // setReviews(sortedReviews)
 
                 // for (let i = 0; i < reviews.length; i++) {
                 //     if (i === res.id) {
@@ -131,7 +173,7 @@ const Reviews = () => {
         <div className='reviews-page'>
             <h3>Reviews</h3>
             <div className='reviews-container'>
-                <PostComment reviews={reviews} setReviews={setReviews} />
+                <PostReview reviews={reviews} setReviews={setReviews} />
                 {
                     reviews?.map(review => (
                         <div
@@ -168,7 +210,7 @@ const Reviews = () => {
                                             </button>
                                             <button className='button' onClick={() => handleDeleteReview(review.id)}>Delete</button>
                                             {
-                                                editModeReviews ? (
+                                                editModeReviews && selectedEdit === review.id ? (
                                                     <div>
                                                         <div>
                                                             {errorsReview.map((error, idx) => (
@@ -183,7 +225,7 @@ const Reviews = () => {
                                                             placeholder='Edit The Review'
                                                             onChange={(e) => setNewReview({ ...newReview, review: e.target.value })}
                                                         />
-                                                        {/* <button onClick={handleSubmitReview}>Save</button> */}
+                                                        {/* <button onClick={handleSubmitReview}>Post</button> */}
                                                         <button className='button' onClick={handleSubmitReviewEdit}>Save</button>
                                                     </div>
                                                 ) : null

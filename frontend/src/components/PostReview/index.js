@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useHistory } from 'react-router-dom';
 import { thunkPostReviews } from '../../store/reviews';
 
-function PostReview({ oneBrandReviews, setOneBrandReviews }) {
+function PostReview({ reviews, setReviews }) {
     const dispatch = useDispatch();
 
     const [review, setReview] = useState('');
@@ -24,12 +24,14 @@ function PostReview({ oneBrandReviews, setOneBrandReviews }) {
             brandId: id,
             review
         }
+        dispatch(thunkPostReviews(newReview))
             .then(res => {
                 if (res.error) {
                     setErrors([res.error])
                     return
                 }
-                setOneBrandReviews([...oneBrandReviews, res])
+                console.log('WHAT IS ONEBRANDREVIEWS',reviews)
+                setReviews([...reviews, res])
                 // setReview(newReview)
             })
     };
