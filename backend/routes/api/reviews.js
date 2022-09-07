@@ -8,7 +8,7 @@ const { db } = require('../../config');
 const { User, Brand, Review } = require('../../db/models')
 
 // GET ALL REVIEWS OF CERTAIN BRAND
-router.get('/:id(\\d+)', requireAuth, restoreUser, asyncHandler(async (req, res) => {
+router.get('/:id(\\d+)', restoreUser, asyncHandler(async (req, res) => {
     const { id } = req.params;
     console.log('WHAT IS ID BACKEND', id)
     const brand = await Brand.findByPk(id);
