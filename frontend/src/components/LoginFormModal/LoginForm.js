@@ -41,7 +41,9 @@ function LoginForm() {
             </label>
             <label>
                 Password
-                <input style={errors.length && password == "" ? { border: "1px solid red" } : null}
+                <input
+                    className="input"
+                    style={errors.length && password == "" ? { border: "1px solid red" } : null}
                     type="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
