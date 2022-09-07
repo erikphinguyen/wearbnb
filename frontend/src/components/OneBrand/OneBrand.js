@@ -14,6 +14,12 @@ const OneBrand = () => {
     //     return state.brands[Number(id)]
     // });
 
+    const [brandImg, setBrandImg] = useState('');
+    const [name, setName] = useState('');
+    const [address, setAddress] = useState('');
+    const [city, setCity] = useState('');
+    const [country, setCountry] = useState('');
+
     const [errors, setErrors] = useState([]);
 
     const [editMode, setEditMode] = useState(false);
@@ -32,6 +38,22 @@ const OneBrand = () => {
         city: '',
         country: ''
     })
+
+    const reset = () => {
+        setNewBrandData({
+            brandImg: '',
+            name: '',
+            address: '',
+            city: '',
+            country: ''
+        })
+        setEditMode(false)
+        // setBrandImg('');
+        // setName('');
+        // setAddress('');
+        // setCity('');
+        // setCountry('');
+    }
 
     const user = useSelector(state => state.session.user)
 
@@ -56,7 +78,8 @@ const OneBrand = () => {
                     setErrors([res.error])
                     return
                 }
-                setSingleBrand(res)
+                setSingleBrand(res);
+                reset();
             })
     }
 
@@ -98,6 +121,7 @@ const OneBrand = () => {
                                     </div>
                                     <input
                                         style={errors.length ? { border: "1px solid red" } : null}
+                                        value={newBrandData.name}
                                         type='text'
                                         placeholder='New Name'
                                         onChange={(e) => setNewBrandData({ ...newBrandData, name: e.target.value })}
@@ -105,24 +129,28 @@ const OneBrand = () => {
                                     <input
                                         style={errors.length ? { border: "1px solid red" } : null}
                                         type='text'
+                                        value={newBrandData.brandImg}
                                         placeholder='New Image'
                                         onChange={(e) => setNewBrandData({ ...newBrandData, brandImg: e.target.value })}
                                     />
                                     <input
                                         style={errors.length ? { border: "1px solid red" } : null}
                                         type='text'
+                                        value={newBrandData.address}
                                         placeholder='New Address'
                                         onChange={(e) => setNewBrandData({ ...newBrandData, address: e.target.value })}
                                     />
                                     <input
                                         style={errors.length ? { border: "1px solid red" } : null}
                                         type='text'
+                                        value={newBrandData.city}
                                         placeholder='New City'
                                         onChange={(e) => setNewBrandData({ ...newBrandData, city: e.target.value })}
                                     />
                                     <input
                                         style={errors.length ? { border: "1px solid red" } : null}
                                         type='text'
+                                        value={newBrandData.country}
                                         placeholder='New Country'
                                         onChange={(e) => setNewBrandData({ ...newBrandData, country: e.target.value })}
                                     />

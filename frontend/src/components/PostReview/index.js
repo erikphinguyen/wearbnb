@@ -17,6 +17,7 @@ function PostReview({ reviews, setReviews }) {
 
     const { id } = useParams()
 
+
     const handleSubmit = async (event) => {
         event.preventDefault();
         const newReview = {
@@ -32,6 +33,7 @@ function PostReview({ reviews, setReviews }) {
                 }
                 console.log('WHAT IS ONEBRANDREVIEWS',reviews)
                 setReviews([...reviews, res])
+                setReview('')
                 // setReview(newReview)
             })
     };

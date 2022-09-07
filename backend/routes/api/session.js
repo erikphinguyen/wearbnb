@@ -24,16 +24,20 @@ router.post(
     // validateLogin,
     asyncHandler(async (req, res, next) => {
         const { credential, password } = req.body;
+        let errorsArray = []
         if (credential == "" && password.length > 1) {
+            errorsArray.push(res.status(400).json({error: "Please fill out Username or Email"}))
             return res.status(400).json({error: "Please fill out Username or Email"})
         }
         if (password == "" && credential.length > 1) {
+            errorsArray.push(res.status(400).json({error: "Please fill out Password"}))
             return res.status(400).json({error: "Please fill out Password"})
         }
 
         const user = await User.login({ credential, password });
 
         if (!user) {
+            errorsArray.push(res.status(400).json({error: "Invalid Username or Email"}))
             return res.status(400).json({error: "Invalid Username or Email"})
         }
 
@@ -46,6 +50,8 @@ router.post(
         // }
 
         await setTokenCookie(res, user);
+        console.log('WHAT IS ERRORS ARRAY', errorsArray)
+        if (errorsArray.length > 1) return errorsArray
 
         return res.json({
             user

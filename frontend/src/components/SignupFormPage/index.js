@@ -25,19 +25,27 @@ function SignupFormPage() {
         //             if (data && data.errors) setErrors(data.errors);
         //         });
         // }
-        dispatch(sessionActions.signup({ email, username, password })).then(
+        dispatch(sessionActions.signup({ email, username, password, confirmPassword })).then(
             async (res) => {
                 setErrors([res])
+                console.log('WHAT IS RES IN SIGNUP', res)
             }
         )
+        // .catch(err)
         // return setErrors(['Confirm Password field must be the same as the Password field']);
     };
+
+    console.log('WHAT IS ERRORS', errors)
 
     return (
         <form className="form" onSubmit={handleSubmit}>
             <ul>
                 {errors.map((error, idx) => (
-                    <li style={errors.length ? { color: "red" } : null} key={idx}>{error}</li>
+                    // <li style={errors.length ? { color: "red" } : null} key={idx}>{error}</li>
+                    <>
+                        <li style={{color: "red"}}>{error}</li>
+                    </>
+
                 ))}
             </ul>
             <label>

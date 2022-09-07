@@ -33,31 +33,49 @@ router.post(
     // validateSignup,
     asyncHandler(async (req, res) => {
         const { email, password, username, confirmPassword } = req.body;
-
+        let errorsArray = []
         if (email == "") {
-            return res.status(400).json({ error: "Please fill out Email" })
-
+            errorsArray.push("Please fill out Email")
+            // return res.status(400).json({ error: "Please fill out Email" })
         }
         if (username == "") {
-            return res.status(400).json({ error: "Please fill out Username" })
+            errorsArray.push("Please fill out Username")
+            // return res.status(400).json({ error: "Please fill out Username" })
         }
 
         if (password == "") {
-            return res.status(400).json({ error: "Please fill out Password" })
+            errorsArray.push("Please fill out Password")
+            // return res.status(400).json({ error: "Please fill out Password" })
         }
         if (confirmPassword == "") {
-            return res.status(400).json({ error: "Please fill out Password" })
+            errorsArray.push("Please fill out Password")
+            // return res.status(400).json({ error: "Please fill out Password" })
         }
-        if (password.length > 40) return res.status(400).json({ error: "Password exceeds max length of 40" })
-        if (confirmPassword.length > 40) return res.status(400).json({ error: "Confirm password exceeds max length of 40" })
+        if (password.length < 5) {
+            errorsArray.push("Password needs to be at least 5 characters long")
+            // return res.status(400).json({ error: "Password needs to be at least 5 characters long" })
+        }
+        if (password.length > 40) {
+            errorsArray.push("Password exceeds max length of 40")
+            // return res.status(400).json({ error: "Password exceeds max length of 40" })
+        }
+        if (confirmPassword.length < 5) {
+            errorsArray.push("Password needs to be at least 5 characters long")
+            // return res.status(400).json({ error: "Password needs to be at least 5 characters long" })
+        }
+        if (confirmPassword.length > 40) {
+            errorsArray.push("Confirm password exceeds max length of 40")
+            // return res.status(400).json({ error: "Confirm password exceeds max length of 40" })
+        }
 
+        console.log('AM I IN BACKEND')
+        if (errorsArray.length) return res.status(400).json({error: errorsArray})
         const user = await User.signup({ email, username, password });
         if (!user) {
-            return res.status(400).json({ error: "Invalid Username or Email" })
+            errorsArray.push("Invalid Username or Email")
+            // return res.status(400).json({ error: "Invalid Username or Email" })
         }
-
         await setTokenCookie(res, user);
-
         return res.json({
             user,
         });

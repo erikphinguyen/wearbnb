@@ -9,7 +9,6 @@ const Reviews = () => {
     // THIS WAS PASSED IN AS PROPS PRIOR
     // { reviews, setReviews }
 
-
     const dispatch = useDispatch();
     const { id } = useParams();
 
@@ -24,6 +23,13 @@ const Reviews = () => {
     const [newReview, setNewReview] = useState({
         review: ''
     })
+
+    const reset = () => {
+        setNewReview({
+            review: ''
+        })
+        setEditModeReviews(false)
+    }
 
     const user = useSelector(state => state.session.user)
 
@@ -65,6 +71,8 @@ const Reviews = () => {
             .then(res => setReviews([...reviews, res]))
     }
 
+
+
     // EDITING REVIEW
     const handleSubmitReviewEdit = e => {
         e.preventDefault();
@@ -100,6 +108,7 @@ const Reviews = () => {
                         })
                         console.log('WHAT IS RES', res)
                         setReviews(sortedReviews)
+                        reset();
                     })
                 // this posts
                 // setReviews([...reviews, res])
@@ -219,9 +228,9 @@ const Reviews = () => {
                                                         </div>
                                                         {console.log('NEW REVIEW IN EDITMODE REVIEWS', newReview)}
                                                         <input
-
                                                             style={errorsReview.length && newReview.review.length == 0 ? { border: "1px solid red" } : null}
                                                             type='text'
+                                                            value={newReview.review}
                                                             placeholder='Edit The Review'
                                                             onChange={(e) => setNewReview({ ...newReview, review: e.target.value })}
                                                         />
