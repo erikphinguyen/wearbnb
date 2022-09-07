@@ -10,9 +10,10 @@ const { User, Brand, Review } = require('../../db/models')
 // GET ALL REVIEWS OF CERTAIN BRAND
 router.get('/:id(\\d+)', requireAuth, restoreUser, asyncHandler(async (req, res) => {
     const { id } = req.params;
+    console.log('WHAT IS ID BACKEND', id)
     const brand = await Brand.findByPk(id);
     let reviews = await Review.findAll({
-        where: { id: id }
+        where: { brandId: id }
     });
 
     return res.json(reviews);

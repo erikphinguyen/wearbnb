@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, NavLink, Route, useParams } from 'react-router-dom';
 import brandsReducer, { thunkGetOneBrand, thunkPutBrands } from '../../store/brands.js'
 import { thunkGetReviews, thunkPutReviews, thunkPostReviews, thunkDeleteReviews } from '../../store/reviews.js';
-import PostComment from '../PostComment'
 
 import "./OneBrand.css"
 
@@ -15,24 +14,21 @@ const OneBrand = () => {
     //     return state.brands[Number(id)]
     // });
 
+    const [brandImg, setBrandImg] = useState('');
+    const [name, setName] = useState('');
+    const [address, setAddress] = useState('');
+    const [city, setCity] = useState('');
+    const [country, setCountry] = useState('');
+
     const [errors, setErrors] = useState([]);
-    const [errorsReview, setErrorsReview] = useState([]);
 
     const [editMode, setEditMode] = useState(false);
-    const [editModeReviews, setEditModeReviews] = useState(false);
-    const [selectedEdit, setSelectedEdit] = useState(null);
+
+    // get reviews
+    const [reviews, setReviews] = useState([])
 
     // get brand
     const [singleBrand, setSingleBrand] = useState({})
-
-
-    // put reviews
-    const [newReview, setNewReview] = useState({
-        review: ''
-    })
-
-    // get reviews
-    const [oneBrandReviews, setOneBrandReviews] = useState([])
 
     // put brand
     const [newBrandData, setNewBrandData] = useState({
@@ -43,13 +39,29 @@ const OneBrand = () => {
         country: ''
     })
 
+    const reset = () => {
+        setNewBrandData({
+            brandImg: '',
+            name: '',
+            address: '',
+            city: '',
+            country: ''
+        })
+        setEditMode(false)
+        // setBrandImg('');
+        // setName('');
+        // setAddress('');
+        // setCity('');
+        // setCountry('');
+    }
+
     const user = useSelector(state => state.session.user)
 
     useEffect(async => {
         dispatch(thunkGetOneBrand(id))
             .then(res => {
                 setSingleBrand(res)
-                setOneBrandReviews(res.Reviews)
+                setReviews(res.Reviews)
             })
             .catch(err => console.log(err))
     }, [dispatch, id])
@@ -66,75 +78,8 @@ const OneBrand = () => {
                     setErrors([res.error])
                     return
                 }
-                setSingleBrand(res)
-            })
-    }
-
-    // EDITING REVIEW
-    const handleSubmitReviewEdit = e => {
-        e.preventDefault();
-        let data = {
-            id: selectedEdit,
-            ...newReview
-        }
-
-        dispatch(thunkPutReviews(data))
-            .then(res => {
-                if (res.error) {
-                    setErrorsReview([res.error])
-                    return
-                }
-                // this posts
-                // setOneBrandReviews([...oneBrandReviews, res])
-                // setOneBrandReviews(oneBrandReviews.filter(review => review.id !))
-
-                // edit
-                // let idx;
-                // for (let i = 0; i < oneBrandReviews.length; i++) {
-                //     if (i === res.id) {
-                //         idx = i;
-                //     }
-                // }
-                // let newReview = [];
-                // let oldReview = oneBrandReviews.filter(review => review.id !== res.id);
-                // for (let i = 0; i < oldReview.length; i++)  {
-                //     if (i === idx) {
-                //         newReview.push(res)
-                //     }
-                //     newReview.push(oldReview[i])
-                // }
-                // setOneBrandReviews(newReview)
-
-                //edit with less code
-                let oldReview = oneBrandReviews.filter(review => review.id !== res.id);
-                setOneBrandReviews([...oldReview, res])
-
-                // for (let i = 0; i < oneBrandReviews.length; i++) {
-                //     if (i === res.id) {
-                //         oneBrandReviews[i] = res;
-                //     }
-                // }
-                // setOneBrandReviews(oneBrandReviews);
-            })
-            .catch(err => console.log(err))
-    }
-
-    // POSTING NEW REVIEW
-    const handleSubmitReview = e => {
-        e.preventDefault();
-        let data = {
-            brandId: id,
-            review: newReview.review
-        }
-        dispatch(thunkPostReviews(data))
-            .then(res => setOneBrandReviews([...oneBrandReviews, res]))
-    }
-
-    // DELETING REVIEW
-    const handleDeleteReview = (id) => {
-        dispatch(thunkDeleteReviews(id))
-            .then(() => {
-                setOneBrandReviews(oneBrandReviews.filter(review => review.id !== id))
+                setSingleBrand(res);
+                reset();
             })
     }
 
@@ -175,32 +120,37 @@ const OneBrand = () => {
                                         ))}
                                     </div>
                                     <input
-                                        style={errors.length && newReview.review.length == 0 ? { border: "1px solid red" } : null}
+                                        style={errors.length ? { border: "1px solid red" } : null}
+                                        value={newBrandData.name}
                                         type='text'
                                         placeholder='New Name'
                                         onChange={(e) => setNewBrandData({ ...newBrandData, name: e.target.value })}
                                     />
                                     <input
-                                        style={errors.length && newReview.review.length == 0 ? { border: "1px solid red" } : null}
+                                        style={errors.length ? { border: "1px solid red" } : null}
                                         type='text'
+                                        value={newBrandData.brandImg}
                                         placeholder='New Image'
                                         onChange={(e) => setNewBrandData({ ...newBrandData, brandImg: e.target.value })}
                                     />
                                     <input
-                                        style={errors.length && newReview.review.length == 0 ? { border: "1px solid red" } : null}
+                                        style={errors.length ? { border: "1px solid red" } : null}
                                         type='text'
+                                        value={newBrandData.address}
                                         placeholder='New Address'
                                         onChange={(e) => setNewBrandData({ ...newBrandData, address: e.target.value })}
                                     />
                                     <input
-                                        style={errors.length && newReview.review.length == 0 ? { border: "1px solid red" } : null}
+                                        style={errors.length ? { border: "1px solid red" } : null}
                                         type='text'
+                                        value={newBrandData.city}
                                         placeholder='New City'
                                         onChange={(e) => setNewBrandData({ ...newBrandData, city: e.target.value })}
                                     />
                                     <input
-                                        style={errors.length && newReview.review.length == 0 ? { border: "1px solid red" } : null}
+                                        style={errors.length ? { border: "1px solid red" } : null}
                                         type='text'
+                                        value={newBrandData.country}
                                         placeholder='New Country'
                                         onChange={(e) => setNewBrandData({ ...newBrandData, country: e.target.value })}
                                     />
@@ -208,69 +158,6 @@ const OneBrand = () => {
                                 </div>
                             ) : null
                         }
-                        <div className='review'>
-                            <PostComment oneBrandReviews={oneBrandReviews} setOneBrandReviews={setOneBrandReviews} />
-                            {
-                                oneBrandReviews?.map(review => (
-                                    <div
-                                        key={review.id}
-                                    >
-                                        <div>
-                                            <p>
-                                                <b>
-                                                    user {review.userId}'s review:
-                                                </b>
-                                                <div>
-                                                    {review.review}
-                                                </div>
-                                                <div>
-                                                    <b>created at: </b>{review.createdAt}
-                                                </div>
-                                                <div>
-                                                    <b>updated at:</b> {review.updatedAt}
-                                                </div>
-                                            </p>
-
-                                            {
-                                                user?.id === review.userId && (
-                                                    <>
-                                                        <button className='button' onClick={() => {
-                                                            setSelectedEdit(review.id)
-                                                            setEditModeReviews(true)
-                                                        }
-                                                        }>
-                                                            Edit Review
-                                                        </button>
-                                                        <button className='button' onClick={() => handleDeleteReview(review.id)}>Delete</button>
-                                                        {
-                                                            editModeReviews ? (
-                                                                <div>
-                                                                    <div>
-                                                                        {errorsReview.map((error, idx) => (
-                                                                            <li style={errors.length ? { color: "red" } : null} key={idx}>{error}</li>
-                                                                        ))}
-                                                                    </div>
-                                                                    {console.log('NEW REVIEW IN EDITMODE REVIEWS', newReview)}
-                                                                    <input
-
-                                                                        style={errorsReview.length && newReview.review.length == 0 ? { border: "1px solid red" } : null}
-                                                                        type='text'
-                                                                        placeholder='Edit The Review'
-                                                                        onChange={(e) => setNewReview({ ...newReview, review: e.target.value })}
-                                                                    />
-                                                                    {/* <button onClick={handleSubmitReview}>Save</button> */}
-                                                                    <button className='button' onClick={handleSubmitReviewEdit}>Save</button>
-                                                                </div>
-                                                            ) : null
-                                                        }
-                                                    </>
-                                                )
-                                            }
-                                        </div>
-                                    </div>
-                                ))
-                            }
-                        </div>
                     </div>
                 </div>
             </div>

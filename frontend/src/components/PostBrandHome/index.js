@@ -39,6 +39,7 @@ function PostBrand({ brands, setBrands, onClose, setShowModal }) {
         }
 
         // const brand = await dispatch(thunkPostBrands(newBrand));
+        // if validation erros = empty, dispatch
         dispatch(thunkPostBrands(newBrand))
             .then(res => {
                 if (res.error) {
@@ -112,7 +113,7 @@ function PostBrand({ brands, setBrands, onClose, setShowModal }) {
                     placeholder='Country'
                     name='country'
                 />
-                <button className='button' type='submit'>Submit</button>
+                <button className='button' type='submit' >Submit</button>
             </form>
         </div>
     );

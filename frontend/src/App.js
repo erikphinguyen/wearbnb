@@ -43,6 +43,7 @@ import Brands from "./components/Brands/Brands.js"
 import OneBrand from "./components/OneBrand/OneBrand";
 import Footer from "./components/Footer/ index";
 import PageNotFound from "./components/PageNotFound";
+import Reviews from "./components/OneBrand/Reviews";
 
 function App() {
   const dispatch = useDispatch();
@@ -64,6 +65,7 @@ function App() {
           </Route>
           <Route exact path='/brands/:id'>
             <OneBrand />
+            <Reviews />
           </Route>
           <Route component={PageNotFound} />
         </Switch>
