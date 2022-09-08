@@ -43,7 +43,7 @@ function PostBrand({ brands, setBrands, onClose, setShowModal }) {
         dispatch(thunkPostBrands(newBrand))
             .then(res => {
                 if (res.error) {
-                    setErrors([res.error])
+                    setErrors(res.error)
                     return
                 }
                 // onClose();
