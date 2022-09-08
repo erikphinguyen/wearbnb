@@ -84,7 +84,7 @@ const Reviews = () => {
         dispatch(thunkPutReviews(data))
             .then(res => {
                 if (res.error) {
-                    setErrorsReview([res.error])
+                    setErrorsReview(res.error)
                     return
                 }
                 dispatch(thunkGetReviews(id))

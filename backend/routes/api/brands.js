@@ -1,3 +1,4 @@
+const e = require('express');
 const express = require('express');
 const router = express.Router();
 const asyncHandler = require('express-async-handler');
@@ -33,33 +34,24 @@ router.post('/', requireAuth, asyncHandler(async function (req, res) {
 
     let { brandImg, name, address, city, country } = req.body;
 
-    // let expression = { brandImg, name, address, city, country };
-
-    // switch (expression) {
-    //     case brandImg:
-    //         return res.status(400).json({error: "Brand image needed"});
-    //         break
-    //     case name:
-    //         return res.status(400).json({error: "Name input needed"});
-    //         break
-    //     case address:
-    //         return res.status(400).json({error: "Address input needed"});
-    //         break
-    //     case city:
-    //         return res.status(400).json({error: "City input needed"});
-    //         break
-    //     case country:
-    //         return res.status(400).json({error: "Country input needed"});
-    //         break
-    //     default:
-    //         return res.status(400).json({error: "There is an error"});
-    // }
+    let errorsArray = [];
 
     if (brandImg.length === 0) {
-        return res.status(400).json({ error: "Add a brand image" })
+       errorsArray.push("Please add a Brand Image")
     }
-
-
+    if (name.length === 0) {
+        errorsArray.push("Please add a name")
+    }
+    if (address.length === 0) {
+        errorsArray.push("Please add an address")
+    }
+    if (city.length === 0) {
+        errorsArray.push("Please add a city")
+    }
+    if (country.length === 0) {
+        errorsArray.push("Please add a country")
+    }
+    if (errorsArray.length) return res.status(400).json({error: errorsArray})
 
     // let splitBrandImg = brandImg.split(".")
     // let splitBrandImgStr = String(splitBrandImg[splitBrandImg.length - 1])
@@ -76,7 +68,7 @@ router.post('/', requireAuth, asyncHandler(async function (req, res) {
 
     let review = new Review({
         userId: req.body.userId,
-        brandid: newBrand.id,
+        brandId: newBrand.id,
         review: ""
     })
     await review.save();

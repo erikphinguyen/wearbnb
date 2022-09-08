@@ -28,7 +28,7 @@ function PostReview({ reviews, setReviews }) {
         dispatch(thunkPostReviews(newReview))
             .then(res => {
                 if (res.error) {
-                    setErrors([res.error])
+                    setErrors(res.error)
                     return
                 }
                 console.log('WHAT IS ONEBRANDREVIEWS',reviews)
