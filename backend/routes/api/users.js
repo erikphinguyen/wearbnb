@@ -32,6 +32,7 @@ router.post(
     '/',
     // validateSignup,
     asyncHandler(async (req, res) => {
+        console.log('WHAT IS RES.BODY', req.body)
         const { email, password, username, confirmPassword } = req.body;
         let errorsArray = []
         if (email == "") {
@@ -67,12 +68,22 @@ router.post(
             errorsArray.push("Confirm password exceeds max length of 40")
             // return res.status(400).json({ error: "Confirm password exceeds max length of 40" })
         }
+        if (password !== confirmPassword) errorsArray.push("Passwords do not match")
+        // const matchUser = await User.findOne({where: {username: username}}) means the same as bottom
+        const matchUser = await User.findOne({where: {username}})
+        const matchEmail = await User.findOne({where: {email}})
 
-        console.log('AM I IN BACKEND')
+        if (matchUser) {
+            errorsArray.push("User already exists")
+        }
+        if (matchEmail) {
+            errorsArray.push("Email already exists")
+        }
+
         if (errorsArray.length) return res.status(400).json({error: errorsArray})
         const user = await User.signup({ email, username, password });
         if (!user) {
-            errorsArray.push("Invalid Username or Email")
+            errorsArray.push("Invalid Signup")
             // return res.status(400).json({ error: "Invalid Username or Email" })
         }
         await setTokenCookie(res, user);

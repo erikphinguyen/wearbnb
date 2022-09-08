@@ -61,11 +61,11 @@ function PostBrand({ brands, setBrands, onClose, setShowModal }) {
 
     return (
         <div>
-            <div>
+            <ul>
                 {errors.map((error, idx) => (
                     <li style={errors.length ? { color: "red" } : null} key={idx}>{error}</li>
                 ))}
-            </div>
+            </ul>
             <h2 className='input'>Upload New Brand</h2>
             <form className="form" onSubmit={handleSubmit}>
                 <input

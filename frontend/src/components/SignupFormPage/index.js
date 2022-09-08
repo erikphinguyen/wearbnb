@@ -27,7 +27,7 @@ function SignupFormPage() {
         // }
         dispatch(sessionActions.signup({ email, username, password, confirmPassword })).then(
             async (res) => {
-                setErrors([res])
+                setErrors(res)
                 console.log('WHAT IS RES IN SIGNUP', res)
             }
         )
