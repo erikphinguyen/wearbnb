@@ -3,6 +3,21 @@ nav {
     margin-top: 0;
 }
 
+.session-container {
+    display: flex;
+    align-items: center;
+}
+
+.session-button1 {
+    display: flex;
+    padding: 5px;
+}
+
+.session-button2 {
+    display: flex;
+    padding: 5px;
+}
+
 .button-container {
     display: flex;
     justify-content: space-between;

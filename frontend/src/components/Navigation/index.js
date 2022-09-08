@@ -55,10 +55,14 @@ function Navigation({ isLoaded, brands, setBrands }) {
     let sessionLinks;
     if (sessionUser) {
         sessionLinks = (
-            <>
-                <ProfileButton user={sessionUser} />
-                <PostBrandHomeModal brands={brands} setBrands={setBrands} />
-            </>
+            <div className='session-container'>
+                <div className='session-button1'>
+                    <ProfileButton user={sessionUser} />
+                </div>
+                <div className='session-button2'>
+                    <PostBrandHomeModal brands={brands} setBrands={setBrands} />
+                </div>
+            </div>
         );
     } else {
         sessionLinks = (
