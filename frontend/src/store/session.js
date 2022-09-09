@@ -18,7 +18,7 @@ const removeUser = () => {
 
 
 export const login = (user) => async (dispatch) => {
-    console.log("INSIDE LOGIN STORE")
+    console.log("INSIDE LOGIN THUNK")
     const { credential, password } = user;
     const response = await csrfFetch('/api/session', {
         method: 'POST',
@@ -27,21 +27,10 @@ export const login = (user) => async (dispatch) => {
             password,
         }),
     });
-    console.log('WHAT IS RESPONSE IN LOGIN STORE', response)
-    if (response.ok) {
-        const data = await response.json();
-        dispatch(setUser(data.user))
-        return null;
-    } else if (response.status < 500) {
-        const data = await response.json();
-
-        // if (data.errors) {
-        //     return data.errors;
-        // }
-        return data.error;
-    } else {
-        return ['An error occurred. Please try again.']
-    }
+    console.log("WHAT IS RESPONSE", response)
+    const data = await response.json();
+    dispatch(setUser(data.user));
+    return response;
 
     // const data = await response.json();
     // dispatch(setUser(data.user));

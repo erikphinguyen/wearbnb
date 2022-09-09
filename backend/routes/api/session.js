@@ -21,37 +21,29 @@ const validateLogin = [
 // Log in
 router.post(
     '/',
-    // validateLogin,
+    validateLogin,
     asyncHandler(async (req, res, next) => {
         const { credential, password } = req.body;
-        let errorsArray = []
-        if (credential == "") {
-            errorsArray.push("Please fill out Username or Email")
-            // return res.status(400).json({error: "Please fill out Username or Email"})
-        }
-        if (password == "") {
-            errorsArray.push("Please fill out Password")
-            // return res.status(400).json({error: "Please fill out Password"})
-        }
 
         const user = await User.login({ credential, password });
 
+        // let errorsArray = []
+        // if (credential == '') errorsArray.push("Please provide a Username")
+        // if (password == '') errorsArray.push("Please provide a password")
+
         if (!user) {
-            errorsArray.push("Invalid Login")
-            // return res.status(400).json({error: "Invalid Login"})
+            const err = new Error('Login failed');
+            err.status = 401;
+            err.title = 'Login failed';
+            err.errors = ['The provided credentials were invalid.'];
+            errorsArray.push("The provided credentials were invalid.")
+            return next(err);
         }
 
-        // if (!user) {
-        //     const err = new Error('Login failed');
-        //     err.status = 401;
-        //     err.title = 'Login failed';
-        //     err.errors = ['The provided credentials were invalid.'];
-        //     return next(err);
-        // }
+        // if (errorsArray) return next(err)
 
-        if (errorsArray) return res.status(400).json({ error: errorsArray })
-
-        await setTokenCookie(res, user);
+        let token = await setTokenCookie(res, user);
+        res.cookie("token", token)
 
         return res.json({
             user
