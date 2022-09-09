@@ -56,6 +56,7 @@ export const signup = (user) => async (dispatch) => {
             confirmPassword
         }),
     });
+    console.log('WHAT IS RESPONS', response)
     // BEFORE SIGN UP ERRORS
     // const data = await response.json();
     // dispatch(setUser(data.user));
