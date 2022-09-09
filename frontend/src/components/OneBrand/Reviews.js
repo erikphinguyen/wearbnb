@@ -191,21 +191,20 @@ const Reviews = () => {
                             <> {console.log('HITTING REVIEWS FRONT END')}</>
                             {console.log('WHAT IS REVIEW', review)}
                             <div>
-                                <p>
-                                    <b>
-                                        user {review.userId}'s review:
-                                    </b>
-                                    <div>
-                                        {/* so review.review doesn't exist */}
-                                        {review.review}
-                                    </div>
-                                    <div>
-                                        <b>created at: </b>{review.createdAt}
-                                    </div>
-                                    <div>
-                                        <b>updated at:</b> {review.updatedAt}
-                                    </div>
-                                </p>
+                                {review.review && (
+                                    <p>
+                                        <b>
+                                            user {review.userId}'s review:
+                                        </b>
+                                        <div>
+                                            {/* so review.review doesn't exist */}
+                                            {review.review}
+                                        </div>
+                                        <div>
+                                            <b>created at: </b>{review.createdAt}
+                                        </div>
+                                    </p>
+                                )}
 
                                 {
                                     user?.id === review.userId && (
