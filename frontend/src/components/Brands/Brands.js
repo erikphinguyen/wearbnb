@@ -35,6 +35,7 @@ const Brands = ({ brands, setBrands }) => {
 
     return (
         <div className='brands-page'>
+            <p className='brands-text'>wearbnb, where everyone can post their favorite brands and look at reviews!</p>
             <div className='brands-container'>
                 {
                     brands?.map((brand) => (

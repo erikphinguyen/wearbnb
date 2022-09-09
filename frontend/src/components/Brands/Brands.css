@@ -3,6 +3,11 @@
     margin-right: 19%;
 }
 
+.brands-text {
+    display: flex;
+    justify-content: center;
+}
+
 .brands-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
