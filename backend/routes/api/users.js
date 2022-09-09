@@ -51,6 +51,9 @@ router.post(
             errorsArray.push("Please fill out Email")
             // return res.status(400).json({ error: "Please fill out Email" })
         }
+        if (!email.includes('@') && !email.includes('.com') && !email.includes('.edu')) {
+            errorsArray.push("Please provide a valid Email")
+        }
         if (username == "") {
             errorsArray.push("Please fill out Username")
             // return res.status(400).json({ error: "Please fill out Username" })
