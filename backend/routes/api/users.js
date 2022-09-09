@@ -24,6 +24,18 @@ const validateSignup = [
         .exists({ checkFalsy: true })
         .isLength({ min: 6 })
         .withMessage('Password must be 6 characters or more.'),
+    check('password')
+        .exists({ checkFalsy: true })
+        .isLength({ max: 40 })
+        .withMessage('Password must be 40 characters or less.'),
+    check('confirmPassow')
+        .exists({ checkFalsy: true })
+        .isLength({ min: 6 })
+        .withMessage('Password must be 6 characters or more.'),
+    check('confirmPassow')
+        .exists({ checkFalsy: true })
+        .isLength({ max: 40 })
+        .withMessage('Password must be 40 characters or less.'),
     handleValidationErrors
 ];
 
@@ -70,8 +82,8 @@ router.post(
         }
         if (password !== confirmPassword) errorsArray.push("Passwords do not match")
         // const matchUser = await User.findOne({where: {username: username}}) means the same as bottom
-        const matchUser = await User.findOne({where: {username}})
-        const matchEmail = await User.findOne({where: {email}})
+        const matchUser = await User.findOne({ where: { username } })
+        const matchEmail = await User.findOne({ where: { email } })
 
         if (matchUser) {
             errorsArray.push("User already exists")
@@ -80,7 +92,7 @@ router.post(
             errorsArray.push("Email already exists")
         }
 
-        if (errorsArray.length) return res.status(400).json({error: errorsArray})
+        if (errorsArray.length) return res.status(400).json({ error: errorsArray })
         const user = await User.signup({ email, username, password });
         if (!user) {
             errorsArray.push("Invalid Signup")

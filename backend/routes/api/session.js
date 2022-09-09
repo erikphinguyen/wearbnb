@@ -21,37 +21,28 @@ const validateLogin = [
 // Log in
 router.post(
     '/',
-    // validateLogin,
+    validateLogin,
     asyncHandler(async (req, res, next) => {
         const { credential, password } = req.body;
-        let errorsArray = []
-        if (credential == "" && password.length > 1) {
-            errorsArray.push(res.status(400).json({error: "Please fill out Username or Email"}))
-            return res.status(400).json({error: "Please fill out Username or Email"})
-        }
-        if (password == "" && credential.length > 1) {
-            errorsArray.push(res.status(400).json({error: "Please fill out Password"}))
-            return res.status(400).json({error: "Please fill out Password"})
-        }
 
         const user = await User.login({ credential, password });
 
+        // let errorsArray = []
+        // if (credential == '') errorsArray.push("Please provide a Username")
+        // if (password == '') errorsArray.push("Please provide a password")
+
         if (!user) {
-            errorsArray.push(res.status(400).json({error: "Invalid Username or Email"}))
-            return res.status(400).json({error: "Invalid Username or Email"})
+            const err = new Error('Login failed');
+            err.status = 401;
+            err.title = 'Login failed';
+            err.errors = ['The provided credentials were invalid.'];
+            return next(err);
         }
 
-        // if (!user) {
-        //     const err = new Error('Login failed');
-        //     err.status = 401;
-        //     err.title = 'Login failed';
-        //     err.errors = ['The provided credentials were invalid.'];
-        //     return next(err);
-        // }
+        // if (errorsArray) return next(err)
 
-        await setTokenCookie(res, user);
-        console.log('WHAT IS ERRORS ARRAY', errorsArray)
-        if (errorsArray.length > 1) return errorsArray
+        let token = await setTokenCookie(res, user);
+        res.cookie("token", token)
 
         return res.json({
             user
