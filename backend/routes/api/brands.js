@@ -14,15 +14,15 @@ router.get('/', asyncHandler(async function (req, res) {
 router.get('/:id(\\d+)', asyncHandler(async function (req, res) {
     const { id } = req.params;
     const brand = await Brand.findByPk(Number(id))
-        // this would not load the brand at all even with filled out info
-        // {
-        //     include: [{
-        //         model: Review,
-        //         where: {
-        //             brandId: id
-        //         }
-        //     }]
-        // })
+    // this would not load the brand at all even with filled out info
+    // {
+    //     include: [{
+    //         model: Review,
+    //         where: {
+    //             brandId: id
+    //         }
+    //     }]
+    // })
 
     return res.json(brand)
 }))
@@ -34,11 +34,17 @@ router.post('/', requireAuth, asyncHandler(async function (req, res) {
     let { brandImg, name, address, city, country } = req.body;
 
     let errorsArray = [];
+    let brandImgSplit = brandImg.split('.')
+    console.log('WHAT IS BRANDIMGSPLIT', brandImgSplit)
+    let brandExtensionFile = brandImgSplit[brandImgSplit.length - 1]
+    console.log('WHAT IS BRANDEXENTSION', brandExtensionFile)
 
     if (brandImg.length === 0) {
-       errorsArray.push("Please add a Brand Image")
+        errorsArray.push("Please add a Brand Image")
     }
-    if (brandImg.indexOf)
+    if (!brandExtensionFile.includes('png') && !brandExtensionFile.includes('jpg') && !brandExtensionFile.includes('jpeg')) {
+        errorsArray.push("Please use an image with extension file .png, .jpg, or .jpeg")
+    }
     if (name.length === 0) {
         errorsArray.push("Please add a name")
     }
@@ -51,7 +57,7 @@ router.post('/', requireAuth, asyncHandler(async function (req, res) {
     if (country.length === 0) {
         errorsArray.push("Please add a country")
     }
-    if (errorsArray.length) return res.status(400).json({error: errorsArray})
+    if (errorsArray.length) return res.status(400).json({ error: errorsArray })
 
     // let splitBrandImg = brandImg.split(".")
     // let splitBrandImgStr = String(splitBrandImg[splitBrandImg.length - 1])
@@ -79,21 +85,31 @@ router.post('/', requireAuth, asyncHandler(async function (req, res) {
 // PUT BRAND
 router.put('/:id', asyncHandler(async (req, res) => {
     const { brandImg, name, address, city, country } = req.body;
+    let errorsArray = []
+    let brandImgSplit = brandImg.split('.')
+    let brandExtensionFile = brandImgSplit[brandImgSplit.length - 1]
+    
     if (brandImg.length === 0) {
-        return res.status(400).json({ error: "This is an empty editted brand image" })
+        errorsArray.push("This is an empty editted brand image")
+    }
+    if (!brandExtensionFile.includes('png') && !brandExtensionFile.includes('jpg') && !brandExtensionFile.includes('jpeg')) {
+        errorsArray.push("Please use an image with extension file .png, .jpg, or .jpeg")
     }
     if (name.length === 0) {
-        return res.status(400).json({ error: "This is an empty editted brand name" })
+        errorsArray.push("This is an empty editted brand name")
     }
     if (address.length === 0) {
-        return res.status(400).json({ error: "This is an empty editted brand address" })
+        errorsArray.push("This is an empty editted brand address")
     }
     if (city.length === 0) {
-        return res.status(400).json({ error: "This is an empty editted brand city" })
+        errorsArray.push("This is an empty editted brand city")
     }
     if (country.length === 0) {
-        return res.status(400).json({ error: "This is an empty editted brand country" })
+        errorsArray.push("This is an empty editted brand country")
     }
+    if (errorsArray.length) return res.status(400).json({ error: errorsArray })
+
+
     const id = parseInt(req.params.id);
     const brand = await Brand.findByPk(id);
     brand.brandImg = brandImg;

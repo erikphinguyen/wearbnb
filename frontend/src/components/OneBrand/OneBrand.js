@@ -75,7 +75,7 @@ const OneBrand = () => {
         dispatch(thunkPutBrands(data))
             .then(res => {
                 if (res.error) {
-                    setErrors([res.error])
+                    setErrors(res.error)
                     return
                 }
                 setSingleBrand(res);
