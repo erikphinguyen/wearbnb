@@ -18,6 +18,7 @@ const removeUser = () => {
 
 
 export const login = (user) => async (dispatch) => {
+    console.log("INSIDE LOGIN STORE")
     const { credential, password } = user;
     const response = await csrfFetch('/api/session', {
         method: 'POST',
@@ -26,7 +27,7 @@ export const login = (user) => async (dispatch) => {
             password,
         }),
     });
-
+    console.log('WHAT IS RESPONSE IN LOGIN STORE', response)
     if (response.ok) {
         const data = await response.json();
         dispatch(setUser(data.user))
