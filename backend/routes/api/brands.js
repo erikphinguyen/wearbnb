@@ -38,6 +38,7 @@ router.post('/', requireAuth, asyncHandler(async function (req, res) {
     if (brandImg.length === 0) {
        errorsArray.push("Please add a Brand Image")
     }
+    if (brandImg.indexOf)
     if (name.length === 0) {
         errorsArray.push("Please add a name")
     }
