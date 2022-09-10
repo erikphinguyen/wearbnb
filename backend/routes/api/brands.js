@@ -49,7 +49,7 @@ router.post('/', requireAuth, asyncHandler(async function (req, res) {
     if (!brandExtensionFile.includes('png') && !brandExtensionFile.includes('jpg') && !brandExtensionFile.includes('jpeg')) {
         errorsArray.push("Please use an image with extension file .png, .jpg, or .jpeg")
     }
-    if (!brandURL.includes("http://") || !brandURL.includes("https://")) {
+    if (!brandURL.includes("http://") && !brandURL.includes("https://")) {
         errorsArray.push("Please use correct URL (http://) or (https://)")
     }
     if (name.length === 0) {
@@ -118,7 +118,7 @@ router.put('/:id', asyncHandler(async (req, res) => {
     if (!brandExtensionFile.includes('png') && !brandExtensionFile.includes('jpg') && !brandExtensionFile.includes('jpeg')) {
         errorsArray.push("Please use an image with extension file .png, .jpg, or .jpeg")
     }
-    if (!brandURL.includes("http://") || !brandURL.includes("https://")) {
+    if (!brandURL.includes("http://") && !brandURL.includes("https://")) {
         errorsArray.push("Please use correct URL (http://) or (https://)")
     }
     if (name.length === 0) {
