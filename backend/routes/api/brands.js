@@ -35,9 +35,7 @@ router.post('/', requireAuth, asyncHandler(async function (req, res) {
 
     let errorsArray = [];
     let brandImgSplit = brandImg.split('.')
-    console.log('WHAT IS BRANDIMGSPLIT', brandImgSplit)
     let brandExtensionFile = brandImgSplit[brandImgSplit.length - 1]
-    console.log('WHAT IS BRANDEXENTSION', brandExtensionFile)
     let brandURL = brandImgSplit[0]
 
     if (brandImg.length === 0) {
