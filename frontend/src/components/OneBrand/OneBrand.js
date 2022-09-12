@@ -32,11 +32,11 @@ const OneBrand = () => {
 
     // put brand
     const [newBrandData, setNewBrandData] = useState({
-        brandImg: '',
-        name: '',
-        address: '',
-        city: '',
-        country: ''
+        brandImg: singleBrand.brandImg,
+        name: singleBrand.name,
+        address: singleBrand.address,
+        city: singleBrand.city,
+        country: singleBrand.country
     })
 
     const reset = () => {
@@ -61,6 +61,13 @@ const OneBrand = () => {
         dispatch(thunkGetOneBrand(id))
             .then(res => {
                 setSingleBrand(res)
+                setNewBrandData({
+                    brandImg: res.brandImg,
+                    name: res.name,
+                    address: res.address,
+                    city: res.city,
+                    country: res.country
+                })
                 setReviews(res.Reviews)
             })
             .catch(err => console.log(err))

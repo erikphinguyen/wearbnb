@@ -34,6 +34,7 @@ function PostReview({ reviews, setReviews }) {
                 console.log('WHAT IS ONEBRANDREVIEWS',reviews)
                 setReviews([...reviews, res])
                 setReview('')
+                setErrors([])
                 // setReview(newReview)
             })
     };

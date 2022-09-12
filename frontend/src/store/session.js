@@ -27,10 +27,11 @@ export const login = (user) => async (dispatch) => {
             password,
         }),
     });
-    console.log("WHAT IS RESPONSE", response)
+    console.log("WHAT IS RESPONSE LOGIN THUNK", response.error)
     const data = await response.json();
+    console.log('WHAT IS DATA LOGIN THUNK', data)
     dispatch(setUser(data.user));
-    return response;
+    return data;
 
     // const data = await response.json();
     // dispatch(setUser(data.user));
