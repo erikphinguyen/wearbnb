@@ -27,22 +27,23 @@ router.post(
 
         const user = await User.login({ credential, password });
 
-        // let errorsArray = []
-        // if (credential == '') errorsArray.push("Please provide a Username")
-        // if (password == '') errorsArray.push("Please provide a password")
+        let errorsArray = []
+        if (credential == '') errorsArray.push("Please provide a Username")
+        if (password == '') errorsArray.push("Please provide a password")
+        if (errorsArray.length) return res.status(400).json({error: errorsArray})
 
-        if (!user) {
-            const err = new Error('Login failed');
-            err.status = 401;
-            err.title = 'Login failed';
-            err.errors = ['The provided credentials were invalid.'];
-            return next(err);
-        }
-
+        // if (!user) {
+        //     const err = new Error('Login failed');
+        //     err.status = 401;
+        //     err.title = 'Login failed';
+        //     err.errors = ['The provided credentials were invalid.'];
+        //     return next(err);
+        // }
         // if (errorsArray) return next(err)
+        // let token = await setTokenCookie(res, user);
+        // res.cookie("token", token)
 
-        let token = await setTokenCookie(res, user);
-        res.cookie("token", token)
+        await setTokenCookie(res, user);
 
         return res.json({
             user

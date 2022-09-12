@@ -49,6 +49,8 @@ function PostBrand({ brands, setBrands, onClose, setShowModal }) {
                 // onClose();
                 setShowModal(false);
                 setBrands([...brands, res])
+                // MAYBE NEED LINE 53   
+                // setErrors([])
                 // history.push({pathname:`/brands/${String(res.id)}`, state:{data: res}})
             })
         // if (brand) {

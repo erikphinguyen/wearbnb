@@ -101,6 +101,7 @@ router.post(
             errorsArray.push("Invalid Signup")
             // return res.status(400).json({ error: "Invalid Username or Email" })
         }
+
         await setTokenCookie(res, user);
         return res.json({
             user,

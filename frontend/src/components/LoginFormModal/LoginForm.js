@@ -15,7 +15,8 @@ function LoginForm() {
             async (res) => {
                 // const data = await res.json();
                 // if (data && data.errors) setErrors(data.errors);
-                setErrors(res)
+                console.log('WHAT IS RES LOGIN FRONTEND', res.error)
+                setErrors(res.errors)
             }
         );
     };
@@ -24,15 +25,15 @@ function LoginForm() {
     return (
         <form className="form" onSubmit={handleSubmit}>
             <ul>
-                {errors.map((error, idx) => (
-                    <li style={errors.length ? { color: "red" } : null} key={idx}>{error}</li>
+                {errors?.map((error, idx) => (
+                    <li style={errors?.length ? { color: "red" } : null} key={idx}>{error}</li>
                 ))}
             </ul>
             <label>
                 Username or Email
                 <input
                     className="input"
-                    style={errors.length && credential == "" ? { border: "1px solid red" } : null}
+                    style={errors?.length && credential == "" ? { border: "1px solid red" } : null}
                     type="text"
                     value={credential}
                     onChange={(e) => setCredential(e.target.value)}
@@ -43,7 +44,7 @@ function LoginForm() {
                 Password
                 <input
                     className="input"
-                    style={errors.length && password == "" ? { border: "1px solid red" } : null}
+                    style={errors?.length && password == "" ? { border: "1px solid red" } : null}
                     type="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}

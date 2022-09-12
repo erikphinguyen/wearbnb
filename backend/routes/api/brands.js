@@ -35,27 +35,44 @@ router.post('/', requireAuth, asyncHandler(async function (req, res) {
 
     let errorsArray = [];
     let brandImgSplit = brandImg.split('.')
-    console.log('WHAT IS BRANDIMGSPLIT', brandImgSplit)
     let brandExtensionFile = brandImgSplit[brandImgSplit.length - 1]
-    console.log('WHAT IS BRANDEXENTSION', brandExtensionFile)
+    let brandURL = brandImgSplit[0]
 
     if (brandImg.length === 0) {
         errorsArray.push("Please add a Brand Image")
     }
+    if (brandImg.length > 255) {
+        errorsArray.push("Brand Image length cannot exceed 255 characters")
+    }
     if (!brandExtensionFile.includes('png') && !brandExtensionFile.includes('jpg') && !brandExtensionFile.includes('jpeg')) {
         errorsArray.push("Please use an image with extension file .png, .jpg, or .jpeg")
+    }
+    if (!brandURL.includes("http://") && !brandURL.includes("https://")) {
+        errorsArray.push("Please use correct URL (http://) or (https://)")
     }
     if (name.length === 0) {
         errorsArray.push("Please add a name")
     }
+    if (name.length > 255) {
+        errorsArray.push("Name length cannot exceed 255 characters")
+    }
     if (address.length === 0) {
         errorsArray.push("Please add an address")
+    }
+    if (address.length > 255) {
+        errorsArray.push("Address length cannot exceed 255 characters")
     }
     if (city.length === 0) {
         errorsArray.push("Please add a city")
     }
+    if (city.length > 255) {
+        errorsArray.push("City length cannot exceed 255 characters")
+    }
     if (country.length === 0) {
         errorsArray.push("Please add a country")
+    }
+    if (country.length > 255) {
+        errorsArray.push("Country length cannot exceed 255 characters")
     }
     if (errorsArray.length) return res.status(400).json({ error: errorsArray })
 
@@ -88,24 +105,43 @@ router.put('/:id', asyncHandler(async (req, res) => {
     let errorsArray = []
     let brandImgSplit = brandImg.split('.')
     let brandExtensionFile = brandImgSplit[brandImgSplit.length - 1]
-    
+    let brandURL = brandImgSplit[0]
+
     if (brandImg.length === 0) {
-        errorsArray.push("This is an empty editted brand image")
+        errorsArray.push("There is an empty editted brand image")
+    }
+    if (brandImg.length > 255) {
+        errorsArray.push("Brand Image length cannot exceed 255 characters")
     }
     if (!brandExtensionFile.includes('png') && !brandExtensionFile.includes('jpg') && !brandExtensionFile.includes('jpeg')) {
         errorsArray.push("Please use an image with extension file .png, .jpg, or .jpeg")
     }
+    if (!brandURL.includes("http://") && !brandURL.includes("https://")) {
+        errorsArray.push("Please use correct URL (http://) or (https://)")
+    }
     if (name.length === 0) {
-        errorsArray.push("This is an empty editted brand name")
+        errorsArray.push("There is an empty editted brand name")
+    }
+    if (name.length > 255) {
+        errorsArray.push("Name length cannot exceed 255 characters")
     }
     if (address.length === 0) {
-        errorsArray.push("This is an empty editted brand address")
+        errorsArray.push("There is an empty editted brand address")
+    }
+    if (address.length > 255) {
+        errorsArray.push("Address length cannot exceed 255 characters")
     }
     if (city.length === 0) {
-        errorsArray.push("This is an empty editted brand city")
+        errorsArray.push("There is an empty editted brand city")
+    }
+    if (city.length > 255) {
+        errorsArray.push("City length cannot exceed 255 characters")
     }
     if (country.length === 0) {
-        errorsArray.push("This is an empty editted brand country")
+        errorsArray.push("There is an empty editted brand country")
+    }
+    if (country.length > 255) {
+        errorsArray.push("Country length cannot exceed 255 characters")
     }
     if (errorsArray.length) return res.status(400).json({ error: errorsArray })
 
