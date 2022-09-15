@@ -4,7 +4,7 @@ wearbnb is a fullstack web application modeled after Airbnb.  Signed up users ca
 
 Visit the live site here: https://wearbnb-erik-nguyen.herokuapp.com/
 
-![image](https://user-images.githubusercontent.com/46208016/184631531-4d543166-41cf-4ea7-b9a5-879b9a21d488.png)
+![image](https://user-images.githubusercontent.com/46208016/189611627-a6de4ece-685b-4833-b01f-3f986c6846f8.png)
 
 ## Tecnologies Used:
 * **Languages:** Javascript, HTML/CSS
