@@ -4,6 +4,11 @@ nav {
     border-bottom: 1px solid #e5e5e5;
 }
 
+.profile {
+    max-width: 30%;
+    fill: red
+}
+
 .session-container {
     display: flex;
     align-items: center;
