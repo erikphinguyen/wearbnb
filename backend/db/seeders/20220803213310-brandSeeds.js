@@ -93,6 +93,36 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date()
       },
+      {
+        userId: "1",
+        brandImg: "https://cdn.freebiesupply.com/logos/large/2x/patagonia-logo-svg-vector.svg",
+        name: "Patagonia",
+        address: "235 W. Santa Clara",
+        city: "Ventura, CA",
+        country: "USA",
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        userId: "2",
+        brandImg: "https://1000logos.net/wp-content/uploads/2021/05/AllSaints-logo.png",
+        name: "AllSaints",
+        address: "114 Commercial St.",
+        city: "London, England",
+        country: "UK",
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        userId: "3",
+        brandImg: "https://seeklogo.com/images/B/burton-logo-9B7C50B28C-seeklogo.com.png",
+        name: "Burton",
+        address: "80 Industrial Parkway",
+        city: "Burlington, VT",
+        country: "USA",
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
     ], {})
   },
 
