@@ -95,7 +95,7 @@ module.exports = {
       },
       {
         userId: "1",
-        brandImg: "https://cdn.freebiesupply.com/logos/large/2x/patagonia-logo-svg-vector.svg",
+        brandImg: "https://logolook.net/wp-content/uploads/2021/07/Patagonia-Logo.png",
         name: "Patagonia",
         address: "235 W. Santa Clara",
         city: "Ventura, CA",
@@ -115,7 +115,7 @@ module.exports = {
       },
       {
         userId: "3",
-        brandImg: "https://seeklogo.com/images/B/burton-logo-9B7C50B28C-seeklogo.com.png",
+        brandImg: "https://logovtor.com/wp-content/uploads/2021/03/burton-snowboards-logo-vector.png",
         name: "Burton",
         address: "80 Industrial Parkway",
         city: "Burlington, VT",
