@@ -48,6 +48,7 @@ import Logo from './wearbnb-logo.PNG'
 import PostBrandHomeModal from '../PostBrandHomeModal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { fadro } from '@fortawesome/free-solid-svg-icons';
+import ProfilePic from '../../assets/images/ProfilePic.svg'
 
 function Navigation({ isLoaded, brands, setBrands }) {
     const sessionUser = useSelector(state => state.session.user);
@@ -68,7 +69,10 @@ function Navigation({ isLoaded, brands, setBrands }) {
         sessionLinks = (
             <div className='button-container'>
                 <div className='dropdown' data-dropdown>
-                    <button className='link' data-dropdown-button>Log in/Sign up</button>
+                    <button className='link' data-dropdown-button>
+                        {/* <img className='profile' data-dropdown-button src={ProfilePic}></img> */}
+                        Log in/Sign up
+                    </button>
                     <div className='dropdown-menu' data-dropdown-button>
                         <div>
                             <Demo />
