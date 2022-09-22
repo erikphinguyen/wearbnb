@@ -93,6 +93,36 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date()
       },
+      {
+        userId: "1",
+        brandImg: "https://logolook.net/wp-content/uploads/2021/07/Patagonia-Logo.png",
+        name: "Patagonia",
+        address: "235 W. Santa Clara",
+        city: "Ventura, CA",
+        country: "USA",
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        userId: "2",
+        brandImg: "https://1000logos.net/wp-content/uploads/2021/05/AllSaints-logo.png",
+        name: "AllSaints",
+        address: "114 Commercial St.",
+        city: "London, England",
+        country: "UK",
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        userId: "3",
+        brandImg: "https://logovtor.com/wp-content/uploads/2021/03/burton-snowboards-logo-vector.png",
+        name: "Burton",
+        address: "80 Industrial Parkway",
+        city: "Burlington, VT",
+        country: "USA",
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
     ], {})
   },
 

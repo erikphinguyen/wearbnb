@@ -191,7 +191,70 @@ module.exports = {
         review: "Can't believe all the fun I had!",
         createdAt: new Date(),
         updatedAt: new Date()
-      }
+      },
+      {
+        userId: "1",
+        brandId: "10",
+        review: "I loved working with them!",
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        userId: "2",
+        brandId: "10",
+        review: "Everyone was awesome!",
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        userId: "3",
+        brandId: "10",
+        review: "My favorite brand - coolest team ever!",
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        userId: "1",
+        brandId: "11",
+        review: "Very professional, loved it!",
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        userId: "2",
+        brandId: "11",
+        review: "Would do this again!",
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        userId: "3",
+        brandId: "11",
+        review: "Loved having the opportunity to work with the entire team!",
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        userId: "1",
+        brandId: "12",
+        review: "Fantastic experience, would want to do it again!",
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        userId: "2",
+        brandId: "12",
+        review: "Superb!  Very professional and fun!",
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        userId: "3",
+        brandId: "12",
+        review: "Can't believe all the fun I had!",
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
     ], {})
   },
 
