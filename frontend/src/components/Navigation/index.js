@@ -71,7 +71,7 @@ function Navigation({ isLoaded, brands, setBrands }) {
                 <div className='dropdown' data-dropdown>
                     <button className='link' data-dropdown-button>
                         {/* <img className='profile' data-dropdown-button src={ProfilePic}></img> */}
-                        Log in/Sign up
+                        Log In/Sign Up
                     </button>
                     <div className='dropdown-menu' data-dropdown-button>
                         <div>
