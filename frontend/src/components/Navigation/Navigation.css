@@ -48,7 +48,8 @@ nav {
 }
 
 .dropdown {
-    position: relative
+    position: relative;
+    /* background-image: url("../../assets/images/ProfilePic.svg"); */
 }
 
 .dropdown.active>.link,
