@@ -107,7 +107,7 @@ module.exports = {
         userId: "2",
         brandImg: "https://1000logos.net/wp-content/uploads/2021/05/AllSaints-logo.png",
         name: "AllSaints",
-        address: "114 Commercial St.",
+        address: "114 Commercial Street",
         city: "London, England",
         country: "UK",
         createdAt: new Date(),
@@ -119,6 +119,46 @@ module.exports = {
         name: "Burton",
         address: "80 Industrial Parkway",
         city: "Burlington, VT",
+        country: "USA",
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        userId: "1",
+        brandImg: "https://1000logos.net/wp-content/uploads/2018/01/supreme-logo-font.jpg",
+        name: "Supreme",
+        address: "274 Lafayette Street",
+        city: "New York, NY",
+        country: "USA",
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        userId: "2",
+        brandImg: "https://1000logos.net/wp-content/uploads/2018/04/Logo-Stussy.png",
+        name: "Stussy",
+        address: " 17426 Daimler Street",
+        city: "Irvine, CA",
+        country: "USA",
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        userId: "3",
+        brandImg: "https://logos-world.net/wp-content/uploads/2021/08/BAPE-Logo.png",
+        name: "BAPE (A Bathing Ape)",
+        address: "91 Greene Street",
+        city: "Tokyo, Tokyo",
+        country: "Japan",
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        userId: "1",
+        brandImg: "https://wallpaperaccess.com/full/633432.jpg",
+        name: "Yeezy",
+        address: "26632 Agoura Road",
+        city: "Calabasas, CA",
         country: "USA",
         createdAt: new Date(),
         updatedAt: new Date()

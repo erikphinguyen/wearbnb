@@ -77,9 +77,11 @@ function Navigation({ isLoaded, brands, setBrands }) {
                         <div>
                             <Demo />
                         </div>
+                        <div className='hidden'>.</div>
                         <div>
                             <LoginFormModal />
                         </div>
+                        <div className='hidden'>.</div>
                         <div>
                             <SignUpFormModal />
                         </div>
