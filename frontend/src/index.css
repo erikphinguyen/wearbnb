@@ -16,6 +16,12 @@
     cursor: pointer;
     width: 100%
 } */
+
+.hidden {
+    display: none;
+    opacity: 0;
+}
+
 .button {
     background-color: #ff5a5f;
     box-shadow: 0 5px 0 #e49799;
