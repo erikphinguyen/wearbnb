@@ -9,7 +9,9 @@ module.exports = {
         startDate: '2022-10-01',
         endDate: '2022-10-08',
         price: 99.99,
-        totalPrice: 909.91
+        totalPrice: 909.91,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },
       {
         userId: "2",
@@ -17,7 +19,9 @@ module.exports = {
         startDate: '2022-10-01',
         endDate: '2022-10-08',
         price: 99.99,
-        totalPrice: 909.91
+        totalPrice: 909.91,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },
       {
         userId: "3",
@@ -25,7 +29,9 @@ module.exports = {
         startDate: '2022-10-01',
         endDate: '2022-10-08',
         price: 99.99,
-        totalPrice: 909.91
+        totalPrice: 909.91,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },
       {
         userId: "1",
@@ -33,7 +39,9 @@ module.exports = {
         startDate: '2022-10-08',
         endDate: '2022-10-15',
         price: 99.99,
-        totalPrice: 909.91
+        totalPrice: 909.91,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },
       {
         userId: "2",
@@ -41,7 +49,9 @@ module.exports = {
         startDate: '2022-11-08',
         endDate: '2022-11-15',
         price: 149.99,
-        totalPrice: 1364.91
+        totalPrice: 1364.91,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },
       {
         userId: "3",
@@ -49,7 +59,9 @@ module.exports = {
         startDate: '2022-11-08',
         endDate: '2022-11-15',
         price: 149.99,
-        totalPrice: 1364.91
+        totalPrice: 1364.91,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },
       {
         userId: "1",
@@ -57,7 +69,9 @@ module.exports = {
         startDate: '2022-11-15',
         endDate: '2022-11-22',
         price: 149.99,
-        totalPrice: 1364.91
+        totalPrice: 1364.91,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },
       {
         userId: "2",
@@ -65,7 +79,9 @@ module.exports = {
         startDate: '2022-11-15',
         endDate: '2022-11-22',
         price: 149.99,
-        totalPrice: 1364.91
+        totalPrice: 1364.91,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },
       {
         userId: "3",
@@ -73,7 +89,9 @@ module.exports = {
         startDate: '2022-12-15',
         endDate: '2022-12-22',
         price: 199.99,
-        totalPrice: 1819.91
+        totalPrice: 1819.91,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },
       {
         userId: "1",
@@ -81,7 +99,9 @@ module.exports = {
         startDate: '2022-12-22',
         endDate: '2022-12-29',
         price: 199.99,
-        totalPrice: 1819.91
+        totalPrice: 1819.91,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },
       {
         userId: "2",
@@ -89,7 +109,9 @@ module.exports = {
         startDate: '2022-12-22',
         endDate: '2022-12-29',
         price: 199.99,
-        totalPrice: 1819.91
+        totalPrice: 1819.91,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },
       {
         userId: "3",
@@ -97,7 +119,9 @@ module.exports = {
         startDate: '2022-12-22',
         endDate: '2022-12-29',
         price: 199.99,
-        totalPrice: 1819.91
+        totalPrice: 1819.91,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },
       {
         userId: "1",
@@ -105,7 +129,9 @@ module.exports = {
         startDate: '2022-01-22',
         endDate: '2022-01-29',
         price: 249.99,
-        totalPrice: 2274.91
+        totalPrice: 2274.91,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },
       {
         userId: "2",
@@ -113,7 +139,9 @@ module.exports = {
         startDate: '2022-01-22',
         endDate: '2022-01-29',
         price: 249.99,
-        totalPrice: 2274.91
+        totalPrice: 2274.91,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },
       {
         userId: "3",
@@ -121,7 +149,9 @@ module.exports = {
         startDate: '2022-01-22',
         endDate: '2022-01-29',
         price: 249.99,
-        totalPrice: 2274.91
+        totalPrice: 2274.91,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },
       {
         userId: "1",
@@ -129,7 +159,9 @@ module.exports = {
         startDate: '2022-01-22',
         endDate: '2022-01-29',
         price: 249.99,
-        totalPrice: 2274.91
+        totalPrice: 2274.91,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },
     ], {});
   },

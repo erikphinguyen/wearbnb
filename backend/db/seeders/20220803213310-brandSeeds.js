@@ -123,6 +123,16 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date()
       },
+      {
+        userId: "1",
+        brandImg: "https://logolook.net/wp-content/uploads/2021/07/Patagonia-Logo.png",
+        name: "Patagonia",
+        address: "235 W. Santa Clara",
+        city: "Ventura, CA",
+        country: "USA",
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
     ], {})
   },
 
