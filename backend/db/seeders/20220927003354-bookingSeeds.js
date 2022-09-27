@@ -116,7 +116,7 @@ module.exports = {
       {
         userId: "3",
         brandId: "12",
-        startDate: '2022-12-22',
+        startDate: '2022-12-23',
         endDate: '2022-12-29',
         price: 199.99,
         totalPrice: 1819.91,
@@ -126,7 +126,7 @@ module.exports = {
       {
         userId: "1",
         brandId: "13",
-        startDate: '2022-01-22',
+        startDate: '2022-01-23',
         endDate: '2022-01-29',
         price: 249.99,
         totalPrice: 2274.91,
@@ -136,7 +136,7 @@ module.exports = {
       {
         userId: "2",
         brandId: "14",
-        startDate: '2022-01-22',
+        startDate: '2022-01-23',
         endDate: '2022-01-29',
         price: 249.99,
         totalPrice: 2274.91,
@@ -146,7 +146,7 @@ module.exports = {
       {
         userId: "3",
         brandId: "15",
-        startDate: '2022-01-22',
+        startDate: '2022-01-23',
         endDate: '2022-01-29',
         price: 249.99,
         totalPrice: 2274.91,
@@ -156,7 +156,7 @@ module.exports = {
       {
         userId: "1",
         brandId: "16",
-        startDate: '2022-01-22',
+        startDate: '2022-01-23',
         endDate: '2022-01-29',
         price: 249.99,
         totalPrice: 2274.91,
