@@ -3,20 +3,34 @@ module.exports = (sequelize, DataTypes) => {
   const Booking = sequelize.define('Booking', {
     brandId: {
       type: DataTypes.INTEGER,
-      references: { model: "Brands" }
+      references: { model: "Brands" },
+      allowNull: false
     },
     userId: {
       type: DataTypes.INTEGER,
-      references: { model: "Users" }
+      references: { model: "Users" },
+      allowNull: false
     },
-    startDate: DataTypes.DATE,
-    endDate: DataTypes.DATE,
-    price: DataTypes.FLOAT,
-    totalPrice: DataTypes.FLOAT
+    startDate: {
+      type: DataTypes.DATE,
+      allowNull: false
+    },
+    endDate: {
+      type: DataTypes.DATE,
+      allowNull: false
+    },
+    price: {
+      type: DataTypes.FLOAT,
+      allowNull: false
+    },
+    totalPrice: {
+      type: DataTypes.FLOAT,
+      allowNull: false
+    }
   }, {});
   Booking.associate = function (models) {
     Booking.belongsTo(models.Brand, { foreignKey: "brandId" })
-    Booking.belognsTo(models.User, { foreignKey: "userId" })
+    Booking.belongsTo(models.User, { foreignKey: "userId" })
   };
   return Booking;
 };
