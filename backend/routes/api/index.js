@@ -2,8 +2,8 @@ const router = require('express').Router();
 const sessionRouter = require('./session.js');
 const usersRouter = require('./users.js');
 const brandsRouter = require('./brands.js')
-const reviewsRouter = require('./reviews')
-const bookingsRouter = require('./bookings')
+const reviewsRouter = require('./reviews.js')
+const bookingsRouter = require('./bookings.js')
 
 router.use('/session', sessionRouter);
 

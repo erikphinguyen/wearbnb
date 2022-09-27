@@ -20,3 +20,5 @@ router.get('/:id(\\d+)', asyncHandler(async (req, res) => {
 
     return res.json(bookings)
 }))
+
+module.exports = router;
