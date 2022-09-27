@@ -254,6 +254,89 @@ module.exports = {
         review: "Can't believe all the fun I had!",
         createdAt: new Date(),
         updatedAt: new Date()
+      }, {
+        userId: "3",
+        brandId: "13",
+        review: "Can't believe all the fun I had!",
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        userId: "1",
+        brandId: "13",
+        review: "Very professional, loved it!",
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        userId: "2",
+        brandId: "13",
+        review: "Would do this again!",
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        userId: "1",
+        brandId: "14",
+        review: "I loved working with them!",
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        userId: "2",
+        brandId: "14",
+        review: "Everyone was awesome!",
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        userId: "3",
+        brandId: "14",
+        review: "My favorite brand - coolest team ever!",
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        userId: "2",
+        brandId: "15",
+        review: "Would do this again!",
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        userId: "3",
+        brandId: "15",
+        review: "Loved having the opportunity to work with the entire team!",
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        userId: "1",
+        brandId: "15",
+        review: "I loved working with them!",
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        userId: "1",
+        brandId: "16",
+        review: "Very professional, loved it!",
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        userId: "2",
+        brandId: "16",
+        review: "Would do this again!",
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        userId: "3",
+        brandId: "16",
+        review: "Loved having the opportunity to work with the entire team!",
+        createdAt: new Date(),
+        updatedAt: new Date()
       },
     ], {})
   },
