@@ -36,3 +36,37 @@ const deleteBookings = (id) => {
 }
 
 // THUNKS
+export const thunkGetBookings = (id) => async (dispatch) => {
+    console.log('AM I INSIDE THUNK GET BOOKINGS');
+    const response = await csrfFetch(`/api/bookings/${id}`);
+
+    if (response.ok) {
+        console.log('WHAT IS RESPONSE IN THUNK GET BOOKINGS RESPONSE', response)
+        const bookings = await response.json();
+        dispatch(getBookings(bookings))
+        return bookings
+    }
+}
+
+export const thunkPutBookings = data => async (dispatch) => {
+    console.log('AM I INSIDE THUNK PUT BOOKINGS')
+    const response = await csrfFetch(`/api/bookings/${data.id}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    });
+
+    if (response.ok) {
+        console.log('WHAT IS RESPONSE IN THUNK PUT BOOKINGS RESPONSE', response)
+        const bookings = await response.json();
+        dispatch(getBookings(bookings))
+        return bookings
+    }
+    else {
+        const data = await response.json();
+        return data
+    }
+}
+
