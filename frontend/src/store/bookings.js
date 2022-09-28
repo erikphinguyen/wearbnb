@@ -49,6 +49,16 @@ export const thunkGetBookings = (id) => async (dispatch) => {
     }
 }
 
+export const thunkGetUserBookings = (userId) => async (dispatch) => {
+    const response = await csrfFetch(`/api/bookings/${userId}`);
+
+    if (response.ok) {
+        const bookings = await response.json();
+        dispatch(getBookings(bookings));
+        return bookings;
+    }
+}
+
 export const thunkPutBookings = (data) => async (dispatch) => {
     console.log('AM I INSIDE THUNK PUT BOOKINGS')
     const response = await csrfFetch(`/api/bookings/${data.id}`, {
@@ -62,7 +72,7 @@ export const thunkPutBookings = (data) => async (dispatch) => {
     if (response.ok) {
         console.log('WHAT IS RESPONSE IN THUNK PUT BOOKINGS RESPONSE', response)
         const bookings = await response.json();
-        dispatch(getBookings(bookings))
+        dispatch(putBookings(bookings))
         return bookings
     }
     else {
