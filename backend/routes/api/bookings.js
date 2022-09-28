@@ -24,20 +24,10 @@ router.get('/:id(\\d+)', asyncHandler(async (req, res) => {
 }))
 
 // EDIT BOOKING
-router.put('/:id(\\d+)', bookingValidations, requireAuth, restoreUser, asyncHandler(async (req, res) => {
+// try using booking validations later
+router.put('/:id(\\d+)', requireAuth, restoreUser, asyncHandler(async (req, res) => {
     // use req.body instead of req.params bc specific booking not url
     const { id, brandId, userId, startDate, endDate, price, totalPrice } = req.body;
-
-    let validatorErrors = validationResult(req);
-    if (validatorErrors.isEmpty()) {
-        const booking = await Booking.create({ brandId, userId, startDate, endDate, price, totalPrice })
-        return res.json(booking)
-    }
-
-    else {
-        const errors = validatorErrors.array().map(error => error.msg);
-        return res.json(errors)
-    }
 
     const booking = await Booking.findByPk(id);
     booking.startDate = startDate;
