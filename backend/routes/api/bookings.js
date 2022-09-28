@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const asyncHandler = require('express-async-handler');
-const { restoreUser, requireAuth } = require('../../utils/auth.js');
-const { User, Brand, Booking } = require('../../db/models')
+const { restoreUser, requireAuth } = require('../../utils/auth')
+const { User, Brand, Booking } = require('../../db/models');
 
 const { bookingValidations } = require('../../validaitons/bookings');
 const { validationResult } = require('express-validator')
@@ -23,8 +23,16 @@ router.get('/:id(\\d+)', asyncHandler(async (req, res) => {
     return res.json(bookings)
 }))
 
+// EDIT BOOKING
+router.put('/:id(\\d+)', bookingValidations, requireAuth, restoreUser, asyncHandler(async (req, res) => {
+    // use req.body instead of req.params bc specific booking not url
+    const { id } = req.body;
+    
+}))
+
+
 // POST BOOKINGS (can do errorsArray like brands & reviews)
-router.post('/:id(\\d+)', bookingValidations, requireAuth, asyncHandler(async (req, res) => {
+router.post('/:id(\\d+)', bookingValidations, requireAuth, restoreUser, asyncHandler(async (req, res) => {
     const { brandId, userId, startDate, endDate, price, totalPrice } = req.body;
 
     const validatorErrors = validationResult(req);
@@ -38,6 +46,16 @@ router.post('/:id(\\d+)', bookingValidations, requireAuth, asyncHandler(async (r
         const errors = validatorErrors.array().map(error => error.msg);
         return res.json(errors)
     }
+}))
+
+// DELETE BOOKINGS
+router.delete('/:id(\\d+)', requireAuth, restoreUser, asyncHandler(async (req, res) => {
+    const { id } = req.params;
+    const booking = await Booking.findByPk(id)
+    await review.destroy();
+    res.json({
+        message: "booking canceled"
+    })
 }))
 
 
