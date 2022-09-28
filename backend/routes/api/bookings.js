@@ -1,9 +1,11 @@
 const express = require('express');
 const router = express.Router();
 const asyncHandler = require('express-async-handler');
-const { requireAuth } = require('../../utils/auth.js')
-// forgot if we need line 6?
-const db = require('../../db/models')
+const { restoreUser, requireAuth } = require('../../utils/auth.js');
+const { User, Brand, Booking } = require('../../db/models')
+
+const { bookingValidations } = require('../../validaitons/bookings');
+const { validationResult } = require('express-validator')
 
 // GET BOOKINGS
 router.get('/:id(\\d+)', asyncHandler(async (req, res) => {
@@ -20,5 +22,23 @@ router.get('/:id(\\d+)', asyncHandler(async (req, res) => {
 
     return res.json(bookings)
 }))
+
+// POST BOOKINGS (can do errorsArray like brands & reviews)
+router.post('/:id(\\d+)', bookingValidations, requireAuth, asyncHandler(async (req, res) => {
+    const { brandId, userId, startDate, endDate, price, totalPrice } = req.body;
+
+    const validatorErrors = validationResult(req);
+
+    if (validatorErrors.isEmpty()) {
+        const booking = await Booking.create({ brandId, userId, startDate, endDate, price, totalPrice })
+        return res.json(booking)
+    }
+
+    else {
+        const errors = validatorErrors.array().map(error => error.msg);
+        return res.json(errors)
+    }
+}))
+
 
 module.exports = router;
