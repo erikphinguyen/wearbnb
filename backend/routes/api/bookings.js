@@ -12,13 +12,13 @@ router.get('/:id(\\d+)', asyncHandler(async (req, res) => {
     console.log('INSIDE BOOKINGS ROUTE');
     const { id } = req.params;
     // first option with .findAll
-    const bookings = await Bookings.findAll(
+    const bookings = await Booking.findAll(
         {
             where: { id }
         }
     )
     // second option with .findByPk
-    // const bookings = await Bookings.findByPk(Number(id))
+    // const bookings = await Booking.findByPk(Number(id))
 
     return res.json(bookings)
 }))
