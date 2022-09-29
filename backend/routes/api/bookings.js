@@ -4,7 +4,7 @@ const asyncHandler = require('express-async-handler');
 const { restoreUser, requireAuth } = require('../../utils/auth')
 const { User, Brand, Booking } = require('../../db/models');
 
-const { bookingValidations } = require('../../validaitons/bookings');
+const { bookingValidations } = require('../../validations/bookings');
 const { validationResult } = require('express-validator')
 
 // GET BOOKINGS
@@ -12,13 +12,13 @@ router.get('/:id(\\d+)', asyncHandler(async (req, res) => {
     console.log('INSIDE BOOKINGS ROUTE');
     const { id } = req.params;
     // first option with .findAll
-    const bookings = await Bookings.findAll(
+    const bookings = await Booking.findAll(
         {
             where: { id }
         }
     )
     // second option with .findByPk
-    // const bookings = await Bookings.findByPk(Number(id))
+    // const bookings = await Booking.findByPk(Number(id))
 
     return res.json(bookings)
 }))
