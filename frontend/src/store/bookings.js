@@ -22,7 +22,7 @@ const postBookings = (bookings) => {
     }
 }
 
-const putBookings = (BOOKING) => {
+const putBookings = (booking) => {
     return {
         type: PUT_BOOKINGS,
         booking

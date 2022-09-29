@@ -44,6 +44,7 @@ import OneBrand from "./components/OneBrand/OneBrand";
 import Footer from "./components/Footer/ index";
 import PageNotFound from "./components/PageNotFound";
 import Reviews from "./components/OneBrand/Reviews";
+import Bookings from "./components/Bookings/Bookings";
 
 function App() {
   const dispatch = useDispatch();
@@ -66,6 +67,7 @@ function App() {
           <Route exact path='/brands/:id'>
             <OneBrand />
             <Reviews />
+            <Bookings />
           </Route>
           <Route component={PageNotFound} />
         </Switch>

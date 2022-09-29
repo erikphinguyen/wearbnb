@@ -9,11 +9,18 @@ const Bookings = () => {
     const dispatch = useDispatch();
     const { id } = useParams();
     const user = useSelector(state => state.session.user);
-    const brandName = useSelector(state => state.brand.name);
-
+    const brand = useSelector(state => state.brands)
+    console.log('WHAT IS BRAND IN BOOKINGS', brand)
+    // can't get brand name
+    // tried state.brands[id]['name']
+    // also tried state.brands.id.name
+    const brandName = useSelector(state => state.brands.id);
+    console.log('WHAT IS BRANDNAME IN BOOKINGS', brandName)
     const [editModeBookings, setEditModeBookings] = useState(false);
     const [startDate, setStartDate] = useState([]);
     const [endDate, setEndDate] = useState([]);
+    const [price, setPrice] = useState([]);
+    const [totalPrice, setTotalPrice] = useState([]);
 
     // get bookings
     const [bookings, setBookings] = useState([])
@@ -47,8 +54,8 @@ const Bookings = () => {
     }, [dispatch])
 
     const data = {
-        brandId,
-        userId,
+        brandId: brand.id,
+        userId: user.id,
         startDate,
         endDate,
         price,
@@ -58,7 +65,7 @@ const Bookings = () => {
     return (
         <div className='bookings'>
             <div className='bookings-container'>
-
+                <h1>hello</h1>
             </div>
         </div>
     )
