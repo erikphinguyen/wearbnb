@@ -23,7 +23,7 @@ const Bookings = () => {
     // const [price, setPrice] = useState([]);
     const [totalPrice, setTotalPrice] = useState([]);
 
-    const price = useSelector(state => state.bookings[brandId].price)
+    const price = useSelector(state => state.bookings)
     console.log('WHAT IS PRICE IN BOOKINGS', price)
 
     // get bookings

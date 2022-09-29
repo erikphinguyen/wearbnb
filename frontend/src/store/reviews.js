@@ -40,10 +40,7 @@ const deleteReviews = (id) => {
 export const thunkGetReviews = (id) => async (dispatch) => {
     console.log('AM I HITTING THUNK GET REVIEWS')
     const response = await csrfFetch(`/api/reviews/${id}`)
-    console.log('WHAT IS RESPONSE', response)
-
     if (response.ok) {
-        console.log('WHAT IS RESPONSE IN THUNK GET REVIEWS', response)
         const reviews = await response.json();
         dispatch(getReviews(reviews));
         return reviews
