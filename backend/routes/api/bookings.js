@@ -4,7 +4,7 @@ const asyncHandler = require('express-async-handler');
 const { restoreUser, requireAuth } = require('../../utils/auth')
 const { User, Brand, Booking } = require('../../db/models');
 
-const { bookingValidations } = require('../../validaitons/bookings');
+const { bookingValidations } = require('../../validations/bookings');
 const { validationResult } = require('express-validator')
 
 // GET BOOKINGS
