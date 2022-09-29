@@ -8,6 +8,7 @@ import "./Bookings.css";
 const Bookings = () => {
     const dispatch = useDispatch();
     const { id } = useParams();
+    const { brandId } = useParams();
     const user = useSelector(state => state.session.user);
     const brand = useSelector(state => state.brands)
     console.log('WHAT IS BRAND IN BOOKINGS', brand)
@@ -19,8 +20,11 @@ const Bookings = () => {
     const [editModeBookings, setEditModeBookings] = useState(false);
     const [startDate, setStartDate] = useState([]);
     const [endDate, setEndDate] = useState([]);
-    const [price, setPrice] = useState([]);
+    // const [price, setPrice] = useState([]);
     const [totalPrice, setTotalPrice] = useState([]);
+
+    const price = useSelector(state => state.bookings[brandId].price)
+    console.log('WHAT IS PRICE IN BOOKINGS', price)
 
     // get bookings
     const [bookings, setBookings] = useState([])
