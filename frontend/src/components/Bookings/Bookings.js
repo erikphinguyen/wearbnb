@@ -21,15 +21,38 @@ const Bookings = () => {
     // put bookings
     const [newBooking, setNewBooking] = useState({
         // is it a string or should use new Date()?
-        startDate: '',
-        endDate: ''
+        startDate: bookings.startDate,
+        endDate: bookings.endDate,
+        price: bookings.price,
+        totalPrice: bookings.totalPrice
     })
 
     const reset = () => {
         setNewBooking({
-            review: ''
+            startDate: '',
+            endDate: '',
+            price: '',
+            totalPrice: ''
         })
         setEditModeBookings(false)
+    }
+
+    // GET BOOKINGS
+    useEffect(() => {
+        dispatch(thunkGetBookings())
+            .then(res => {
+                let sortedBookings = res.sort((a, b) => a.id - b.id)
+                setBookings(sortedBookings)
+            })
+    }, [dispatch])
+
+    const data = {
+        brandId,
+        userId,
+        startDate,
+        endDate,
+        price,
+        totalPrice
     }
 
     return (
