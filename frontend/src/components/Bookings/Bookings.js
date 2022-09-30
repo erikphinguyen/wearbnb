@@ -50,7 +50,7 @@ const Bookings = () => {
 
     // GET BOOKINGS
     useEffect(() => {
-        dispatch(thunkGetBookings())
+        dispatch(thunkGetBookings(id))
             .then(res => {
                 let sortedBookings = res.sort((a, b) => a.id - b.id)
                 setBookings(sortedBookings)
