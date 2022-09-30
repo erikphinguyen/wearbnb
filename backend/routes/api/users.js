@@ -44,7 +44,6 @@ router.post(
     '/',
     // validateSignup,
     asyncHandler(async (req, res) => {
-        console.log('WHAT IS RES.BODY', req.body)
         const { email, password, username, confirmPassword } = req.body;
         let errorsArray = []
         if (email == "") {

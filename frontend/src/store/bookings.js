@@ -22,7 +22,7 @@ const postBookings = (bookings) => {
     }
 }
 
-const putBookings = (BOOKING) => {
+const putBookings = (booking) => {
     return {
         type: PUT_BOOKINGS,
         booking
@@ -39,13 +39,16 @@ const deleteBookings = (id) => {
 // THUNKS
 export const thunkGetBookings = (id) => async (dispatch) => {
     console.log('AM I INSIDE THUNK GET BOOKINGS');
+    console.log('WHAT IS ID', id)
     const response = await csrfFetch(`/api/bookings/${id}`);
-
+    console.log('WHAT IS RESPONSE IN THUNK GET BOOKINGS RESPONSE', response)
     if (response.ok) {
-        console.log('WHAT IS RESPONSE IN THUNK GET BOOKINGS RESPONSE', response)
         const bookings = await response.json();
         dispatch(getBookings(bookings))
         return bookings
+    }
+    else {
+        console.log('NOT HITTING THUNK GET BOOKINGS')
     }
 }
 
@@ -122,6 +125,7 @@ const bookingsReducer = (state = {}, action) => {
     switch (action.type) {
         case GET_BOOKINGS:
             const getState = {};
+            console.log('@@@@@@@@@@@@@@@@@@@@@@@@@@@AM I INSIDE GET BOOKINGS STORE')
             action.bookings.forEach(booking => {
                 getState[booking.id] = booking;
             })

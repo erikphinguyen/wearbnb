@@ -54,7 +54,6 @@ const Reviews = () => {
                         return 0
                     }
                 })
-                console.log('WHAT IS RES', res)
                 setReviews(sortedReviews)
             })
     }, [dispatch])
@@ -106,7 +105,7 @@ const Reviews = () => {
                                 return 0
                             }
                         })
-                        console.log('WHAT IS RES', res)
+
                         setReviews(sortedReviews)
                         reset();
                     })
@@ -188,12 +187,11 @@ const Reviews = () => {
                         <div
                             key={review.id}
                         >
-                            <> {console.log('HITTING REVIEWS FRONT END')}</>
-                            {console.log('WHAT IS REVIEW', review)}
                             <div>
                                 {review.review && (
                                     <p>
                                         <b>
+                                            {/* {review.userId == 1 && review.userId = "Demo-lition"} */}
                                             user {review.userId}'s review:
                                         </b>
                                         <div>

@@ -14,12 +14,11 @@ router.get('/:id(\\d+)', asyncHandler(async (req, res) => {
     // first option with .findAll
     const bookings = await Booking.findAll(
         {
-            where: { id }
+            where: { brandId: id }
         }
     )
     // second option with .findByPk
     // const bookings = await Bookings.findByPk(Number(id))
-
     return res.json(bookings)
 }))
 

@@ -38,12 +38,8 @@ const deleteReviews = (id) => {
 // THUNKS
 // ALL REVIEWS ON ONE IMAGE
 export const thunkGetReviews = (id) => async (dispatch) => {
-    console.log('AM I HITTING THUNK GET REVIEWS')
     const response = await csrfFetch(`/api/reviews/${id}`)
-    console.log('WHAT IS RESPONSE', response)
-
     if (response.ok) {
-        console.log('WHAT IS RESPONSE IN THUNK GET REVIEWS', response)
         const reviews = await response.json();
         dispatch(getReviews(reviews));
         return reviews
@@ -106,7 +102,6 @@ export const thunkDeleteReviews = (id) => async dispatch => {
 // const initialState = { entries: {}, isLoading: true };
 
 const reviewsReducer = (state = {}, action) => {
-    console.log('AM I HITTING GET REVIEWS IN STORE')
     switch (action.type) {
         case GET_REVIEWS:
             const getState = {};
