@@ -11,12 +11,12 @@ const Bookings = () => {
     const { brandId } = useParams();
     const user = useSelector(state => state.session.user);
     const brand = useSelector(state => state.brands)
-    console.log('WHAT IS BRAND IN BOOKINGS', brand)
+    // console.log('WHAT IS BRAND IN BOOKINGS', brand)
     // can't get brand name
     // tried state.brands[id]['name']
     // also tried state.brands.id.name
     const brandName = useSelector(state => state.brands.id);
-    console.log('WHAT IS BRANDNAME IN BOOKINGS', brandName)
+    // console.log('WHAT IS BRANDNAME IN BOOKINGS', brandName)
     const [editModeBookings, setEditModeBookings] = useState(false);
     const [startDate, setStartDate] = useState([]);
     const [endDate, setEndDate] = useState([]);
@@ -24,7 +24,7 @@ const Bookings = () => {
     const [totalPrice, setTotalPrice] = useState([]);
 
     const price = useSelector(state => state.bookings)
-    console.log('WHAT IS PRICE IN BOOKINGS', price)
+    // console.log('WHAT IS PRICE IN BOOKINGS', price)
 
     // get bookings
     const [bookings, setBookings] = useState([])

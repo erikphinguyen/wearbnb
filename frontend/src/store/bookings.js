@@ -47,6 +47,9 @@ export const thunkGetBookings = (id) => async (dispatch) => {
         dispatch(getBookings(bookings))
         return bookings
     }
+    else {
+        console.log('NOT HITTING THUNK GET BOOKINGS')
+    }
 }
 
 export const thunkGetUserBookings = (userId) => async (dispatch) => {
@@ -122,6 +125,7 @@ const bookingsReducer = (state = {}, action) => {
     switch (action.type) {
         case GET_BOOKINGS:
             const getState = {};
+            console.log('@@@@@@@@@@@@@@@@@@@@@@@@@@@AM I INSIDE GET BOOKINGS STORE')
             action.bookings.forEach(booking => {
                 getState[booking.id] = booking;
             })

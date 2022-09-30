@@ -11,7 +11,6 @@ const e = require('express');
 // GET ALL REVIEWS OF CERTAIN BRAND
 router.get('/:id(\\d+)', restoreUser, asyncHandler(async (req, res) => {
     const { id } = req.params;
-    console.log('WHAT IS ID BACKEND', id)
     const brand = await Brand.findByPk(id);
     let reviews = await Review.findAll({
         where: { brandId: id }
