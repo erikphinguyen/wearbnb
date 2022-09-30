@@ -38,7 +38,6 @@ const deleteReviews = (id) => {
 // THUNKS
 // ALL REVIEWS ON ONE IMAGE
 export const thunkGetReviews = (id) => async (dispatch) => {
-    console.log('AM I HITTING THUNK GET REVIEWS')
     const response = await csrfFetch(`/api/reviews/${id}`)
     if (response.ok) {
         const reviews = await response.json();
@@ -103,7 +102,6 @@ export const thunkDeleteReviews = (id) => async dispatch => {
 // const initialState = { entries: {}, isLoading: true };
 
 const reviewsReducer = (state = {}, action) => {
-    console.log('AM I HITTING GET REVIEWS IN STORE')
     switch (action.type) {
         case GET_REVIEWS:
             const getState = {};
