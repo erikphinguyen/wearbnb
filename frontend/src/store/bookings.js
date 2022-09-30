@@ -38,17 +38,11 @@ const deleteBookings = (id) => {
 
 // THUNKS
 export const thunkGetBookings = (id) => async (dispatch) => {
-    console.log('AM I INSIDE THUNK GET BOOKINGS');
-    console.log('WHAT IS ID', id)
     const response = await csrfFetch(`/api/bookings/${id}`);
-    console.log('WHAT IS RESPONSE IN THUNK GET BOOKINGS RESPONSE', response)
     if (response.ok) {
         const bookings = await response.json();
         dispatch(getBookings(bookings))
         return bookings
-    }
-    else {
-        console.log('NOT HITTING THUNK GET BOOKINGS')
     }
 }
 

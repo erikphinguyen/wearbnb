@@ -136,7 +136,7 @@ module.exports = {
       {
         userId: "2",
         brandImg: "https://1000logos.net/wp-content/uploads/2018/04/Logo-Stussy.png",
-        name: "Stussy",
+        name: "Stüssy",
         address: " 17426 Daimler Street",
         city: "Irvine, CA",
         country: "USA",
