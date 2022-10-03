@@ -11,20 +11,16 @@ const Bookings = () => {
     const { brandId } = useParams();
     const user = useSelector(state => state.session.user);
     const brand = useSelector(state => state.brands[id])
-    console.log('WHAT IS BRAND IN BOOKINGS', brand)
-    // can't get brand name
-    // tried state.brands[id]['name']
-    // also tried state.brands.id.name
     const brandName = useSelector(state => state.brands[id].name);
-    console.log('WHAT IS BRANDNAME IN BOOKINGS', brandName)
+
     const [editModeBookings, setEditModeBookings] = useState(false);
     const [startDate, setStartDate] = useState([]);
     const [endDate, setEndDate] = useState([]);
     // const [price, setPrice] = useState([]);
     const [totalPrice, setTotalPrice] = useState([]);
 
-    const price = useSelector(state => state.bookings)
-    // console.log('WHAT IS PRICE IN BOOKINGS', price)
+    const price = useSelector(state => state.bookings[id].price)
+    console.log('WHAT IS PRICE IN BOOKINGS', price)
 
     // get bookings
     const [bookings, setBookings] = useState([])
@@ -57,6 +53,10 @@ const Bookings = () => {
             })
     }, [dispatch])
 
+    const handleSubmit = e => {
+        e.preventDefault();
+    }
+
     const data = {
         brandId: brand.id,
         userId: user.id,
@@ -67,9 +67,9 @@ const Bookings = () => {
     }
 
     return (
-        <div className='bookings'>
-            <div className='bookings-container'>
-                <h1>hello</h1>
+        <div className='bookings-container'>
+            <div className='price-container'>
+                <h3>{`${price}`} per night</h3>
             </div>
         </div>
     )
