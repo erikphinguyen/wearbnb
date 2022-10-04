@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useDispatch, useSelector } from "react-redux"
 import { useParams, useHistory } from "react-router-dom";
 import { thunkGetBookings, thunkPutBookings, thunkPostBookings, thunkDeleteBookings } from '../../store/bookings';
@@ -18,10 +18,21 @@ const Bookings = () => {
     const [startDate, setStartDate] = useState([]);
     const [endDate, setEndDate] = useState([]);
     // const [price, setPrice] = useState([]);
-    const [totalPrice, setTotalPrice] = useState([]);
+    // const [totalPrice, setTotalPrice] = useState([]);
 
-    const price = useSelector(state => state.bookings)
+    const price = useSelector(state => state.bookings[id].price)
     console.log('WHAT IS PRICE IN BOOKINGS', price)
+
+    let stayDuration = useRef(0);
+    let totalPrice = useRef(0);
+    let fees = Number((price * 0.3).toFixed(2));
+
+    // PRICE ADJUSTMENTS
+    useEffect(() => {
+        stayDuration.current = ((new Date(endDate)) - (new Date(startDate))) / 86400000;
+        totalPrice.current = ((price * stayDuration.current) + (fees)).toFixed(2);
+        dispatch(thunkGetBookings());
+    }, [dispatch, startDate, endDate, price, fees]);
 
     // get bookings
     const [bookings, setBookings] = useState([])
@@ -77,7 +88,8 @@ const Bookings = () => {
     return (
         <div className='bookings-container'>
             <div className='price-container'>
-                <h3>{`${price}`} per night</h3>
+                <h3>Price per night: ${`${price}`}</h3>
+                <h3>Fees (30% for tax and services): ${`${fees}`}</h3>
             </div>
         </div>
     )
