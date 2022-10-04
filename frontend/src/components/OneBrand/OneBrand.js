@@ -30,6 +30,7 @@ const OneBrand = () => {
     // get brand
     const [singleBrand, setSingleBrand] = useState({})
 
+
     // put brand
     const [newBrandData, setNewBrandData] = useState({
         brandImg: singleBrand.brandImg,

@@ -32,6 +32,8 @@ const Reviews = () => {
     }
 
     const user = useSelector(state => state.session.user)
+    // const username = useSelector(state => state.session.user.username)
+    // console.log('WHAT IS USERNAME', username)
 
     // GET REVIEWS
     useEffect(() => {
@@ -162,20 +164,6 @@ const Reviews = () => {
                 setReviews(newReviews)
             })
     }
-
-    // THIS WAS UNDER <H3>REVIEWS</H3>
-    // {
-    //     reviews?.map((review) => (
-    //         <div
-    //             key={review.id}
-    //         >
-    //             {/* <div>{`${review.User.id} says`}</div> */}
-    //             {/* {`@${review.User.username}`} */}
-    //             <p>{review.review}</p>
-    //             <button className='button' onClick={() => handleDeleteReview(review.id)}>Delete Review</button>
-    //         </div>
-    //     ))
-    // }
 
     return (
         <div className='reviews-page'>
