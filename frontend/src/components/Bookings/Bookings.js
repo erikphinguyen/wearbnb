@@ -134,6 +134,7 @@ const Bookings = () => {
                                 placeholder='New Total Price'
                                 onChange={(e) => setNewBooking({ ...newBooking, totalPrice: e.target.value })}
                             />
+                            <button className='button' onClick={handleSubmitEditBookings}>Save</button>
                         </div>
                     ) : null
                 }
