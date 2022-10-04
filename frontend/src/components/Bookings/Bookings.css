@@ -1,0 +1,22 @@
+.bookings-container {}
+
+.price-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 60%;
+    margin-right: 20%
+}
+
+.price-card {
+    padding: 1rem;
+    border: 1px solid rgba(119,119,119, 0.3);
+    border-radius: 1rem;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .2);
+    overflow: hidden;
+}
+
+.total {
+    border-top: 1px solid #e5e5e5;
+    padding-top: 10px;
+}

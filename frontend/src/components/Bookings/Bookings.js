@@ -88,9 +88,11 @@ const Bookings = () => {
     return (
         <div className='bookings-container'>
             <div className='price-container'>
-                <h3>Price per night: ${`${price}`}</h3>
-                <h3>Fees (30% for tax and services): ${`${fees}`}</h3>
-                <h3>Total: {`${totalPrice}`}</h3>
+                <div className='price-card'>
+                    <h3>Price per night: ${`${price}`}</h3>
+                    <h3>Fees (30% for tax and services): ${`${fees}`}</h3>
+                    <h3 className='total'>Total: {`${totalPrice}`}</h3>
+                </div>
                 {
                     user?.id === bookings?.userId && (
                         <button className='button' onClick={() => setEditModeBookings(true)}>
