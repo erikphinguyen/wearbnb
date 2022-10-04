@@ -45,6 +45,8 @@ import Footer from "./components/Footer/ index";
 import PageNotFound from "./components/PageNotFound";
 import Reviews from "./components/OneBrand/Reviews";
 import Bookings from "./components/Bookings/Bookings";
+// import Calendar from "react-calendar";
+// import 'react-calendar/dist/Calendar.css';
 
 function App() {
   const dispatch = useDispatch();
@@ -54,6 +56,7 @@ function App() {
   }, [dispatch]);
 
   const [brands, setBrands] = useState([]);
+  const [value, onChange] = useState(new Date());
 
   return (
     <>
@@ -66,8 +69,9 @@ function App() {
           </Route>
           <Route exact path='/brands/:id'>
             <OneBrand />
-            <Reviews />
             <Bookings />
+            <Reviews />
+            {/* <Calendar onChange={onChange} value={value} /> */}
           </Route>
           <Route component={PageNotFound} />
         </Switch>
