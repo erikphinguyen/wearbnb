@@ -89,8 +89,8 @@ const Bookings = () => {
         <div className='bookings-container'>
             <div className='price-container'>
                 <div className='price-card'>
-                    <h3>Price per night: ${`${price}`}</h3>
-                    <h3>Fees (30% for tax and services): ${`${fees}`}</h3>
+                    <h3>Price per day: ${`${price}`}</h3>
+                    <h3>Fees (30% for tax and services): $10000.00</h3>
                     <h3 className='total'>Total: {`${totalPrice}`}</h3>
                 </div>
                 {
