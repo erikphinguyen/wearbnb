@@ -90,7 +90,7 @@ const Bookings = () => {
             <div className='price-container'>
                 <h3>Price per night: ${`${price}`}</h3>
                 <h3>Fees (30% for tax and services): ${`${fees}`}</h3>
-                <h3>Total: </h3>
+                <h3>Total: {`${totalPrice}`}</h3>
                 {
                     user?.id === bookings?.userId && (
                         <button className='button' onClick={() => setEditModeBookings(true)}>
@@ -109,14 +109,14 @@ const Bookings = () => {
                             <input
                                 style={errors.length ? { border: "1px solid red" } : null}
                                 value={newBooking.startDate}
-                                type='text'
+                                type='date'
                                 placeholder='New Start Date'
                                 onChange={(e) => setNewBooking({ ...newBooking, startDate: e.target.value })}
                             />
                             <input
                                 style={errors.length ? { border: "1px solid red" } : null}
                                 value={newBooking.endDate}
-                                type='text'
+                                type='date'
                                 placeholder='New End Date'
                                 onChange={(e) => setNewBooking({ ...newBooking, endDate: e.target.value })}
                             />
