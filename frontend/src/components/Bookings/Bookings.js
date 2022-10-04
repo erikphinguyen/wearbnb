@@ -9,6 +9,7 @@ const Bookings = () => {
     const dispatch = useDispatch();
     const { id } = useParams();
     const { brandId } = useParams();
+    const [errors, setErrors] = useState([])
     const user = useSelector(state => state.session.user);
     const brand = useSelector(state => state.brands[id])
     const brandName = useSelector(state => state.brands[id]);
@@ -44,7 +45,7 @@ const Bookings = () => {
         setEditModeBookings(false)
     }
 
-    // GET BOOKINGS
+    // CALLING GET BOOKINGS
     useEffect(() => {
         dispatch(thunkGetBookings(id))
             .then(res => {
@@ -53,18 +54,25 @@ const Bookings = () => {
             })
     }, [dispatch])
 
-    const handleSubmit = e => {
+    // CALLING PUT BOOKINGS
+    const handleSubmitEditBookings = e => {
         e.preventDefault();
+        let data = {
+            id: id,
+            ...newBooking
+        }
+        dispatch(thunkPutBookings(data))
+            .then(res => {
+                if (res.error) {
+                    setErrors(res.error)
+                    return
+                }
+                else {
+                    setBookings(res);
+                    reset();
+                }
+            })
     }
-
-    // const data = {
-    //     brandId: brand.id,
-    //     userId: user.id,
-    //     startDate,
-    //     endDate,
-    //     price,
-    //     totalPrice
-    // }
 
     return (
         <div className='bookings-container'>
