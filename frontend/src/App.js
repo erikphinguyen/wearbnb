@@ -66,8 +66,8 @@ function App() {
           </Route>
           <Route exact path='/brands/:id'>
             <OneBrand />
-            <Reviews />
             <Bookings />
+            <Reviews />
           </Route>
           <Route component={PageNotFound} />
         </Switch>
