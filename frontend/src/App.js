@@ -45,13 +45,18 @@ import Footer from "./components/Footer/ index";
 import PageNotFound from "./components/PageNotFound";
 import Reviews from "./components/OneBrand/Reviews";
 import Bookings from "./components/Bookings/Bookings";
-import Month from "./components/Calendar/Calendar.js"
+import "./index.css"
+import Calendar from "./components/Calendar/Calendar";
+import { getMonth } from "./utils";
+import CalendarHeader from "./components/Calendar/CalendarHeader";
+import Sidebar from "./components/Calendar/Sidebar";
+import Month from "./components/Calendar/Month";
 
 // import Calendar from "react-calendar";
 // import 'react-calendar/dist/Calendar.css';
 
 function App() {
-  console.table(Month())
+  console.table(getMonth(3))
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
   useEffect(() => {
@@ -59,7 +64,8 @@ function App() {
   }, [dispatch]);
 
   const [brands, setBrands] = useState([]);
-  const [value, onChange] = useState(new Date());
+  const [currentMonth, setCurrentMonth] = useState(getMonth());
+  // const [value, onChange] = useState(new Date()); this is for react-calendar
 
   return (
     <>
@@ -74,6 +80,14 @@ function App() {
             <OneBrand />
             <Bookings />
             <Reviews />
+            <div className="h-screen flex flex-col">
+              <CalendarHeader />
+              <div className="flex flex-1">
+                <Sidebar />
+                <Month month={currentMonth}/>
+              </div>
+            </div>
+            {/* <Calendar /> */}
             {/* <Calendar onChange={onChange} value={value} /> */}
           </Route>
           <Route component={PageNotFound} />

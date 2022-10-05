@@ -6,7 +6,6 @@ import Month from './Month.js';
 
 function Calendar(month = dayjs().month()) {
     const year = dayjs().year()
-    // creates the first day of the month
     const firstDayOfTheMonth = dayjs(new Date(year, month, 1)).day();
     let currentMonthCount = 0 - firstDayOfTheMonth;
 
