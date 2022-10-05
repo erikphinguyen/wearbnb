@@ -103,15 +103,40 @@ const Bookings = () => {
             <div className='price-container'>
                 <div className='price-card'>
                     <h3>Price per day: ${`${price}`}</h3>
+                    <form onSubmit={handleSubmitReservation}>
+                        <div className='reservation'>
+                            <input
+                                placeholder='Start Date'
+                                name="startDate"
+                                onChange={(e) => setStartDate(e.target.value)}
+                                value={startDate}
+                                type='date'
+                            />
+                            <input
+                                placeholder='End Date'
+                                name="endDate"
+                                onChange={(e) => setEndDate(e.target.value)}
+                                value={endDate}
+                                type='date'
+                            />
+                        </div>
+                        <div className='hidden'>.</div>
+                        <div className='reservation-button-container'>
+                            <button className='reservation-button' >Reserve</button>
+                        </div>
+                    </form>
                     <h3>Fees (30% for tax and services): ${`${fees}`}</h3>
                     {console.log('WHAT IS TOTALPRICE', totalPrice)}
                     <h3 className='total'>Total: {`${totalPrice.current}`}</h3>
                 </div>
                 {
-                    user?.id === bookings?.userId && (
-                        <button className='button' onClick={() => setEditModeBookings(true)}>
-                            Edit Booking Logistics
-                        </button>
+                    user?.id === brand?.userId && (
+                        <>
+                            <div className='hidden'>.</div>
+                            <button className='button' onClick={() => setEditModeBookings(true)}>
+                                Edit Booking Logistics
+                            </button>
+                        </>
                     )
                 }
                 {
@@ -154,25 +179,6 @@ const Bookings = () => {
                         </div>
                     ) : null
                 }
-                <form onSubmit={handleSubmitReservation}>
-                    <div className='reservation'>
-                        <input
-                            placeholder='Start Date'
-                            name="startDate"
-                            onChange={(e) => setStartDate(e.target.value)}
-                            value={startDate}
-                            type='date'
-                        />
-                        <input
-                            placeholder='End Date'
-                            name="endDate"
-                            onChange={(e) => setEndDate(e.target.value)}
-                            value={endDate}
-                            type='date'
-                        />
-                    </div>
-                    <button className='button'>Reserve</button>
-                </form>
             </div>
         </div>
     )
