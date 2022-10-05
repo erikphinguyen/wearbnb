@@ -1,5 +1,5 @@
 import React from 'react';
-import Day from  './Day'
+import Day from './Day'
 
 function Month({ month }) {
     return (
@@ -7,7 +7,7 @@ function Month({ month }) {
             {month.map((row, i) => (
                 <>
                     {row.map((day, idx) => (
-                        <Day day={day} key={idx} />
+                        <Day day={day} key={idx} rowIdx={i} />
                     ))}
                 </>
             ))}
