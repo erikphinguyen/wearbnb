@@ -1,10 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { useState } from 'react';
 import dayjs from 'dayjs';
 import CalendarHeader from './CalendarHeader'
 import Sidebar from './Sidebar';
 import Month from './Month';
 
-export function getMonth(month = dayjs().month()) {
+function getMonth(month = dayjs().month()) {
     const year = dayjs().year()
     // creates the first day of the month
     const firstDayOfTheMonth = dayjs(new Date(year, month, 1)).day();
@@ -20,8 +20,8 @@ export function getMonth(month = dayjs().month()) {
     }));
     return (
         <>
-            {/* {daysMatrix} */}
             <div className='h-screen flex flex-columns'>
+                {daysMatrix}
                 <CalendarHeader />
                 <div>
                     <Sidebar />
@@ -31,3 +31,5 @@ export function getMonth(month = dayjs().month()) {
         </>
     )
 }
+
+export default getMonth;

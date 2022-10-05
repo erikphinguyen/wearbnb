@@ -45,12 +45,12 @@ import Footer from "./components/Footer/ index";
 import PageNotFound from "./components/PageNotFound";
 import Reviews from "./components/OneBrand/Reviews";
 import Bookings from "./components/Bookings/Bookings";
-import { getMonth } from "./components/Calendar/Calendar"
+import Month from "./components/Calendar/Calendar.js"
 // import Calendar from "react-calendar";
 // import 'react-calendar/dist/Calendar.css';
 
 function App() {
-  console.table(getMonth(3))
+  console.table(Month(3))
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
   useEffect(() => {
