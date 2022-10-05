@@ -1,9 +1,10 @@
-import React from 'react'
+import React from 'react';
+import Logo from '../Navigation/wearbnb-logo.PNG';
 
 function CalendarHeader() {
     return (
         <header className='px-4 py-2 flex items-center'>
-            <img src='' className='mr-2 w-12 h-12' />
+            <img src={Logo} width="200" alt="logo" />
             <h1 className='mr-10 text-xl text-gray-500 font-bold'>
                 Calendar
             </h1>
