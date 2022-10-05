@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Logo from '../Navigation/wearbnb-logo.PNG';
+import GlobalContext from '../../context/GlobalContext';
 
 function CalendarHeader() {
+    const { monthIndex, setMonthIndex } = useContext(GlobalContext);
     return (
         <header className='px-4 py-2 flex items-center'>
             <img src={Logo} width="200" alt="logo" />

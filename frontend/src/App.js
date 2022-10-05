@@ -33,7 +33,7 @@
 
 // export default App;
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useDispatch } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 import SignupFormPage from "./components/SignupFormPage";
@@ -51,6 +51,7 @@ import { getMonth } from "./utils";
 import CalendarHeader from "./components/Calendar/CalendarHeader";
 import Sidebar from "./components/Calendar/Sidebar";
 import Month from "./components/Calendar/Month";
+import GlobalContext from "./context/GlobalContext";
 
 // import Calendar from "react-calendar";
 // import 'react-calendar/dist/Calendar.css';
@@ -64,7 +65,12 @@ function App() {
   }, [dispatch]);
 
   const [brands, setBrands] = useState([]);
+
   const [currentMonth, setCurrentMonth] = useState(getMonth());
+  const { monthIndex } = useContext(GlobalContext)
+  useEffect(() => {
+    setCurrentMonth(monthIndex)
+  }, [monthIndex])
   // const [value, onChange] = useState(new Date()); this is for react-calendar
 
   return (
@@ -84,7 +90,7 @@ function App() {
               <CalendarHeader />
               <div className="flex flex-1">
                 <Sidebar />
-                <Month month={currentMonth}/>
+                <Month month={currentMonth} />
               </div>
             </div>
             {/* <Calendar /> */}
