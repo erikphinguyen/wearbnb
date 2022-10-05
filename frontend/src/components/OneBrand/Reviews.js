@@ -165,6 +165,7 @@ const Reviews = () => {
             })
     }
 
+
     return (
         <div className='reviews-page'>
             <h3>Reviews</h3>
@@ -187,7 +188,7 @@ const Reviews = () => {
                                             {review.review}
                                         </div>
                                         <div>
-                                            <b>created at: </b>{review.createdAt}
+                                            <b>created at: </b>{(review.createdAt)}
                                         </div>
                                     </p>
                                 )}
