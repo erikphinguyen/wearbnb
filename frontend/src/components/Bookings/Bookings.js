@@ -14,8 +14,8 @@ const Bookings = () => {
     const brand = useSelector(state => state.brands[id])
     const brandName = useSelector(state => state.brands[id]?.name);
     const [editModeBookings, setEditModeBookings] = useState(false);
-    const [startDate, setStartDate] = useState([]);
-    const [endDate, setEndDate] = useState([]);
+    const [startDate, setStartDate] = useState('');
+    const [endDate, setEndDate] = useState('');
     // const [price, setPrice] = useState([]);
     // const [totalPrice, setTotalPrice] = useState([]);
 
@@ -29,7 +29,7 @@ const Bookings = () => {
     // PRICE ADJUSTMENTS
     useEffect(() => {
         stayDuration.current = ((new Date(endDate)) - (new Date(startDate))) / 86400000;
-        totalPrice = ((price * stayDuration.current) + (fees)).toFixed(2);
+        totalPrice.current = ((price * stayDuration.current) + (fees)).toFixed(2);
         dispatch(thunkGetBookings(id));
     }, [dispatch, startDate, endDate, price, fees]);
 
@@ -53,6 +53,20 @@ const Bookings = () => {
             totalPrice: ''
         })
         setEditModeBookings(false)
+    }
+
+    // MAKING RESERVATIONS
+    const handleSubmitReservation = e => {
+        e.preventDefault();
+
+        const data = {
+            brandId,
+            userId: user.id,
+            startDate,
+            endDate,
+            price,
+            totalPrice: totalPrice.current
+        }
     }
 
     // CALLING GET BOOKINGS
@@ -89,15 +103,40 @@ const Bookings = () => {
             <div className='price-container'>
                 <div className='price-card'>
                     <h3>Price per day: ${`${price}`}</h3>
+                    <form onSubmit={handleSubmitReservation}>
+                        <div className='reservation'>
+                            <input
+                                placeholder='Start Date'
+                                name="startDate"
+                                onChange={(e) => setStartDate(e.target.value)}
+                                value={startDate}
+                                type='date'
+                            />
+                            <input
+                                placeholder='End Date'
+                                name="endDate"
+                                onChange={(e) => setEndDate(e.target.value)}
+                                value={endDate}
+                                type='date'
+                            />
+                        </div>
+                        <div className='hidden'>.</div>
+                        <div className='reservation-button-container'>
+                            <button className='reservation-button' >Reserve</button>
+                        </div>
+                    </form>
                     <h3>Fees (30% for tax and services): ${`${fees}`}</h3>
                     {console.log('WHAT IS TOTALPRICE', totalPrice)}
-                    <h3 className='total'>Total: {`${totalPrice}`}</h3>
+                    <h3 className='total'>Total: {`${totalPrice.current}`}</h3>
                 </div>
                 {
-                    user?.id === bookings?.userId && (
-                        <button className='button' onClick={() => setEditModeBookings(true)}>
-                            Edit Booking Logistics
-                        </button>
+                    user?.id === brand?.userId && (
+                        <>
+                            <div className='hidden'>.</div>
+                            <button className='button' onClick={() => setEditModeBookings(true)}>
+                                Edit Booking Logistics
+                            </button>
+                        </>
                     )
                 }
                 {

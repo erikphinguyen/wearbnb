@@ -23,3 +23,30 @@
     padding-top: 15px;
     margin-bottom: 0;
 }
+
+.reservation {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.reservation-button-container {
+    display: flex;
+    justify-content: center;
+}
+
+.reservation-button {
+    display: flex;
+    background-color: #ff5a5f;
+    box-shadow: 0 5px 0 #e49799;
+    text-align: center;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    cursor: pointer;
+}
+
+.reservation-button:active {
+    box-shadow: none;
+    transform: translateY(5px);
+}
