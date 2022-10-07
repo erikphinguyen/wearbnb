@@ -14,6 +14,10 @@ function UserBookings() {
 
     const bookingsFromUser = Object.values(bookings)
 
+    let stayDuration = (startDate, endDate) => {
+        return ((new Date(endDate) - (new Date(startDate)) / 86400000))
+    }
+
     return (
         <div>UserBookings</div>
     )
