@@ -7,7 +7,7 @@ function UserBookings() {
     const dispatch = useDispatch();
     const { id } = useParams();
     const bookings = useSelector(state => state.bookings[id]);
-    const user = useSelector(state.session.user?.id)
+    const user = useSelector(state => state.session.user?.id)
     const username = useSelector(state => state.session.user?.username)
     const brandName = useSelector(state => state.brands[id]?.name);
 
