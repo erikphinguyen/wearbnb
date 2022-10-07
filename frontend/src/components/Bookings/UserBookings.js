@@ -44,4 +44,4 @@ function UserBookings() {
     )
 }
 
-export default UserBookings
+export default UserBookings;
