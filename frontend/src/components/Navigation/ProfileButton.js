@@ -40,6 +40,12 @@ function ProfileButton({ user }) {
                     <div><b>Username: </b> {user.username}</div>
                     <div><b>Email: </b>{user.email}</div>
                     <div>
+                        <button className="button">Bookings</button>
+                    </div>
+                    <div className="hidden hidden-button">
+                        .
+                    </div>
+                    <div>
                         <button className='button' onClick={logout}>Log Out</button>
                     </div>
                 </div>

@@ -57,7 +57,7 @@ function Navigation({ isLoaded, brands, setBrands }) {
     if (sessionUser) {
         sessionLinks = (
             <div className='session-container'>
-                <div className='session-button1'>
+                <div className='session-button1 profile'>
                     <ProfileButton user={sessionUser} />
                 </div>
                 <div className='session-button2'>

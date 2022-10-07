@@ -12,20 +12,16 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false
     },
     startDate: {
-      type: DataTypes.DATE,
-      allowNull: false
+      type: DataTypes.DATE
     },
     endDate: {
-      type: DataTypes.DATE,
-      allowNull: false
+      type: DataTypes.DATE
     },
     price: {
-      type: DataTypes.FLOAT,
-      allowNull: false
+      type: DataTypes.FLOAT
     },
     totalPrice: {
-      type: DataTypes.FLOAT,
-      allowNull: false
+      type: DataTypes.FLOAT
     }
   }, {});
   Booking.associate = function (models) {
