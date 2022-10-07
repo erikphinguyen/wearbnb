@@ -24,7 +24,6 @@ const Bookings = () => {
     let stayDuration = useRef(0);
     let totalPrice = useRef(0);
     let fees = Number((price * 0.3).toFixed(2));
-    console.log('WHAT IS FEES', fees)
 
     // PRICE ADJUSTMENTS
     useEffect(() => {

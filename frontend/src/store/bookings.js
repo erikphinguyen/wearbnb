@@ -114,7 +114,6 @@ export const thunkDeleteBookings = (id) => async (dispatch) => {
 
 // REDUCER
 const bookingsReducer = (state = {}, action) => {
-    console.log('AM I HITTING BOOKINGS REDUCER')
     if (state.errors) delete state.errors
     switch (action.type) {
         case GET_BOOKINGS:
