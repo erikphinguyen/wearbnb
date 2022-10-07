@@ -134,7 +134,7 @@ const Bookings = () => {
                         <>
                             <div className='hidden'>.</div>
                             <button className='button' onClick={() => setEditModeBookings(true)}>
-                                Edit Booking Logistics
+                                Edit Booking Price
                             </button>
                         </>
                     )
@@ -149,31 +149,10 @@ const Bookings = () => {
                             </div>
                             <input
                                 style={errors.length ? { border: "1px solid red" } : null}
-                                value={newBooking.startDate}
-                                type='date'
-                                placeholder='New Start Date'
-                                onChange={(e) => setNewBooking({ ...newBooking, startDate: e.target.value })}
-                            />
-                            <input
-                                style={errors.length ? { border: "1px solid red" } : null}
-                                value={newBooking.endDate}
-                                type='date'
-                                placeholder='New End Date'
-                                onChange={(e) => setNewBooking({ ...newBooking, endDate: e.target.value })}
-                            />
-                            <input
-                                style={errors.length ? { border: "1px solid red" } : null}
                                 value={newBooking.price}
                                 type='text'
                                 placeholder='New Price'
                                 onChange={(e) => setNewBooking({ ...newBooking, price: e.target.value })}
-                            />
-                            <input
-                                style={errors.length ? { border: "1px solid red" } : null}
-                                value={newBooking.totalPrice}
-                                type='text'
-                                placeholder='New Total Price'
-                                onChange={(e) => setNewBooking({ ...newBooking, totalPrice: e.target.value })}
                             />
                             <button className='button' onClick={handleSubmitEditBookings}>Save</button>
                         </div>
