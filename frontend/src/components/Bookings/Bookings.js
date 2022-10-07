@@ -147,6 +147,7 @@ const Bookings = () => {
                                 ))}
                             </div>
                             <input
+                            className='new-price'
                                 style={errors.length ? { border: "1px solid red" } : null}
                                 value={newBooking.price}
                                 type='text'

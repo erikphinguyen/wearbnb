@@ -5,8 +5,8 @@ nav {
 }
 
 .profile {
-    max-width: 30%;
-    fill: red
+    justify-content: flex;
+    align-items: center;
 }
 
 .session-container {
