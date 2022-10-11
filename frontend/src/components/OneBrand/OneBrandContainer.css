@@ -1,0 +1,6 @@
+.side-by-side {
+    display: flex;
+    justify-content: space-between;
+margin-left: 19%;
+margin-right: 19%;
+}

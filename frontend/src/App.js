@@ -40,11 +40,9 @@ import SignupFormPage from "./components/SignupFormPage";
 import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 import Brands from "./components/Brands/Brands.js"
-import OneBrand from "./components/OneBrand/OneBrand";
+import OneBrandContainer from "./components/OneBrand/OneBrandContainer";
 import Footer from "./components/Footer/ index";
 import PageNotFound from "./components/PageNotFound";
-import Reviews from "./components/OneBrand/Reviews";
-import Bookings from "./components/Bookings/Bookings";
 import UserBookings from "./components/Bookings/UserBookings";
 // import Calendar from "react-calendar";
 // import 'react-calendar/dist/Calendar.css';
@@ -69,9 +67,7 @@ function App() {
             <Footer />
           </Route>
           <Route exact path='/brands/:id'>
-            <OneBrand />
-            <Bookings />
-            <Reviews />
+            <OneBrandContainer />
             {/* <Calendar onChange={onChange} value={value} /> */}
           </Route>
           <Route path='/users/:id'>
