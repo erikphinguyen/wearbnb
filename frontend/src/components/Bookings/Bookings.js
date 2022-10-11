@@ -16,6 +16,7 @@ const Bookings = () => {
     const [editModeBookings, setEditModeBookings] = useState(false);
     const [startDate, setStartDate] = useState('');
     const [endDate, setEndDate] = useState('');
+    const [currentTotalPrice, setCurrentTotalPrice] = useState('')
     // const [price, setPrice] = useState([]);
     // const [totalPrice, setTotalPrice] = useState([]);
 
@@ -57,7 +58,6 @@ const Bookings = () => {
     // MAKING RESERVATIONS
     const handleSubmitReservation = e => {
         e.preventDefault();
-
         const data = {
             brandId,
             userId: user.id,
@@ -65,6 +65,13 @@ const Bookings = () => {
             endDate,
             price,
             totalPrice: totalPrice.current
+        }
+    }
+
+    const handlePriceChange = e => {
+        e.preventDefault();
+        const data = {
+            
         }
     }
 
@@ -107,14 +114,22 @@ const Bookings = () => {
                             <input
                                 placeholder='Start Date'
                                 name="startDate"
-                                onChange={(e) => setStartDate(e.target.value)}
+                                onChange={(e) => {
+                                    stayDuration.current = ((new Date(endDate)) - (new Date(startDate))) / 86400000;
+                                    setCurrentTotalPrice((price * stayDuration.current) + (fees)).toFixed(2);
+                                    setStartDate(e.target.value)
+                                }}
                                 value={startDate}
                                 type='date'
                             />
                             <input
                                 placeholder='End Date'
                                 name="endDate"
-                                onChange={(e) => setEndDate(e.target.value)}
+                                onChange={(e) => {
+                                    stayDuration.current = ((new Date(endDate)) - (new Date(startDate))) / 86400000;
+                                    setCurrentTotalPrice((price * stayDuration.current) + (fees)).toFixed(2);
+                                    setEndDate(e.target.value)
+                                }}
                                 value={endDate}
                                 type='date'
                             />
@@ -126,7 +141,7 @@ const Bookings = () => {
                     </form>
                     <h3>Fees (30% for tax and services): ${`${fees}`}</h3>
                     {console.log('WHAT IS TOTALPRICE', totalPrice)}
-                    <h3 className='total'>Total: {`${totalPrice.current}`}</h3>
+                    <h3 className='total'>Total: {`${currentTotalPrice}`}</h3>
                 </div>
                 {
                     user?.id === brand?.userId && (
@@ -147,7 +162,7 @@ const Bookings = () => {
                                 ))}
                             </div>
                             <input
-                            className='new-price'
+                                className='new-price'
                                 style={errors.length ? { border: "1px solid red" } : null}
                                 value={newBooking.price}
                                 type='text'

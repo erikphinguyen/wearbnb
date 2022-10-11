@@ -1,8 +1,7 @@
-.reviews-page {
-    margin-left: 19%;
-    margin-right: 19%;
-}
-
 .reviews-container {
     max-width: 50%;
+}
+
+.reviews-page {
+    width: 100%;
 }
