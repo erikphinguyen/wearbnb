@@ -6,7 +6,7 @@ import { thunkGetUserBookings, thunkDeleteBookings } from '../../store/bookings'
 function UserBookings() {
     const dispatch = useDispatch();
     const { id } = useParams();
-    const bookings = useSelector(state => state.bookings[id]);
+    const bookings = useSelector(state => state?.bookings[id]);
     const user = useSelector(state => state.session.user?.id)
     const username = useSelector(state => state.session.user?.username)
     const brandName = useSelector(state => state.brands[id]?.name);
@@ -41,8 +41,9 @@ function UserBookings() {
                     <button
                     onClick={(e) => {
                         e.preventDefault();
-                        dispatch(thunkDeleteBookings())
+                        dispatch(thunkDeleteBookings(booking?.id))
                     }}
+                    Cancel Booking
                     ></button>
                 </div>
             ))}
