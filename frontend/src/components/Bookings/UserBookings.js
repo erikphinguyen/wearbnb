@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, NavLink } from "react-router-dom";
-import { thunkGetUserBookings } from '../../store/bookings';
+import { thunkGetUserBookings, thunkDeleteBookings } from '../../store/bookings';
 
 function UserBookings() {
     const dispatch = useDispatch();
@@ -38,6 +38,12 @@ function UserBookings() {
                     <p>
                         {`Total: ${booking.totalPrice}`}
                     </p>
+                    <button
+                    onClick={(e) => {
+                        e.preventDefault();
+                        dispatch(thunkDeleteBookings())
+                    }}
+                    ></button>
                 </div>
             ))}
         </div>
