@@ -136,7 +136,7 @@ const Bookings = () => {
         <div className='bookings-container'>
             <div className='price-container'>
                 <div className='price-card'>
-                    <h3>Price per day: ${`${price.toFixed(2)}`}</h3>
+                    <h3>Price per day: ${`${price?.toFixed(2)}`}</h3>
                     <form onSubmit={handleSubmitReservation}>
                         <div className='reservation'>
                             <input
@@ -171,8 +171,8 @@ const Bookings = () => {
                             <button className='reservation-button' >Reserve</button>
                         </div>
                     </form>
-                    <h3>Fees (30% for tax and services): ${`${fees.toFixed(2)}`}</h3>
-                    <h3 className='total'>Total: ${`${totalPrice.toFixed(2)}`}</h3>
+                    <h3>Fees (30% for tax and services): ${`${fees?.toFixed(2)}`}</h3>
+                    <h3 className='total'>Total: ${`${totalPrice?.toFixed(2)}`}</h3>
                 </div>
                 {
                     user?.id === brand?.userId && (
