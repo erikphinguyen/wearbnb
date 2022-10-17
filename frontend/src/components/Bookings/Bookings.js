@@ -113,12 +113,12 @@ const Bookings = () => {
         }
         // console.log('WHAT IS START DATE',new Date(dates.endDate))
         if (date === 'end' && dates.startDate !== '') {
-            console.log('WHAT IS START DATE', dates.startDate)
-            console.log('WHAT IS END DATE', e.target.value)
+            // console.log('WHAT IS START DATE', dates.startDate)
+            // console.log('WHAT IS END DATE', e.target.value)
             console.log('@@@@@@@@@@@@@@@ NEWWWWWWWWWWW',new Date(dates.startDate.split('-').join('/')))
             console.log('@@@@@@@@@@@@@@@ END DATE',new Date(e.target.value.split('-').join('/')))
             // console.log('WHAT IS END DATE', new Date(dates.startDate))
-            let duration = (new Date(e.target.value) - (new Date(dates.startDate)) / 86400000);
+            let duration = (new Date(e.target.value.split('-').join('/')) - (new Date(dates.startDate.split('-').join('/')))) / 86400000;
             setTotalPrice((price * duration) + fees)
         }
         if (date === 'end') setDates({...dates, endDate: e.target.value})
