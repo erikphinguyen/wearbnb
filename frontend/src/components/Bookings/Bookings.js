@@ -16,9 +16,7 @@ const Bookings = () => {
     const [editModeBookings, setEditModeBookings] = useState(false);
     const [startDate, setStartDate] = useState('');
     const [endDate, setEndDate] = useState('');
-    // const [price, setPrice] = useState([]);
     const [totalPrice, setTotalPrice] = useState(0);
-    // const [currentTotalPrice, setCurrentTotalPrice] = useState(totalPrice)
     const [stayDuration, setStayDuration] = useState(0)
 
     const price = useSelector(state => state.bookings[id]?.price)
@@ -26,14 +24,14 @@ const Bookings = () => {
 
     // let stayDuration = useRef(0);
     // let totalPrice = useRef(0);
-    let fees = Number((price * 0.3).toFixed(2));
+    let fees = Number(price * .3);
 
     // PRICE ADJUSTMENTS
     useEffect(() => {
         // setStayDuration((new Date(endDate) - (new Date(startDate)) /86400000));
         // setTotalPrice(((price * stayDuration) + (fees)));
         dispatch(thunkGetBookings(id));
-    }, [dispatch, startDate, endDate, price, fees]);
+    }, [dispatch, dates.startDate, dates.endDate, price, fees]);
 
     // get bookings
     const [bookings, setBookings] = useState([])
@@ -107,35 +105,38 @@ const Bookings = () => {
     }
 
     const updateDisplayInfo = (e, date) => {
-        // calculateTotalPrice()
+
         if (date === 'start') {
             setDates({...dates, startDate: e.target.value})
         }
-        // console.log('WHAT IS START DATE',new Date(dates.endDate))
+
         if (date === 'end' && dates.startDate !== '') {
-            // console.log('WHAT IS START DATE', dates.startDate)
-            // console.log('WHAT IS END DATE', e.target.value)
-            console.log('@@@@@@@@@@@@@@@ NEWWWWWWWWWWW',new Date(dates.startDate.split('-').join('/')))
-            console.log('@@@@@@@@@@@@@@@ END DATE',new Date(e.target.value.split('-').join('/')))
-            // console.log('WHAT IS END DATE', new Date(dates.startDate))
+            /*
+                HUGE BUG SOLVED:
+                new Date() needs to have the date in slashes not hyphens!!
+            */
+           console.log('WHAT IS PRICE', price)
             let duration = (new Date(e.target.value.split('-').join('/')) - (new Date(dates.startDate.split('-').join('/')))) / 86400000;
-            setTotalPrice((price * duration) + fees)
+            console.log('WHAT IS DURATION', duration)
+            console.log('WHAT IS FEES', fees)
+            setTotalPrice((((price * duration) + fees)))
         }
         if (date === 'end') setDates({...dates, endDate: e.target.value})
     }
 
-    const calculateTotalPrice = () => {
-        if (dates.startDate !== '' && dates.endDate !== '') {
-            setStayDuration((new Date(dates.endDate) - (new Date(dates.startDate)) / 86400000));
-            setTotalPrice(((price * stayDuration) + (fees)));
-        }
-    }
+    // maybe use this later??
+    // const calculateTotalPrice = () => {
+    //     if (dates.startDate !== '' && dates.endDate !== '') {
+    //         setStayDuration((new Date(dates.endDate) - (new Date(dates.startDate)) / 86400000));
+    //         setTotalPrice(((price * stayDuration) + (fees)));
+    //     }
+    // }
 
     return (
         <div className='bookings-container'>
             <div className='price-container'>
                 <div className='price-card'>
-                    <h3>Price per day: ${`${price}`}</h3>
+                    <h3>Price per day: ${`${price.toFixed(2)}`}</h3>
                     <form onSubmit={handleSubmitReservation}>
                         <div className='reservation'>
                             <input
@@ -170,9 +171,8 @@ const Bookings = () => {
                             <button className='reservation-button' >Reserve</button>
                         </div>
                     </form>
-                    <h3>Fees (30% for tax and services): ${`${fees}`}</h3>
-                    {console.log('WHAT IS TOTALPRICE', totalPrice)}
-                    <h3 className='total'>Total: {`${totalPrice}`}</h3>
+                    <h3>Fees (30% for tax and services): ${`${fees.toFixed(2)}`}</h3>
+                    <h3 className='total'>Total: ${`${totalPrice.toFixed(2)}`}</h3>
                 </div>
                 {
                     user?.id === brand?.userId && (
