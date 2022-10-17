@@ -16,20 +16,22 @@ const Bookings = () => {
     const [editModeBookings, setEditModeBookings] = useState(false);
     const [startDate, setStartDate] = useState('');
     const [endDate, setEndDate] = useState('');
-    const [currentTotalPrice, setCurrentTotalPrice] = useState('')
     // const [price, setPrice] = useState([]);
-    // const [totalPrice, setTotalPrice] = useState([]);
+    const [totalPrice, setTotalPrice] = useState(0);
+    // const [currentTotalPrice, setCurrentTotalPrice] = useState(totalPrice)
+    const [stayDuration, setStayDuration] = useState(0)
 
     const price = useSelector(state => state.bookings[id]?.price)
+    const [dates, setDates] = useState({startDate : '', endDate : ''})
 
-    let stayDuration = useRef(0);
-    let totalPrice = useRef(0);
+    // let stayDuration = useRef(0);
+    // let totalPrice = useRef(0);
     let fees = Number((price * 0.3).toFixed(2));
 
     // PRICE ADJUSTMENTS
     useEffect(() => {
-        stayDuration.current = ((new Date(endDate)) - (new Date(startDate))) / 86400000;
-        totalPrice.current = ((price * stayDuration.current) + (fees)).toFixed(2);
+        // setStayDuration((new Date(endDate) - (new Date(startDate)) /86400000));
+        // setTotalPrice(((price * stayDuration) + (fees)));
         dispatch(thunkGetBookings(id));
     }, [dispatch, startDate, endDate, price, fees]);
 
@@ -64,14 +66,14 @@ const Bookings = () => {
             startDate,
             endDate,
             price,
-            totalPrice: totalPrice.current
+            totalPrice: totalPrice
         }
     }
 
     const handlePriceChange = e => {
         e.preventDefault();
         const data = {
-            
+
         }
     }
 
@@ -104,6 +106,31 @@ const Bookings = () => {
             })
     }
 
+    const updateDisplayInfo = (e, date) => {
+        // calculateTotalPrice()
+        if (date === 'start') {
+            setDates({...dates, startDate: e.target.value})
+        }
+        // console.log('WHAT IS START DATE',new Date(dates.endDate))
+        if (date === 'end' && dates.startDate !== '') {
+            console.log('WHAT IS START DATE', dates.startDate)
+            console.log('WHAT IS END DATE', e.target.value)
+            console.log('@@@@@@@@@@@@@@@ NEWWWWWWWWWWW',new Date(dates.startDate.split('-').join('/')))
+            console.log('@@@@@@@@@@@@@@@ END DATE',new Date(e.target.value.split('-').join('/')))
+            // console.log('WHAT IS END DATE', new Date(dates.startDate))
+            let duration = (new Date(e.target.value) - (new Date(dates.startDate)) / 86400000);
+            setTotalPrice((price * duration) + fees)
+        }
+        if (date === 'end') setDates({...dates, endDate: e.target.value})
+    }
+
+    const calculateTotalPrice = () => {
+        if (dates.startDate !== '' && dates.endDate !== '') {
+            setStayDuration((new Date(dates.endDate) - (new Date(dates.startDate)) / 86400000));
+            setTotalPrice(((price * stayDuration) + (fees)));
+        }
+    }
+
     return (
         <div className='bookings-container'>
             <div className='price-container'>
@@ -115,22 +142,26 @@ const Bookings = () => {
                                 placeholder='Start Date'
                                 name="startDate"
                                 onChange={(e) => {
-                                    stayDuration.current = ((new Date(endDate)) - (new Date(startDate))) / 86400000;
-                                    setCurrentTotalPrice((price * stayDuration.current) + (fees)).toFixed(2);
-                                    setStartDate(e.target.value)
+                                    // setStayDuration(((new Date(endDate)) - (new Date(startDate))) / 86400000);
+                                    // setStartDate(e.target.value)
+                                    updateDisplayInfo(e, 'start')
+                                    // calculateTotalPrice()
+                                    // setTotalPrice((price * stayDuration) + (fees)).toFixed(2);
                                 }}
-                                value={startDate}
+                                value={dates.startDate}
                                 type='date'
                             />
                             <input
                                 placeholder='End Date'
                                 name="endDate"
                                 onChange={(e) => {
-                                    stayDuration.current = ((new Date(endDate)) - (new Date(startDate))) / 86400000;
-                                    setCurrentTotalPrice((price * stayDuration.current) + (fees)).toFixed(2);
-                                    setEndDate(e.target.value)
+                                    // setStayDuration(((new Date(endDate)) - (new Date(startDate))) / 86400000);
+                                    // setEndDate(e.target.value)
+                                    updateDisplayInfo(e, 'end')
+                                    // calculateTotalPrice()
+                                    // setTotalPrice((price * stayDuration) + (fees)).toFixed(2);
                                 }}
-                                value={endDate}
+                                value={dates.endDate}
                                 type='date'
                             />
                         </div>
@@ -141,7 +172,7 @@ const Bookings = () => {
                     </form>
                     <h3>Fees (30% for tax and services): ${`${fees}`}</h3>
                     {console.log('WHAT IS TOTALPRICE', totalPrice)}
-                    <h3 className='total'>Total: {`${currentTotalPrice}`}</h3>
+                    <h3 className='total'>Total: {`${totalPrice}`}</h3>
                 </div>
                 {
                     user?.id === brand?.userId && (
