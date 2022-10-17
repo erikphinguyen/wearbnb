@@ -118,7 +118,6 @@ const bookingsReducer = (state = {}, action) => {
     switch (action.type) {
         case GET_BOOKINGS:
             const getState = {};
-            console.log('@@@@@@@@@@@@@@@@@@@@@@@@@@@AM I INSIDE GET BOOKINGS STORE')
             action.bookings.forEach(booking => {
                 getState[booking.id] = booking;
             })
