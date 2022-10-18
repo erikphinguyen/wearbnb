@@ -7,7 +7,7 @@ import * as sessionActions from '../../store/session';
 function UserBookings({ bookings, setBookings }) {
     const dispatch = useDispatch();
     const { id } = useParams();
-    const bookings = useSelector(state => state.bookings);
+    // const bookings = useSelector(state => state.bookings);
     const user = useSelector(state => state.session.user?.id)
     const username = useSelector(state => state.session.user?.username)
     const brandName = useSelector(state => state.brands[id]?.name);
@@ -25,7 +25,11 @@ function UserBookings({ bookings, setBookings }) {
 
     useEffect(() => {
         dispatch(thunkGetUserBookings(id))
-    }, [id, dispatch])
+            .then(res => {
+                let sortedBookings = res.sort((a, b) => a.id - b.id)
+                setBookings(sortedBookings)
+            })
+    }, [dispatch])
 
     console.log('WHAT IS BOOKINGS', bookings)
 
