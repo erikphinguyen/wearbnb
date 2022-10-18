@@ -2,10 +2,10 @@ import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, NavLink, Route, useParams, useHistory } from 'react-router-dom';
 import { thunkGetReviews, thunkPutReviews, thunkPostReviews, thunkDeleteReviews } from '../../store/reviews';
-import PostReview from '../PostReview'
+import PostReview from '../PostReview';
 import './Reviews.css'
 
-const Reviews = () => {
+const Reviews = ({ user }) => {
     // THIS WAS PASSED IN AS PROPS PRIOR
     // { reviews, setReviews }
 
@@ -31,7 +31,7 @@ const Reviews = () => {
         setEditModeReviews(false)
     }
 
-    const user = useSelector(state => state.session.user)
+    // const user = useSelector(state => state.session.user)
     // const username = useSelector(state => state.session.user.username)
     // console.log('WHAT IS USERNAME', username)
 
@@ -164,7 +164,6 @@ const Reviews = () => {
                 setReviews(newReviews)
             })
     }
-
 
     return (
         <div className='reviews-page'>
