@@ -11,7 +11,12 @@ function UserBookings() {
     const user = useSelector(state => state.session.user?.id)
     const username = useSelector(state => state.session.user?.username)
     const brandName = useSelector(state => state.brands[id]?.name);
-    const [isLoaded, setIsLoaded] = useState(false)
+    const [isLoaded, setIsLoaded] = useState(false);
+
+    const price = useSelector(state => state.bookings[id]?.price)
+    const [dates, setDates] = useState({startDate : '', endDate : ''});
+    let fees = Number(price * .3);
+    console.log('WHAT IS PRICE', price)
 
     useEffect(() => {
         dispatch(sessionActions.restoreUser())
@@ -28,9 +33,11 @@ function UserBookings() {
     const bookingsFromUser = Object?.values(bookings)
     console.log('WHAT IS BOOKINGS FROM USER', bookingsFromUser)
 
-    let stayDuration = (startDate, endDate) => {
-        return ((new Date(endDate) - (new Date(startDate)) / 86400000))
+    let stayDuration = () => {
+        return (new Date(bookings.endDate.split('-').join('/')) - (new Date(bookings.startDate.split('-').join('/')))) / 86400000;
     }
+
+    console.log('WHAT IS STAYDURATION', stayDuration)
 
     return (
         <div className='user-bookings-container'>
@@ -38,9 +45,16 @@ function UserBookings() {
                 User {user}'s Bookings
             </h1>
             {bookingsFromUser && bookingsFromUser.map(booking => (
-                <div className='user-bookings'>
-                    {console.log('WHAT IS BOOKING JSX', booking)}
-                    {console.log('WHAT IS BOOKING NAME', booking.brandId)}
+                <div className='user-bookings' key={booking.id}>
+                    <div>
+                        <p>
+                            {booking.price}
+                            {console.log('@@@@@@@@@@@@@@@',new Date(booking.endDate.split('-').join('/')) - new Date(booking.startDate.split('-').join('/')))}
+                            {(booking.endDate.split('-').join('/')) - (booking.startDate.split('-').join('/'))}
+                        </p>
+                    </div>
+
+
                     {/*deleting bookings*/}
                     <button
                     onClick={(e) => {

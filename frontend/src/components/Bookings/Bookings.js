@@ -115,10 +115,7 @@ const Bookings = () => {
                 HUGE BUG SOLVED:
                 new Date() needs to have the date in slashes not hyphens!!
             */
-           console.log('WHAT IS PRICE', price)
             let duration = (new Date(e.target.value.split('-').join('/')) - (new Date(dates.startDate.split('-').join('/')))) / 86400000;
-            console.log('WHAT IS DURATION', duration)
-            console.log('WHAT IS FEES', fees)
             setTotalPrice((((price * duration) + fees)))
         }
         if (date === 'end') setDates({...dates, endDate: e.target.value})
