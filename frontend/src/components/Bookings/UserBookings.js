@@ -34,7 +34,7 @@ function UserBookings() {
     console.log('WHAT IS BOOKINGS FROM USER', bookingsFromUser)
 
     let stayDuration = () => {
-        return (new Date(bookings.endDate.split('-').join('/')) - (new Date(bookings.startDate.split('-').join('/')))) / 86400000;
+        return (new Date(bookings?.endDate.split('-').join('/')) - (new Date(bookings?.startDate.split('-').join('/')))) / 86400000;
     }
 
     console.log('WHAT IS STAYDURATION', stayDuration)
@@ -49,8 +49,9 @@ function UserBookings() {
                     <div>
                         <p>
                             {booking.price}
+                            {stayDuration()}
                             {console.log('@@@@@@@@@@@@@@@',new Date(booking.endDate.split('-').join('/')) - new Date(booking.startDate.split('-').join('/')))}
-                            {(booking.endDate.split('-').join('/')) - (booking.startDate.split('-').join('/'))}
+                            {(booking.endDate?.split('-').join('/')) - (booking.startDate?.split('-').join('/'))}
                         </p>
                     </div>
 
