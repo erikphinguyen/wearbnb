@@ -42,7 +42,7 @@ function UserBookings() {
     return (
         <div className='user-bookings-container'>
             <h1>
-                User {user}'s Bookings
+                {username}'s Bookings:
             </h1>
             {bookingsFromUser && bookingsFromUser.map(booking => (
                 <div className='user-bookings' key={booking.id}>
