@@ -57,6 +57,8 @@ function App() {
   const [brands, setBrands] = useState([]);
   const [value, onChange] = useState(new Date());
 
+  const [bookings, setBookings] = useState([])
+
   return (
     <>
       <Navigation isLoaded={isLoaded} brands={brands} setBrands={setBrands} />
@@ -71,7 +73,7 @@ function App() {
             {/* <Calendar onChange={onChange} value={value} /> */}
           </Route>
           <Route path='/users/:id'>
-            <UserBookings />
+            <UserBookings bookings={bookings} setBookings={setBookings} />
           </Route>
           <Route component={PageNotFound} />
         </Switch>

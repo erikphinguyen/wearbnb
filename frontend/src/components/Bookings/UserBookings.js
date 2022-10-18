@@ -4,7 +4,7 @@ import { useParams, NavLink } from "react-router-dom";
 import { thunkGetUserBookings, thunkDeleteBookings } from '../../store/bookings';
 import * as sessionActions from '../../store/session';
 
-function UserBookings() {
+function UserBookings({ bookings, setBookings }) {
     const dispatch = useDispatch();
     const { id } = useParams();
     const bookings = useSelector(state => state.bookings);
@@ -14,7 +14,7 @@ function UserBookings() {
     const [isLoaded, setIsLoaded] = useState(false);
 
     const price = useSelector(state => state.bookings[id]?.price)
-    const [dates, setDates] = useState({startDate : '', endDate : ''});
+    const [dates, setDates] = useState({ startDate: '', endDate: '' });
     let fees = Number(price * .3);
     console.log('WHAT IS PRICE', price)
 
@@ -34,7 +34,7 @@ function UserBookings() {
     console.log('WHAT IS BOOKINGS FROM USER', bookingsFromUser)
 
     let stayDuration = () => {
-        return (new Date(bookings?.endDate.split('-').join('/')) - (new Date(bookings?.startDate.split('-').join('/')))) / 86400000;
+        return (new Date(bookings.endDate?.split('-')?.join('/')) - (new Date(bookings.startDate?.split('-')?.join('/')))) / 86400000;
     }
 
     console.log('WHAT IS STAYDURATION', stayDuration)
@@ -50,19 +50,19 @@ function UserBookings() {
                         <p>
                             {booking.price}
                             {stayDuration()}
-                            {console.log('@@@@@@@@@@@@@@@',new Date(booking.endDate.split('-').join('/')) - new Date(booking.startDate.split('-').join('/')))}
-                            {(booking.endDate?.split('-').join('/')) - (booking.startDate?.split('-').join('/'))}
+                            {console.log('@@@@@@@@@@@@@@@', new Date(booking.endDate.split('-').join('/')) - new Date(booking.startDate.split('-').join('/')))}
+                            {/* {(booking.endDate?.split('-').join('/')) - (booking.startDate?.split('-').join('/'))} */}
                         </p>
                     </div>
 
 
                     {/*deleting bookings*/}
                     <button
-                    onClick={(e) => {
-                        e.preventDefault();
-                        dispatch(thunkDeleteBookings(booking?.id))
-                    }}
-                    Cancel Booking
+                        onClick={(e) => {
+                            e.preventDefault();
+                            dispatch(thunkDeleteBookings(booking?.id))
+                        }}
+                        Cancel Booking
                     ></button>
                 </div>
             ))}
