@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from 'react-redux';
+import { NavLink } from "react-router-dom";
 import * as sessionActions from '../../store/session';
 import './ProfileButton.css'
 
@@ -29,6 +30,12 @@ function ProfileButton({ user }) {
         dispatch(sessionActions.logout());
     };
 
+    const userBookings = () => {
+        <NavLink
+            to={`users/$user.id}/bookings`}
+        />
+    }
+
     return (
         <>
             <button className="button" onClick={openMenu}>
@@ -40,7 +47,7 @@ function ProfileButton({ user }) {
                     <div><b>Username: </b> {user.username}</div>
                     <div><b>Email: </b>{user.email}</div>
                     <div>
-                        <button className="button">Bookings</button>
+                        <button className="button" onClick={userBookings}>Bookings</button>
                     </div>
                     <div className="hidden hidden-button">
                         .
