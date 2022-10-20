@@ -7,42 +7,19 @@ const { User, Brand, Booking } = require('../../db/models');
 const { bookingValidations } = require('../../validations/bookings');
 const { validationResult } = require('express-validator')
 
-// GET BOOKINGS
+// GET ALL BOOKINGS TO SPECIFIC USER
 router.get('/:id(\\d+)', asyncHandler(async (req, res) => {
     const { id } = req.params;
     // first option with .findAll
-
-    let user = new User({
-        userId: req.body.userId,
-    })
-
-    let brand = new Brand({
-        brandId: req.body.brandId
-    })
-    // console.log('WHAT IS BOOKING SINGULAR', user)
-    // console.log('WHAT IS BOOKING SINGULAR', brand)
-
-    // const bookings = await Booking.findAll(
-    //     {
-    //         where: {
-    //             brandId,
-    //             userId
-    //         }
-    //     }
-    // )
-
-    // second option with .findByPk
-    // const bookings = await Booking.findByPk(Number(id))
-
-    // third option with includes
     const bookings = await Booking.findAll({
             where: {
                 userId: id
             }
     })
 
-    console.log('@@@@@@@@@@@@@@@@@@@@@@@@@@')
-    console.log('--------- WHAT IS BOOKINGS', bookings)
+    // second option with .findByPk
+    // const bookings = await Booking.findByPk(Number(id))
+
     return res.json(bookings)
 }))
 
