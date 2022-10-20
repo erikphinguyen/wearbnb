@@ -35,12 +35,6 @@ function UserBookings({ bookings, setBookings, Brand }) {
     // this returns an array of bookings from specific user
     const bookingsFromUser = Object?.values(bookings)
 
-    let stayDuration = () => {
-        return (new Date(bookings.endDate?.split('-')?.join('/')) - (new Date(bookings.startDate?.split('-')?.join('/')))) / 86400000;
-    }
-
-    console.log('WHAT IS STAYDURATION', stayDuration)
-
     return (
         <div className='user-bookings-container'>
             <h1>
@@ -59,9 +53,9 @@ function UserBookings({ bookings, setBookings, Brand }) {
                             </div>
                             <div>
                                 Total: $
-                                {stayDuration()}
+                                {(((new Date(booking.endDate)) - (new Date(booking.startDate))) / 86400000) }
                             </div>
-                            {console.log('@@@@@@@@@@@@@@@', new Date(booking.endDate.split('-').join('/')) - new Date(booking.startDate.split('-').join('/')))}
+                            {console.log('WHAT IS BOOKING', booking)}
                             {/* {(booking.endDate?.split('-').join('/')) - (booking.startDate?.split('-').join('/'))} */}
                         </p>
                     </div>
