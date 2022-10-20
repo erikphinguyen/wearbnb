@@ -9,16 +9,40 @@ const { validationResult } = require('express-validator')
 
 // GET BOOKINGS
 router.get('/:id(\\d+)', asyncHandler(async (req, res) => {
-    console.log('INSIDE BOOKINGS ROUTE');
     const { id } = req.params;
     // first option with .findAll
-    const bookings = await Booking.findAll(
-        {
-            where: { brandId: id }
-        }
-    )
+
+    let user = new User({
+        userId: req.body.userId,
+    })
+
+    let brand = new Brand({
+        brandId: req.body.brandId
+    })
+    // console.log('WHAT IS BOOKING SINGULAR', user)
+    // console.log('WHAT IS BOOKING SINGULAR', brand)
+
+    // const bookings = await Booking.findAll(
+    //     {
+    //         where: {
+    //             brandId,
+    //             userId
+    //         }
+    //     }
+    // )
+
     // second option with .findByPk
-    // const bookings = await Bookings.findByPk(Number(id))
+    // const bookings = await Booking.findByPk(Number(id))
+
+    // third option with includes
+    const bookings = await Booking.findAll({
+            where: {
+                userId: id
+            }
+    })
+
+    console.log('@@@@@@@@@@@@@@@@@@@@@@@@@@')
+    console.log('--------- WHAT IS BOOKINGS', bookings)
     return res.json(bookings)
 }))
 
