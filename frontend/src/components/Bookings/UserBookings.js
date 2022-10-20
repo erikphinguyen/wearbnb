@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams, NavLink } from "react-router-dom";
 import { thunkGetUserBookings, thunkDeleteBookings } from '../../store/bookings';
 import * as sessionActions from '../../store/session';
+import './UserBookings.css';
 
 function UserBookings({ bookings, setBookings, Brand }) {
     const dispatch = useDispatch();
@@ -53,11 +54,12 @@ function UserBookings({ bookings, setBookings, Brand }) {
                     <div>
                         <h2>
                             {booking?.Brand?.name}
-                            {console.log('WHAT IS BOOKING ID BRAND', booking?.Brand?.name)}
                         </h2>
                         <p>
                             {booking.price}
-                            {stayDuration()}
+                            <div>
+                                {stayDuration()}
+                            </div>
                             {console.log('@@@@@@@@@@@@@@@', new Date(booking.endDate.split('-').join('/')) - new Date(booking.startDate.split('-').join('/')))}
                             {/* {(booking.endDate?.split('-').join('/')) - (booking.startDate?.split('-').join('/'))} */}
                         </p>
