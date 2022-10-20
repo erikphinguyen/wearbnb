@@ -53,10 +53,8 @@ function UserBookings({ bookings, setBookings, Brand }) {
                             </div>
                             <div>
                                 Total: $
-                                {(((new Date(booking.endDate)) - (new Date(booking.startDate))) / 86400000) }
+                                {(((((new Date(booking.endDate)) - (new Date(booking.startDate))) / 86400000) * (booking.price)) * 1.3)?.toFixed(2) }
                             </div>
-                            {console.log('WHAT IS BOOKING', booking)}
-                            {/* {(booking.endDate?.split('-').join('/')) - (booking.startDate?.split('-').join('/'))} */}
                         </p>
                     </div>
 
