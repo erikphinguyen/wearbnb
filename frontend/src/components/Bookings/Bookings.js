@@ -121,14 +121,6 @@ const Bookings = () => {
         if (date === 'end') setDates({...dates, endDate: e.target.value})
     }
 
-    // maybe use this later??
-    // const calculateTotalPrice = () => {
-    //     if (dates.startDate !== '' && dates.endDate !== '') {
-    //         setStayDuration((new Date(dates.endDate) - (new Date(dates.startDate)) / 86400000));
-    //         setTotalPrice(((price * stayDuration) + (fees)));
-    //     }
-    // }
-
     return (
         <div className='bookings-container'>
             <div className='price-container'>

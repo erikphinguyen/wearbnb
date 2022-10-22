@@ -46,27 +46,31 @@ function UserBookings({ bookings, setBookings, Brand }) {
                         <h2>
                             {booking?.Brand?.name}
                         </h2>
+                        <h3>
+                            Reservation: {Date(booking.startDate)} - {Date(booking.endDate)}
+                        </h3>
                         <p>
-                            ${(booking.price)?.toFixed(2)} per day
+                            <b>Price per day:</b> ${(booking.price)?.toFixed(2)}
                             <div>
-                                Fees (30% for tax and services): ${((booking.price) * 0.3)?.toFixed(2)}
+                                <b>Fees (30% for tax and services):</b> ${((booking.price) * 0.3)?.toFixed(2)}
                             </div>
                             <div>
-                                Total: $
-                                {(((((new Date(booking.endDate)) - (new Date(booking.startDate))) / 86400000) * (booking.price)) * 1.3)?.toFixed(2) }
+                                <b>Total:</b> $
+                                {(((((new Date(booking.endDate)) - (new Date(booking.startDate))) / 86400000) * (booking.price)) * 1.3)?.toFixed(2)}
                             </div>
                         </p>
                     </div>
 
 
                     {/*deleting bookings*/}
-                    <button
+                    <button className='button'
                         onClick={(e) => {
                             e.preventDefault();
                             dispatch(thunkDeleteBookings(booking?.id))
                         }}
+                    >
                         Cancel Booking
-                    ></button>
+                    </button>
                 </div>
             ))}
         </div>
