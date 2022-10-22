@@ -19,7 +19,8 @@ const Bookings = () => {
     const [totalPrice, setTotalPrice] = useState(0);
     const [stayDuration, setStayDuration] = useState(0)
 
-    const price = useSelector(state => state.bookings[id]?.price)
+    const price = useSelector(state => state.bookings[id])
+    console.log('WHAT IS PRICE', price)
     const [dates, setDates] = useState({startDate : '', endDate : ''})
 
     // let stayDuration = useRef(0);

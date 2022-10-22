@@ -47,7 +47,7 @@ function UserBookings({ bookings, setBookings, Brand }) {
                             {booking?.Brand?.name}
                         </h2>
                         <h3>
-                            Reservation: {Date(booking.startDate)} - {Date(booking.endDate)}
+                            Reservation: {new Date(booking.startDate).toLocaleDateString()} - {new Date(booking.endDate).toLocaleDateString()}
                         </h3>
                         <p>
                             <b>Price per day:</b> ${(booking.price)?.toFixed(2)}
