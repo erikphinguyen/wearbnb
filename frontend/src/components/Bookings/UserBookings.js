@@ -8,15 +8,29 @@ import './UserBookings.css';
 function UserBookings({ bookings, setBookings, Brand }) {
     const dispatch = useDispatch();
     const { id } = useParams();
-    // const bookings = useSelector(state => state.bookings);
     const user = useSelector(state => state.session.user?.id)
     const username = useSelector(state => state.session.user?.username)
     const [isLoaded, setIsLoaded] = useState(false);
 
     const price = useSelector(state => state.bookings[id]?.price)
+
+    // const price = useSelector(state => {
+    //     let listing = state.bookings.filter(el => {
+    //         console.log('@@@@@@@@@@@@@@ WHAT IS LISTING', listing)
+    //         return el.id === bookings.brandId
+    //     })
+
+    //     return listing[0].price
+    // })
+
+    console.log('WHAT IS PRICE', price)
+
     const [dates, setDates] = useState({ startDate: '', endDate: '' });
     let fees = Number(price * .3);
-    console.log('WHAT IS PRICE', price)
+
+    // this returns an array of bookings from specific user
+    const bookingsFromUser = Object?.values(bookings)
+    console.log('WHAT IS BOOKINGSFROMUSER', bookingsFromUser)
 
     useEffect(() => {
         dispatch(sessionActions.restoreUser())
@@ -31,9 +45,15 @@ function UserBookings({ bookings, setBookings, Brand }) {
             })
     }, [dispatch])
 
-
-    // this returns an array of bookings from specific user
-    const bookingsFromUser = Object?.values(bookings)
+    // DELETING BOOKING
+    // const handleDeleteBooking = (id) => {
+    //     dispatch(thunkDeleteBookings(id))
+    //         .then(() => {
+    //             // let deleteBookings = bookingsFromUser.filter(deleteBooking => deleteBooking.id !== id);
+    //             let deleteBookings = bookings.filter(deleteBooking => deleteBooking.id !== id);
+    //             setBookings(deleteBookings)
+    //         })
+    // }
 
     return (
         <div className='user-bookings-container'>
@@ -63,14 +83,9 @@ function UserBookings({ bookings, setBookings, Brand }) {
 
 
                     {/*deleting bookings*/}
-                    <button className='button'
-                        onClick={(e) => {
-                            e.preventDefault();
-                            dispatch(thunkDeleteBookings(booking?.id))
-                        }}
-                    >
+                    {/* <button className='button'onClick={handleDeleteBooking(booking.id)}>
                         Cancel Booking
-                    </button>
+                    </button> */}
                 </div>
             ))}
         </div>
