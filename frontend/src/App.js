@@ -44,6 +44,7 @@ import OneBrandContainer from "./components/OneBrand/OneBrandContainer";
 import Footer from "./components/Footer/ index";
 import PageNotFound from "./components/PageNotFound";
 import UserBookings from "./components/Bookings/UserBookings";
+import SearchBar from "./components/SearchBar/SearchBar";
 // import Calendar from "react-calendar";
 // import 'react-calendar/dist/Calendar.css';
 
@@ -65,6 +66,7 @@ function App() {
       {isLoaded && (
         <Switch>
           <Route exact path="/">
+            <SearchBar placeholder="Search a Brand"/>
             <Brands brands={brands} setBrands={setBrands} />
             <Footer />
           </Route>
