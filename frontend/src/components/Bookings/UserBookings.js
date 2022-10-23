@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams, NavLink } from "react-router-dom";
 import { thunkGetUserBookings, thunkDeleteBookings } from '../../store/bookings';
 import * as sessionActions from '../../store/session';
+import './UserBookings.css';
 
 function UserBookings({ bookings, setBookings, Brand }) {
     const dispatch = useDispatch();
@@ -30,17 +31,9 @@ function UserBookings({ bookings, setBookings, Brand }) {
             })
     }, [dispatch])
 
-    console.log('WHAT IS BOOKINGS', bookings)
 
     // this returns an array of bookings from specific user
     const bookingsFromUser = Object?.values(bookings)
-    console.log('WHAT IS BOOKINGS FROM USER', bookingsFromUser)
-
-    let stayDuration = () => {
-        return (new Date(bookings.endDate?.split('-')?.join('/')) - (new Date(bookings.startDate?.split('-')?.join('/')))) / 86400000;
-    }
-
-    console.log('WHAT IS STAYDURATION', stayDuration)
 
     return (
         <div className='user-bookings-container'>
@@ -49,29 +42,35 @@ function UserBookings({ bookings, setBookings, Brand }) {
             </h1>
             {bookingsFromUser && bookingsFromUser.map(booking => (
                 <div className='user-bookings' key={booking.id}>
-                    {console.log('WHAT IS BOOKING', booking)}
                     <div>
                         <h2>
                             {booking?.Brand?.name}
-                            {console.log('WHAT IS BOOKING ID BRAND', booking?.Brand?.name)}
                         </h2>
+                        <h3>
+                            Reservation: {new Date(booking.startDate).toLocaleDateString()} - {new Date(booking.endDate).toLocaleDateString()}
+                        </h3>
                         <p>
-                            {booking.price}
-                            {stayDuration()}
-                            {console.log('@@@@@@@@@@@@@@@', new Date(booking.endDate.split('-').join('/')) - new Date(booking.startDate.split('-').join('/')))}
-                            {/* {(booking.endDate?.split('-').join('/')) - (booking.startDate?.split('-').join('/'))} */}
+                            <b>Price per day:</b> ${(booking.price)?.toFixed(2)}
+                            <div>
+                                <b>Fees (30% for tax and services):</b> ${((booking.price) * 0.3)?.toFixed(2)}
+                            </div>
+                            <div>
+                                <b>Total:</b> $
+                                {(((((new Date(booking.endDate)) - (new Date(booking.startDate))) / 86400000) * (booking.price)) * 1.3)?.toFixed(2)}
+                            </div>
                         </p>
                     </div>
 
 
                     {/*deleting bookings*/}
-                    <button
+                    <button className='button'
                         onClick={(e) => {
                             e.preventDefault();
                             dispatch(thunkDeleteBookings(booking?.id))
                         }}
+                    >
                         Cancel Booking
-                    ></button>
+                    </button>
                 </div>
             ))}
         </div>

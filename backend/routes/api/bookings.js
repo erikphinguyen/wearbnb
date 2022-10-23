@@ -10,7 +10,6 @@ const { validationResult } = require('express-validator')
 // GET ALL BOOKINGS TO LOGGED IN USER
 router.get('/:id(\\d+)', requireAuth, asyncHandler(async (req, res) => {
     const { id } = req.params;
-    console.log('WHAT IS ID', id)
     // first option with .findAll
     const bookings = await Booking.findAll({
         include: {
@@ -20,12 +19,6 @@ router.get('/:id(\\d+)', requireAuth, asyncHandler(async (req, res) => {
             }
         }
     })
-    console.log('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@')
-    console.log('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@')
-    console.log('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@')
-    console.log('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@')
-    console.log('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@')
-    console.log('FINDING BRAND NAME', bookings[id].Brand.name)
 
     // second option with .findByPk
     // const bookings = await Booking.findByPk(Number(id))

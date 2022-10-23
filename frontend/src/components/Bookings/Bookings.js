@@ -19,7 +19,8 @@ const Bookings = () => {
     const [totalPrice, setTotalPrice] = useState(0);
     const [stayDuration, setStayDuration] = useState(0)
 
-    const price = useSelector(state => state.bookings[id]?.price)
+    const price = useSelector(state => state.bookings[id])
+    console.log('WHAT IS PRICE', price)
     const [dates, setDates] = useState({startDate : '', endDate : ''})
 
     // let stayDuration = useRef(0);
@@ -120,14 +121,6 @@ const Bookings = () => {
         }
         if (date === 'end') setDates({...dates, endDate: e.target.value})
     }
-
-    // maybe use this later??
-    // const calculateTotalPrice = () => {
-    //     if (dates.startDate !== '' && dates.endDate !== '') {
-    //         setStayDuration((new Date(dates.endDate) - (new Date(dates.startDate)) / 86400000));
-    //         setTotalPrice(((price * stayDuration) + (fees)));
-    //     }
-    // }
 
     return (
         <div className='bookings-container'>

@@ -179,8 +179,7 @@ const Reviews = ({ user }) => {
                                 {review.review && (
                                     <p>
                                         <b>
-                                            {/* {review.userId == 1 && review.userId = "Demo-lition"} */}
-                                            user {review?.userId}'s review:
+                                            {review?.User?.username}'s review:
                                         </b>
                                         <div>
                                             {/* so review.review doesn't exist */}

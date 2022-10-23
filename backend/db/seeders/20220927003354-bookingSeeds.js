@@ -126,8 +126,8 @@ module.exports = {
       {
         userId: "1",
         brandId: "13",
-        startDate: '2022-01-23',
-        endDate: '2022-01-29',
+        startDate: '2022-01-20',
+        endDate: '2022-01-27',
         price: 250.00,
         totalPrice: 2275.00,
         createdAt: new Date(),
@@ -136,8 +136,8 @@ module.exports = {
       {
         userId: "2",
         brandId: "14",
-        startDate: '2022-01-23',
-        endDate: '2022-01-29',
+        startDate: '2022-01-20',
+        endDate: '2022-01-27',
         price: 250.00,
         totalPrice: 2275.00,
         createdAt: new Date(),
@@ -146,8 +146,8 @@ module.exports = {
       {
         userId: "3",
         brandId: "15",
-        startDate: '2022-01-23',
-        endDate: '2022-01-29',
+        startDate: '2022-01-20',
+        endDate: '2022-01-27',
         price: 250.00,
         totalPrice: 2275.00,
         createdAt: new Date(),
@@ -156,8 +156,8 @@ module.exports = {
       {
         userId: "1",
         brandId: "16",
-        startDate: '2022-01-23',
-        endDate: '2022-01-29',
+        startDate: '2022-01-20',
+        endDate: '2022-01-27',
         price: 250.00,
         totalPrice: 2275.00,
         createdAt: new Date(),
