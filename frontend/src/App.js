@@ -72,7 +72,7 @@ function App() {
             <OneBrandContainer />
             {/* <Calendar onChange={onChange} value={value} /> */}
           </Route>
-          <Route path='/users/:id'>
+          <Route exact path='/users/:id/bookings'>
             <UserBookings bookings={bookings} setBookings={setBookings} />
           </Route>
           <Route component={PageNotFound} />

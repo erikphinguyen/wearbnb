@@ -32,7 +32,7 @@ function ProfileButton({ user }) {
 
     const userBookings = () => {
         <NavLink
-            to={`users/$user.id}/bookings`}
+            to={`users/${user.id}/bookings`}
         />
     }
 

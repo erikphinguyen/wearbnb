@@ -64,7 +64,7 @@ router.post('/:id(\\d+)', bookingValidations, requireAuth, restoreUser, asyncHan
 router.delete('/:id(\\d+)', requireAuth, restoreUser, asyncHandler(async (req, res) => {
     const { id } = req.params;
     const booking = await Booking.findByPk(id)
-    await review.destroy();
+    await booking.destroy({});
     res.json({
         message: "booking canceled"
     })
