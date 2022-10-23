@@ -4,13 +4,12 @@ import { useParams, NavLink } from "react-router-dom";
 import { thunkGetUserBookings, thunkDeleteBookings } from '../../store/bookings';
 import * as sessionActions from '../../store/session';
 
-function UserBookings({ bookings, setBookings }) {
+function UserBookings({ bookings, setBookings, Brand }) {
     const dispatch = useDispatch();
     const { id } = useParams();
     // const bookings = useSelector(state => state.bookings);
     const user = useSelector(state => state.session.user?.id)
     const username = useSelector(state => state.session.user?.username)
-    const brandName = useSelector(state => state.brands[id]?.name);
     const [isLoaded, setIsLoaded] = useState(false);
 
     const price = useSelector(state => state.bookings[id]?.price)
@@ -50,7 +49,12 @@ function UserBookings({ bookings, setBookings }) {
             </h1>
             {bookingsFromUser && bookingsFromUser.map(booking => (
                 <div className='user-bookings' key={booking.id}>
+                    {console.log('WHAT IS BOOKING', booking)}
                     <div>
+                        <h2>
+                            {booking?.Brand?.name}
+                            {console.log('WHAT IS BOOKING ID BRAND', booking?.Brand?.name)}
+                        </h2>
                         <p>
                             {booking.price}
                             {stayDuration()}
