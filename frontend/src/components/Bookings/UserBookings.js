@@ -54,6 +54,12 @@ function UserBookings({ bookings, setBookings, Brand }) {
     //             setBookings(deleteBookings)
     //         })
     // }
+    // const handleDeleteBooking = (id) => {
+    //     dispatch(thunkDeleteBookings(id))
+    //         .then(() => {
+    //             setBookings(bookings.filter(booking => booking.id !== id))
+    //         })
+    // }
 
     return (
         <div className='user-bookings-container'>
