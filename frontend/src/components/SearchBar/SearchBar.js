@@ -1,7 +1,10 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './SearchBar.css'
 
 function SearchBar({ placeholder, data }) {
+
+    const [filteredData, setFilteredData] = useState([]);
+
     return (
         <div className='search'>
             <div className='searchInputs'>
