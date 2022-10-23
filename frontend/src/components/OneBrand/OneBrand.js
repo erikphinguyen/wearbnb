@@ -97,21 +97,18 @@ const OneBrand = () => {
         <div className='onebrand-container'>
             <div>
                 <h1>{singleBrand.name}</h1>
+                <h3>
+                    <b>
+                        {singleBrand.address}, {''}
+                        {singleBrand.city}, {''}
+                        {singleBrand.country}
+                    </b>
+                </h3>
                 <img className='onebrand-image'
                     src={singleBrand.brandImg}
                 />
                 <div className='address-review'>
-                    <h2>
-                        Address:
-                    </h2>
                     <div>
-                        <p>
-                            {singleBrand.address}
-                            <br></br>
-                            {singleBrand.city}
-                            <br></br>
-                            {singleBrand.country}
-                        </p>
                         {
                             user?.id === singleBrand?.userId && (
                                 <button className='button' onClick={() => setEditMode(true)}>
