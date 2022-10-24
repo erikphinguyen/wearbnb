@@ -186,7 +186,7 @@ const Reviews = ({ user }) => {
                                             {review.review}
                                         </div>
                                         <div>
-                                            <b>created at: </b>{new Date(review.createdAt).toLocaleDateString()}
+                                            <b>posted on: </b>{new Date(review.createdAt).toLocaleDateString()}
                                         </div>
                                     </p>
                                 )}
