@@ -46,7 +46,6 @@ import PageNotFound from "./components/PageNotFound";
 import UserBookings from "./components/Bookings/UserBookings";
 // import Calendar from "react-calendar";
 // import 'react-calendar/dist/Calendar.css';
-import SearchBar from "./components/SearchBar/SearchBar";
 
 function App() {
   const dispatch = useDispatch();
@@ -66,7 +65,6 @@ function App() {
       {isLoaded && (
         <Switch>
           <Route exact path="/">
-            <SearchBar placeholder="Find a Brand..." />
             <Brands brands={brands} setBrands={setBrands} />
             <Footer />
           </Route>

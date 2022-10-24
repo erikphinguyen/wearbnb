@@ -8,7 +8,7 @@ function SearchBar({ placeholder, data }) {
 
     const handleFilter = (e) => {
         const searchBrand = e.target.value;
-        setWordEntered(searchBrand)
+        setBrandEntered(searchBrand)
         const newFilter = data.filter((value) => {
             return value.name.toLowerCase().includes(searchBrand.toLowerCase())
         })
@@ -22,7 +22,7 @@ function SearchBar({ placeholder, data }) {
 
     const clearInput = () => {
         setFilteredData([]);
-        setWordEntered('')
+        setBrandEntered('')
     }
 
     return (

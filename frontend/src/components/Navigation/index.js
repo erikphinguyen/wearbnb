@@ -48,7 +48,8 @@ import Logo from './wearbnb-logo.PNG'
 import PostBrandHomeModal from '../PostBrandHomeModal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { fadro } from '@fortawesome/free-solid-svg-icons';
-import ProfilePic from '../../assets/images/ProfilePic.svg'
+import ProfilePic from '../../assets/images/ProfilePic.svg';
+import SearchBar from '../SearchBar/SearchBar';
 
 function Navigation({ isLoaded, brands, setBrands }) {
     const sessionUser = useSelector(state => state.session.user);
@@ -99,6 +100,9 @@ function Navigation({ isLoaded, brands, setBrands }) {
                         <NavLink exact to="/">
                             <img src={Logo} width="200" alt="logo" />
                         </NavLink>
+                    </div>
+                    <div>
+                    <SearchBar placeholder="Find a Brand..." />
                     </div>
                     <div>
                         {isLoaded && sessionLinks}
