@@ -84,7 +84,9 @@ function PostBrand({ brands, setBrands, onClose, setShowModal }) {
         console.log(imageUrl)
 
         // post request to my server to store any extra data
-        
+        const img = document.createElement("img");
+        img.src = imageUrl;
+        document.body.appendChild(img)
     })
 
     return (
