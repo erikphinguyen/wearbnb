@@ -49,7 +49,7 @@ function PostBrand({ brands, setBrands, onClose, setShowModal }) {
                 // onClose();
                 setShowModal(false);
                 setBrands([...brands, res])
-                // MAYBE NEED LINE 53   
+                // MAYBE NEED LINE 53
                 // setErrors([])
                 // history.push({pathname:`/brands/${String(res.id)}`, state:{data: res}})
             })
@@ -116,6 +116,11 @@ function PostBrand({ brands, setBrands, onClose, setShowModal }) {
                     name='country'
                 />
                 <button className='button' type='submit' >Submit</button>
+
+                <form id="imageForm">
+                    <input id="imageInput" type="file" accept="image/*" />
+                    <button type="submit">Upload</button>
+                </form>
             </form>
         </div>
     );
