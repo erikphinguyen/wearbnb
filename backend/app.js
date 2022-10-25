@@ -14,6 +14,8 @@ app.use(morgan('dev'));
 app.use(cookieParser());
 app.use(express.json());
 
+import { generateUploadURL } from '../s3.js'
+
 // Security Middleware
 if (!isProduction) {
     // enable cors only in development
@@ -66,5 +68,12 @@ app.use((err, _req, res, _next) => {
         stack: isProduction ? null : err.stack
     });
 });
+
+// S3 connection
+app.get('/s3Url', async (req, res) => {
+    const url = await generateUploadURL();
+    res.send({ url })
+})
+
 
 module.exports = app;
