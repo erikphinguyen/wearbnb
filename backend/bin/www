@@ -5,6 +5,8 @@ const { port } = require('../config');
 const app = require('../app');
 const db = require('../db/models');
 
+import { generateUploadURL } from '../s3.js'
+
 // Check the database connection before starting the app
 db.sequelize
   .authenticate()
@@ -12,8 +14,9 @@ db.sequelize
     console.log('Database connection success! Sequelize is ready to use...');
 
     // S3 connection
-    app.get('s3Url', (req, res) => {
-      
+    app.get('/s3Url', async (req, res) => {
+      const url = await generateUploadURL();
+      res.send({ url })
     })
 
     // Start listening for connections

@@ -68,10 +68,23 @@ function PostBrand({ brands, setBrands, onClose, setShowModal }) {
         const file = imageInput.files[0];
 
         // get a secure url form our server
+        const {url} = await fetch("/s3URL").then(res => res.json())
+        console.log(url)
 
         // post the image directly to the s3 bucket
+        await fetch(url, {
+            method: "PUT",
+            HEADERS: {
+                "Content-Type": "multipart/form-data"
+            },
+            body: file
+        })
+
+        const imageUrl = url.split('?')[0];
+        console.log(imageUrl)
 
         // post request to my server to store any extra data
+        
     })
 
     return (
