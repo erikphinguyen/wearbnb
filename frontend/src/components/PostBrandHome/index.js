@@ -60,6 +60,19 @@ function PostBrand({ brands, setBrands, onClose, setShowModal }) {
         // }
     };
 
+    const imageForm = document.querySelector("#imageForm")
+    const imageInput = document.querySelector("#imageInput")
+
+    imageForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const file = imageInput.files[0];
+
+        // get a secure url form our server
+
+        // post the image directly to the s3 bucket
+
+        // post request to my server to store any extra data
+    })
 
     return (
         <div>

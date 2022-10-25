@@ -11,6 +11,11 @@ db.sequelize
   .then(() => {
     console.log('Database connection success! Sequelize is ready to use...');
 
+    // S3 connection
+    app.get('s3Url', (req, res) => {
+      
+    })
+
     // Start listening for connections
     app.listen(port, () => console.log(`Listening on port ${port}...`));
   })
