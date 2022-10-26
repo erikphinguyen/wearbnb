@@ -101,8 +101,8 @@ function Navigation({ isLoaded, brands, setBrands }) {
                             <img src={Logo} width="200" alt="logo" />
                         </NavLink>
                     </div>
-                    <div>
-                    <SearchBar placeholder="Find a Brand..."/>
+                    <div className='search-container'>
+                    <SearchBar placeholder="Find a Brand..." />
                     </div>
                     <div>
                         {isLoaded && sessionLinks}
