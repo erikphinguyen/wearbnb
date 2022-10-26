@@ -6,6 +6,11 @@
   border: red 1px solid;
 }
 
+.search-icon {
+  display: flex;
+  height: 30px;
+}
+
 .searchInputs {
   margin-top: 105px;
   display: flex;

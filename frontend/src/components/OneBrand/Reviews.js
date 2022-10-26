@@ -31,7 +31,7 @@ const Reviews = ({ user }) => {
         setEditModeReviews(false)
     }
 
-    // const user = useSelector(state => state.session.user)
+    const loggedInUser = useSelector(state => state.session.user)
     // const username = useSelector(state => state.session.user.username)
     // console.log('WHAT IS USERNAME', username)
 
@@ -180,6 +180,10 @@ const Reviews = ({ user }) => {
                                     <p>
                                         <b>
                                             {review?.User?.username}'s review:
+                                            {console.log('WHAT IS REVIEW', review)}
+                                            {console.log('WHAT IS REVIEW USERID', review?.userId)}
+                                            {console.log('WHAT IS REVIEW USER ID WITH THE MODEL', review?.User?.id)}
+
                                         </b>
                                         <div>
                                             {/* so review.review doesn't exist */}
@@ -192,7 +196,7 @@ const Reviews = ({ user }) => {
                                 )}
 
                                 {
-                                    (user?.id === review.userId && review.review) && (
+                                    (review?.userId === loggedInUser.id && review.review) && (
                                         <>
                                             <button className='button' onClick={() => {
                                                 setSelectedEdit(review.id)
