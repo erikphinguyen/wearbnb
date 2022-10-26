@@ -30,11 +30,7 @@ function ProfileButton({ user }) {
         dispatch(sessionActions.logout());
     };
 
-    const userBookings = () => {
-        <NavLink
-            to={`users/$user.id}/bookings`}
-        />
-    }
+
 
     return (
         <>
@@ -47,7 +43,9 @@ function ProfileButton({ user }) {
                     <div><b>Username: </b> {user.username}</div>
                     <div><b>Email: </b>{user.email}</div>
                     <div>
-                        <button className="button" onClick={userBookings}>Bookings</button>
+                        <NavLink to={`users/${user.id}/bookings`}>
+                            <button className="button">Bookings</button>
+                        </NavLink>
                     </div>
                     <div className="hidden hidden-button">
                         .
