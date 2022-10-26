@@ -1,10 +1,10 @@
-.search-inputs {
+.searchInputs {
     margin-top: 105px;
     display: flex;
-}
+  }
 
-.search input {
-    background-color: white;
+  .search input {
+    background-color: #e9ecef;
     border: 0;
     border-radius: 2px;
     border-top-right-radius: 0px;
@@ -13,58 +13,56 @@
     padding: 15px;
     height: 30px;
     width: 300px;
-}
+  }
 
-.search-icon {
+  .searchIcon {
     height: 60px;
     width: 50px;
-    background-color: white;
+    background-color: #e9ecef;
     display: grid;
     place-items: center;
-}
+  }
 
-input:focus {
+  input:focus {
     outline: none;
-}
-
-.search-icon svg {
+  }
+  .searchIcon svg {
     font-size: 35px;
-}
+  }
 
-.data-result {
+  .dataResult {
     margin-top: 5px;
     width: 300px;
     height: 200px;
-    background-color: white;
+    background-color: #e9ecef;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     overflow: hidden;
     overflow-y: auto;
-}
+  }
 
-.data-result::-webkit-scrollbar {
+  .dataResult::-webkit-scrollbar {
     display: none;
-}
+  }
 
-.data-result .dataItem {
+  .dataResult .dataItem {
     width: 100%;
     height: 50px;
     display: flex;
     align-items: center;
     color: black;
-}
+  }
 
-.data-item p {
+  .dataItem p {
     margin-left: 10px;
-}
-
-a {
+  }
+  a {
     text-decoration: none;
-}
+  }
 
-a:hover {
+  a:hover {
     background-color: lightgrey;
-}
+  }
 
-#clearBtn {
+  #clearBtn {
     cursor: pointer;
-}
+  }

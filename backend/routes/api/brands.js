@@ -27,6 +27,17 @@ router.get('/:id(\\d+)', asyncHandler(async function (req, res) {
     return res.json(brand)
 }))
 
+router.post('/search', asyncHandler(async function (req, res) {
+    const {searchTerm} = req.body;
+    console.log('WHAT IS SEARCH TERM', searchTerm)
+    const brands = await Brand.findAll();
+    let filtered = brands.filter(el => {
+        return el.name.toLowerCase().includes(searchTerm.toLowerCase())
+    })
+    console.log('WHAT IS FILTERED', filtered)
+    return res.json(filtered)
+}))
+
 // POST BRAND
 router.post('/', requireAuth, asyncHandler(async function (req, res) {
     // const id = await Brand.create(req.body);

@@ -107,9 +107,9 @@ export const thunkDeleteBookings = (id) => async (dispatch) => {
         // try new way
         // dispatch(deleteBookings(id))
         // old way
-        const { id: deletedBookingId } = await response.json();
-        dispatch(deleteBookings(deletedBookingId));
-        return deletedBookingId;
+        const { id} = await response.json();
+        dispatch(deleteBookings(id));
+        return id;
     }
 };
 
