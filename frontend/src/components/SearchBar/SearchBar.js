@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import './SearchBar.css';
 import { csrfFetch } from '../../store/csrf';
 import { NavLink } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 
 function SearchBar({ placeholder }) {
 
@@ -51,7 +53,7 @@ function SearchBar({ placeholder }) {
                     value={brandEntered}
                     onChange={handleFilter} />
                 <div className='searchIcon'>
-                    {filteredData.length === 0 ? <p>Search Icon here</p> : <p>Close Icon here</p>}
+                    {filteredData.length === 0 ? <FontAwesomeIcon className='search-icon' icon={faMagnifyingGlass} /> : <p>Close Icon here</p>}
                 </div>
             </div>
             {(filteredData.length !== 0) && (

@@ -31,7 +31,7 @@ const Reviews = ({ user }) => {
         setEditModeReviews(false)
     }
 
-    // const user = useSelector(state => state.session.user)
+    const loggedInUser = useSelector(state => state.session.user)
     // const username = useSelector(state => state.session.user.username)
     // console.log('WHAT IS USERNAME', username)
 
@@ -192,7 +192,7 @@ const Reviews = ({ user }) => {
                                 )}
 
                                 {
-                                    (user?.id === review.userId && review.review) && (
+                                    (review?.userId === loggedInUser.id && review.review) && (
                                         <>
                                             <button className='button' onClick={() => {
                                                 setSelectedEdit(review.id)
