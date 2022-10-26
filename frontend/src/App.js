@@ -66,7 +66,6 @@ function App() {
       {isLoaded && (
         <Switch>
           <Route exact path="/">
-            <SearchBar placeholder="Search a Brand"/>
             <Brands brands={brands} setBrands={setBrands} />
             <Footer />
           </Route>
