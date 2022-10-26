@@ -1,29 +1,45 @@
 import React, { useState } from 'react';
 import './SearchBar.css';
+import { csrfFetch } from '../../store/csrf';
+import { NavLink } from 'react-router-dom';
 
-function SearchBar({ placeholder, data }) {
+function SearchBar({ placeholder }) {
 
     const [filteredData, setFilteredData] = useState([]);
     const [brandEntered, setBrandEntered] = useState('');
 
-    const handleFilter = (e) => {
+    const handleFilter = async (e) => {
+        setBrandEntered(e.target.value)
         const searchBrand = e.target.value;
-        setBrandEntered(searchBrand)
-        const newFilter = data.filter((value) => {
-            return value.name.toLowerCase().includes(searchBrand.toLowerCase())
+        let data = { searchTerm: e.target.value }
+        const response = await csrfFetch(`/api/brands/search`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
         })
-        if (searchBrand === "") {
-            setFilteredData([])
-        }
-        else {
-            setFilteredData(newFilter)
-        }
+        const brands = await response.json()
+        console.log('WHAT IS RESPONSE HANDLE FILTER', brands)
+
+        setFilteredData(brands)
+        // setBrandEntered(searchBrand)
+        // const newFilter = data.filter((value) => {
+        //     return value.name.toLowerCase().includes(searchBrand.toLowerCase())
+        // })
+        // if (searchBrand === "") {
+        //     setFilteredData([])
+        // }
+        // else {
+        //     setFilteredData(newFilter)
+        // }
     }
 
     const clearInput = () => {
         setFilteredData([]);
         setBrandEntered('')
     }
+
 
     return (
         <div className='search'>
@@ -34,19 +50,18 @@ function SearchBar({ placeholder, data }) {
                     value={brandEntered}
                     onChange={handleFilter} />
                 <div className='searchIcon'>
-                    {/*search bar react tutorial ~28 min */}
                     {filteredData.length === 0 ? <p>Search Icon here</p> : <p>Close Icon here</p>}
                 </div>
             </div>
             {(filteredData.length !== 0) && (
                 <div className='dataResult'>
-                    {/* {filteredData.slice(0,15).map((value, key) => {
-                    return <a className='dataItem' target="_blank">
-                        <p>
-                            {value.name}
-                        </p>
-                    </a>
-                })} */}
+                    {filteredData.map((value, key) => {
+                        return <NavLink to={`/brands/${value.id}`} className='dataItem' target="_blank">
+                            <p>
+                                {value.name}
+                            </p>
+                        </NavLink>
+                    })}
                 </div>
             )}
         </div>

@@ -102,7 +102,7 @@ function Navigation({ isLoaded, brands, setBrands }) {
                         </NavLink>
                     </div>
                     <div>
-                    <SearchBar placeholder="Find a Brand..." />
+                    <SearchBar placeholder="Find a Brand..."/>
                     </div>
                     <div>
                         {isLoaded && sessionLinks}
