@@ -38,6 +38,7 @@ const deleteBookings = (id) => {
 
 // THUNKS
 export const thunkGetBookings = (id) => async (dispatch) => {
+    console.log('WHAT IS ID IN THUNK GET BOOKIGNS', id)
     const response = await csrfFetch(`/api/bookings/${id}`);
     if (response.ok) {
         const bookings = await response.json();
@@ -104,11 +105,11 @@ export const thunkDeleteBookings = (id) => async (dispatch) => {
 
     if (response.ok) {
         // try new way
-        dispatch(deleteBookings(id))
+        // dispatch(deleteBookings(id))
         // old way
-        // const { id: deletedBookingId } = await response.json();
-        // dispatch(deleteBookings(deletedBookingId));
-        // return deletedBookingId;
+        const { id: deletedBookingId } = await response.json();
+        dispatch(deleteBookings(deletedBookingId));
+        return deletedBookingId;
     }
 };
 

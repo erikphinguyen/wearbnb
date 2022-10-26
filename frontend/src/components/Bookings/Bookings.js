@@ -19,10 +19,26 @@ const Bookings = () => {
     const [totalPrice, setTotalPrice] = useState(0);
     const [stayDuration, setStayDuration] = useState(0)
 
-    const price = useSelector(state => state.bookings[id]?.price)
-    console.log('WHAT IS BOOKING')
-    console.log('WHAT IS PRICE', price)
-    const [dates, setDates] = useState({startDate : '', endDate : ''})
+    console.log('WHAT IS USE PARAMS ID', id)
+    const price = useSelector(state => {
+        // return state.bookings[id]?.price
+        for (let key in state.bookings) {
+            let booking = state.bookings[key]
+            // console.log('WHAT IS BOOKING', booking)
+            console.log('WHAT IS BOKING BRAND', booking.Brand.id)
+            console.log('WHAT IS ID', id)
+            if (booking.Brand.id === Number(id)) {
+                console.log('WAHT IS BOOKING', booking)
+                return booking.price
+            }
+        }
+        // if (state.bookings) {
+        //     let bookings = state.bookings?.filter(el => el.Brand.id === id)
+        //     return bookings[0].price
+        // }
+    })
+    console.log('WHAT IS PRICE BOOKINGS.JS', price)
+    const [dates, setDates] = useState({ startDate: '', endDate: '' })
 
     // let stayDuration = useRef(0);
     // let totalPrice = useRef(0);
@@ -109,7 +125,7 @@ const Bookings = () => {
     const updateDisplayInfo = (e, date) => {
 
         if (date === 'start') {
-            setDates({...dates, startDate: e.target.value})
+            setDates({ ...dates, startDate: e.target.value })
         }
 
         if (date === 'end' && dates.startDate !== '') {
@@ -120,7 +136,7 @@ const Bookings = () => {
             let duration = (new Date(e.target.value.split('-').join('/')) - (new Date(dates.startDate.split('-').join('/')))) / 86400000;
             setTotalPrice((((price * duration) + fees)))
         }
-        if (date === 'end') setDates({...dates, endDate: e.target.value})
+        if (date === 'end') setDates({ ...dates, endDate: e.target.value })
     }
 
     return (

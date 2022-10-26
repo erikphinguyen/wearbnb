@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams, NavLink } from "react-router-dom";
 import { thunkGetUserBookings, thunkDeleteBookings } from '../../store/bookings';
 import * as sessionActions from '../../store/session';
+import { csrfFetch } from '../../store/csrf';
 import './UserBookings.css';
 
 function UserBookings({ bookings, setBookings, Brand }) {
@@ -12,16 +13,24 @@ function UserBookings({ bookings, setBookings, Brand }) {
     const username = useSelector(state => state.session.user?.username)
     const [isLoaded, setIsLoaded] = useState(false);
 
+    const bookingState = useSelector(state => {
+        return state.bookings
+    })
+
+
+    // console.log('@@@@@@@@@@@@@@@@@@@@@@@@@@@ WHAT IS BOOKINGS STATE', bookingState)
     const price = useSelector(state => state.bookings[id]?.price)
 
     // const price = useSelector(state => {
     //     let listing = state.bookings.filter(el => {
-    //         console.log('@@@@@@@@@@@@@@ WHAT IS LISTING', listing)
+    //         console.log('@@@@@@@@@@@@@@@@@@@@@ WHAT IS EL', el)
     //         return el.id === bookings.brandId
     //     })
 
     //     return listing[0].price
     // })
+
+    // const price =
 
     console.log('WHAT IS PRICE', price)
 
@@ -54,12 +63,13 @@ function UserBookings({ bookings, setBookings, Brand }) {
     //             setBookings(deleteBookings)
     //         })
     // }
-    // const handleDeleteBooking = (id) => {
-    //     dispatch(thunkDeleteBookings(id))
-    //         .then(() => {
-    //             setBookings(bookings.filter(booking => booking.id !== id))
-    //         })
-    // }
+    const handleDeleteBooking = (id) => {
+        console.log('WHAT IS BOOKING ID', id)
+        dispatch(thunkDeleteBookings(id))
+            .then(() => {
+                setBookings(bookings.filter(booking => booking.id !== id))
+            })
+    }
 
     return (
         <div className='user-bookings-container'>
@@ -85,13 +95,13 @@ function UserBookings({ bookings, setBookings, Brand }) {
                                 {(((((new Date(booking.endDate)) - (new Date(booking.startDate))) / 86400000) * (booking.price)) * 1.3)?.toFixed(2)}
                             </div>
                         </p>
+                        {/*deleting bookings*/}
+                        <button className='button' onClick={() => handleDeleteBooking(booking.id)}>
+                            Cancel Booking
+                        </button>
                     </div>
 
 
-                    {/*deleting bookings*/}
-                    {/* <button className='button'onClick={handleDeleteBooking(booking.id)}>
-                        Cancel Booking
-                    </button> */}
                 </div>
             ))}
         </div>
