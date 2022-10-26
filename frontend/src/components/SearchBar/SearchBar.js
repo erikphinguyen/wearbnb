@@ -35,6 +35,7 @@ function SearchBar({ placeholder }) {
         // }
     }
 
+    // for X icon
     const clearInput = () => {
         setFilteredData([]);
         setBrandEntered('')
@@ -55,10 +56,10 @@ function SearchBar({ placeholder }) {
             </div>
             {(filteredData.length !== 0) && (
                 <div className='dataResult'>
-                    {filteredData.map((value, key) => {
-                        return <NavLink to={`/brands/${value.id}`} className='dataItem' target="_blank">
+                    {filteredData.map((brand) => {
+                        return <NavLink to={`/brands/${brand.id}`} className='dataItem' target="_blank">
                             <p>
-                                {value.name}
+                                {brand.name}
                             </p>
                         </NavLink>
                     })}

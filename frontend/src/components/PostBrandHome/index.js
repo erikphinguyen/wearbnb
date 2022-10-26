@@ -63,31 +63,31 @@ function PostBrand({ brands, setBrands, onClose, setShowModal }) {
     const imageForm = document.querySelector("#imageForm")
     const imageInput = document.querySelector("#imageInput")
 
-    imageForm.addEventListener("submit", async (e) => {
-        e.preventDefault();
-        const file = imageInput.files[0];
+    // imageForm.addEventListener("submit", async (e) => {
+    //     e.preventDefault();
+    //     const file = imageInput.files[0];
 
-        // get a secure url form our server
-        const {url} = await fetch("/s3URL").then(res => res.json())
-        console.log(url)
+    //     // get a secure url form our server
+    //     const {url} = await fetch("/s3URL").then(res => res.json())
+    //     console.log(url)
 
-        // post the image directly to the s3 bucket
-        await fetch(url, {
-            method: "PUT",
-            HEADERS: {
-                "Content-Type": "multipart/form-data"
-            },
-            body: file
-        })
+    //     // post the image directly to the s3 bucket
+    //     await fetch(url, {
+    //         method: "PUT",
+    //         HEADERS: {
+    //             "Content-Type": "multipart/form-data"
+    //         },
+    //         body: file
+    //     })
 
-        const imageUrl = url.split('?')[0];
-        console.log(imageUrl)
+    //     const imageUrl = url.split('?')[0];
+    //     console.log(imageUrl)
 
-        // post request to my server to store any extra data
-        const img = document.createElement("img");
-        img.src = imageUrl;
-        document.body.appendChild(img)
-    })
+    //     // post request to my server to store any extra data
+    //     const img = document.createElement("img");
+    //     img.src = imageUrl;
+    //     document.body.appendChild(img)
+    // })
 
     return (
         <div>
