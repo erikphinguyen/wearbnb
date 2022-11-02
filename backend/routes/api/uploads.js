@@ -32,8 +32,11 @@ router.post('/videos', upload.single('video'), async (req, res) => {
     res.send({videoPath: `/uploads/${result.Key}`});
 })
 
-router.get('/photos', (res, req) => {
+router.get('/photos', (req, res) => {
     const key = req.params.key;
+    const getFiles = getFile(key)
+
+    getFiles.pipe(res)
 })
 
 router.post('/photos', upload.single('photo'), async (req, res) => {
