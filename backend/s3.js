@@ -1,33 +1,11 @@
-// import dotenv from 'dotenv';
-// import aws from 'aws-sdk';
-// import crypto, { randomBytes } from 'crypto';
-// import {promisify} from "util";
+const S3 = require('aws-sdk/clients/s3');
+const fs = require('fs');
 
-// const randomBytes = promisify(crypto.randomBytes)
-// dotenv.config();
+// from Alex
+// const {AWS_BUCKET_NAME, AWS_BUCKET_REGION, AWS_ACCESS_KEY_ID, AWS_SECRET_KEY} = require('./env')
 
-// const region = "us-west-1";
-// const bucketName = "wearbnb";
-// const accessKeyId = process.env.AWS_ACCESS_KEY_ID
-// const secretAccessKey = process.env.AWS_SECRET_ACCESS_KEY
-
-// const s3 = new aws.S3({
-//   region,
-//   accessKeyId,
-//   secretAccessKey,
-//   signatureVersion: 'v4'
-// });
-
-// export async function generateUploadURL() {
-//   const rawBytes = await randomBytes(16);
-//   const imageName = rawBytes.toString('hex')
-
-//   const params = ({
-//     Bucket: bucketName,
-//     Key: imageName,
-//     Expires: 60
-//   })
-
-//   const uploadURL = await s3.getSignedUrlPromise('putObject', params)
-//   return uploadURL
-// }
+// from Sam Meech-Ward
+const bucketName = process.env.AWS_BUCKET_NAME;
+const region = process.env.AWS_BUCKET_REGION;
+const accessKeyId = process.env.AWS_ACCESS_KEY_ID;
+const secretAccessKey = process.env.AWS_SECRET_KEY;
