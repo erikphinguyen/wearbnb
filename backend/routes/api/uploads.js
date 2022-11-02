@@ -10,23 +10,38 @@ const unlinkFile = util.promisify(fs.unlink);
 
 const {uploadFile, getFile, deleteFile} = require('../../s3')
 
-const Photo = require('../../db/models/Photo')
-const Video = require('../../db/models/Video')
+const video = require('../../db/models/video')
+const photo = require('../../db/models/photo')
+const brand = require('../../db/models/brand')
 
-router.post('/', upload.single('video'), async (req, res) => {
+router.post('/videos', upload.single('video'), async (req, res) => {
     const file = req.file;
-    const photoId = req.body.photoId;
+    const brandId = req.body.brandId;
     const result = await uploadFile(file);
 
     if (result) {
-        let photo = new Photo({
-            photo: photoId,
+        let video = new video({
+            brandId,
             filepath: result.Key
         })
-        await Photo.findByIdAndUpdate(photoId, {visited: true});
-        await photo.save();
+        await brand.findByIdAndUpdate(brandId, {visited: true});
+        await video.save();
     }
 
+    await unlinkFile(file.path);
+    res.send({videoPath: `/uploads/${result.Key}`});
+})
+
+router.post('/photos', upload.single('photo'), async (req, res) => {
+    const file = req.file;
+    const result = await uploadFile(file);
+    if (result) {
+        let photo = new photo({
+            brandId,
+            filepath: result.Key
+        })
+        await photo.save()
+    }
     await unlinkFile(file.path);
     res.send({photoPath: `/uploads/${result.Key}`});
 })
