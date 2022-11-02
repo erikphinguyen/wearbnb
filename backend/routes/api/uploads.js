@@ -45,3 +45,5 @@ router.post('/photos', upload.single('photo'), async (req, res) => {
     await unlinkFile(file.path);
     res.send({photoPath: `/uploads/${result.Key}`});
 })
+
+module.exports = router;
