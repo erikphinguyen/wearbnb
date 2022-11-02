@@ -10,9 +10,9 @@ const unlinkFile = util.promisify(fs.unlink);
 
 const {uploadFile, getFile, deleteFile} = require('../../s3')
 
-const video = require('../../db/models/video')
-const photo = require('../../db/models/photo')
-const brand = require('../../db/models/brand')
+const Video = require('../../db/models/video')
+const Photo = require('../../db/models/photo')
+const Brand = require('../../db/models/brand')
 
 router.post('/videos', upload.single('video'), async (req, res) => {
     const file = req.file;
@@ -20,11 +20,11 @@ router.post('/videos', upload.single('video'), async (req, res) => {
     const result = await uploadFile(file);
 
     if (result) {
-        let video = new video({
+        let video = new Video({
             brandId,
             filepath: result.Key
         })
-        await brand.findByIdAndUpdate(brandId, {visited: true});
+        await Brand.findByIdAndUpdate(brandId, {visited: true});
         await video.save();
     }
 
@@ -36,7 +36,7 @@ router.post('/photos', upload.single('photo'), async (req, res) => {
     const file = req.file;
     const result = await uploadFile(file);
     if (result) {
-        let photo = new photo({
+        let photo = new Photo({
             brandId,
             filepath: result.Key
         })
