@@ -1,7 +1,35 @@
+import { faImages } from '@fortawesome/free-solid-svg-icons';
+import { csrfFetch } from '../../store/csrf';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useHistory } from 'react-router-dom';
 import { thunkPostBrands } from '../../store/brands';
+import { thunkPostPhotos } from '../../store/uploads';
+
+const postPhoto = async ({ uploadedPhoto, file }) => {
+    const formData = new FormData();
+    formData.append("photo", uploadedPhoto);
+
+    let data = { file }
+    console.log('WHAT IS FILE IN POSTPHOTO', file)
+
+    const response = await csrfFetch(`/api/uploads/photos`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    });
+
+    console.log('WHAT IS RESPONSE IN POSTPHOTO', response)
+    console.log('WHAT IS RESPONSE.JSON IN POSTPHOTO', response.json())
+
+    // return response.data
+    const photos = await response.json();
+
+    return photos
+}
+
 
 function PostBrand({ brands, setBrands, onClose, setShowModal }) {
     const dispatch = useDispatch();
@@ -12,7 +40,11 @@ function PostBrand({ brands, setBrands, onClose, setShowModal }) {
     const [address, setAddress] = useState('');
     const [city, setCity] = useState('');
     const [country, setCountry] = useState('');
-    const [errors, setErrors] = useState([])
+    const [errors, setErrors] = useState([]);
+
+    // aws
+    const [file, setFile] = useState();
+    const [photo, setPhoto] = useState([]);
 
     const reset = () => {
         setBrandImg('');
@@ -60,6 +92,23 @@ function PostBrand({ brands, setBrands, onClose, setShowModal }) {
         // }
     };
 
+    // aws
+    const submitAWS = async (e) => {
+        e.preventDefault();
+        const response = await postPhoto({ photo: file });
+
+        dispatch(thunkPostPhotos(response))
+            .then(res => {
+                if (res.error) {
+                    setErrors(res.error)
+                    return
+                }
+                // setPhoto([response.photo, ...photo])
+                setPhoto([...brands, res])
+            })
+
+    }
+
     const imageForm = document.querySelector("#imageForm")
     const imageInput = document.querySelector("#imageInput")
 
@@ -88,6 +137,19 @@ function PostBrand({ brands, setBrands, onClose, setShowModal }) {
     //     img.src = imageUrl;
     //     document.body.appendChild(img)
     // })
+
+    // // aws
+    // const submitAWS = async (e) => {
+    //     e.preventDefault();
+    //     const response = await postPhoto({ photo: file })
+    //     setPhoto([response.photo, ...photo])
+    // }
+
+    const fileSelected = e => {
+        const file = e.target.files[0]
+        console.log('WHAT IS FILE IN FILESELECTED', file)
+        setFile(file)
+    }
 
     return (
         <div>
@@ -145,10 +207,24 @@ function PostBrand({ brands, setBrands, onClose, setShowModal }) {
                 />
                 <button className='button' type='submit' >Submit</button>
 
+                {/* this is s3 upload front end
                 <form className='form' id="imageForm">
                     <input id="imageInput" type="file" accept="photo/*" />
                     <button className='button' type="submit">Upload</button>
+                </form> */}
+
+                <form onSubmit={submitAWS}>
+                    <input onChange={fileSelected} type='file' accept='photo/*'></input>
+                    <button type='submit'>Submit</button>
                 </form>
+
+                {photo.map(uploadedPhoto => {
+                    <div key={uploadedPhoto}>
+                        <img src={uploadedPhoto}></img>
+                    </div>
+                })}
+
+                {/* <img src="/images/9fa06d3c5da7aec7f932beb5b3e60f1d"></img> */}
 
             </form>
         </div>

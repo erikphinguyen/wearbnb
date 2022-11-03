@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const asyncHandler = require('express-async-handler');
 
 const multer = require('multer');
 const upload = multer({ dest: 'uploads/' });
@@ -14,7 +15,7 @@ const Video = require('../../db/models/video')
 const Photo = require('../../db/models/photo')
 const Brand = require('../../db/models/brand')
 
-router.post('/videos', upload.single('video'), async (req, res) => {
+router.post('/videos', upload.single('video'), asyncHandler(async (req, res) => {
     const file = req.file;
     const brandId = req.body.brandId;
     const result = await uploadFile(file);
@@ -30,16 +31,18 @@ router.post('/videos', upload.single('video'), async (req, res) => {
 
     await unlinkFile(file.path);
     res.send({videoPath: `/uploads/${result.Key}`});
-})
+}))
 
-router.get('/photos', (req, res) => {
+router.get('/photos/:key', (req, res) => {
+    console.log('WHAT IS REQ.PARAMS', req.params)
     const key = req.params.key;
+    console.log('WHAT IS KEY', key)
     const getFiles = getFile(key)
 
     getFiles.pipe(res)
 })
 
-router.post('/photos', upload.single('photo'), async (req, res) => {
+router.post('/photos', upload.single('photo'), asyncHandler(async (req, res) => {
     const file = req.file;
     console.log('WHAT IS FILE UPLOADS.JS', file)
     const result = await uploadFile(file);
@@ -53,6 +56,6 @@ router.post('/photos', upload.single('photo'), async (req, res) => {
     }
     await unlinkFile(file.path);
     res.send({photoPath: `/uploads/${result.Key}`});
-})
+}))
 
 module.exports = router;
