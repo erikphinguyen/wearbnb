@@ -128,15 +128,23 @@ export const thunkDeletePhotos = (id) => async dispatch => {
 // REDUCER
 // const initialState = { entries: {}, isLoading: true };
 
-const brandsReducer = (state = {}, action) => {
+const uploadsReducer = (state = {}, action) => {
     switch (action.type) {
-        case GET_BRANDS:
-            const newBrands = {};
-            action.brands.forEach(brand => {
-                newBrands[brand.id] = brand;
+        case GET_PHOTOS:
+            const newPhotos = {};
+            action.uploads.forEach(photo => {
+                newPhotos[photo.id] = photo;
             })
             return {
-                ...newBrands
+                ...newPhotos
+            }
+        case GET_VIDEOS:
+            const newVideos = {};
+            action.videos.forEach(video => {
+                newVideos[video.id] = video;
+            })
+            return {
+                ...newVideos
             }
         case GET_ONE_BRAND:
             const newState = { ...state };
@@ -160,4 +168,4 @@ const brandsReducer = (state = {}, action) => {
     }
 };
 
-export default brandsReducer;
+export default uploadsReducer;
