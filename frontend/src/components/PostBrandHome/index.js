@@ -146,9 +146,10 @@ function PostBrand({ brands, setBrands, onClose, setShowModal }) {
                 <button className='button' type='submit' >Submit</button>
 
                 <form className='form' id="imageForm">
-                    <input id="imageInput" type="file" accept="image/*" />
+                    <input id="imageInput" type="file" accept="photo/*" />
                     <button className='button' type="submit">Upload</button>
                 </form>
+
             </form>
         </div>
     );
