@@ -3,6 +3,25 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useHistory } from 'react-router-dom';
 import { thunkPostBrands } from '../../store/brands';
 
+const postPhoto = async ({photo}) => {
+    const formData = new FormData();
+    formData.append("photo", photo);
+
+    const response = await csrfFetch(`/api/uploads/photos`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    });
+
+    console.log('WHAT IS RESPONSE IN POSTPHOTO', response)
+
+    // return response.data
+    return response
+}
+
+
 function PostBrand({ brands, setBrands, onClose, setShowModal }) {
     const dispatch = useDispatch();
     const history = useHistory();
@@ -12,7 +31,11 @@ function PostBrand({ brands, setBrands, onClose, setShowModal }) {
     const [address, setAddress] = useState('');
     const [city, setCity] = useState('');
     const [country, setCountry] = useState('');
-    const [errors, setErrors] = useState([])
+    const [errors, setErrors] = useState([]);
+
+    // aws
+    const [file, setFile] = useState();
+    const [photo, setPhooto] = useState([]);
 
     const reset = () => {
         setBrandImg('');
@@ -88,6 +111,12 @@ function PostBrand({ brands, setBrands, onClose, setShowModal }) {
     //     img.src = imageUrl;
     //     document.body.appendChild(img)
     // })
+
+    // aws
+    const submitAWS = async (e) => {
+        e.preventDefault();
+
+    }
 
     return (
         <div>
