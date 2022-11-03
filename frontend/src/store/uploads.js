@@ -160,7 +160,7 @@ const uploadsReducer = (state = {}, action) => {
                 const postState = { ...state };
                 postState[action.uploads.id] = action.uploads
                 return postState;
-        case DELETE_BRANDS:
+        case DELETE_PHOTOS:
             const deleteState = { ...state };
             delete deleteState[action.id]
             return deleteState;

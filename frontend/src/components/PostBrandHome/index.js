@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useHistory } from 'react-router-dom';
 import { thunkPostBrands } from '../../store/brands';
+import { thunkPostPhotos } from '../../store/uploads';
 
 const postPhoto = async ({ uploadedPhoto, file }) => {
     const formData = new FormData();
@@ -91,6 +92,23 @@ function PostBrand({ brands, setBrands, onClose, setShowModal }) {
         // }
     };
 
+    // aws
+    const submitAWS = async (e) => {
+        e.preventDefault();
+        const response = await postPhoto({ photo: file });
+
+        dispatch(thunkPostPhotos(response))
+            .then(res => {
+                if (res.error) {
+                    setErrors(res.error)
+                    return
+                }
+                // setPhoto([response.photo, ...photo])
+                setPhoto([...brands, res])
+            })
+
+    }
+
     const imageForm = document.querySelector("#imageForm")
     const imageInput = document.querySelector("#imageInput")
 
@@ -120,15 +138,16 @@ function PostBrand({ brands, setBrands, onClose, setShowModal }) {
     //     document.body.appendChild(img)
     // })
 
-    // aws
-    const submitAWS = async (e) => {
-        e.preventDefault();
-        const response = await postPhoto({ photo: file })
-        setPhoto([response.photo, ...photo])
-    }
+    // // aws
+    // const submitAWS = async (e) => {
+    //     e.preventDefault();
+    //     const response = await postPhoto({ photo: file })
+    //     setPhoto([response.photo, ...photo])
+    // }
 
     const fileSelected = e => {
         const file = e.target.files[0]
+        console.log('WHAT IS FILE IN FILESELECTED', file)
         setFile(file)
     }
 
