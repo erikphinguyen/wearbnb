@@ -5,9 +5,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useHistory } from 'react-router-dom';
 import { thunkPostBrands } from '../../store/brands';
 
-const postPhoto = async ({ photo }) => {
+const postPhoto = async ({ uploadedPhoto, file }) => {
     const formData = new FormData();
-    formData.append("photo", photo);
+    formData.append("photo", uploadedPhoto);
 
     let data = { file }
     console.log('WHAT IS FILE IN POSTPHOTO', file)
@@ -124,7 +124,7 @@ function PostBrand({ brands, setBrands, onClose, setShowModal }) {
     const submitAWS = async (e) => {
         e.preventDefault();
         const response = await postPhoto({ photo: file })
-        setPhoto([response.photo, ...photos])
+        setPhoto([response.photo, ...photo])
     }
 
     const fileSelected = e => {
@@ -199,9 +199,9 @@ function PostBrand({ brands, setBrands, onClose, setShowModal }) {
                     <button type='submit'>Submit</button>
                 </form>
 
-                {photos.map(photo => {
-                    <div key={photo}>
-                        <img src={photo}></img>
+                {photo.map(uploadedPhoto => {
+                    <div key={uploadedPhoto}>
+                        <img src={uploadedPhoto}></img>
                     </div>
                 })}
 

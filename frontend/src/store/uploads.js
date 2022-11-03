@@ -52,7 +52,7 @@ const deleteVideos = (id) => {
 }
 
 // THUNKS
-// GET ALL BRANDS
+// GET ALL PHOTOS
 export const thunkGetPhotos = () => async (dispatch) => {
     const response = await csrfFetch(`/api/uploads/photos`)
     if (response.ok) {
@@ -71,7 +71,6 @@ export const thunkGetVideos = () => async (dispatch) => {
         return videos
     }
 }
-
 
 export const thunkPostPhotos = (data) => async dispatch => {
     const response = await csrfFetch(`/api/uploads/photos`, {
@@ -120,7 +119,18 @@ export const thunkDeletePhotos = (id) => async dispatch => {
 
     if (response.ok) {
         const { id }= await response.json();
-        dispatch(deleteBrands(id));
+        dispatch(deletePhotos(id));
+        return id;
+    }
+};
+export const thunkDeleteVideos = (id) => async dispatch => {
+    const response = await csrfFetch(`/api/uploads/videos/${id}`, {
+        method: 'DELETE',
+    });
+
+    if (response.ok) {
+        const { id }= await response.json();
+        dispatch(deleteVideos(id));
         return id;
     }
 };
@@ -146,23 +156,14 @@ const uploadsReducer = (state = {}, action) => {
             return {
                 ...newVideos
             }
-        case GET_ONE_BRAND:
-            const newState = { ...state };
-            newState[action.brand.id] = action.brand
-            return newState
+            case POST_PHOTOS:
+                const postState = { ...state };
+                postState[action.uploads.id] = action.uploads
+                return postState;
         case DELETE_BRANDS:
             const deleteState = { ...state };
             delete deleteState[action.id]
             return deleteState;
-        case POST_BRANDS:
-            const postState = { ...state };
-            postState[action.brands.id] = action.brands
-            return postState;
-        case PUT_BRANDS:
-            return {
-                ...state,
-                [action.brands.id]: action.brands
-            };
         default:
             return state;
     }
