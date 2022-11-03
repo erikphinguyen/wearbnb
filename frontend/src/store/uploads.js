@@ -53,47 +53,28 @@ const deleteVideos = (id) => {
 
 // THUNKS
 // GET ALL BRANDS
-export const thunkGetBrands = () => async (dispatch) => {
-    const response = await csrfFetch(`/api/brands`)
+export const thunkGetPhotos = () => async (dispatch) => {
+    const response = await csrfFetch(`/api/uploads/photos`)
     if (response.ok) {
-        const brands = await response.json();
-        dispatch(getBrands(brands));
-        return brands
+        const photos = await response.json();
+        dispatch(getPhotos(photos));
+        return photos
     }
 }
 
-// GET ONE BRAND
-export const thunkGetOneBrand = (id) => async (dispatch) => {
-    const response = await csrfFetch(`/api/brands/${id}`)
+// GET ALL VIDEOS
+export const thunkGetVideos = () => async (dispatch) => {
+    const response = await csrfFetch(`/api/uploads/videos`)
     if (response.ok) {
-        const brand = await response.json();
-        dispatch(getOneBrand(brand));
-        return brand
+        const videos = await response.json();
+        dispatch(getVideos(videos));
+        return videos
     }
 }
 
-export const thunkPutBrands = data => async dispatch => {
-    const response = await csrfFetch(`/api/brands/${data.id}`, {
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-    });
 
-    if (response.ok) {
-        const brand = await response.json();
-        dispatch(putBrands(brand));
-        return brand;
-    }
-    else {
-        const data = await response.json()
-        return data
-    }
-};
-
-export const thunkPostBrands = (data) => async dispatch => {
-    const response = await csrfFetch(`/api/brands`, {
+export const thunkPostPhotos = (data) => async dispatch => {
+    const response = await csrfFetch(`/api/uploads/photos`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -102,9 +83,9 @@ export const thunkPostBrands = (data) => async dispatch => {
     });
 
     if (response.ok) {
-        const brand = await response.json();
-        dispatch(postBrands(brand));
-        return brand;
+        const photo = await response.json();
+        dispatch(postPhotos(photo));
+        return photo;
     }
     else {
         const data = await response.json()
@@ -112,21 +93,40 @@ export const thunkPostBrands = (data) => async dispatch => {
     }
 };
 
-export const thunkDeleteBrands = (id) => async dispatch => {
-    const response = await csrfFetch(`/api/brands/${id}`, {
+export const thunkPostVideos = (data) => async dispatch => {
+    const response = await csrfFetch(`/api/uploads/videos`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    });
+
+    if (response.ok) {
+        const video = await response.json();
+        dispatch(postVideos(video));
+        return video;
+    }
+    else {
+        const data = await response.json()
+        return data
+    }
+};
+
+export const thunkDeletePhotos = (id) => async dispatch => {
+    const response = await csrfFetch(`/api/uploads/photos/${id}`, {
         method: 'DELETE',
     });
 
     if (response.ok) {
-        const { id: deletedBrandId } = await response.json();
-        dispatch(deleteBrands(deletedBrandId));
-        return deletedBrandId;
+        const { id }= await response.json();
+        dispatch(deleteBrands(id));
+        return id;
     }
 };
 
 // REDUCER
 // const initialState = { entries: {}, isLoading: true };
-
 
 const brandsReducer = (state = {}, action) => {
     switch (action.type) {
