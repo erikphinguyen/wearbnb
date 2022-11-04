@@ -22,7 +22,6 @@ function SearchBar({ placeholder }) {
             body: JSON.stringify(data)
         })
         const brands = await response.json()
-        console.log('WHAT IS RESPONSE HANDLE FILTER', brands)
 
         setFilteredData(brands)
         // setBrandEntered(searchBrand)
@@ -53,7 +52,7 @@ function SearchBar({ placeholder }) {
                     value={brandEntered}
                     onChange={handleFilter} />
                 <div className='searchIcon'>
-                    {filteredData.length === 0 ? <FontAwesomeIcon className='search-icon' icon={faMagnifyingGlass} /> : <FontAwesomeIcon className='x-icon' icon={faXmark} />}
+                    {filteredData.length === 0 ? <FontAwesomeIcon className='search-icon' icon={faMagnifyingGlass} /> : <FontAwesomeIcon className='x-icon' id='clearBtn' onClick={clearInput} icon={faXmark} />}
                 </div>
             </div>
             {(filteredData.length !== 0) && (
