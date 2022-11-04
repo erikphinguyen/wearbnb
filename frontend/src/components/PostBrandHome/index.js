@@ -212,11 +212,13 @@ function PostBrand({ brands, setBrands, onClose, setShowModal }) {
                     <input id="imageInput" type="file" accept="photo/*" />
                     <button className='button' type="submit">Upload</button>
                 </form> */}
+                <h2>Or Upload Brand Image via File</h2>
 
                 <form onSubmit={submitAWS}>
                     <input onChange={fileSelected} type='file' accept='photo/*'></input>
                     <button type='submit'>Submit</button>
                 </form>
+
 
                 {photo.map(uploadedPhoto => {
                     <div key={uploadedPhoto}>
