@@ -5,6 +5,11 @@
   height: 30px;
 }
 
+.x-icon{
+  display: flex;
+  height: 30px;
+}
+
 .searchInputs {
   display: flex;
 }
@@ -26,6 +31,7 @@
   display: grid;
   place-items: center;
 }
+
 
 input:focus {
   outline: none;
