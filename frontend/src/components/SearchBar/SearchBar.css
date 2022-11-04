@@ -1,5 +1,3 @@
-
-
 .search-icon {
   display: flex;
   height: 30px;
@@ -12,6 +10,7 @@
 
 .searchInputs {
   display: flex;
+  align-items: center;
 }
 
 .search input {
@@ -31,7 +30,6 @@
   display: grid;
   place-items: center;
 }
-
 
 input:focus {
   outline: none;
