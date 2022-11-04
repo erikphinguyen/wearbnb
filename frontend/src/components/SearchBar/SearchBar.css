@@ -22,8 +22,6 @@
 }
 
 .searchIcon {
-  height: 60px;
-  width: 50px;
   background-color: #e9ecef;
   display: grid;
   place-items: center;
