@@ -44,7 +44,7 @@ router.get('/photos/:key', (req, res) => {
 })
 
 router.post('/photos', upload.single('photo'), async (req, res) => {
-    
+    console.log('AM I HITTING POST ROUTE UPLOADS')
     const file = req.file;
     console.log('WHAT IS FILE UPLOADS.JS', file)
     const result = await uploadFile(file);
