@@ -15,7 +15,7 @@ const Video = require('../../db/models/video')
 const Photo = require('../../db/models/photo')
 const Brand = require('../../db/models/brand')
 
-router.post('/videos', upload.single('video'), asyncHandler(async (req, res) => {
+router.post('/videos', upload.single('video'), async (req, res) => {
     const file = req.file;
     const brandId = req.body.brandId;
     const result = await uploadFile(file);
@@ -31,10 +31,10 @@ router.post('/videos', upload.single('video'), asyncHandler(async (req, res) => 
 
     await unlinkFile(file.path);
     res.send({videoPath: `/uploads/${result.Key}`});
-}))
+})
 
 router.get('/photos/:key', (req, res) => {
-    console.log('WHAT IS REQ.PARAMS', req.params)
+    console.log('@@@@@@@@@@@@@@@@@@@@@@WHAT IS REQ.PARAMS', req)
     const key = req.params.key;
     console.log('WHAT IS KEY', key)
     const getFiles = getFile(key)
@@ -42,20 +42,20 @@ router.get('/photos/:key', (req, res) => {
     getFiles.pipe(res)
 })
 
-router.post('/photos', upload.single('photo'), asyncHandler(async (req, res) => {
+router.post('/photos', upload.single('photo'), async (req, res) => {
     const file = req.file;
     console.log('WHAT IS FILE UPLOADS.JS', file)
     const result = await uploadFile(file);
     console.log('WHAT IS RESULT UPLOADS.JS', result)
-    if (result) {
-        let photo = new Photo({
-            brandId,
-            filepath: result.Key
-        })
-        await photo.save()
-    }
+    // if (result) {
+    //     let photo = new Photo({
+    //         userId,
+    //         filepath: result.Key
+    //     })
+    //     await photo.save()
+    // }
     await unlinkFile(file.path);
     res.send({photoPath: `/uploads/${result.Key}`});
-}))
+})
 
 module.exports = router;

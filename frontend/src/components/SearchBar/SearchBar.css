@@ -1,19 +1,16 @@
-.search {
-  top: 0;
-  margin: 0;
-  border: 0;
-  padding: 0;
-  border: red 1px solid;
-}
-
 .search-icon {
   display: flex;
   height: 30px;
 }
 
-.searchInputs {
-  margin-top: 105px;
+.x-icon{
   display: flex;
+  height: 30px;
+}
+
+.searchInputs {
+  display: flex;
+  align-items: center;
 }
 
 .search input {
@@ -29,8 +26,6 @@
 }
 
 .searchIcon {
-  height: 60px;
-  width: 50px;
   background-color: #e9ecef;
   display: grid;
   place-items: center;
