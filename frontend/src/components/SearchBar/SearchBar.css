@@ -1,10 +1,4 @@
-.search {
-  top: 0;
-  margin: 0;
-  border: 0;
-  padding: 0;
-  border: red 1px solid;
-}
+
 
 .search-icon {
   display: flex;
@@ -12,7 +6,6 @@
 }
 
 .searchInputs {
-  margin-top: 105px;
   display: flex;
 }
 

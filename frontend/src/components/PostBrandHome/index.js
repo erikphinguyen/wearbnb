@@ -97,6 +97,8 @@ function PostBrand({ brands, setBrands, onClose, setShowModal }) {
         e.preventDefault();
         const response = await postPhoto({ photo: file });
 
+        console.log('WHAT IS RESPONSE SUBMITAWS', response)
+
         dispatch(thunkPostPhotos(response))
             .then(res => {
                 if (res.error) {

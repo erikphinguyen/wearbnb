@@ -47,13 +47,13 @@ router.post('/photos', upload.single('photo'), async (req, res) => {
     console.log('WHAT IS FILE UPLOADS.JS', file)
     const result = await uploadFile(file);
     console.log('WHAT IS RESULT UPLOADS.JS', result)
-    if (result) {
-        let photo = new Photo({
-            userId,
-            filepath: result.Key
-        })
-        await photo.save()
-    }
+    // if (result) {
+    //     let photo = new Photo({
+    //         userId,
+    //         filepath: result.Key
+    //     })
+    //     await photo.save()
+    // }
     await unlinkFile(file.path);
     res.send({photoPath: `/uploads/${result.Key}`});
 })

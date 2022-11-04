@@ -7,9 +7,7 @@ nav {
 .search-container {
     top: 0;
     margin: 0;
-    border: 0;
     padding: 0;
-    border: green 1px solid;
 }
 
 .profile {
@@ -105,6 +103,7 @@ nav {
     margin-left: 19%;
     margin-right: 19%;
     /* border: 1px solid green; */
+
 }
 
 .navigation>div {
