@@ -34,6 +34,7 @@ router.post('/videos', upload.single('video'), async (req, res) => {
 })
 
 router.get('/photos/:key', (req, res) => {
+    console.log('AM I HITTING GET ROUTE UPLOADS')
     console.log('@@@@@@@@@@@@@@@@@@@@@@WHAT IS REQ.PARAMS', req)
     const key = req.params.key;
     console.log('WHAT IS KEY', key)
@@ -43,6 +44,7 @@ router.get('/photos/:key', (req, res) => {
 })
 
 router.post('/photos', upload.single('photo'), async (req, res) => {
+    console.log('AM I HITTING POST ROUTE UPLOADS')
     const file = req.file;
     console.log('WHAT IS FILE UPLOADS.JS', file)
     const result = await uploadFile(file);
