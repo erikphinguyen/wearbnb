@@ -15,23 +15,23 @@ const Video = require('../../db/models/video')
 const Photo = require('../../db/models/photo')
 const Brand = require('../../db/models/brand')
 
-router.post('/videos', upload.single('video'), async (req, res) => {
-    const file = req.file;
-    const brandId = req.body.brandId;
-    const result = await uploadFile(file);
+// router.post('/videos', upload.single('video'), async (req, res) => {
+//     const file = req.file;
+//     const brandId = req.body.brandId;
+//     const result = await uploadFile(file);
 
-    if (result) {
-        let video = new Video({
-            brandId,
-            filepath: result.Key
-        })
-        await Brand.findByIdAndUpdate(brandId, {visited: true});
-        await video.save();
-    }
+//     if (result) {
+//         let video = new Video({
+//             brandId,
+//             filepath: result.Key
+//         })
+//         await Brand.findByIdAndUpdate(brandId, {visited: true});
+//         await video.save();
+//     }
 
-    await unlinkFile(file.path);
-    res.send({videoPath: `/uploads/${result.Key}`});
-})
+//     await unlinkFile(file.path);
+//     res.send({videoPath: `/uploads/${result.Key}`});
+// })
 
 router.get('/photos/:key', (req, res) => {
     console.log('AM I HITTING GET ROUTE UPLOADS')
