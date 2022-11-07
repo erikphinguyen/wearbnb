@@ -105,33 +105,6 @@ function UserBookings({ bookings, setBookings, Brand }) {
                         </div>
                     </div>
                 )
-                // <div className='user-bookings' key={booking.id}>
-                //     {console.log('WAHT IS USER ID', booking.userId)}
-                //     {console.log('WAHT IS ID', id)}
-                //     <div>
-                //         <h2>
-                //             {console.log("WHAT IS BOOKING", booking)}
-                //             {booking?.Brand?.name}
-                //         </h2>
-                //         <h3>
-                //             Reservation: {new Date(booking.startDate).toLocaleDateString()} - {new Date(booking.endDate).toLocaleDateString()}
-                //         </h3>
-                //         <p>
-                //             <b>Price per day:</b> ${(booking.price)?.toFixed(2)}
-                //             <div>
-                //                 <b>Fees (30% for tax and services):</b> ${((booking.price) * 0.3)?.toFixed(2)}
-                //             </div>
-                //             <div>
-                //                 <b>Total:</b> $
-                //                 {(((((new Date(booking.endDate)) - (new Date(booking.startDate))) / 86400000) * (booking.price)) * 1.3)?.toFixed(2)}
-                //             </div>
-                //         </p>
-                //         {/*deleting bookings*/}
-                //         <button className='button' onClick={() => handleDeleteBooking(booking.id)}>
-                //             Cancel Booking
-                //         </button>
-                //     </div>
-                // </div>
             ))}
         </div>
     )
