@@ -74,8 +74,9 @@ const Bookings = () => {
     }
 
     // MAKING RESERVATIONS
-    const handleSubmitReservation = e => {
+    const handleSubmitReservation = async (e) => {
         e.preventDefault();
+
         const data = {
             brandId,
             userId: user.id,
@@ -84,6 +85,9 @@ const Bookings = () => {
             price,
             totalPrice: totalPrice
         }
+
+        const createBooking = await dispatch(thunkPostBookings(data))
+        history.pushState(`/bookings/${createBooking.id}`)
     }
 
     const handlePriceChange = e => {

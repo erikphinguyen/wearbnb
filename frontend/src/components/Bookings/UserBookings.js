@@ -82,7 +82,6 @@ function UserBookings({ bookings, setBookings, Brand }) {
                     <div className='user-bookings' key={booking.id}>
                         <div>
                             <h2>
-                                {console.log("WHAT IS BOOKING", booking)}
                                 {booking?.Brand?.name}
                             </h2>
                             <h3>
