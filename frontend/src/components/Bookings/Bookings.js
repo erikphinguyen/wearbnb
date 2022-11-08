@@ -183,7 +183,7 @@ const Bookings = () => {
                     <h3>Fees (30% for tax and services): ${`${fees?.toFixed(2)}`}</h3>
                     <h3 className='total'>Total: ${`${totalPrice?.toFixed(2)}`}</h3>
                 </div>
-                {
+                { 
                     user?.id === brand?.userId && (
                         <>
                             <div className='hidden'>.</div>
