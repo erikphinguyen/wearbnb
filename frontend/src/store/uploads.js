@@ -52,9 +52,18 @@ const deleteVideos = (id) => {
 }
 
 // THUNKS
-// GET ALL PHOTOS
 export const thunkGetPhotos = () => async (dispatch) => {
     const response = await csrfFetch(`/api/uploads/photos`)
+    if (response.ok) {
+        const photos = await response.json();
+        dispatch(getPhotos(photos));
+        return photos
+    }
+}
+
+// GET ONE BRAND IMAGE
+export const thunkGetOnePhoto = (id) => async (dispatch) => {
+    const response = await csrfFetch(`/api/uploads/photos/${id}`)
     if (response.ok) {
         const photos = await response.json();
         dispatch(getPhotos(photos));
@@ -76,7 +85,7 @@ export const thunkPostPhotos = (data) => async dispatch => {
     const response = await csrfFetch(`/api/uploads/photos`, {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'multipart/form-data'
         },
         body: JSON.stringify(data)
     });
