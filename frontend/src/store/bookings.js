@@ -1,5 +1,4 @@
 import { csrfFetch } from './csrf';
-import reviewsReducer from './reviews';
 
 // TYPES
 const GET_BOOKINGS = 'bookings/get_bookings';
@@ -38,7 +37,6 @@ const deleteBookings = (id) => {
 
 // THUNKS
 export const thunkGetBookings = (id) => async (dispatch) => {
-    console.log('WHAT IS ID IN THUNK GET BOOKIGNS', id)
     const response = await csrfFetch(`/api/bookings/${id}`);
     if (response.ok) {
         const bookings = await response.json();
@@ -68,7 +66,6 @@ export const thunkPutBookings = (data) => async (dispatch) => {
     });
 
     if (response.ok) {
-        console.log('WHAT IS RESPONSE IN THUNK PUT BOOKINGS RESPONSE', response)
         const bookings = await response.json();
         dispatch(putBookings(bookings))
         return bookings
@@ -80,13 +77,14 @@ export const thunkPutBookings = (data) => async (dispatch) => {
 }
 
 export const thunkPostBookings = (data) => async (dispatch) => {
-    const response = await csrfFetch(`/api//${data.brandId}`, {
+    const response = await csrfFetch(`/api/bookings`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(data)
     });
+    console.log('WAHT IS RESPONSE FRONT END STORE', response)
     if (response.ok) {
         const bookings = await response.json();
         dispatch(postBookings(bookings));
@@ -132,7 +130,7 @@ const bookingsReducer = (state = {}, action) => {
             }
         case POST_BOOKINGS:
             const postState = { ...state };
-            postState[action.bookings.id] = action.bookings;
+            postState[action.bookings] = action.bookings;
             return postState;
         case DELETE_BOOKINGS:
             const deleteState = { ...state };
