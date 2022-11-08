@@ -2,6 +2,7 @@ import { csrfFetch } from './csrf';
 
 // TYPES
 const GET_PHOTOS = 'uploads/get_photos';
+const GET_ONE_PHOTO = 'uploads/get_one_photo'
 const GET_VIDEOS = 'uploads/get_videos';
 const POST_PHOTOS = 'uploads/post_photos';
 const POST_VIDEOS = 'uploads/post_videos';
@@ -13,6 +14,13 @@ const getPhotos = (photos) => {
     return {
         type: GET_PHOTOS,
         photos
+    }
+}
+
+const getOnePhoto = (photo) => {
+    return {
+        type: GET_ONE_PHOTO,
+        photo
     }
 }
 
@@ -157,6 +165,10 @@ const uploadsReducer = (state = {}, action) => {
             return {
                 ...newPhotos
             }
+        case GET_ONE_PHOTO:
+            const newState = {...state};
+            newState[action.photo.id] = action.photo;
+            return newState;
         case GET_VIDEOS:
             const newVideos = {};
             action.videos.forEach(video => {
