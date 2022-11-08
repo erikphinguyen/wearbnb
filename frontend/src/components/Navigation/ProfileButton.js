@@ -41,7 +41,7 @@ function ProfileButton({ user }) {
                     <div><b>Username: </b> {user.username}</div>
                     <div><b>Email: </b>{user.email}</div>
                     <div>
-                        <NavLink to={`users/${user.id}/bookings`}>
+                        <NavLink exact to={`users/${user.id}/bookings`}>
                             <button className="button">Bookings</button>
                         </NavLink>
                     </div>

@@ -7,6 +7,7 @@ import "./Bookings.css";
 
 const Bookings = () => {
     const dispatch = useDispatch();
+    const history = useHistory();
     const { id } = useParams();
     const { brandId } = useParams();
     const [errors, setErrors] = useState([])
@@ -19,16 +20,11 @@ const Bookings = () => {
     const [totalPrice, setTotalPrice] = useState(0);
     const [stayDuration, setStayDuration] = useState(0)
 
-    console.log('WHAT IS USE PARAMS ID', id)
     const price = useSelector(state => {
         // return state.bookings[id]?.price
         for (let key in state.bookings) {
             let booking = state.bookings[key]
-            // console.log('WHAT IS BOOKING', booking)
-            console.log('WHAT IS BOKING BRAND', booking.Brand.id)
-            console.log('WHAT IS ID', id)
             if (booking.Brand.id === Number(id)) {
-                console.log('WAHT IS BOOKING', booking)
                 return booking.price
             }
         }
@@ -37,7 +33,6 @@ const Bookings = () => {
         //     return bookings[0].price
         // }
     })
-    console.log('WHAT IS PRICE BOOKINGS.JS', price)
     const [dates, setDates] = useState({ startDate: '', endDate: '' })
 
     // let stayDuration = useRef(0);
@@ -78,16 +73,19 @@ const Bookings = () => {
         e.preventDefault();
 
         const data = {
-            brandId,
+            brandId: brand.id,
             userId: user.id,
-            startDate,
-            endDate,
+            startDate: dates.startDate,
+            endDate: dates.endDate,
             price,
             totalPrice: totalPrice
         }
 
+        console.log('WHAT IS DATA', data)
+
         const createBooking = await dispatch(thunkPostBookings(data))
-        history.pushState(`/bookings/${createBooking.id}`)
+        console.log('WHAT IS CREATEBOOKING', createBooking)
+        history.push(`/bookings/${createBooking.id}`)
     }
 
     const handlePriceChange = e => {
@@ -185,7 +183,7 @@ const Bookings = () => {
                     <h3>Fees (30% for tax and services): ${`${fees?.toFixed(2)}`}</h3>
                     <h3 className='total'>Total: ${`${totalPrice?.toFixed(2)}`}</h3>
                 </div>
-                {
+                { 
                     user?.id === brand?.userId && (
                         <>
                             <div className='hidden'>.</div>

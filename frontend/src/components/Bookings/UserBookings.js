@@ -9,7 +9,6 @@ import './UserBookings.css';
 function UserBookings({ bookings, setBookings, Brand }) {
     const dispatch = useDispatch();
     const { id } = useParams();
-    console.log('WHAT IS ID', id)
     const user = useSelector(state => state.session.user?.id)
     const username = useSelector(state => state.session.user?.username)
     const [isLoaded, setIsLoaded] = useState(false);
@@ -19,12 +18,11 @@ function UserBookings({ bookings, setBookings, Brand }) {
     })
 
 
-    // console.log('@@@@@@@@@@@@@@@@@@@@@@@@@@@ WHAT IS BOOKINGS STATE', bookingState)
+
     const price = useSelector(state => state.bookings[id]?.price)
 
     // const price = useSelector(state => {
     //     let listing = state.bookings.filter(el => {
-    //         console.log('@@@@@@@@@@@@@@@@@@@@@ WHAT IS EL', el)
     //         return el.id === bookings.brandId
     //     })
 
@@ -33,14 +31,13 @@ function UserBookings({ bookings, setBookings, Brand }) {
 
     // const price =
 
-    console.log('WHAT IS PRICE', price)
 
     const [dates, setDates] = useState({ startDate: '', endDate: '' });
     let fees = Number(price * .3);
 
     // this returns an array of bookings from specific user
     const bookingsFromUser = Object?.values(bookings)
-    console.log('WHAT IS BOOKINGSFROMUSER', bookingsFromUser)
+
 
     useEffect(() => {
         dispatch(sessionActions.restoreUser())
@@ -65,7 +62,6 @@ function UserBookings({ bookings, setBookings, Brand }) {
     //         })
     // }
     const handleDeleteBooking = (id) => {
-        console.log('WHAT IS BOOKING ID', id)
         dispatch(thunkDeleteBookings(id))
             .then(() => {
                 setBookings(bookings.filter(booking => booking.id !== id))

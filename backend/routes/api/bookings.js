@@ -10,14 +10,12 @@ const { validationResult } = require('express-validator')
 // GET ALL BOOKINGS TO LOGGED IN USER
 router.get('/:id(\\d+)', requireAuth, asyncHandler(async (req, res) => {
     const { id } = req.params;
-    console.log('WHAT IS ID BACKEND BOOKINGS', id)
     // first option with .findAll
     const bookings = await Booking.findAll({
         include: {
             model: Brand
         }
     })
-    console.log('WHAT IS BOOKINGS', bookings)
     // second option with .findByPk
     // const bookings = await Booking.findByPk(Number(id))
 
@@ -41,21 +39,31 @@ router.put('/:id(\\d+)', requireAuth, restoreUser, asyncHandler(async (req, res)
 }))
 
 
-// POST BOOKINGS (can do errorsArray like brands & reviews)
-router.post('/:id(\\d+)', bookingValidations, requireAuth, restoreUser, asyncHandler(async (req, res) => {
+// POST BOOKINGS (can do errorsArray like brands & reviews); bookingValidations taken out
+router.post('/', requireAuth, restoreUser, asyncHandler(async (req, res) => {
     const { brandId, userId, startDate, endDate, price, totalPrice } = req.body;
 
-    let validatorErrors = validationResult(req);
+    // let validatorErrors = validationResult(req);
 
-    if (validatorErrors.isEmpty()) {
-        const booking = await Booking.create({ brandId, userId, startDate, endDate, price, totalPrice })
-        return res.json(booking)
-    }
+    // console.log('WHAT IS VALIDATOR ERROS', validatorErrors)
 
-    else {
-        const errors = validatorErrors.array().map(error => error.msg);
-        return res.json(errors)
-    }
+    // if (validatorErrors.isEmpty()) {
+    //     let booking = await Booking.create({ brandId, userId, startDate, endDate, price, totalPrice })
+    //     await booking.save();
+    //     return res.json(booking)
+    // }
+
+    // else {
+    //     const errors = validatorErrors.array().map(error => error.msg);
+    //     return res.json(errors)
+    // }
+
+    let newBooking = new Booking(req.body);
+    console.log('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ WAHT IS NEW BOOKING', newBooking)
+    await newBooking.save();
+
+    const payload = await Brand.findByPk(newBooking.id);
+    return res.json(payload)
 }))
 
 // DELETE BOOKINGS

@@ -31,7 +31,7 @@ function PostReview({ reviews, setReviews }) {
                     setErrors([res.error])
                     return
                 }
-                console.log('WHAT IS ONEBRANDREVIEWS',reviews)
+
                 setReviews([...reviews, res])
                 setReview('')
                 setErrors([])
