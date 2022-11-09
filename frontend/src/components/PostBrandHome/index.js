@@ -1,5 +1,3 @@
-import { faImages } from '@fortawesome/free-solid-svg-icons';
-import { csrfFetch } from '../../store/csrf';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useHistory } from 'react-router-dom';
@@ -16,10 +14,6 @@ function PostBrand({ brands, setBrands, onClose, setShowModal }) {
     const [city, setCity] = useState('');
     const [country, setCountry] = useState('');
     const [errors, setErrors] = useState([]);
-
-    // aws
-    const [file, setFile] = useState();
-    const [photo, setPhoto] = useState([]);
 
     const reset = () => {
         setBrandImg('');
@@ -67,67 +61,6 @@ function PostBrand({ brands, setBrands, onClose, setShowModal }) {
         //     history.push({pathname:`/brands/${brand.id}`, state:{data: brand}})
         // }
     };
-
-    // aws
-    // const submitAWS = async (e) => {
-    //     e.preventDefault();
-    //     const response = await postPhoto({ photo: file });
-
-    //     console.log('WHAT IS RESPONSE SUBMITAWS', response)
-
-    //     dispatch(thunkPostPhotos(response))
-    //         .then(res => {
-    //             if (res.error) {
-    //                 setErrors(res.error)
-    //                 return
-    //             }
-    //             // setPhoto([response.photo, ...photo])
-    //             setPhoto([...brands, res])
-    //         })
-
-    // }
-
-    const imageForm = document.querySelector("#imageForm")
-    const imageInput = document.querySelector("#imageInput")
-
-    // imageForm.addEventListener("submit", async (e) => {
-    //     e.preventDefault();
-    //     const file = imageInput.files[0];
-
-    //     // get a secure url form our server
-    //     const {url} = await fetch("/s3URL").then(res => res.json())
-    //     console.log(url)
-
-    //     // post the image directly to the s3 bucket
-    //     await fetch(url, {
-    //         method: "PUT",
-    //         HEADERS: {
-    //             "Content-Type": "multipart/form-data"
-    //         },
-    //         body: file
-    //     })
-
-    //     const imageUrl = url.split('?')[0];
-    //     console.log(imageUrl)
-
-    //     // post request to my server to store any extra data
-    //     const img = document.createElement("img");
-    //     img.src = imageUrl;
-    //     document.body.appendChild(img)
-    // })
-
-    // // aws
-    // const submitAWS = async (e) => {
-    //     e.preventDefault();
-    //     const response = await postPhoto({ photo: file })
-    //     setPhoto([response.photo, ...photo])
-    // }
-
-    const fileSelected = e => {
-        const file = e.target.files[0]
-        console.log('WHAT IS FILE IN FILESELECTED', file)
-        setFile(file)
-    }
 
     return (
         <div>
@@ -187,27 +120,6 @@ function PostBrand({ brands, setBrands, onClose, setShowModal }) {
                 <div>
                     <AWSS3/>
                 </div>
-
-                {/* this is s3 upload front end
-                <form className='form' id="imageForm">
-                    <input id="imageInput" type="file" accept="photo/*" />
-                    <button className='button' type="submit">Upload</button>
-                </form> */}
-                {/* <h2>Or Upload Brand Image via File</h2>
-
-                <form onSubmit={submitAWS}>
-                    <input onChange={fileSelected} type='file' accept='photo/*'></input>
-                    <button type='submit'>Submit</button>
-                </form>
-
-
-                {photo.map(uploadedPhoto => {
-                    <div key={uploadedPhoto}>
-                        <img src={uploadedPhoto}></img>
-                    </div>
-                })} */}
-
-                {/* <img src="/images/9fa06d3c5da7aec7f932beb5b3e60f1d"></img> */}
 
             </form>
         </div>

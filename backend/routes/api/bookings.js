@@ -59,7 +59,6 @@ router.post('/', requireAuth, restoreUser, asyncHandler(async (req, res) => {
     // }
 
     let newBooking = new Booking(req.body);
-    console.log('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ WAHT IS NEW BOOKING', newBooking)
     await newBooking.save();
 
     const payload = await Brand.findByPk(newBooking.id);

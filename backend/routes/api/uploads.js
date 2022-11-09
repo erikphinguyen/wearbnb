@@ -11,14 +11,14 @@ const db = require('../../db/models');
 
 const router = express.Router();
 
-router.get('/brands/:id', asyncHandler(async (req, res) => {
+router.get('/brands', asyncHandler(async (req, res) => {
   const brandId = req.params.id
   console.log('WHAT IS BRANDID IN GET ROUTE', brandId)
   const images = await db.Image.findAll({ where: { brandId } });
   return res.json(images);
 }))
 
-router.post('/brands/:id', singleMulterUpload('image'), asyncHandler(async (req, res) => {
+router.post('/brands', singleMulterUpload('image'), asyncHandler(async (req, res) => {
   const brandId = req.params.id;
   console.log('WHAT IS BRANDID IN POST ROUTE', brandId)
 
