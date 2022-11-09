@@ -81,7 +81,7 @@ export const thunkPostImage = (data) => async (dispatch) => {
 }
 
 // REDUCER
-const imagesReducer = (state = {}, action) => {
+const uploadsReducer = (state = {}, action) => {
     switch (action.type) {
         case GET_IMAGES:
             const newImage = {};
@@ -104,4 +104,4 @@ const imagesReducer = (state = {}, action) => {
     }
 }
 
-export default imagesReducer;
+export default uploadsReducer;
