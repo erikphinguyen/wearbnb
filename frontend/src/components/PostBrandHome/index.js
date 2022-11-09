@@ -15,6 +15,8 @@ function PostBrand({ brands, setBrands, onClose, setShowModal }) {
     const [country, setCountry] = useState('');
     const [errors, setErrors] = useState([]);
 
+    const [file, setFile] = useState(null)
+
     const reset = () => {
         setBrandImg('');
         setName('');
