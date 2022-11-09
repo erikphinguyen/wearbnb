@@ -95,7 +95,7 @@ const uploadsReducer = (state = {}, action) => {
             const newState = { ...state };
             newState[action.image.id] = action.image
             return newState
-        case POST_BRANDS:
+        case POST_IMAGES:
             const postState = { ...state };
             postState[action.images.id] = action.images
             return postState;

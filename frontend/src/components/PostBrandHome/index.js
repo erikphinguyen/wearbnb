@@ -4,32 +4,7 @@ import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useHistory } from 'react-router-dom';
 import { thunkPostBrands } from '../../store/brands';
-import { thunkPostPhotos } from '../../store/uploads';
-
-const postPhoto = async ({ uploadedPhoto, file }) => {
-    const formData = new FormData();
-    formData.append("photo", uploadedPhoto);
-
-    let data = { file }
-    console.log('WHAT IS FILE IN POSTPHOTO', file)
-
-    const response = await csrfFetch(`/api/uploads/photos`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-    });
-
-    console.log('WHAT IS RESPONSE IN POSTPHOTO', response)
-    console.log('WHAT IS RESPONSE.JSON IN POSTPHOTO', response.json())
-
-    // return response.data
-    const photos = await response.json();
-
-    return photos
-}
-
+import AWSS3 from './AWSS3';
 
 function PostBrand({ brands, setBrands, onClose, setShowModal }) {
     const dispatch = useDispatch();
@@ -40,11 +15,10 @@ function PostBrand({ brands, setBrands, onClose, setShowModal }) {
     const [address, setAddress] = useState('');
     const [city, setCity] = useState('');
     const [country, setCountry] = useState('');
-    const [file, setFile] = useState('')
     const [errors, setErrors] = useState([]);
 
     // aws
-    // const [file, setFile] = useState();
+    const [file, setFile] = useState();
     const [photo, setPhoto] = useState([]);
 
     const reset = () => {
@@ -69,7 +43,7 @@ function PostBrand({ brands, setBrands, onClose, setShowModal }) {
             address,
             city,
             country,
-            file
+            file,
         }
 
         // const brand = await dispatch(thunkPostBrands(newBrand));
@@ -95,23 +69,23 @@ function PostBrand({ brands, setBrands, onClose, setShowModal }) {
     };
 
     // aws
-    const submitAWS = async (e) => {
-        e.preventDefault();
-        const response = await postPhoto({ photo: file });
+    // const submitAWS = async (e) => {
+    //     e.preventDefault();
+    //     const response = await postPhoto({ photo: file });
 
-        console.log('WHAT IS RESPONSE SUBMITAWS', response)
+    //     console.log('WHAT IS RESPONSE SUBMITAWS', response)
 
-        dispatch(thunkPostPhotos(response))
-            .then(res => {
-                if (res.error) {
-                    setErrors(res.error)
-                    return
-                }
-                // setPhoto([response.photo, ...photo])
-                setPhoto([...brands, res])
-            })
+    //     dispatch(thunkPostPhotos(response))
+    //         .then(res => {
+    //             if (res.error) {
+    //                 setErrors(res.error)
+    //                 return
+    //             }
+    //             // setPhoto([response.photo, ...photo])
+    //             setPhoto([...brands, res])
+    //         })
 
-    }
+    // }
 
     const imageForm = document.querySelector("#imageForm")
     const imageInput = document.querySelector("#imageInput")
@@ -152,8 +126,7 @@ function PostBrand({ brands, setBrands, onClose, setShowModal }) {
     const fileSelected = e => {
         const file = e.target.files[0]
         console.log('WHAT IS FILE IN FILESELECTED', file)
-
-        if (file) setFile(file)
+        setFile(file)
     }
 
     return (
@@ -210,22 +183,18 @@ function PostBrand({ brands, setBrands, onClose, setShowModal }) {
                     placeholder='Country'
                     name='country'
                 />
-
-                {/* <h2>Or Upload Brand Image via File</h2>
-                <input
-                    className='input'
-                    onChange={fileSelected}
-                    type='file'
-                    accept='photo/*'></input>
-                <button className='button' type='submit' >Submit</button> */}
+                <button className='button' type='submit' >Submit</button>
+                <div>
+                    <AWSS3/>
+                </div>
 
                 {/* this is s3 upload front end
                 <form className='form' id="imageForm">
                     <input id="imageInput" type="file" accept="photo/*" />
                     <button className='button' type="submit">Upload</button>
                 </form> */}
+                {/* <h2>Or Upload Brand Image via File</h2>
 
-                <h2>Or Upload Brand Image via File</h2>
                 <form onSubmit={submitAWS}>
                     <input onChange={fileSelected} type='file' accept='photo/*'></input>
                     <button type='submit'>Submit</button>
@@ -236,7 +205,7 @@ function PostBrand({ brands, setBrands, onClose, setShowModal }) {
                     <div key={uploadedPhoto}>
                         <img src={uploadedPhoto}></img>
                     </div>
-                })}
+                })} */}
 
                 {/* <img src="/images/9fa06d3c5da7aec7f932beb5b3e60f1d"></img> */}
 

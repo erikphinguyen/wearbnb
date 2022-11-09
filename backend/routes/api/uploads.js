@@ -13,21 +13,24 @@ const router = express.Router();
 
 router.get('/brands/:id', asyncHandler(async (req, res) => {
   const brandId = req.params.id
+  console.log('WHAT IS BRANDID IN GET ROUTE', brandId)
   const images = await db.Image.findAll({ where: { brandId } });
   return res.json(images);
 }))
 
 router.post('/brands/:id', singleMulterUpload('image'), asyncHandler(async (req, res) => {
-    const brandId = req.params.id;
-    const imageUrl = await singlePublicFileUpload(req.file);
+  const brandId = req.params.id;
+  console.log('WHAT IS BRANDID IN POST ROUTE', brandId)
 
-    const newImage = await db.Image.create({
-      brandId,
-      imageUrl,
-    });
+  const imageUrl = await singlePublicFileUpload(req.file);
+  console.log('WHAT IS IMAGEURL', imageUrl)
+  const newImage = await db.Image.create({
+    brandId,
+    imageUrl,
+  });
 
-    return res.json(newImage);
-  })
+  return res.json(newImage);
+})
 )
 
 // router.post('/brands/:id', multipleMulterUpload('image'), asyncHandler(async (req, res) => {
