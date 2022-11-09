@@ -40,10 +40,11 @@ function PostBrand({ brands, setBrands, onClose, setShowModal }) {
     const [address, setAddress] = useState('');
     const [city, setCity] = useState('');
     const [country, setCountry] = useState('');
+    const [file, setFile] = useState('')
     const [errors, setErrors] = useState([]);
 
     // aws
-    const [file, setFile] = useState();
+    // const [file, setFile] = useState();
     const [photo, setPhoto] = useState([]);
 
     const reset = () => {
@@ -67,7 +68,8 @@ function PostBrand({ brands, setBrands, onClose, setShowModal }) {
             name,
             address,
             city,
-            country
+            country,
+            file
         }
 
         // const brand = await dispatch(thunkPostBrands(newBrand));
@@ -150,7 +152,8 @@ function PostBrand({ brands, setBrands, onClose, setShowModal }) {
     const fileSelected = e => {
         const file = e.target.files[0]
         console.log('WHAT IS FILE IN FILESELECTED', file)
-        setFile(file)
+
+        if (file) setFile(file)
     }
 
     return (
@@ -207,15 +210,22 @@ function PostBrand({ brands, setBrands, onClose, setShowModal }) {
                     placeholder='Country'
                     name='country'
                 />
-                <button className='button' type='submit' >Submit</button>
+
+                {/* <h2>Or Upload Brand Image via File</h2>
+                <input
+                    className='input'
+                    onChange={fileSelected}
+                    type='file'
+                    accept='photo/*'></input>
+                <button className='button' type='submit' >Submit</button> */}
 
                 {/* this is s3 upload front end
                 <form className='form' id="imageForm">
                     <input id="imageInput" type="file" accept="photo/*" />
                     <button className='button' type="submit">Upload</button>
                 </form> */}
-                <h2>Or Upload Brand Image via File</h2>
 
+                <h2>Or Upload Brand Image via File</h2>
                 <form onSubmit={submitAWS}>
                     <input onChange={fileSelected} type='file' accept='photo/*'></input>
                     <button type='submit'>Submit</button>

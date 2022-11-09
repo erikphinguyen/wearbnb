@@ -6,7 +6,8 @@ module.exports = (sequelize, DataTypes) => {
     name: DataTypes.STRING,
     address: DataTypes.STRING,
     city: DataTypes.STRING,
-    country: DataTypes.STRING
+    country: DataTypes.STRING,
+    file: DataTypes.STRING
   }, {});
   Brand.associate = function (models) {
     Brand.belongsTo(models.User, { foreignKey: "userId" })

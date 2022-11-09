@@ -41,25 +41,60 @@ router.post('/search', asyncHandler(async function (req, res) {
 router.post('/', requireAuth, asyncHandler(async function (req, res) {
     // const id = await Brand.create(req.body);
 
-    let { brandImg, name, address, city, country } = req.body;
+    let { brandImg, name, address, city, country, file } = req.body;
+
+    console.log('WHAT IS REQ.BODY', req.body)
+    console.log('WHAT IS FILE', file)
 
     let errorsArray = [];
+
     let brandImgSplit = brandImg.split('.')
     let brandExtensionFile = brandImgSplit[brandImgSplit.length - 1]
     let brandURL = brandImgSplit[0]
 
-    if (brandImg.length === 0) {
-        errorsArray.push("Please add a Brand Image")
+    if (file.length > 1) {
+        let fileSplit = file.split('.');
+        let fileExtension = fileSplit[fileSplit.length - 1];
+        console.log('WHAT IS FILE SPLIT', fileSplit)
+        console.log('WHAT IS FILE EXTENSION', fileExtension)
     }
-    if (brandImg.length > 255) {
-        errorsArray.push("Brand Image length cannot exceed 255 characters")
+
+    //        return el.name.toLowerCase().includes(searchTerm.toLowerCase())
+
+    if (file.length === 0) {
+        let fileSplit = file.split('.');
+        let fileExtension = fileSplit[fileSplit.length - 1];
+        if (!fileExtension.toLowerCase().includes('png') && !fileExtension.toLowerCase().includes('jpg') && !fileExtension.toLowerCase().includes('jpeg')) {
+            errorsArray.push("Please upload a file with extension .png, .jpg, or .jpeg")
+        }
+        if (brandImg.length === 0) {
+            errorsArray.push("Please add a Brand Image")
+        }
+        if (brandImg.length > 255) {
+            errorsArray.push("Brand Image length cannot exceed 255 characters")
+        }
+        if (!brandExtensionFile.includes('png') && !brandExtensionFile.includes('jpg') && !brandExtensionFile.includes('jpeg')) {
+            errorsArray.push("Please use an image with extension .png, .jpg, or .jpeg")
+        }
+        if (!brandURL.includes("http://") && !brandURL.includes("https://")) {
+            errorsArray.push("Please use correct URL (http://) or (https://)")
+        }
     }
-    if (!brandExtensionFile.includes('png') && !brandExtensionFile.includes('jpg') && !brandExtensionFile.includes('jpeg')) {
-        errorsArray.push("Please use an image with extension file .png, .jpg, or .jpeg")
-    }
-    if (!brandURL.includes("http://") && !brandURL.includes("https://")) {
-        errorsArray.push("Please use correct URL (http://) or (https://)")
-    }
+
+    // if (brandImg.length === 0) {
+    //     errorsArray.push("Please add a Brand Image")
+    // }
+    // if (brandImg.length > 255) {
+    //     errorsArray.push("Brand Image length cannot exceed 255 characters")
+    // }
+    // if (!brandExtensionFile.includes('png') && !brandExtensionFile.includes('jpg') && !brandExtensionFile.includes('jpeg')) {
+    //     errorsArray.push("Please use an image with extension file .png, .jpg, or .jpeg")
+    // }
+    // if (!brandURL.includes("http://") && !brandURL.includes("https://")) {
+    //     errorsArray.push("Please use correct URL (http://) or (https://)")
+    // }
+
+
     if (name.length === 0) {
         errorsArray.push("Please add a name")
     }
