@@ -1,63 +1,54 @@
 const express = require('express');
-const router = express.Router();
 const asyncHandler = require('express-async-handler');
+const {
+  singleMulterUpload,
+  singlePublicFileUpload,
+  multipleMulterUpload,
+  multiplePublicFileUpload
+} = require('../../awsS3.js');
 
-const multer = require('multer');
-const upload = multer({ dest: 'uploads/' });
+const db = require('../../db/models');
 
-const fs = require('fs');
-const util = require('util');
-const unlinkFile = util.promisify(fs.unlink);
+const router = express.Router();
 
-const {uploadFile, getFile, deleteFile} = require('../../s3.js')
+router.get('/brands/:id', asyncHandler(async (req, res) => {
+  const brandId = req.params.id
+  const images = await db.Image.findAll({ where: { brandId } });
+  return res.json(images);
+}))
 
-const Video = require('../../db/models/video')
-const Photo = require('../../db/models/photo')
-const Brand = require('../../db/models/brand')
+router.post('/brands/:id', singleMulterUpload('image'), asyncHandler(async (req, res) => {
+    const brandId = req.params.id;
+    const imageUrl = await singlePublicFileUpload(req.file);
 
-// router.post('/videos', upload.single('video'), async (req, res) => {
-//     const file = req.file;
-//     const brandId = req.body.brandId;
-//     const result = await uploadFile(file);
+    const newImage = await db.Image.create({
+      brandId,
+      imageUrl,
+    });
 
-//     if (result) {
-//         let video = new Video({
-//             brandId,
-//             filepath: result.Key
-//         })
-//         await Brand.findByIdAndUpdate(brandId, {visited: true});
-//         await video.save();
-//     }
+    return res.json(newImage);
+  })
+)
 
-//     await unlinkFile(file.path);
-//     res.send({videoPath: `/uploads/${result.Key}`});
-// })
+// router.post('/brands/:id', multipleMulterUpload('image'), asyncHandler(async (req, res) => {
+//     const brandId = req.params.id;
+//     const imageUrls = await multiplePublicFileUpload(req.files);
 
-router.get('/photos/:key', (req, res) => {
-    console.log('AM I HITTING GET ROUTE UPLOADS')
-    console.log('@@@@@@@@@@@@@@@@@@@@@@WHAT IS REQ.PARAMS', req)
-    const key = req.params.key;
-    console.log('WHAT IS KEY', key)
-    const getFiles = getFile(key)
+//     imageUrls.forEach(async imageUrl => {
+//       const newImage = await db.Image.create({
+//         brandId,
+//         imageUrl
+//       })
+//     });
 
-    getFiles.pipe(res)
-})
+//     // return res.end();
 
-router.post('/photos', upload.single('photo'), async (req, res) => {
-    console.log('AM I HITTING POST ROUTE UPLOADS')
-    const file = req.file;
-    console.log('WHAT IS FILE UPLOADS.JS', file)
-    const result = await uploadFile(file);
-    console.log('WHAT IS RESULT UPLOADS.JS', result)
-    // if (result) {
-    //     let photo = new Photo({
-    //         userId,
-    //         filepath: result.Key
-    //     })
-    //     await photo.save()
-    // }
-    await unlinkFile(file.path);
-    res.send({photoPath: `/uploads/${result.Key}`});
-})
+//     const newImage = await db.Image.create({
+//       brandId,
+//       imageUrl,
+//     });
+
+//     return res.json(newImage);
+// }))
 
 module.exports = router;
