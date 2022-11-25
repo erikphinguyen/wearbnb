@@ -35,8 +35,9 @@ nav {
 .button-container {
     display: flex;
     justify-content: space-between;
-    margin: 0;
+    align-items: center;
     /* border: 1px solid red; */
+    width: 100px;
 }
 
 .break-line {
@@ -44,7 +45,6 @@ nav {
 }
 
 .link {
-    margin-top: 20%;
     background: none;
     border: none;
     text-decoration: none;
@@ -55,8 +55,23 @@ nav {
     padding: 0;
 }
 
+#bars-icon {
+    padding:1rem;
+}
+
+#user-icon {
+
+ padding:1rem;
+}
+
 .dropdown {
+    display: flex;
     position: relative;
+    width: 100px;
+    border: 1px solid #ced4da;
+    border-radius: 45%;
+    justify-content: center;
+    align-items: center;
     /* background-image: url("../../assets/images/ProfilePic.svg"); */
 }
 
@@ -92,10 +107,6 @@ nav {
     opacity: 1;
     transform: translateY(0);
     pointer-events: auto;
-}
-
-.button-container>div {
-    margin-top: 12%;
 }
 
 .navigation {

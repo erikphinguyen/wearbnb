@@ -85,16 +85,55 @@ export const thunkPutBrands = data => async dispatch => {
     }
 };
 
+
 export const thunkPostBrands = (data) => async dispatch => {
+    const formData = new FormData();
+    // formData.append('fromModal', data.fromModal)
+    // formData.append('userId', data.userId)
+    // formData.append('brandImg', data.brandImg)
+    formData.append("file", data.file)
+    // formData.append("name", data.name)
+    // formData.append("address", data.address)
+    // formData.append("city", data.city)
+    // formData.append("country", data.country)
+    console.log('WHAT IS DATA THUNK POST BRANDS', data)
     const response = await csrfFetch(`/api/brands`, {
         method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
+        // headers: {
+        //     'Content-Type': 'multipart/form-data'
+        // },
+        body: formData
     });
 
     if (response.ok) {
+        const brand = await response.json();
+        dispatch(postBrands(brand));
+        return brand;
+    }
+    else {
+        const data = await response.json()
+        return data
+    }
+};
+
+export const thunkPostFile = (data) => async dispatch => {
+    const formData = new FormData();
+    FormData.append("file", data.file)
+    FormData.append("name", data.name)
+    FormData.append("address", data.address)
+    FormData.append("city", data.city)
+    FormData.append("country", data.country)
+    console.log('WHAT IS DATA THUNK POST BRANDS', data)
+    const response = await csrfFetch(`/api/brands`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': "multipart/form-data"
+        },
+        body: formData
+    });
+
+    if (response.ok) {
+        console.log('WAHT IS RESPONSE THUNK POST FILe', response)
         const brand = await response.json();
         dispatch(postBrands(brand));
         return brand;

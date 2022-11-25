@@ -3,33 +3,8 @@ import { csrfFetch } from '../../store/csrf';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useHistory } from 'react-router-dom';
-import { thunkPostBrands } from '../../store/brands';
+import { thunkPostBrands, thunkPostFile } from '../../store/brands';
 import { thunkPostPhotos } from '../../store/uploads';
-
-const postPhoto = async ({ uploadedPhoto, file }) => {
-    const formData = new FormData();
-    formData.append("photo", uploadedPhoto);
-
-    let data = { file }
-    console.log('WHAT IS FILE IN POSTPHOTO', file)
-
-    const response = await csrfFetch(`/api/uploads/photos`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-    });
-
-    console.log('WHAT IS RESPONSE IN POSTPHOTO', response)
-    console.log('WHAT IS RESPONSE.JSON IN POSTPHOTO', response.json())
-
-    // return response.data
-    const photos = await response.json();
-
-    return photos
-}
-
 
 function PostBrand({ brands, setBrands, onClose, setShowModal }) {
     const dispatch = useDispatch();
@@ -67,8 +42,11 @@ function PostBrand({ brands, setBrands, onClose, setShowModal }) {
             name,
             address,
             city,
-            country
+            country,
+            file
         }
+
+        console.log('WHAT IS NEWBRAND HANDLE SUBMIT', newBrand)
 
         // const brand = await dispatch(thunkPostBrands(newBrand));
         // if validation erros = empty, dispatch
@@ -95,18 +73,16 @@ function PostBrand({ brands, setBrands, onClose, setShowModal }) {
     // aws
     const submitAWS = async (e) => {
         e.preventDefault();
-        const response = await postPhoto({ photo: file });
 
-        console.log('WHAT IS RESPONSE SUBMITAWS', response)
-
-        dispatch(thunkPostPhotos(response))
+        dispatch(thunkPostFile(file))
             .then(res => {
                 if (res.error) {
                     setErrors(res.error)
                     return
                 }
-                // setPhoto([response.photo, ...photo])
-                setPhoto([...brands, res])
+                setShowModal(false);
+                setPhoto(photo)
+                setBrands([...brands, res])
             })
 
     }
