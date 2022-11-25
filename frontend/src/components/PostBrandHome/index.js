@@ -190,7 +190,9 @@ function PostBrand({ brands, setBrands, onClose, setShowModal }) {
                     <input id="imageInput" type="file" accept="photo/*" />
                     <button className='button' type="submit">Upload</button>
                 </form> */}
-                <h2>Or Upload Brand Image via File</h2>
+
+                {/* {FIX THIS FOR AWS} */}
+                {/* <h2>Or Upload Brand Image via File</h2>
 
                 <form onSubmit={submitAWS}>
                     <input onChange={fileSelected} type='file' accept='photo/*'></input>
@@ -202,7 +204,7 @@ function PostBrand({ brands, setBrands, onClose, setShowModal }) {
                     <div key={uploadedPhoto}>
                         <img src={uploadedPhoto}></img>
                     </div>
-                })}
+                })} */}
 
                 {/* <img src="/images/9fa06d3c5da7aec7f932beb5b3e60f1d"></img> */}
 

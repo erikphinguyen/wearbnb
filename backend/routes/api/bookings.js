@@ -8,7 +8,7 @@ const { bookingValidations } = require('../../validations/bookings');
 const { validationResult } = require('express-validator')
 
 // GET ALL BOOKINGS TO LOGGED IN USER
-router.get('/:id(\\d+)', requireAuth, asyncHandler(async (req, res) => {
+router.get('/:id(\\d+)', asyncHandler(async (req, res) => {
     const { id } = req.params;
     // first option with .findAll
     const bookings = await Booking.findAll({

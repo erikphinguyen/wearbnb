@@ -192,7 +192,9 @@ const Reviews = ({ user }) => {
                                 )}
 
                                 {
-                                    (review?.userId === loggedInUser.id && review.review) && (
+                                    // (review?.userId === loggedInUser.id && review.review) &&
+
+                                    (review?.userId === loggedInUser?.id) && (
                                         <>
                                             <button className='button' onClick={() => {
                                                 setSelectedEdit(review.id)
