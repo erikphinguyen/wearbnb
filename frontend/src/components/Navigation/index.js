@@ -50,6 +50,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { fadro } from '@fortawesome/free-solid-svg-icons';
 import ProfilePic from '../../assets/images/ProfilePic.svg';
 import SearchBar from '../SearchBar/SearchBar';
+import { faUser, faBars } from '@fortawesome/free-solid-svg-icons'
 
 function Navigation({ isLoaded, brands, setBrands }) {
     const sessionUser = useSelector(state => state.session.user);
@@ -72,7 +73,9 @@ function Navigation({ isLoaded, brands, setBrands }) {
                 <div className='dropdown' data-dropdown>
                     <button className='link' data-dropdown-button>
                         {/* <img className='profile' data-dropdown-button src={ProfilePic}></img> */}
-                        Log In/Sign Up
+                        {/* Log In/Sign Up */}
+                        <FontAwesomeIcon id='bars-icon' data-dropdown-button icon={faBars} />
+                        <FontAwesomeIcon id='user-icon' data-dropdown-button icon={faUser} />
                     </button>
                     <div className='dropdown-menu' data-dropdown-button>
                         <div>
@@ -102,7 +105,7 @@ function Navigation({ isLoaded, brands, setBrands }) {
                         </NavLink>
                     </div>
                     <div className='search-container'>
-                    <SearchBar placeholder="Find a Brand..." />
+                        <SearchBar placeholder="Find a Brand..." />
                     </div>
                     <div>
                         {isLoaded && sessionLinks}

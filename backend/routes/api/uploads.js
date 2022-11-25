@@ -33,7 +33,7 @@ const Brand = require('../../db/models/brand')
 //     res.send({videoPath: `/uploads/${result.Key}`});
 // })
 
-router.get('/photos/:key', (req, res) => {
+router.get('/:key', (req, res) => {
     console.log('AM I HITTING GET ROUTE UPLOADS')
     console.log('@@@@@@@@@@@@@@@@@@@@@@WHAT IS REQ.PARAMS', req)
     const key = req.params.key;
@@ -43,12 +43,11 @@ router.get('/photos/:key', (req, res) => {
     getFiles.pipe(res)
 })
 
-router.post('/photos', upload.single('photo'), async (req, res) => {
-    console.log('AM I HITTING POST ROUTE UPLOADS')
+router.post('/', upload.single('photo'), async (req, res) => {
+
     const file = req.file;
-    console.log('WHAT IS FILE UPLOADS.JS', file)
+
     const result = await uploadFile(file);
-    console.log('WHAT IS RESULT UPLOADS.JS', result)
     // if (result) {
     //     let photo = new Photo({
     //         userId,
