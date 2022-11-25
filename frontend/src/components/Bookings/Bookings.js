@@ -176,14 +176,18 @@ const Bookings = () => {
                             />
                         </div>
                         <div className='hidden'>.</div>
-                        <div className='reservation-button-container'>
-                            <button className='reservation-button' >Reserve</button>
-                        </div>
+                        {
+                            user?.id === brand?.userId && (
+                                <div className='reservation-button-container'>
+                                    <button className='reservation-button' >Reserve</button>
+                                </div>
+                            )
+                        }
                     </form>
                     <h3>Fees (30% for tax and services): ${`${fees?.toFixed(2)}`}</h3>
                     <h3 className='total'>Total: ${`${totalPrice?.toFixed(2)}`}</h3>
                 </div>
-                { 
+                {
                     user?.id === brand?.userId && (
                         <>
                             <div className='hidden'>.</div>
