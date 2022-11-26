@@ -11,7 +11,7 @@ Visit the live site here: https://wearbnb-erik-nguyen.herokuapp.com/
 * **Backend:** Express
 * **Frontend:** React, Redux
 * **Database:** PostgreSQL
-* **Hosting:** Heroku
+* **Hosting:** Render
 
 ## How to Start:
 1. Clone this repository @ https://github.com/erikphinguyen/wearbnb
@@ -38,11 +38,16 @@ Visit the live site here: https://wearbnb-erik-nguyen.herokuapp.com/
 # Brands
 All users are able to view all brands, and can click each brand to view more details of each single brand.  If the user is signed in, then that user can create, edit, or delete their respective brands.
 
-#Reviews
+# Reviews
 All users are able to view all reviews to a certain brand.  Signed in users can create, edit, or delete their respective review.
 
+# Bookings
+All users are able to view the prices of a specific brand, but only logged in users can book the brand and can view all bookings in their specific user profile.
+
+# Search Bar
+All users are able to search for any existing brand on the search bar in the middle of the navigation bar.
+
 ## Future Features to Implement
-* Bookings
 * Favorites
 * Messaging
 * AWS Upload
