@@ -15,7 +15,7 @@ Visit the live site here: https://wearbnb.onrender.com/
 
 ## How to Start:
 1. Clone this repository @ https://github.com/erikphinguyen/wearbnb
-2. Install all dependencies in both backend and frontend via "npm install" in the terminal
+2. Install all dependencies in the root directory, backend, and frontend via "npm install" in the terminal
 3. Create your **.env** file in the backend folder; there is an **.env-example** in case you need help
 4. Ensure PostgreSQL matches **.env** file
 5. Enter the environment, and do migrations as well as seedings
