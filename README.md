@@ -2,7 +2,7 @@
 
 wearbnb is a fullstack web application modeled after Airbnb.  Signed up users can create a listing of a brand and create comments.
 
-Visit the live site here: https://wearbnb-erik-nguyen.herokuapp.com/
+Visit the live site here: https://wearbnb.onrender.com/
 
 ![image](https://user-images.githubusercontent.com/46208016/192426232-a64ffac3-e890-4ffa-bf3b-684da6065d5c.png)
 
