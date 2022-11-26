@@ -6,7 +6,7 @@ Visit the live site here: https://wearbnb-erik-nguyen.herokuapp.com/
 
 ![image](https://user-images.githubusercontent.com/46208016/192426232-a64ffac3-e890-4ffa-bf3b-684da6065d5c.png)
 
-## Tecnologies Used:
+## Technologies Used:
 * **Languages:** Javascript, HTML/CSS
 * **Backend:** Express
 * **Frontend:** React, Redux
