@@ -4,8 +4,8 @@ const asyncHandler = require('express-async-handler');
 const { restoreUser, requireAuth } = require('../../utils/auth')
 const { User, Brand, Booking } = require('../../db/models');
 
-const { bookingValidations } = require('../../validations/bookings');
-const { validationResult } = require('express-validator')
+const { bookingValidations } = require('../../validations/bookings.js');
+const { validationResult } = require('express-validator');
 
 // GET ALL BOOKINGS TO LOGGED IN USER
 router.get('/:id(\\d+)', asyncHandler(async (req, res) => {
@@ -43,26 +43,27 @@ router.put('/:id(\\d+)', requireAuth, restoreUser, asyncHandler(async (req, res)
 router.post('/', requireAuth, bookingValidations, restoreUser, asyncHandler(async (req, res) => {
     const { brandId, userId, startDate, endDate, price, totalPrice } = req.body;
 
-    // let validatorErrors = validationResult(req);
+    let validatorErrors = validationResult(req);
 
-    // console.log('WHAT IS VALIDATOR ERROS', validatorErrors)
+    console.log('WHAT IS VALIDATOR ERRORS', validatorErrors)
 
-    // if (validatorErrors.isEmpty()) {
-    //     let booking = await Booking.create({ brandId, userId, startDate, endDate, price, totalPrice })
-    //     await booking.save();
-    //     return res.json(booking)
-    // }
+    if (validatorErrors.isEmpty()) {
+        let newBooking = new Booking(req.body)
+        await newBooking.save();
+        const payload = await Brand.findByPk(newBooking.id);
+        return res.json(payload)
+    }
 
-    // else {
-    //     const errors = validatorErrors.array().map(error => error.msg);
-    //     return res.json(errors)
-    // }
+    else {
+        const errors = validatorErrors.array().map(error => error.msg);
+        return res.json(errors)
+    }
 
-    let newBooking = new Booking(req.body);
-    await newBooking.save();
+    // let newBooking = new Booking(req.body);
+    // await newBooking.save();
 
-    const payload = await Brand.findByPk(newBooking.id);
-    return res.json(payload)
+    // const payload = await Brand.findByPk(newBooking.id);
+    // return res.json(payload)
 }))
 
 // DELETE BOOKINGS
