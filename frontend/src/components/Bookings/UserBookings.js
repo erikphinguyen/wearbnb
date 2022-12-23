@@ -68,12 +68,6 @@ function UserBookings({ bookings, setBookings, Brand }) {
             })
     }
 
-    // let startingDate = new Date(booking.startDate);
-    // let endingDate = new Date(booking.endDate);
-
-    // let jsxStartDate = startingDate.setMinutes( startingDate.getMinutes() + startingDate.getTimezoneOffset() );
-    // let jsxEndDate = endingDate.setMinutes( endingDate.getMinutes() + endingDate.getTimezoneOffset() );
-
     return (
         <div className='user-bookings-container'>
             <h1>
@@ -87,9 +81,7 @@ function UserBookings({ bookings, setBookings, Brand }) {
                                 {booking?.Brand?.name}
                             </h2>
                             <h3>
-                                Reservation: {new Date(booking.startDate).toLocaleDateString()} - {new Date(booking.endDate).toLocaleDateString()}
-                                {/* {console.log('RESERVATION CHECK', new Date(booking.startDate.setDate(booking.startDate.getDate() + 1)).toLocaleDateString()))} */}
-                                {/* {console.log('RESERVATION CHECK', new Date(booking.startDate).setDate(new Date(booking.startDate).getDate() + 1).toLocaleDateString())} */}
+                                Reservation: {new Date(new Date(booking.startDate).setMinutes(new Date(booking.startDate).getMinutes() + new Date(booking.startDate).getTimezoneOffset())).toLocaleDateString()} - {new Date(new Date(booking.endDate).setMinutes(new Date(booking.endDate).getMinutes() + new Date(booking.endDate).getTimezoneOffset())).toLocaleDateString()}
                             </h3>
                             <p>
                                 <b>Price per day:</b> ${(booking.price)?.toFixed(2)}
