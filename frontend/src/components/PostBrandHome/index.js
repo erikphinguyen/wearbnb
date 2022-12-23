@@ -46,7 +46,6 @@ function PostBrand({ brands, setBrands, onClose, setShowModal }) {
             file
         }
 
-        console.log('WHAT IS NEWBRAND HANDLE SUBMIT', newBrand)
 
         // const brand = await dispatch(thunkPostBrands(newBrand));
         // if validation erros = empty, dispatch

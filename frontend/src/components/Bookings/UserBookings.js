@@ -9,6 +9,7 @@ import './UserBookings.css';
 function UserBookings({ bookings, setBookings, Brand }) {
     const dispatch = useDispatch();
     const { id } = useParams();
+    console.log('WHAT IS ID', id)
     const user = useSelector(state => state.session.user?.id)
     const username = useSelector(state => state.session.user?.username)
     const [isLoaded, setIsLoaded] = useState(false);
@@ -22,22 +23,33 @@ function UserBookings({ bookings, setBookings, Brand }) {
     const price = useSelector(state => state.bookings[id]?.price)
 
     // const price = useSelector(state => {
-    //     let listing = state.bookings.filter(el => {
-    //         return el.id === bookings.brandId
-    //     })
+        //     let listing = state.bookings.filter(el => {
+            //         return el.id === bookings.brandId
+            //     })
 
-    //     return listing[0].price
-    // })
+            //     return listing[0].price
+            // })
 
-    // const price =
+            // const price =
 
 
-    const [dates, setDates] = useState({ startDate: '', endDate: '' });
-    let fees = Number(price * .3);
+            const [dates, setDates] = useState({ startDate: '', endDate: '' });
+            let fees = Number(price * .3);
 
-    // this returns an array of bookings from specific user
-    const bookingsFromUser = Object?.values(bookings)
+            // this returns an array of bookings from specific user
+            const bookingsFromUser = Object?.values(bookings)
+            console.log('WHAT IS BOOKINGSSFROMUSER', bookingsFromUser)
 
+            let startingDate = new Date(bookingsFromUser[id]?.startDate)
+            console.log('WHAT IS STARTING DATE TYPE', typeof startingDate)
+            console.log('WHAT IS STARTINGDATE', startingDate)
+
+            let resoStart = startingDate.setMinutes( startingDate.getMinutes() + startingDate.getTimezoneOffset() );
+            console.log('WHAT IS resoStart', resoStart)
+            console.log('WHAT IS STARTING DATE TYPE', typeof resoStart)
+
+            let reservationStart = new Date(resoStart);
+            console.log('WHAT IS RESERVATION START', reservationStart.toLocaleDateString())
 
     useEffect(() => {
         dispatch(sessionActions.restoreUser())
@@ -68,11 +80,6 @@ function UserBookings({ bookings, setBookings, Brand }) {
             })
     }
 
-    // let startingDate = new Date(booking.startDate);
-    // let endingDate = new Date(booking.endDate);
-
-    // let jsxStartDate = startingDate.setMinutes( startingDate.getMinutes() + startingDate.getTimezoneOffset() );
-    // let jsxEndDate = endingDate.setMinutes( endingDate.getMinutes() + endingDate.getTimezoneOffset() );
 
     return (
         <div className='user-bookings-container'>
@@ -88,8 +95,6 @@ function UserBookings({ bookings, setBookings, Brand }) {
                             </h2>
                             <h3>
                                 Reservation: {new Date(booking.startDate).toLocaleDateString()} - {new Date(booking.endDate).toLocaleDateString()}
-                                {/* {console.log('RESERVATION CHECK', new Date(booking.startDate.setDate(booking.startDate.getDate() + 1)).toLocaleDateString()))} */}
-                                {/* {console.log('RESERVATION CHECK', new Date(booking.startDate).setDate(new Date(booking.startDate).getDate() + 1).toLocaleDateString())} */}
                             </h3>
                             <p>
                                 <b>Price per day:</b> ${(booking.price)?.toFixed(2)}
