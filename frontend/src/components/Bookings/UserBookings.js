@@ -68,29 +68,6 @@ function UserBookings({ bookings, setBookings, Brand }) {
             })
     }
 
-    // let startingDate = new Date(booking.startDate);
-    // let endingDate = new Date(booking.endDate);
-
-    // let jsxStartDate = startingDate.setMinutes( startingDate.getMinutes() + startingDate.getTimezoneOffset() );
-    // let jsxEndDate = endingDate.setMinutes( endingDate.getMinutes() + endingDate.getTimezoneOffset() );
-
-    /*
-            // this returns an array of bookings from specific user
-            const bookingsFromUser = Object?.values(bookings)
-            console.log('WHAT IS BOOKINGSSFROMUSER', bookingsFromUser)
-
-            let startingDate = new Date(bookingsFromUser[id]?.startDate)
-            console.log('WHAT IS STARTING DATE TYPE', typeof startingDate)
-            console.log('WHAT IS STARTINGDATE', startingDate)
-
-            let resoStart = startingDate.setMinutes( startingDate.getMinutes() + startingDate.getTimezoneOffset() );
-            console.log('WHAT IS resoStart', resoStart)
-            console.log('WHAT IS STARTING DATE TYPE', typeof resoStart)
-
-            let reservationStart = new Date(resoStart);
-            console.log('WHAT IS RESERVATION START', reservationStart.toLocaleDateString())
-    */
-
     return (
         <div className='user-bookings-container'>
             <h1>
