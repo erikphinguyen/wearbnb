@@ -7,6 +7,14 @@ const { User } = require('../../db/models');
 
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
+
+const {
+    singleMulterUpload,
+    singlePublicFileUpload,
+    multipleMulterUpload,
+    multiplePublicFileUpload,
+} = require("../../awsS3");
+
 const validateSignup = [
     check('email')
         .exists({ checkFalsy: true })
@@ -28,11 +36,11 @@ const validateSignup = [
         .exists({ checkFalsy: true })
         .isLength({ max: 40 })
         .withMessage('Password must be 40 characters or less.'),
-    check('confirmPassow')
+    check('confirmPassword')
         .exists({ checkFalsy: true })
         .isLength({ min: 6 })
         .withMessage('Password must be 6 characters or more.'),
-    check('confirmPassow')
+    check('confirmPassword')
         .exists({ checkFalsy: true })
         .isLength({ max: 40 })
         .withMessage('Password must be 40 characters or less.'),
@@ -42,10 +50,17 @@ const validateSignup = [
 // Sign up
 router.post(
     '/',
+    singleMulterUpload("image"),
     // validateSignup,
     asyncHandler(async (req, res) => {
         const { email, password, username, confirmPassword } = req.body;
+        console.log('WHAT IS REQ.BODY', req.body)
+        console.log('hello')
+        const profileImageUrl = await singlePublicFileUpload(req.file);
+        console.log('hello2')
+        console.log('`````````````````````````````WHAT IS PROFILE IMAGE URL', profileImageUrl)
         let errorsArray = []
+        console.log('hello3')
         if (email == "") {
             errorsArray.push("Please fill out Email")
             // return res.status(400).json({ error: "Please fill out Email" })
@@ -95,17 +110,41 @@ router.post(
         }
 
         if (errorsArray.length) return res.status(400).json({ error: errorsArray })
-        const user = await User.signup({ email, username, password });
+        const user = await User.signup({ email, username, password, profileImageUrl });
         if (!user) {
             errorsArray.push("Invalid Signup")
             // return res.status(400).json({ error: "Invalid Username or Email" })
         }
 
+        // setTokenCookie(res, user);
+
         await setTokenCookie(res, user);
+        console.log('BEFORE RETURNING USER')
         return res.json({
             user,
         });
     }),
+);
+
+router.put(
+    "/:id",
+    singleMulterUpload("image"),
+    asyncHandler(async (req, res) => {
+        const id = req.params.id;
+        const profileImageUrl = await singlePublicFileUpload(req.file);
+        await User.update({ profileImageUrl }, { where: { id } });
+
+        res.json({ profileImageUrl });
+    })
+);
+
+router.get(
+    "/",
+    asyncHandler(async (req, res) => {
+        const users = await User.findAll();
+
+        res.json(users);
+    })
 );
 
 module.exports = router;

@@ -44,7 +44,37 @@ export const restoreUser = () => async dispatch => {
 };
 
 export const signup = (user) => async (dispatch) => {
-    const { username, email, password, confirmPassword } = user;
+    const { images, image, username, email, password, confirmPassword } = user;
+
+    const formData = new FormData();
+    formData.append("username", username);
+    formData.append("email", email);
+    formData.append("password", password);
+    formData.append("confirmPassword", confirmPassword);
+
+    // for multiple files
+    if (images && images.length !== 0) {
+        for (var i = 0; i < images.length; i++) {
+            formData.append("images", images[i]);
+        }
+    }
+
+    // for single file
+    if (image) formData.append("image", image);
+
+    //AWS S3
+    const res = await csrfFetch(`/api/users/`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "multipart/form-data",
+        },
+        body: formData,
+    });
+
+    const data = await res.json();
+    dispatch(setUser(data.user));
+
+    /* ORIGINAL CODE
     const response = await csrfFetch("/api/users", {
         method: "POST",
         body: JSON.stringify({
@@ -75,6 +105,7 @@ export const signup = (user) => async (dispatch) => {
     // const data = await response.json();
     // dispatch(setUser(data.user));
     // return response;
+    */
 };
 
 export const logout = () => async (dispatch) => {
@@ -92,9 +123,13 @@ const sessionReducer = (state = initialState, action) => {
     let newState;
     switch (action.type) {
         case SET_USER:
+            return { ...state, user: action.payload };
+        /* ORIGINAL CODE
+        case SET_USER:
             newState = Object.assign({}, state);
             newState.user = action.payload;
             return newState;
+        */
         case REMOVE_USER:
             newState = Object.assign({}, state);
             newState.user = null;
