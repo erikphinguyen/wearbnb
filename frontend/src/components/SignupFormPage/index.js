@@ -15,7 +15,6 @@ function SignupFormPage() {
 
     const [image, setImage] = useState(null);
     const user = useSelector((state) => state.session.user);
-    console.log('WHAT IS USER SIGNUP FORM PAGE INDEX.JS', user)
     // for multuple file upload
     //   const [images, setImages] = useState([]);
 
@@ -40,21 +39,11 @@ function SignupFormPage() {
                 }
             });
         /* ORIGINAL CODE
-        // if (password === confirmPassword) {
-        //     setErrors([]);
-        //     return dispatch(sessionActions.signup({ email, username, password }))
-        //         .catch(async (res) => {
-        //             const data = await res.json();
-        //             if (data && data.errors) setErrors(data.errors);
-        //         });
-        // }
-        dispatch(sessionActions.signup({ email, username, password, confirmPassword })).then(
-            async (res) => {
+        dispatch(sessionActions.signup({ email, username, password, confirmPassword }))
+        .then(async (res) => {
                 setErrors(res)
             }
         )
-        // .catch(err)
-        // return setErrors(['Confirm Password field must be the same as the Password field']);
         */
     };
 
@@ -75,9 +64,10 @@ function SignupFormPage() {
             <form className="form" onSubmit={handleSubmit}>
                 <ul>
                     {errors.map((error, idx) => (
-                        // <li style={errors.length ? { color: "red" } : null} key={idx}>{error}</li>
                         <>
-                            <li style={{ color: "red" }}>{error}</li>
+                            {console.log('ERRORS', errors)}
+                            <li style={errors.length ? { color: "red" } : null} key={idx}>{error}</li>
+                            {/* <li style={{ color: "red" }}>{error}</li> */}
                         </>
 
                     ))}
@@ -126,23 +116,19 @@ function SignupFormPage() {
                     // required
                     />
                 </label>
+                <br></br>
                 <label>
-                    <input type="file" onChange={updateFile} />
+                    Profile Picture
+                    <br></br>
+                    <input
+                        className="input"
+                        style={errors.length && image == null ? { border: "1px solid red" } : null}
+                        type="file"
+                        onChange={updateFile}
+                    />
                 </label>
                 <button className='button' type="submit">Sign Up</button>
             </form>
-            <div>
-                {user && (
-                    <div>
-                        <h1>{user.username}</h1>
-                        <img
-                            style={{ width: "150px" }}
-                            src={user.profileImageUrl}
-                            alt="profile"
-                        />
-                    </div>
-                )}
-            </div>
         </>
     );
 }

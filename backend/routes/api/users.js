@@ -54,7 +54,10 @@ router.post(
     // validateSignup,
     asyncHandler(async (req, res) => {
         const { email, password, username, confirmPassword } = req.body;
-        const profileImageUrl = await singlePublicFileUpload(req.file);
+        let profileImageUrl = null;
+        if (req.file) {
+          profileImageUrl = await singlePublicFileUpload(req.file);
+        }
         let errorsArray = []
         if (email == "") {
             errorsArray.push("Please fill out Email")
@@ -103,6 +106,12 @@ router.post(
         if (matchEmail) {
             errorsArray.push("Email already exists")
         }
+
+        if (!profileImageUrl) {
+            errorsArray.push("Please upload a profile image")
+        }
+
+        console.log('WHAT IS ERRORS ARRAY', errorsArray)
 
         if (errorsArray.length) return res.status(400).json({ error: errorsArray })
         const user = await User.signup({ email, username, password, profileImageUrl });

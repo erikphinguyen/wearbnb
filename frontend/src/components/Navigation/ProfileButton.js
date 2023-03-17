@@ -41,7 +41,7 @@ function ProfileButton({ user }) {
                 <div className="profile-dropdown">
                     <div><b>Username: </b> {user.username}</div>
                     <div><b>Email: </b>{user.email}</div>
-                    {user && (
+                    {(user && user.username !== 'Demo-lition') && (
                     <div>
                         <img
                             style={{ width: "100px" }}
