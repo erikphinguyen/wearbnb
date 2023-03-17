@@ -20,31 +20,14 @@ function SignupFormPage() {
 
     if (sessionUser) return <Redirect to="/" />;
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         let newErrors = [];
-        dispatch(sessionActions.signup({ username, email, password, confirmPassword, image }))
-            .then(() => {
-                setUsername("");
-                setEmail("");
-                setPassword("");
-                setConfirmPassword("");
-                setImage(null);
-            })
-            .catch(async (res) => {
-                const data = await res.json();
-                if (data && data.errors) {
-                    newErrors = data.errors;
-                    setErrors(newErrors);
-                }
-            });
-        /* ORIGINAL CODE
-        dispatch(sessionActions.signup({ email, username, password, confirmPassword }))
-        .then(async (res) => {
-                setErrors(res)
-            }
-        )
-        */
+        const successfulUser = await dispatch(sessionActions.signup({ username, email, password, confirmPassword, image }))
+        if (successfulUser && successfulUser.error) {
+            newErrors = successfulUser.error;
+            setErrors(newErrors);
+        }
     };
 
     const updateFile = (e) => {
