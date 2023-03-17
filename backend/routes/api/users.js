@@ -54,9 +54,7 @@ router.post(
     // validateSignup,
     asyncHandler(async (req, res) => {
         const { email, password, username, confirmPassword } = req.body;
-        console.log('WHAT IS REQ.BODY', req.body)
         const profileImageUrl = await singlePublicFileUpload(req.file);
-        console.log('`````````````````````````````WHAT IS PROFILE IMAGE URL', profileImageUrl)
         let errorsArray = []
         if (email == "") {
             errorsArray.push("Please fill out Email")
@@ -112,10 +110,7 @@ router.post(
             errorsArray.push("Invalid Signup")
             // return res.status(400).json({ error: "Invalid Username or Email" })
         }
-        console.log('HELLOOOOOOOOOOOOOOOOOOOOOOOOOOO')
-            debugger
         setTokenCookie(res, user);
-        console.log('-------------------------------------------WHAT IS USER', user)
 
         // await setTokenCookie(res, user);
         return res.json({

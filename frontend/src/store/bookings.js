@@ -56,7 +56,6 @@ export const thunkGetUserBookings = (userId) => async (dispatch) => {
 }
 
 export const thunkPutBookings = (data) => async (dispatch) => {
-    console.log('AM I INSIDE THUNK PUT BOOKINGS')
     const response = await csrfFetch(`/api/bookings/${data.id}`, {
         method: 'PUT',
         headers: {
@@ -84,7 +83,6 @@ export const thunkPostBookings = (data) => async (dispatch) => {
         },
         body: JSON.stringify(data)
     });
-    console.log('WAHT IS RESPONSE FRONT END STORE', response)
     if (response.ok) {
         const bookings = await response.json();
         dispatch(postBookings(bookings));

@@ -212,7 +212,6 @@ const Reviews = ({ user }) => {
                                                                 <li style={errorsReview.length ? { color: "red" } : null} key={idx}>{error}</li>
                                                             ))}
                                                         </div>
-                                                        {console.log('NEW REVIEW IN EDITMODE REVIEWS', newReview)}
                                                         <input
                                                             style={errorsReview.length && newReview.review.length == 0 ? { border: "1px solid red" } : null}
                                                             type='text'

@@ -30,7 +30,6 @@ function ProfileButton({ user }) {
         dispatch(sessionActions.logout());
     };
 
-    console.log('WHAT IS USER', user)
 
     return (
         <>
@@ -46,11 +45,8 @@ function ProfileButton({ user }) {
                     <div>
                         <img
                             style={{ width: "100px" }}
-                            {...(console.log("What is user.profileImageUrl", user.profileImageUrl))}
-                            {...(console.log("What is user", user))}
                             src={user.profileImageUrl}
                             alt="profile"
-                            onError={(e) => console.log("Error loading image:", e)}
                         />
                     </div>
                 )}

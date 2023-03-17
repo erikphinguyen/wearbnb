@@ -96,7 +96,6 @@ export const thunkPostBrands = (data) => async dispatch => {
     // formData.append("address", data.address)
     // formData.append("city", data.city)
     // formData.append("country", data.country)
-    console.log('WHAT IS DATA THUNK POST BRANDS', data)
     const response = await csrfFetch(`/api/brands`, {
         method: 'POST',
         // headers: {
@@ -123,7 +122,6 @@ export const thunkPostFile = (data) => async dispatch => {
     FormData.append("address", data.address)
     FormData.append("city", data.city)
     FormData.append("country", data.country)
-    console.log('WHAT IS DATA THUNK POST BRANDS', data)
     const response = await csrfFetch(`/api/brands`, {
         method: 'POST',
         headers: {
@@ -133,7 +131,6 @@ export const thunkPostFile = (data) => async dispatch => {
     });
 
     if (response.ok) {
-        console.log('WAHT IS RESPONSE THUNK POST FILe', response)
         const brand = await response.json();
         dispatch(postBrands(brand));
         return brand;
