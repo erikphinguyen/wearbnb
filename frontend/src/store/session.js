@@ -42,7 +42,7 @@ export const restoreUser = () => async dispatch => {
     dispatch(setUser(data.user));
     return response;
 };
-
+    
 export const signup = (user) => async (dispatch) => {
     const { images, image, username, email, password, confirmPassword } = user;
 
@@ -61,6 +61,8 @@ export const signup = (user) => async (dispatch) => {
 
     // for single file
     if (image) formData.append("image", image);
+    console.log('is THERE IMAGE', image)
+    console.log('WHAT IS FORMDATA', formData)
 
     //AWS S3
     const res = await csrfFetch(`/api/users/`, {
@@ -70,8 +72,10 @@ export const signup = (user) => async (dispatch) => {
         },
         body: formData,
     });
+    console.log('WHAT IS RES SESSION.JS THUNK', res)
 
     const data = await res.json();
+    console.log('WHAT IS DATA SESSION.JS THUNK', data)
     dispatch(setUser(data.user));
 
     /* ORIGINAL CODE

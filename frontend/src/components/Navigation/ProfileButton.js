@@ -30,6 +30,8 @@ function ProfileButton({ user }) {
         dispatch(sessionActions.logout());
     };
 
+    console.log('WHAT IS USER', user)
+
     return (
         <>
             <button className="button" onClick={openMenu}>
@@ -40,6 +42,18 @@ function ProfileButton({ user }) {
                 <div className="profile-dropdown">
                     <div><b>Username: </b> {user.username}</div>
                     <div><b>Email: </b>{user.email}</div>
+                    {user && (
+                    <div>
+                        <img
+                            style={{ width: "100px" }}
+                            {...(console.log("What is user.profileImageUrl", user.profileImageUrl))}
+                            {...(console.log("What is user", user))}
+                            src={user.profileImageUrl}
+                            alt="profile"
+                            onError={(e) => console.log("Error loading image:", e)}
+                        />
+                    </div>
+                )}
                     <div>
                         <NavLink exact to={`/users/${user.id}/bookings`}>
                             <button className="button">Bookings</button>

@@ -15,7 +15,7 @@ function SignupFormPage() {
 
     const [image, setImage] = useState(null);
     const user = useSelector((state) => state.session.user);
-    console.log('WHAT IS USER', user)
+    console.log('WHAT IS USER SIGNUP FORM PAGE INDEX.JS', user)
     // for multuple file upload
     //   const [images, setImages] = useState([]);
 
