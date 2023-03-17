@@ -45,7 +45,6 @@ router.post('/search', asyncHandler(async function (req, res) {
 router.post('/', requireAuth, upload.single('file'), asyncHandler(async function (req, res) {
     // const id = await Brand.create(req.body);
     const file = req.file;
-    console.log('WHAT IS FILE', file)
 
     let { brandImg, name, address, city, country } = req.body;
 
@@ -60,8 +59,6 @@ router.post('/', requireAuth, upload.single('file'), asyncHandler(async function
     if (file.length > 1) {
         let fileSplit = file.split('.');
         let fileExtension = fileSplit[fileSplit.length - 1];
-        console.log('WHAT IS FILE SPLIT', fileSplit)
-        console.log('WHAT IS FILE EXTENSION', fileExtension)
     }
 
     if (file.length === 0) {

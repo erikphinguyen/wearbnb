@@ -80,11 +80,7 @@ const Bookings = () => {
             price,
             totalPrice: totalPrice
         }
-
-        console.log('WHAT IS DATA', data)
-
         const createBooking = await dispatch(thunkPostBookings(data))
-        console.log('WHAT IS CREATEBOOKING', createBooking)
         history.push(`/bookings/${createBooking.id}`)
     }
 

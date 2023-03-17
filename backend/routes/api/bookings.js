@@ -45,8 +45,6 @@ router.post('/', requireAuth, bookingValidations, restoreUser, asyncHandler(asyn
 
     let validatorErrors = validationResult(req);
 
-    console.log('WHAT IS VALIDATOR ERRORS', validatorErrors)
-
     if (validatorErrors.isEmpty()) {
         let newBooking = new Booking(req.body)
         await newBooking.save();

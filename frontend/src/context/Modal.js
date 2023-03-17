@@ -30,7 +30,7 @@ export function Modal({ onClose, children }) {
         <div id="modal">
             <div id="modal-background" onClick={onClose} />
             <div id="modal-background" onClick={() => onClose()} />
-            <div id="modal-content">
+            <div id="modal-content" style={{borderRadius:"1.5rem"}}>
                 {children}
             </div>
         </div>,

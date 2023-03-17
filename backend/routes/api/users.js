@@ -54,13 +54,11 @@ router.post(
     // validateSignup,
     asyncHandler(async (req, res) => {
         const { email, password, username, confirmPassword } = req.body;
-        console.log('WHAT IS REQ.BODY', req.body)
-        console.log('hello')
-        const profileImageUrl = await singlePublicFileUpload(req.file);
-        console.log('hello2')
-        console.log('`````````````````````````````WHAT IS PROFILE IMAGE URL', profileImageUrl)
+        let profileImageUrl = null;
+        if (req.file) {
+          profileImageUrl = await singlePublicFileUpload(req.file);
+        }
         let errorsArray = []
-        console.log('hello3')
         if (email == "") {
             errorsArray.push("Please fill out Email")
             // return res.status(400).json({ error: "Please fill out Email" })
@@ -109,17 +107,21 @@ router.post(
             errorsArray.push("Email already exists")
         }
 
+        if (!profileImageUrl) {
+            errorsArray.push("Please upload a profile image")
+        }
+
+        console.log('WHAT IS ERRORS ARRAY', errorsArray)
+
         if (errorsArray.length) return res.status(400).json({ error: errorsArray })
         const user = await User.signup({ email, username, password, profileImageUrl });
         if (!user) {
             errorsArray.push("Invalid Signup")
             // return res.status(400).json({ error: "Invalid Username or Email" })
         }
+        setTokenCookie(res, user);
 
-        // setTokenCookie(res, user);
-
-        await setTokenCookie(res, user);
-        console.log('BEFORE RETURNING USER')
+        // await setTokenCookie(res, user);
         return res.json({
             user,
         });

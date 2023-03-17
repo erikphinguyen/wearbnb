@@ -18,7 +18,6 @@ const removeUser = () => {
 
 
 export const login = (user) => async (dispatch) => {
-    console.log("INSIDE LOGIN THUNK")
     const { credential, password } = user;
     const response = await csrfFetch('/api/session', {
         method: 'POST',
@@ -73,6 +72,8 @@ export const signup = (user) => async (dispatch) => {
 
     const data = await res.json();
     dispatch(setUser(data.user));
+
+    return data;
 
     /* ORIGINAL CODE
     const response = await csrfFetch("/api/users", {

@@ -124,7 +124,6 @@ function PostBrand({ brands, setBrands, onClose, setShowModal }) {
 
     const fileSelected = e => {
         const file = e.target.files[0]
-        console.log('WHAT IS FILE IN FILESELECTED', file)
         setFile(file)
     }
 

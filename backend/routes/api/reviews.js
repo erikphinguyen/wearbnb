@@ -11,7 +11,6 @@ const e = require('express');
 // GET ALL REVIEWS OF CERTAIN BRAND
 router.get('/:id(\\d+)', restoreUser, asyncHandler(async (req, res) => {
     const { id } = req.params;
-    console.log('WHAT IS ID FOR REVIEWS', id)
     const brand = await Brand.findByPk(id);
     let reviews = await Review.findAll({
         include: {
@@ -38,7 +37,6 @@ router.put('/:id(\\d+)', requireAuth, restoreUser, asyncHandler(async (req, res)
     if (req.body.review.length > 255) {
         errorsArray.push("Review length cannot exceed 255 characters")
     }
-    console.log('WHAT IS ERRORS ARRAY', errorsArray)
     if (errorsArray.length) return res.status(400).json({ error: errorsArray })
 
     await review.save();
