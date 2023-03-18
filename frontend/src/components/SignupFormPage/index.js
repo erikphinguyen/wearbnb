@@ -48,7 +48,6 @@ function SignupFormPage() {
                 <ul>
                     {errors.map((error, idx) => (
                         <>
-                            {console.log('ERRORS', errors)}
                             <li style={errors.length ? { color: "red" } : null} key={idx}>{error}</li>
                             {/* <li style={{ color: "red" }}>{error}</li> */}
                         </>
