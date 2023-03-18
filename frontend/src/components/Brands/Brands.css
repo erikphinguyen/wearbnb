@@ -1,6 +1,17 @@
-.brands-page {
-    margin-left: 19%;
-    margin-right: 19%;
+/* Styles for screens larger than 720px */
+@media only screen and (min-width: 1440px) {
+    .brands-page {
+        margin-left: 19%;
+        margin-right: 19%;
+    }
+}
+
+/* Styles for screens smaller than 720px */
+@media only screen and (max-width: 1440px) {
+    .brands-page {
+        width: 100%;
+        margin: 0 auto;
+    }
 }
 
 .brands-text {
