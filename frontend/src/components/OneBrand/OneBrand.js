@@ -107,7 +107,7 @@ const OneBrand = () => {
                 <img className='onebrand-image'
                     src={singleBrand.brandImg}
                 />
-                <div className='address-review'>
+                <div id='underline'>
                     <div>
                         {
                             user?.id === singleBrand?.userId && (
