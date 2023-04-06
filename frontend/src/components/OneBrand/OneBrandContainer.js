@@ -8,27 +8,42 @@ import Reviews from './Reviews';
 import './OneBrandContainer.css';
 import { thunkGetOneBrand } from '../../store/brands.js';
 import { useJsApiLoader, GoogleMap } from '@react-google-maps/api';
+import Geocode from "react-geocode";
 
 function OneBrandContainer() {
 
     const dispatch = useDispatch();
     const { id } = useParams();
 
-    const { isLoaded } = useJsApiLoader({
-        googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY
-    })
-
     // get brand
-    const [singleBrand, setSingleBrand] = useState({})
-    const center = { lat: 48.8584, lng: 2.2945 }
+    const [singleBrand, setSingleBrand] = useState({});
+    const [center, setCenter] = useState({ lat: 0, lng: 0 });
 
     useEffect(() => {
         dispatch(thunkGetOneBrand(id))
             .then(res => {
+                console.log('------------------', res)
+                console.log('------------------ ADDY', res.address)
                 setSingleBrand(res)
+                Geocode.fromAddress(res.address).then(
+                    response => {
+                        const { lat, lng } = response.results[0].geometry.location;
+                        setCenter({ lat, lng });
+                    },
+                    error => {
+                        console.error(error);
+                    }
+                );
             })
             .catch(err => console.log(err))
     }, [dispatch, id])
+
+
+    const { isLoaded } = useJsApiLoader({
+        googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY
+    })
+
+
 
     if (!isLoaded) {
         return <div>Loading...</div>
