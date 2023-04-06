@@ -18,17 +18,20 @@ function OneBrandContainer() {
         googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY
     })
 
+    const center = { lat: 48.8584, lng: 2.2945 }
+
     // get brand
     const [singleBrand, setSingleBrand] = useState({})
-    const center = { lat: 48.8584, lng: 2.2945 }
 
     useEffect(() => {
         dispatch(thunkGetOneBrand(id))
             .then(res => {
+                console.log('WHAT IS RES', res)
                 setSingleBrand(res)
             })
             .catch(err => console.log(err))
-    }, [dispatch, id])
+        }, [dispatch, id])
+        console.log('---WHAT IS SINGLE BRAND', singleBrand)
 
     if (!isLoaded) {
         return <div>Loading...</div>
@@ -36,7 +39,6 @@ function OneBrandContainer() {
 
 
 
-    console.log('WHAT IS SINGLE BRAND', singleBrand)
 
 
     return (
