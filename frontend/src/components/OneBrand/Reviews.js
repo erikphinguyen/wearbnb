@@ -39,7 +39,7 @@ const Reviews = ({ user }) => {
     useEffect(() => {
         dispatch(thunkGetReviews(id))
             .then(res => {
-                let sortedReviews = res.sort((a, b) => {
+                let sortedReviews = res.sort((b, a) => {
                     if (new Date(a.createdAt) > new Date(b.createdAt)) {
                         return 1
                     }
