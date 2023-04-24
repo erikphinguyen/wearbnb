@@ -31,7 +31,6 @@ function OneBrandContainer() {
             })
             .catch(err => console.log(err))
         }, [dispatch, id])
-        console.log('---WHAT IS SINGLE BRAND', singleBrand)
 
     if (!isLoaded) {
         return <div>Loading...</div>

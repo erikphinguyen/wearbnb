@@ -4,7 +4,8 @@ import { Link, NavLink, Route, useParams } from 'react-router-dom';
 import brandsReducer, { thunkGetOneBrand, thunkPutBrands } from '../../store/brands.js'
 import { thunkGetReviews, thunkPutReviews, thunkPostReviews, thunkDeleteReviews } from '../../store/reviews.js';
 import { useJsApiLoader, GoogleMap } from '@react-google-maps/api';
-import "./OneBrand.css"
+import Geocode from "react-geocode";
+import "./OneBrand.css";
 
 const OneBrand = () => {
     const dispatch = useDispatch();
@@ -13,6 +14,12 @@ const OneBrand = () => {
     //     console.log(state.brands)
     //     return state.brands[Number(id)]
     // });
+
+    const { isLoaded } = useJsApiLoader({
+        googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY
+    });
+
+    const [center, setCenter] = useState({ lat: 0, lng: 0 })
 
     const [brandImg, setBrandImg] = useState('');
     const [name, setName] = useState('');
@@ -58,7 +65,7 @@ const OneBrand = () => {
 
     const user = useSelector(state => state.session.user)
 
-    useEffect(async => {
+    useEffect(async () => {
         dispatch(thunkGetOneBrand(id))
             .then(res => {
                 setSingleBrand(res)
@@ -70,6 +77,17 @@ const OneBrand = () => {
                     country: res.country
                 })
                 setReviews(res.Reviews)
+                const fullAddress = `${res.address}, ${res.city}, ${res.country}`
+                console.log(Geocode.fromAddress(fullAddress))
+                Geocode.fromAddress(fullAddress, process.env.REACT_APP_GOOGLE_MAPS_API_KEY).then(
+                    (response) => {
+                        const { lat, lng } = response.results[0].geometry.location;
+                        setCenter({ lat, lng })
+                    },
+                    (error) => {
+                        console.error(error);
+                    }
+                );
             })
             .catch(err => console.log(err))
     }, [dispatch, id])
@@ -93,7 +111,7 @@ const OneBrand = () => {
 
     if (!singleBrand) return "no brand available";
 
-    const center = { lat: 48.8584, lng: 2.2945 }
+
 
     return (
         <div className='onebrand-container'>
@@ -169,7 +187,7 @@ const OneBrand = () => {
                 </div>
             </div>
             <div>
-                <GoogleMap center={center} zoom={15} mapContainerStyle={{ width: '100%', height: '50%' }}/>
+                <GoogleMap center={center} zoom={15} mapContainerStyle={{ width: '100%', height: '50%' }} />
             </div>
         </div>
     )
