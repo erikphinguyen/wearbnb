@@ -123,6 +123,7 @@ const OneBrand = () => {
                         {singleBrand.country}
                     </b>
                 </h3>
+            <div className='brand-info'>
                 <img className='onebrand-image'
                     src={singleBrand.brandImg}
                 />
@@ -184,13 +185,14 @@ const OneBrand = () => {
                         }
                     </div>
                 </div>
-                <GoogleMap
-                    center={center}
-                    zoom={15}
-                    mapContainerStyle={{ width: '100%', height: '50%' }}
-                >
-                    <Marker position={center} />
-                </GoogleMap>
+            </div>
+            <GoogleMap
+                center={center}
+                zoom={15}
+                mapContainerStyle={{ width: '100%', height: '50%' }}
+            >
+                <Marker position={center} />
+            </GoogleMap>
         </div>
     )
 }
