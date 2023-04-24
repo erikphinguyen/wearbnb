@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, NavLink, Route, useParams } from 'react-router-dom';
 import brandsReducer, { thunkGetOneBrand, thunkPutBrands } from '../../store/brands.js'
 import { thunkGetReviews, thunkPutReviews, thunkPostReviews, thunkDeleteReviews } from '../../store/reviews.js';
-
+import { useJsApiLoader, GoogleMap } from '@react-google-maps/api';
 import "./OneBrand.css"
 
 const OneBrand = () => {
@@ -93,6 +93,8 @@ const OneBrand = () => {
 
     if (!singleBrand) return "no brand available";
 
+    const center = { lat: 48.8584, lng: 2.2945 }
+
     return (
         <div className='onebrand-container'>
             <div>
@@ -165,6 +167,9 @@ const OneBrand = () => {
                         }
                     </div>
                 </div>
+            </div>
+            <div>
+                <GoogleMap center={center} zoom={15} mapContainerStyle={{ width: '100%', height: '50%' }}/>
             </div>
         </div>
     )
