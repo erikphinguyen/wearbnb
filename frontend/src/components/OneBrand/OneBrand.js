@@ -115,7 +115,6 @@ const OneBrand = () => {
 
     return (
         <div className='onebrand-container'>
-            <div>
                 <h1>{singleBrand.name}</h1>
                 <h3>
                     <b>
@@ -185,8 +184,6 @@ const OneBrand = () => {
                         }
                     </div>
                 </div>
-            </div>
-            <div>
                 <GoogleMap
                     center={center}
                     zoom={15}
@@ -194,7 +191,6 @@ const OneBrand = () => {
                 >
                     <Marker position={center} />
                 </GoogleMap>
-            </div>
         </div>
     )
 }

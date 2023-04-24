@@ -26,7 +26,7 @@ function OneBrandContainer() {
     useEffect(() => {
         dispatch(thunkGetOneBrand(id))
             .then(res => {
-
+                console.log('WHAT IS RES', res)
                 setSingleBrand(res)
             })
             .catch(err => console.log(err))
@@ -49,9 +49,9 @@ function OneBrandContainer() {
             </div>
             <div className='google-map'>
                 {/* <GoogleMaps /> */}
+                {/* <GoogleMap center={center} zoom={15} mapContainerStyle={{ width: '100%', height: '50%' }}> */}
 
-                {/* <GoogleMap center={center} zoom={15} mapContainerStyle={{ width: '100%', height: '50%' }}>
-                </GoogleMap> */}
+                {/* </GoogleMap> */}
             </div>
         </div>
     )
