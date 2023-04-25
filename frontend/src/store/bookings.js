@@ -76,7 +76,6 @@ export const thunkPutBookings = (data) => async (dispatch) => {
 }
 
 export const thunkPostBookings = (data) => async (dispatch) => {
-    console.log('helloooooooooooooooooooooooooooooo')
     const response = await csrfFetch(`/api/bookings`, {
         method: 'POST',
         headers: {
@@ -84,9 +83,7 @@ export const thunkPostBookings = (data) => async (dispatch) => {
         },
         body: JSON.stringify(data)
     });
-    console.log('@@@@@@@@@@@@@@@@@@@@ response THUNK POST BOOKINGS', response)
     if (response.ok) {
-        console.log('@@@@@@@@@@@@@@@@@@@@ response OK', response)
         const bookings = await response.json();
         dispatch(postBookings(bookings));
         return bookings;

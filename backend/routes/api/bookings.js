@@ -42,15 +42,13 @@ router.put('/:id(\\d+)', requireAuth, restoreUser, asyncHandler(async (req, res)
 // POST BOOKINGS (can do errorsArray like brands & reviews); bookingValidations taken out
 router.post('/', requireAuth, bookingValidations, restoreUser, asyncHandler(async (req, res) => {
     const { brandId, userId, startDate, endDate, price, totalPrice } = req.body;
-    console.log('-------------------------------------------------------------------------------------------')
+
     let validatorErrors = validationResult(req);
-    console.log('what is validatorErrors', validatorErrors)
+
     if (validatorErrors.isEmpty()) {
         let newBooking = new Booking(req.body)
-        console.log('what is newBooking', newBooking)
         await newBooking.save();
         const payload = await Brand.findByPk(newBooking.id);
-        console.log('what is payload', payload)
         return res.json(payload)
     }
 
