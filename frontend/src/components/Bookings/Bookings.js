@@ -188,7 +188,7 @@ const Bookings = () => {
                                     </>
                                 }
                             </form>
-                            : <p>Log In to Reserve</p>
+                            : <p>Log In to Book</p>
                     }
                     <h3 className='total'>Total: ${`${totalPrice?.toFixed(2)}`}</h3>
                 </div>
