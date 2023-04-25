@@ -19,6 +19,7 @@ const Bookings = () => {
     const [endDate, setEndDate] = useState('');
     const [totalPrice, setTotalPrice] = useState(0);
     const [stayDuration, setStayDuration] = useState(0)
+    const [reservationResult, setReservationResult] = useState(null);
 
     const price = useSelector(state => {
         // return state.bookings[id]?.price
@@ -81,7 +82,7 @@ const Bookings = () => {
             totalPrice: totalPrice
         }
         const createBooking = await dispatch(thunkPostBookings(data))
-        alert("You made a successful reservation!")
+        setReservationResult('Reservation was successful!');
         history.push(`/bookings/${createBooking.id}`)
     }
 
@@ -146,45 +147,48 @@ const Bookings = () => {
                     <h3>Fees (30% for tax and services): ${`${fees?.toFixed(2)}`}</h3>
                     {
                         user ?
-                        <form onSubmit={handleSubmitReservation}>
-                            <div className='reservation'>
-                                <input
-                                    placeholder='Start Date'
-                                    name="startDate"
-                                    onChange={(e) => {
-                                        // setStayDuration(((new Date(endDate)) - (new Date(startDate))) / 86400000);
-                                        // setStartDate(e.target.value)
-                                        updateDisplayInfo(e, 'start')
-                                        // calculateTotalPrice()
-                                        // setTotalPrice((price * stayDuration) + (fees)).toFixed(2);
-                                    }}
-                                    value={dates.startDate}
-                                    type='date'
-                                />
-                                <input
-                                    placeholder='End Date'
-                                    name="endDate"
-                                    onChange={(e) => {
-                                        // setStayDuration(((new Date(endDate)) - (new Date(startDate))) / 86400000);
-                                        // setEndDate(e.target.value)
-                                        updateDisplayInfo(e, 'end')
-                                        // calculateTotalPrice()
-                                        // setTotalPrice((price * stayDuration) + (fees)).toFixed(2);
-                                    }}
-                                    value={dates.endDate}
-                                    type='date'
-                                />
-                            </div>
-                            <div className='hidden'>.</div>
-                            {
-
-                                <div className='reservation-button-container'>
-                                    <button className='reservation-button'>Reserve</button>
+                            <form onSubmit={handleSubmitReservation}>
+                                <div className='reservation'>
+                                    <input
+                                        placeholder='Start Date'
+                                        name="startDate"
+                                        onChange={(e) => {
+                                            // setStayDuration(((new Date(endDate)) - (new Date(startDate))) / 86400000);
+                                            // setStartDate(e.target.value)
+                                            updateDisplayInfo(e, 'start')
+                                            // calculateTotalPrice()
+                                            // setTotalPrice((price * stayDuration) + (fees)).toFixed(2);
+                                        }}
+                                        value={dates.startDate}
+                                        type='date'
+                                    />
+                                    <input
+                                        placeholder='End Date'
+                                        name="endDate"
+                                        onChange={(e) => {
+                                            // setStayDuration(((new Date(endDate)) - (new Date(startDate))) / 86400000);
+                                            // setEndDate(e.target.value)
+                                            updateDisplayInfo(e, 'end')
+                                            // calculateTotalPrice()
+                                            // setTotalPrice((price * stayDuration) + (fees)).toFixed(2);
+                                        }}
+                                        value={dates.endDate}
+                                        type='date'
+                                    />
                                 </div>
-
-                            }
-                        </form>
-                        :   <p>Log In to Reserve</p>
+                                <div className='hidden'>.</div>
+                                {
+                                    <>
+                                        <div className='reservation-button-container'>
+                                            <button className='reservation-button'>Reserve</button>
+                                        </div>
+                                        <div>
+                                            {reservationResult && <p>{reservationResult}</p>}
+                                        </div>
+                                    </>
+                                }
+                            </form>
+                            : <p>Log In to Reserve</p>
                     }
                     <h3 className='total'>Total: ${`${totalPrice?.toFixed(2)}`}</h3>
                 </div>
