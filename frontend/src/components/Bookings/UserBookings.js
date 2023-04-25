@@ -47,10 +47,53 @@ function UserBookings({ bookings, setBookings, Brand }) {
     useEffect(() => {
         dispatch(thunkGetUserBookings(id))
             .then(res => {
-                let sortedBookings = res.sort((a, b) => a.id - b.id)
+                let sortedBookings = res.sort((a, b) => {
+                    if (new Date(a.createdAt) < new Date(b.createdAt)) {
+                        return 1
+                    }
+                    else if (new Date(a.createdAt) > new Date(b.createdAt)) {
+                        return -1
+                    }
+                    if (a.userId > b.userId) {
+                        return 1
+                    }
+                    else if (a.userId < b.userId) {
+                        return -1
+                    }
+                    else {
+                        return 0
+                    }
+                })
                 setBookings(sortedBookings)
             })
     }, [dispatch])
+
+
+/*
+    useEffect(() => {
+        dispatch(thunkGetReviews(id))
+            .then(res => {
+                let sortedReviews = res.sort((b, a) => {
+                    if (new Date(a.createdAt) > new Date(b.createdAt)) {
+                        return 1
+                    }
+                    else if (new Date(a.createdAt) < new Date(b.createdAt)) {
+                        return -1
+                    }
+                    if (a.userId > b.userId) {
+                        return 1
+                    }
+                    else if (a.userId < b.userId) {
+                        return -1
+                    }
+                    else {
+                        return 0
+                    }
+                })
+                setReviews(sortedReviews)
+            })
+    }, [dispatch])
+*/
 
     // DELETING BOOKING
     // const handleDeleteBooking = (id) => {

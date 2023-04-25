@@ -179,7 +179,6 @@ const Bookings = () => {
 
                                 <div className='reservation-button-container'>
                                     <button className='reservation-button'>Reserve</button>
-
                                 </div>
 
                             }

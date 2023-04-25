@@ -26,7 +26,6 @@ function OneBrandContainer() {
     useEffect(() => {
         dispatch(thunkGetOneBrand(id))
             .then(res => {
-                console.log('WHAT IS RES', res)
                 setSingleBrand(res)
             })
             .catch(err => console.log(err))
