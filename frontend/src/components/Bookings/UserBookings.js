@@ -48,52 +48,50 @@ function UserBookings({ bookings, setBookings, Brand }) {
         dispatch(thunkGetUserBookings(id))
             .then(res => {
                 let sortedBookings = res.sort((a, b) => {
-                    if (new Date(a.createdAt) < new Date(b.createdAt)) {
-                        return 1
+                    if (new Date(a.startDate) < new Date(b.startDate)) {
+                        return -1; // compares start date of a and b, if true, a comes before b (return -1 for a before b)
+                    } else if (new Date(a.startDate) > new Date(b.startDate)) {
+                        return 1; // compares start date of a and b, if true, a comes after b (return 1 for a after b)
+                    } else { // if start dates are equal, compare end dates
+                        if (new Date(a.endDate) < new Date(b.endDate)) {
+                            return -1; // compares end date of a and b, if true, a comes before b (return -1 for a before b)
+                        } else if (new Date(a.endDate) > new Date(b.endDate)) {
+                            return 1; // compares end date of a and b, if true, a comes after b (return 1 for a after b)
+                        } else {
+                            return 0; // if start and end dates are equal, return 0
+                        }
                     }
-                    else if (new Date(a.createdAt) > new Date(b.createdAt)) {
-                        return -1
-                    }
-                    if (a.userId > b.userId) {
-                        return 1
-                    }
-                    else if (a.userId < b.userId) {
-                        return -1
-                    }
-                    else {
-                        return 0
-                    }
-                })
+                });
                 setBookings(sortedBookings)
             })
     }, [dispatch])
 
 
-/*
-    useEffect(() => {
-        dispatch(thunkGetReviews(id))
-            .then(res => {
-                let sortedReviews = res.sort((b, a) => {
-                    if (new Date(a.createdAt) > new Date(b.createdAt)) {
-                        return 1
-                    }
-                    else if (new Date(a.createdAt) < new Date(b.createdAt)) {
-                        return -1
-                    }
-                    if (a.userId > b.userId) {
-                        return 1
-                    }
-                    else if (a.userId < b.userId) {
-                        return -1
-                    }
-                    else {
-                        return 0
-                    }
+    /*
+        useEffect(() => {
+            dispatch(thunkGetReviews(id))
+                .then(res => {
+                    let sortedReviews = res.sort((b, a) => {
+                        if (new Date(a.createdAt) > new Date(b.createdAt)) {
+                            return 1
+                        }
+                        else if (new Date(a.createdAt) < new Date(b.createdAt)) {
+                            return -1
+                        }
+                        if (a.userId > b.userId) {
+                            return 1
+                        }
+                        else if (a.userId < b.userId) {
+                            return -1
+                        }
+                        else {
+                            return 0
+                        }
+                    })
+                    setReviews(sortedReviews)
                 })
-                setReviews(sortedReviews)
-            })
-    }, [dispatch])
-*/
+        }, [dispatch])
+    */
 
     // DELETING BOOKING
     // const handleDeleteBooking = (id) => {
