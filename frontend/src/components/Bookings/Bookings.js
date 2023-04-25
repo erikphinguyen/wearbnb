@@ -81,6 +81,7 @@ const Bookings = () => {
             totalPrice: totalPrice
         }
         const createBooking = await dispatch(thunkPostBookings(data))
+        alert("You made a successful reservation!")
         history.push(`/bookings/${createBooking.id}`)
     }
 
