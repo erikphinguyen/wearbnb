@@ -65,7 +65,7 @@ const OneBrand = () => {
 
     const user = useSelector(state => state.session.user)
 
-    useEffect(async () => {
+    useEffect(() => {
         dispatch(thunkGetOneBrand(id))
             .then(res => {
                 setSingleBrand(res)
