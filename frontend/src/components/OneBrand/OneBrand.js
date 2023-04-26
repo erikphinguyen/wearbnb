@@ -78,7 +78,6 @@ const OneBrand = () => {
                 })
                 setReviews(res.Reviews)
                 const fullAddress = `${res.address}, ${res.city}, ${res.country}`
-                console.log(Geocode.fromAddress(fullAddress))
                 Geocode.fromAddress(fullAddress, process.env.REACT_APP_GOOGLE_MAPS_API_KEY).then(
                     (response) => {
                         const { lat, lng } = response.results[0].geometry.location;

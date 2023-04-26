@@ -111,8 +111,6 @@ router.post(
             errorsArray.push("Please upload a profile image")
         }
 
-        console.log('WHAT IS ERRORS ARRAY', errorsArray)
-
         if (errorsArray.length) return res.status(400).json({ error: errorsArray })
         const user = await User.signup({ email, username, password, profileImageUrl });
         if (!user) {
