@@ -41,15 +41,18 @@ function ProfileButton({ user }) {
                 <div className="profile-dropdown">
                     <div><b>Username: </b> {user.username}</div>
                     <div><b>Email: </b>{user.email}</div>
-                    {(user && user.username !== 'Demo-lition') && (
+                    {
+                        user.username !== "Demo-lition" &&
                     <div>
                         <img
                             style={{ width: "100px" }}
                             src={user.profileImageUrl}
                             alt="profile"
-                        />
+                            />
                     </div>
-                )}
+                    }
+                            {/* {user.profileImageUrl && (
+                )} */}
                     <div>
                         <NavLink exact to={`/users/${user.id}/bookings`}>
                             <button className="button">Bookings</button>

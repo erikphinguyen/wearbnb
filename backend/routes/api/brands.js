@@ -44,7 +44,6 @@ router.post('/search', asyncHandler(async function (req, res) {
 // POST BRAND
 router.post('/', requireAuth, upload.single('file'), asyncHandler(async function (req, res) {
     // const id = await Brand.create(req.body);
-    const file = req.file;
 
     let { brandImg, name, address, city, country } = req.body;
 
@@ -54,45 +53,18 @@ router.post('/', requireAuth, upload.single('file'), asyncHandler(async function
     let brandExtensionFile = brandImgSplit[brandImgSplit.length - 1]
     let brandURL = brandImgSplit[0]
 
-    const result = await uploadFile(file);
-
-    if (file.length > 1) {
-        let fileSplit = file.split('.');
-        let fileExtension = fileSplit[fileSplit.length - 1];
+    if (brandImg.length === 0) {
+        errorsArray.push("Please add a Brand Image")
     }
-
-    if (file.length === 0) {
-        let fileSplit = file.split('.');
-        let fileExtension = fileSplit[fileSplit.length - 1];
-        if (!fileExtension.toLowerCase().includes('png') && !fileExtension.toLowerCase().includes('jpg') && !fileExtension.toLowerCase().includes('jpeg')) {
-            errorsArray.push("Please upload a file with extension .png, .jpg, or .jpeg")
-        }
-        if (brandImg.length === 0) {
-            errorsArray.push("Please add a Brand Image")
-        }
-        if (brandImg.length > 255) {
-            errorsArray.push("Brand Image length cannot exceed 255 characters")
-        }
-        if (!brandExtensionFile.includes('png') && !brandExtensionFile.includes('jpg') && !brandExtensionFile.includes('jpeg')) {
-            errorsArray.push("Please use an image with extension .png, .jpg, or .jpeg")
-        }
-        if (!brandURL.includes("http://") && !brandURL.includes("https://")) {
-            errorsArray.push("Please use correct URL (http://) or (https://)")
-        }
+    if (brandImg.length > 255) {
+        errorsArray.push("Brand Image length cannot exceed 255 characters")
     }
-
-    // if (brandImg.length === 0) {
-    //     errorsArray.push("Please add a Brand Image")
-    // }
-    // if (brandImg.length > 255) {
-    //     errorsArray.push("Brand Image length cannot exceed 255 characters")
-    // }
     // if (!brandExtensionFile.includes('png') && !brandExtensionFile.includes('jpg') && !brandExtensionFile.includes('jpeg')) {
     //     errorsArray.push("Please use an image with extension file .png, .jpg, or .jpeg")
     // }
-    // if (!brandURL.includes("http://") && !brandURL.includes("https://")) {
-    //     errorsArray.push("Please use correct URL (http://) or (https://)")
-    // }
+    if (!brandURL.includes("http://") && !brandURL.includes("https://")) {
+        errorsArray.push("Please use correct URL (http://) or (https://)")
+    }
 
     if (name.length === 0) {
         errorsArray.push("Please add a name")
@@ -119,15 +91,6 @@ router.post('/', requireAuth, upload.single('file'), asyncHandler(async function
         errorsArray.push("Country length cannot exceed 255 characters")
     }
     if (errorsArray.length) return res.status(400).json({ error: errorsArray })
-
-    // let splitBrandImg = brandImg.split(".")
-    // let splitBrandImgStr = String(splitBrandImg[splitBrandImg.length - 1])
-
-
-    // if (splitBrandImgStr != jpg || splitBrandImgStr != png) {
-    //     console.log('---------------------------------------WHAT IS SPLITBRANDIMG STRING', splitBrandImgStr)
-    //     return res.status(400).json({ error: "This is not a .jpg or .png" })
-    // }
 
     let newBrand = new Brand(req.body)
 
