@@ -3,7 +3,7 @@ import { csrfFetch } from '../../store/csrf';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useHistory } from 'react-router-dom';
-import { thunkPostBrands, thunkPostFile } from '../../store/brands';
+import { thunkPostBrands } from '../../store/brands';
 import { thunkPostPhotos } from '../../store/uploads';
 
 function PostBrand({ brands, setBrands, onClose, setShowModal }) {
@@ -16,10 +16,6 @@ function PostBrand({ brands, setBrands, onClose, setShowModal }) {
     const [city, setCity] = useState('');
     const [country, setCountry] = useState('');
     const [errors, setErrors] = useState([]);
-
-    // aws
-    const [file, setFile] = useState();
-    const [photo, setPhoto] = useState([]);
 
     const reset = () => {
         setBrandImg('');
@@ -42,8 +38,7 @@ function PostBrand({ brands, setBrands, onClose, setShowModal }) {
             name,
             address,
             city,
-            country,
-            file
+            country
         }
 
 
@@ -69,63 +64,7 @@ function PostBrand({ brands, setBrands, onClose, setShowModal }) {
         // }
     };
 
-    // aws
-    const submitAWS = async (e) => {
-        e.preventDefault();
 
-        dispatch(thunkPostFile(file))
-            .then(res => {
-                if (res.error) {
-                    setErrors(res.error)
-                    return
-                }
-                setShowModal(false);
-                setPhoto(photo)
-                setBrands([...brands, res])
-            })
-
-    }
-
-    const imageForm = document.querySelector("#imageForm")
-    const imageInput = document.querySelector("#imageInput")
-
-    // imageForm.addEventListener("submit", async (e) => {
-    //     e.preventDefault();
-    //     const file = imageInput.files[0];
-
-    //     // get a secure url form our server
-    //     const {url} = await fetch("/s3URL").then(res => res.json())
-    //     console.log(url)
-
-    //     // post the image directly to the s3 bucket
-    //     await fetch(url, {
-    //         method: "PUT",
-    //         HEADERS: {
-    //             "Content-Type": "multipart/form-data"
-    //         },
-    //         body: file
-    //     })
-
-    //     const imageUrl = url.split('?')[0];
-    //     console.log(imageUrl)
-
-    //     // post request to my server to store any extra data
-    //     const img = document.createElement("img");
-    //     img.src = imageUrl;
-    //     document.body.appendChild(img)
-    // })
-
-    // // aws
-    // const submitAWS = async (e) => {
-    //     e.preventDefault();
-    //     const response = await postPhoto({ photo: file })
-    //     setPhoto([response.photo, ...photo])
-    // }
-
-    const fileSelected = e => {
-        const file = e.target.files[0]
-        setFile(file)
-    }
 
     return (
         <div>
@@ -182,31 +121,11 @@ function PostBrand({ brands, setBrands, onClose, setShowModal }) {
                     name='country'
                 />
                 <button className='button' type='submit' >Submit</button>
-
-                {/* this is s3 upload front end
-                <form className='form' id="imageForm">
-                    <input id="imageInput" type="file" accept="photo/*" />
-                    <button className='button' type="submit">Upload</button>
-                </form> */}
-
-                {/* {FIX THIS FOR AWS} */}
-                {/* <h2>Or Upload Brand Image via File</h2>
-
-                <form onSubmit={submitAWS}>
-                    <input onChange={fileSelected} type='file' accept='photo/*'></input>
-                    <button type='submit'>Submit</button>
-                </form>
-
-
-                {photo.map(uploadedPhoto => {
-                    <div key={uploadedPhoto}>
-                        <img src={uploadedPhoto}></img>
-                    </div>
-                })} */}
-
-                {/* <img src="/images/9fa06d3c5da7aec7f932beb5b3e60f1d"></img> */}
-
             </form>
+
+            <div>
+                <p>Note: Only Image URLs accepted </p>
+            </div>
         </div>
     );
 }
