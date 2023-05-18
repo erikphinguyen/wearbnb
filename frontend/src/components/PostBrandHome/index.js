@@ -121,11 +121,8 @@ function PostBrand({ brands, setBrands, onClose, setShowModal }) {
                     name='country'
                 />
                 <button className='button' type='submit' >Submit</button>
-            </form>
-
-            <div>
                 <p>Note: Only Image URLs accepted </p>
-            </div>
+            </form>
         </div>
     );
 }
