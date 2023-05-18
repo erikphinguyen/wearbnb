@@ -96,9 +96,6 @@ export const thunkPostBrands = (data) => async dispatch => {
         body: JSON.stringify(data)
     });
 
-    console.log('WHAT IS RESPONSE', response)
-    console.log('WHAT IS DATA', data)
-
     if (response.ok) {
         const brand = await response.json();
         dispatch(postBrands(brand));
